@@ -92,7 +92,7 @@ and making that choice costs ~no accuracy.
 
 **Take a *traditional deep neural network* and enhance the architecture and the
 training method so that the model converges *toward* a minimal, monosemantic,
-depth-honest, a-priori-interpretable network — accepting a polysemantic periphery
+depth-honest, stable and therefore a-priori-explainable network — accepting a polysemantic periphery
 for corner cases.**
 
 Read the three drivers as **directions of convergence / soft pressures in
