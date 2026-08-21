@@ -42,18 +42,18 @@ reference ceiling is established.
 
 | id | step | deliverable | verify | outcome | status | ref |
 |---|---|---|---|---|---|---|
-| P0-1 | package skeleton: `pyproject.toml` (uv), layout per S-§3, `configs/default.yaml` full schema (S-§12) | installable package, `xplain-x1 --help` | CI: import + CLI smoke | project installs and runs | ☐ | |
-| P0-2 | `util/`: seeding (SeedSequence spawning), provenance writer, `box.wait_until_free` | modules + unit tests | tests green | reproducibility + box etiquette built in from day one | ☐ | |
-| P0-3 | data core: registry, splits (60/20/20 + probe set), CPSS subsampler (S-§4) | `data/` modules | unit tests: split determinism, probe stability, complementary pairs disjoint | deterministic data pipeline | ☐ | |
-| P0-4 | synthetic generator: ADD/COMP2/COMP3/NOISE, 6 pinned configs (S-§5) | `data/synthetic.py` | unit tests: ground-truth metadata present; regeneration deterministic | ground-truth testbed exists | ☐ | |
-| P0-5 | public loaders + encodings: `zoo`, `wine` (S-§4 rules; named columns) | registry entries | loader tests + SHA-256 recorded | first real datasets loadable | ☐ | |
-| P0-6 | `MaskedMLP` + unit registry + growth-op stubs (S-§6) | `model/mlp.py` | unit tests: mask semantics, persistent ids | growable/prunable model substrate | ☐ | |
-| P0-7 | gauge ops: scale-normalise, permutation-sort (S-§6) | `model/gauge.py` | test: max output diff < 1e-5 after pass | canonical form; cross-run comparability | ☐ | |
-| P0-8 | settle loop (no pressures yet): AdamW, plateau stop, best-val restore (S-§7) | `train/settle.py` | trains on synthetics | a model can be trained | ☐ | |
-| P0-9 | reference models `f_ref`: unconstrained MLP + HistGradientBoosting, cached (S-§7) | `train/reference.py` | `Fid_ref`/`Acc_ref` produced per dataset | ceilings fixed — every later result has a comparator | ☐ | |
-| P0-10 | determinism: same config+seed ⇒ identical outputs | test | CI gate green | results are trustworthy and repeatable | ☐ | |
-| **E0.1** | **experiment:** plain settle vs `f_ref` on zoo + wine — is the harness sound? **Bar:** Fid within ±2% of `Fid_ref` | `results/e01.json` | bar met | **🏁 M1 — first reviewable model-training result** (baseline runs at ceiling) | ☐ | |
-| P0-X | **exit criteria:** E0.1 bar met; determinism gate green | — | — | phase gate | ☐ | |
+| P0-1 | package skeleton: `pyproject.toml` (uv), layout per S-§3, `configs/default.yaml` full schema (S-§12) | installable package, `xplain-x1 --help` | CI: import + CLI smoke | project installs and runs | ☑ | `impl/p0` |
+| P0-2 | `util/`: seeding (SeedSequence spawning), provenance writer, `box.wait_until_free` | modules + unit tests | tests green | reproducibility + box etiquette built in from day one | ☑ | `impl/p0` |
+| P0-3 | data core: registry, splits (60/20/20 + probe set), CPSS subsampler (S-§4) | `data/` modules | unit tests: split determinism, probe stability, complementary pairs disjoint | deterministic data pipeline | ☑ | `impl/p0` |
+| P0-4 | synthetic generator: ADD/COMP2/COMP3/NOISE, 6 pinned configs (S-§5) | `data/synthetic.py` | unit tests: ground-truth metadata present; regeneration deterministic | ground-truth testbed exists | ☑ | `impl/p0` |
+| P0-5 | public loaders + encodings: `zoo`, `wine` (S-§4 rules; named columns) | registry entries | loader tests + SHA-256 recorded | first real datasets loadable | ☑ | `impl/p0` |
+| P0-6 | `MaskedMLP` + unit registry + growth-op stubs (S-§6) | `model/mlp.py` | unit tests: mask semantics, persistent ids | growable/prunable model substrate | ☑ | `impl/p0` |
+| P0-7 | gauge ops: scale-normalise, permutation-sort (S-§6) | `model/gauge.py` | test: max output diff < 1e-5 after pass | canonical form; cross-run comparability | ☑ | `impl/p0` |
+| P0-8 | settle loop (no pressures yet): AdamW, plateau stop, best-val restore (S-§7) | `train/settle.py` | trains on synthetics | a model can be trained | ☑ | `impl/p0` |
+| P0-9 | reference models `f_ref`: unconstrained MLP + HistGradientBoosting, cached (S-§7) | `train/reference.py` | `Fid_ref`/`Acc_ref` produced per dataset | ceilings fixed — every later result has a comparator | ☑ | `impl/p0` |
+| P0-10 | determinism: same config+seed ⇒ identical outputs | test | CI gate green | results are trustworthy and repeatable | ☑ | `impl/p0` |
+| **E0.1** | **experiment:** plain settle vs `f_ref` on zoo + wine — is the harness sound? **Bar:** Fid within ±2% of `Fid_ref` | `results/e01.json` | bar met | **🏁 M1 — first reviewable model-training result** (baseline runs at ceiling) | ☑ | `impl/p0` |
+| P0-X | **exit criteria:** E0.1 bar met; determinism gate green | — | — | phase gate | ☑ | `impl/p0` |
 
 ## P1 — Pressures and audit instruments
 
