@@ -1,7 +1,7 @@
 # XPLAIN-x1 — Solution Specification
 
 **Status:** draft for review · **Audience:** the implementing Claude Code model ·
-**Companion:** `docs/METHOD-SPECIFICATION.md` (cited as **M-§n**; rationale lives there, this
+**Companion:** `docs/01-METHOD-SPECIFICATION.md` (cited as **M-§n**; rationale lives there, this
 document is the *how*). Scope: beachhead only — tabular/structured data, MLP realisation.
 
 Every design decision here is an **opinionated default**: implement exactly what is pinned;

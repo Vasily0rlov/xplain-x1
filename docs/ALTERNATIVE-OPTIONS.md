@@ -2,8 +2,8 @@
 
 Options deliberately **not** taken in the current specs, recorded for future assessment.
 Each entry states the option, why it was not chosen now, and what evidence would justify
-revisiting it. Companion to `docs/METHOD-SPECIFICATION.md` (M-) and
-`docs/SOLUTION-SPECIFICATION.md` (S-); mechanism-level substitutions already live in S-§14 —
+revisiting it. Companion to `docs/01-METHOD-SPECIFICATION.md` (M-) and
+`docs/02-SOLUTION-SPECIFICATION.md` (S-); mechanism-level substitutions already live in S-§14 —
 this document is for *approach-level* alternatives.
 
 ---

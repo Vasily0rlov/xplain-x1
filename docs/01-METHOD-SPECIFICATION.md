@@ -1,6 +1,6 @@
 # XPLAIN-x1 — Method Specification
 
-**Status:** draft for review · **Audience:** researchers · **Basis:** `docs/POSITIONING.md`
+**Status:** draft for review · **Audience:** researchers · **Basis:** `docs/00-POSITIONING.md`
 (2026-08) · **Scope:** the beachhead — supervised learning on tabular/structured data with
 monosemantic columns (`docs/DATASETS.md`), realised on standard deep MLPs. The Transformer/SLM
 track is out of scope here (POSITIONING §7, stage 3).
@@ -392,5 +392,5 @@ recovery rates must be confirmed on untouched seeds before being claimed.
 
 ---
 
-*Companion document: `docs/SOLUTION-SPECIFICATION.md` — the implementable technical
+*Companion document: `docs/02-SOLUTION-SPECIFICATION.md` — the implementable technical
 specification realising this method.*

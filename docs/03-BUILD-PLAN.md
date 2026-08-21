@@ -1,7 +1,7 @@
 # XPLAIN-x1 — Build Plan
 
-**Status:** active · **Basis:** `docs/SOLUTION-SPECIFICATION.md` (S-) and
-`docs/METHOD-SPECIFICATION.md` (M-) · **Scope:** beachhead MVL (S-§4)
+**Status:** active · **Basis:** `docs/02-SOLUTION-SPECIFICATION.md` (S-) and
+`docs/01-METHOD-SPECIFICATION.md` (M-) · **Scope:** beachhead MVL (S-§4)
 
 ## How to use this document
 
