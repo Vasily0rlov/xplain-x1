@@ -36,3 +36,5 @@ explicit = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "-m 'not gates'"
+markers = ["gates: slow certification CI gates (run with -m gates)"]

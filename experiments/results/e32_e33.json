@@ -1,0 +1,157 @@
+{
+ "experiment": "E3.2+E3.3",
+ "dataset": "synthetic:comp2-noisy-8k",
+ "tau_sweep": [
+  {
+   "tau": 0.5,
+   "n_concepts": 23,
+   "n_stable": 6,
+   "supports_stable": [
+    [
+     0
+    ],
+    [
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "tau": 0.6,
+   "n_concepts": 23,
+   "n_stable": 6,
+   "supports_stable": [
+    [
+     0
+    ],
+    [
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "tau": 0.7,
+   "n_concepts": 23,
+   "n_stable": 6,
+   "supports_stable": [
+    [
+     0
+    ],
+    [
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "tau": 0.8,
+   "n_concepts": 23,
+   "n_stable": 6,
+   "supports_stable": [
+    [
+     0
+    ],
+    [
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "tau": 0.9,
+   "n_concepts": 24,
+   "n_stable": 6,
+   "supports_stable": [
+    [
+     0
+    ],
+    [
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  }
+ ],
+ "ev_bound_structure": 0.12432142857142861,
+ "p_structure": 175,
+ "ev_bound_raw": 2.1756250000000006,
+ "p_raw": 10,
+ "q_mean": 2.95,
+ "n_core": 6
+}

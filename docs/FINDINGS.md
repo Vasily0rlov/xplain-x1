@@ -85,3 +85,30 @@ above and await owner sign-off; none was a silent retune.
 - Bugs caught by the battery en route: stale-audit unit reference after prune;
   **duplicate unit ids on layer insertion** (per-layer counters collide when
   layers shift) → globally-unique id counter + cycle-guarded support recursion.
+
+## P3 (2026-08-22)
+
+- **E3.1 MET** (after one definition sharpening) — full 6-config suite through
+  the complete certification pipeline (R=8 + 40 CPSS runs each):
+  ADD 3 CORE all order-1 (no invented interactions); COMP2 clean/noisy planted
+  `[x2,x3]` **recovered as CORE**; COMP2 at the n=2k power floor recovers too
+  (reported); COMP3 planted order-3 `[x1,x2,x3]` recovered; **NOISE 0 certified
+  concepts** (K2 untradeable holds).  🏁 **M4**.
+  - *Definition sharpening (first run failed COMP2):* product concepts scored
+    Π=1.00, π=0.97, μ=0.98, Δ≈2.2 and fell ONLY to the `multiplicitous` flag —
+    support variants flickered between `[1,2]` and `[0,1,2]` (a weak x1 rider
+    in some restarts).  Nested variants are boundary jitter of ONE concept,
+    not Rashomon alternatives: when variants form an inclusion chain the
+    certified support is now the **minimal common variant** (the run-invariant
+    core — POSITIONING's own concept); `multiplicitous` is reserved for
+    incomparable variants (the Mushroom case it was designed for).
+- **E3.2 MET** — CORE set completely insensitive to the matching threshold:
+  6 stable concepts at every τ ∈ {0.5, 0.6, 0.7, 0.8, 0.9} on COMP2-noisy.
+- **E3.3 MET** (after a bookkeeping correction) — the MB universe is SUPPORTS,
+  so q must count distinct supports per subsample, not μ-passing units
+  (the product spans 4 units = one support).  Corrected: q=2.95 →
+  **E[V] ≤ 0.124** at the structure-level universe (p=175) vs 2.18 at the
+  raw-feature universe — non-vacuous, and the structure-level advantage
+  (v4 finding) reproduced.
+- CI gates wired (`pytest -m gates`): COMP2 recovery mini-battery + NOISE
+  zero-certification.

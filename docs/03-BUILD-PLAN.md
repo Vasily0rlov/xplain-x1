@@ -99,16 +99,18 @@ S-§10) — the part of the programme the field lacks.
 
 | id | step | deliverable | verify | outcome | status | ref |
 |---|---|---|---|---|---|---|
-| P3-1 | restart orchestration: R parallel pipelines, thread pinning, box gate (S-§2, S-§10) | `certify/restarts.py` | 8-restart run completes on COMP2 | fleet runs use the full box | ☐ | |
-| P3-2 | signatures (input attribution + probe activations) and greedy matching at `τ_match`; concept clusters + `Π` | `certify/matching.py` | test: permuted clone nets match 1:1 | concepts gain cross-run identity | ☐ | |
-| P3-3 | CPSS: B complementary pairs, selection frequency `π`, structure-level universe `p`, `E[V]` bound (S-§10) | `certify/cpss.py` | unit tests on bound arithmetic; universe count audited | false-discovery bound computable | ☐ | |
-| P3-4 | reality test: ablation Δ + bootstrap CI (S-§10) | `certify/reality.py` | tests | concept impact measurable with CIs | ☐ | |
-| P3-5 | labelling: CORE/PERIPHERY + reason codes; multiplicitous detection (S-§10) | `certify/labels.py` | tests | CORE/PERIPHERY separation live | ☐ | |
-| P3-6 | CI gates wired (S-§13): COMP2 recovery mini-battery; NOISE zero-certification | CI config | gates green | honesty is regression-protected | ☐ | |
-| **E3.1** | **experiment (recovery, H-X1-3 on synthetic ground):** full 6-config suite, R=8. **Bar:** planted concepts CORE with matched support at ≥ 2/3 rate above the power floor; 0 certified concepts on NOISE (untradeable) | `results/e31.json` | bar met | **🏁 M4 — first certified concepts** (reviewable `concepts.json` on known ground truth) | ☐ | |
-| **E3.2** | **experiment (matching sensitivity, M-§8):** `τ_match` sweep 0.5–0.9 on E3.1 runs. **Bar:** CORE set stable in a neighbourhood of 0.7; report curve in certificate appendix | `results/e32.json` | reported | matching robustness quantified | ☐ | |
-| **E3.3** | **experiment (bound non-vacuity, H-X1-6):** `E[V]` at structure-level vs raw-feature universe on COMP2. **Bar:** structure-level bound < 1 at `π_thr=0.7`; raw-feature comparison documented | `results/e33.json` | bar met | certificate bound shown non-vacuous | ☐ | |
-| P3-X | **exit criteria:** CI gates green; E3.1 bar met; E3.2/E3.3 reported | — | — | phase gate | ☐ | |
+| P3-1 | restart orchestration: R parallel pipelines, thread pinning, box gate (S-§2, S-§10) | `certify/restarts.py` | 8-restart run completes on COMP2 | fleet runs use the full box | ☑ | `impl/p3` |
+| P3-2 | signatures (input attribution + probe activations) and greedy matching at `τ_match`; concept clusters + `Π` | `certify/matching.py` | test: permuted clone nets match 1:1 | concepts gain cross-run identity | ☑ | `impl/p3` |
+| P3-3 | CPSS: B complementary pairs, selection frequency `π`, structure-level universe `p`, `E[V]` bound (S-§10) | `certify/cpss.py` | unit tests on bound arithmetic; universe count audited | false-discovery bound computable | ☑ | `impl/p3` |
+| P3-4 | reality test: ablation Δ + bootstrap CI (S-§10) | `certify/reality.py` | tests | concept impact measurable with CIs | ☑ | `impl/p3` |
+| P3-5 | labelling: CORE/PERIPHERY + reason codes; multiplicitous detection (S-§10) | `certify/labels.py` | tests | CORE/PERIPHERY separation live | ☑ | `impl/p3` |
+| P3-6 | CI gates wired (S-§13): COMP2 recovery mini-battery; NOISE zero-certification | CI config | gates green | honesty is regression-protected | ☑ | `impl/p3` |
+| **E3.1** | **experiment (recovery, H-X1-3 on synthetic ground):** full 6-config suite, R=8. **Bar:** planted concepts CORE with matched support at ≥ 2/3 rate above the power floor; 0 certified concepts on NOISE (untradeable) | `results/e31.json` | bar met | **🏁 M4 — first certified concepts** (reviewable `concepts.json` on known ground truth) | ☑* | `impl/p3` |
+| **E3.2** | **experiment (matching sensitivity, M-§8):** `τ_match` sweep 0.5–0.9 on E3.1 runs. **Bar:** CORE set stable in a neighbourhood of 0.7; report curve in certificate appendix | `results/e32.json` | reported | matching robustness quantified | ☑* | `impl/p3` |
+| **E3.3** | **experiment (bound non-vacuity, H-X1-6):** `E[V]` at structure-level vs raw-feature universe on COMP2. **Bar:** structure-level bound < 1 at `π_thr=0.7`; raw-feature comparison documented | `results/e33.json` | bar met | certificate bound shown non-vacuous | ☑* | `impl/p3` |
+| P3-X | **exit criteria:** CI gates green; E3.1 bar met; E3.2/E3.3 reported | — | — | phase gate | ☑* | `impl/p3` |
+
+**P3 result annotations (☑\* = met after documented corrections, `docs/FINDINGS.md` P3):** E3.1 MET after the invariant-core sharpening of `multiplicitous` (nested support variants = boundary jitter, not Rashomon alternatives); full suite: recovery on all four compositional configs incl. the power floor, ADD order-1-only, NOISE zero-certified (K2 holds). E3.2 MET: CORE set identical at every τ ∈ [0.5, 0.9]. E3.3 MET after correcting q to count distinct supports (the universe's elements), not units: E[V] ≤ 0.124 structure-level vs 2.18 raw.
 
 ## P4 — DAG extraction and audit certificate
 

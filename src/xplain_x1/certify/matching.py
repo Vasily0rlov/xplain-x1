@@ -92,8 +92,19 @@ def cluster_concepts(run_sigs: list[list[UnitSignature]],
             uniq = {}
             for v in variants:
                 uniq[v] = uniq.get(v, 0) + 1
-            c.modal_support = max(uniq, key=uniq.get)
             c.support_variants = [sorted(v) for v in uniq]
-            c.multiplicitous = len(uniq) >= 2
+            chain = all(a <= b or b <= a for a in uniq for b in uniq)
+            if chain:
+                # Nested variants = boundary jitter of ONE concept (a weak
+                # rider present in some runs).  The certified support is the
+                # minimal common variant — the run-invariant core (POSITIONING
+                # "invariant core") — with the jitter on record above.
+                c.modal_support = min(uniq, key=len)
+                c.multiplicitous = False
+            else:
+                # Incomparable variants = genuinely interchangeable
+                # alternatives (Rashomon multiplicity): not certifiable unique.
+                c.modal_support = max(uniq, key=uniq.get)
+                c.multiplicitous = True
         out.append(c)
     return out

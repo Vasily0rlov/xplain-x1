@@ -33,8 +33,10 @@ def _one_half(dataset: str, cfg: dict, seed: int, half, fid_ref: float,
     r = run_pipeline(dataset, cfg, seed, train_override=half, fid_ref=fid_ref)
     ds = get_dataset(dataset)
     sigs = unit_signatures(r["model"], ds, r["splits"])
+    units_by_id = {u["uid"]: u for u in r["final_audit"]["units"]}
     return {"sigs": sigs,
-            "mu": {u["uid"]: u["mu"] for u in r["final_audit"]["units"]}}
+            "mu": {u["uid"]: u["mu"] for u in r["final_audit"]["units"]},
+            "supports": {s.uid: input_support(s.uid, units_by_id) for s in sigs}}
 
 
 def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
@@ -79,9 +81,13 @@ def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
                            min(workers, len(halves)))
         for i, h in enumerate(halves))
     pi = selection_frequencies(main["sigs"], half_results, tau, mu_min)
+    # q = distinct SUPPORTS selected per subsample (the universe is supports,
+    # M-#3.6): several units carrying the same support are one selection.
     q_mean = float(sum(
-        sum(1 for m in hr["mu"].values() if m >= mu_min) for hr in half_results
-    ) / max(1, len(half_results)))
+        len({tuple(sorted(hr["supports"][uid]))
+             for uid, m in hr["mu"].items()
+             if m >= mu_min and uid in hr["supports"]})
+        for hr in half_results) / max(1, len(half_results)))
     model = main["result"]["model"]
     p_universe = structure_universe_size(model.d_in, model.widths,
                                         int(cfg["audit"]["f_max"]))

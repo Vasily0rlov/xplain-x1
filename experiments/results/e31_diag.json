@@ -1,0 +1,844 @@
+{
+ "concepts": [
+  {
+   "cid": "c0",
+   "uid_main": "L1U3",
+   "layer": 1,
+   "modal_support": [
+    0,
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": true,
+   "Pi": 1.0,
+   "pi": 0.975,
+   "mu": 0.9778687953948975,
+   "delta": 2.237395405769348,
+   "ci_low": 1.9960557758808135,
+   "label": "PERIPHERY",
+   "reasons": [
+    "multiplicitous"
+   ],
+   "form": "poly(2)",
+   "support_names": [
+    "x3",
+    "x2"
+   ]
+  },
+  {
+   "cid": "c1",
+   "uid_main": "L1U6",
+   "layer": 1,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": true,
+   "Pi": 1.0,
+   "pi": 0.975,
+   "mu": 0.9763885140419006,
+   "delta": 2.3657068014144897,
+   "ci_low": 2.1219853833317757,
+   "label": "PERIPHERY",
+   "reasons": [
+    "multiplicitous"
+   ],
+   "form": "poly(2)",
+   "support_names": [
+    "x3",
+    "x2"
+   ]
+  },
+  {
+   "cid": "c2",
+   "uid_main": "L1U2",
+   "layer": 1,
+   "modal_support": [
+    0,
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": true,
+   "Pi": 0.875,
+   "pi": 0.85,
+   "mu": 0.9806013703346252,
+   "delta": 2.27637255191803,
+   "ci_low": 2.0367507576942443,
+   "label": "PERIPHERY",
+   "reasons": [
+    "multiplicitous"
+   ],
+   "form": "poly(2)",
+   "support_names": [
+    "x3",
+    "x2",
+    "x1"
+   ]
+  },
+  {
+   "cid": "c3",
+   "uid_main": "L1U1",
+   "layer": 1,
+   "modal_support": [
+    0,
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": true,
+   "Pi": 0.875,
+   "pi": 0.95,
+   "mu": 0.9804638028144836,
+   "delta": 2.137276768684387,
+   "ci_low": 1.9223357021808625,
+   "label": "PERIPHERY",
+   "reasons": [
+    "multiplicitous"
+   ],
+   "form": "poly(2)",
+   "support_names": [
+    "x3",
+    "x2",
+    "x1"
+   ]
+  },
+  {
+   "cid": "c4",
+   "uid_main": "L1U0",
+   "layer": 1,
+   "modal_support": [
+    0
+   ],
+   "support_variants": [
+    [
+     0
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.875,
+   "pi": 0.875,
+   "mu": 0.9994341731071472,
+   "delta": 1.1197198629379272,
+   "ci_low": 1.002158346772194,
+   "label": "CORE",
+   "reasons": [],
+   "form": "monotone-",
+   "support_names": [
+    "x1"
+   ]
+  },
+  {
+   "cid": "c5",
+   "uid_main": "L1U4",
+   "layer": 1,
+   "modal_support": [
+    0
+   ],
+   "support_variants": [
+    [
+     0
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 1.0,
+   "pi": 0.975,
+   "mu": 1.0,
+   "delta": 0.4497094750404358,
+   "ci_low": 0.39606122523546217,
+   "label": "CORE",
+   "reasons": [],
+   "form": "monotone+",
+   "support_names": [
+    "x1"
+   ]
+  },
+  {
+   "cid": "c6",
+   "uid_main": "L1U5",
+   "layer": 1,
+   "modal_support": [
+    0,
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": 0.35,
+   "mu": 0.8746618628501892,
+   "delta": 0.08076351881027222,
+   "ci_low": 0.06256895810365677,
+   "label": "PERIPHERY",
+   "reasons": [
+    "unstable",
+    "infrequent"
+   ],
+   "form": "poly(2)",
+   "support_names": [
+    "x3",
+    "x2",
+    "x1"
+   ]
+  },
+  {
+   "cid": "c7",
+   "uid_main": "L1U7",
+   "layer": 1,
+   "modal_support": [
+    0,
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": true,
+   "Pi": 0.25,
+   "pi": 0.2,
+   "mu": 0.8552942276000977,
+   "delta": 0.056334733963012695,
+   "ci_low": 0.044221632182598114,
+   "label": "PERIPHERY",
+   "reasons": [
+    "unstable",
+    "infrequent",
+    "multiplicitous"
+   ],
+   "form": "poly(2)",
+   "support_names": [
+    "x2",
+    "x3",
+    "x1"
+   ]
+  },
+  {
+   "cid": "e0",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e1",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e2",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    0,
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e3",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e4",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e5",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e6",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e7",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e8",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e9",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e10",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e11",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    0,
+    1
+   ],
+   "support_variants": [
+    [
+     0,
+     1
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e12",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    0,
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     0,
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e13",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  },
+  {
+   "cid": "e14",
+   "uid_main": null,
+   "layer": null,
+   "modal_support": [
+    1,
+    2
+   ],
+   "support_variants": [
+    [
+     1,
+     2
+    ]
+   ],
+   "multiplicitous": false,
+   "Pi": 0.125,
+   "pi": null,
+   "mu": null,
+   "delta": null,
+   "ci_low": null,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ],
+   "form": null,
+   "support_names": null
+  }
+ ],
+ "tau_sweep": [
+  {
+   "tau": 0.5,
+   "n_concepts": 23,
+   "n_stable": 6,
+   "supports_stable": [
+    [
+     0
+    ],
+    [
+     0
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "tau": 0.6,
+   "n_concepts": 23,
+   "n_stable": 6,
+   "supports_stable": [
+    [
+     0
+    ],
+    [
+     0
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "tau": 0.7,
+   "n_concepts": 23,
+   "n_stable": 6,
+   "supports_stable": [
+    [
+     0
+    ],
+    [
+     0
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "tau": 0.8,
+   "n_concepts": 23,
+   "n_stable": 6,
+   "supports_stable": [
+    [
+     0
+    ],
+    [
+     0
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "tau": 0.9,
+   "n_concepts": 24,
+   "n_stable": 6,
+   "supports_stable": [
+    [
+     0
+    ],
+    [
+     0
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  }
+ ],
+ "n_core": 2
+}
