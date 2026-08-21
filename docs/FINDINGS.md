@@ -112,3 +112,38 @@ above and await owner sign-off; none was a silent retune.
   (v4 finding) reproduced.
 - CI gates wired (`pytest -m gates`): COMP2 recovery mini-battery + NOISE
   zero-certification.
+
+## P4 (2026-08-22) — E4.1 escalated to owner
+
+Artefact machinery complete (DAG + certificate + provenance; golden tests).
+**E4.1 (Wine end-to-end) NOT MET — this is a results finding, not a code
+failure:**
+
+- The model is *better than the reference ceiling* (fid 0.956 vs ref 0.940,
+  ratio **1.017** — v4's anchor was 0.766) and every live unit is μ-legible
+  (0.90–0.98), sitting on the known Wine core (flavanoids, od280,
+  colour intensity, alcohol) with large real ablation effects (Δ up to 0.34,
+  CI > 0).
+- But **0 concepts certify**: across restarts the 13 collinear chemistry
+  features get carved into *different* legible 3-feature mixes (Π 0.38–0.88 —
+  Rashomon under collinearity), and CPSS on 53-row half-samples has no
+  statistical power (π ≤ 0.6) at n=178.  A cleanup-pressure probe (λ_fanin
+  0.3) lifted the flavanoids complex to Π=0.88 but π stayed at 0.55 and the
+  variants remain incomparable.  The honest-labelling machinery is working
+  exactly as designed; Wine at this n sits below the method's unit-level
+  stability floor.
+
+**Options for the owner decision:**
+
+- **A — accept honest periphery on small-n (recommended):** re-scope E4.1's
+  bar: on datasets below a stability power floor the deliverable is
+  fidelity + legibility + honest labels (which Wine passes emphatically);
+  certified-recovery bars live on the n ≥ 8k MVL datasets (mushroom, adult,
+  bike, drybean) where CPSS has power.  Proceed to P5 unchanged.
+- **B — small-n statistical design:** replace 50/50 CPSS with an m-out-of-n
+  subsampling variant below a data-size threshold (changes the E[V] bound's
+  form; needs care to stay non-vacuous and honest).
+- **C — coarser concept identity:** match/certify at route/support level
+  (all-pairs union-find + support-overlap), consolidating collinear variants
+  into one concept.  Larger redesign of M-#3.6; risks blurring genuinely
+  distinct concepts.

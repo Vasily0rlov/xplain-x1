@@ -1,0 +1,5 @@
+[box] load 10.60 >= 8.0 — waiting 60s
+[box] load 14.05 >= 8.0 — waiting 60s
+[box] load 5.67 < 8.0 — proceeding
+wine: 0 CORE / 37 periphery, fid 0.956 vs ref 0.940, E[V]<=0.249 -> /opt/xplain-x1/runs/wine/certified
+E4.1: core=0 on-known=0 flav/proline=False fid-ratio 1.0166 (v4 0.766) -> NOT MET (161.8s)
