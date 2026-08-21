@@ -94,6 +94,11 @@ input features) with incoming edges. Define:
   low-arity function of few parents* — its **local legibility**. The maximising `S` is the
   unit's **support** `S(u)` and the fitted `g` its **surrogate form**.
 
+In plain terms: a monosemantic unit **responds to the same few variables in the same simple
+way** — *not* necessarily "activates on the same (range of) inputs". The feature-detector
+reading is deliberately not the definition (a graded, always-active unit can be maximally
+legible; a narrow detector over many features is not — see `docs/ALTERNATIVE-OPTIONS.md` A1).
+
 A unit is **locally monosemantic** at level `μ_min` if `μ(u) ≥ μ_min`. Global legibility is
 recursive: a decision route is legible iff every unit along it is locally monosemantic —
 this is what the DAG certification (§5) establishes route by route. Explainability in this
