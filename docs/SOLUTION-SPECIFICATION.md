@@ -71,11 +71,24 @@ docs/
 ## 4. Data module
 
 - **Registry:** one entry per dataset with loader, task type, encoding recipe, and metadata
-  (`n`, `d`, expected order→depth from `docs/DATASETS.md`). Beachhead set, in build order:
-  `synthetic:*`, `zoo`, `tictactoe`, `mushroom`, `iris`, `wine`, `seeds`, `titanic`,
-  `adult`, `bike`, `drybean`, `covertype50k`. Public sets fetched via
-  `sklearn.datasets`/OpenML with local cache under `data_cache/`; SHA-256 of the raw file
-  recorded in provenance.
+  (`n`, `d`, expected order→depth from `docs/DATASETS.md`). Two tiers:
+  - **Minimum viable ladder (MVL — the build target).** `synthetic:*` (§5) plus six public
+    datasets, each the sole carrier of a distinct evidential role, in build order:
+    `zoo` (monosemantic recovery of nameable Boolean predicates; native multiclass),
+    `tictactoe` (pure composition, zero main effects; the only public set with known
+    ground-truth structure; below the power floor — honest partial recovery expected),
+    `mushroom` (single-feature-shortcut resistance; multiplicity labelling; v4 anchor),
+    `wine` (continuous features certifying additive; core-recovery + expert-alignment v4
+    anchor; 3-class), `adult` (mixed types at moderate scale; honest-shallow certification;
+    v4 anchor), `bike` (the only regression task; the certified real-data order-2
+    interaction `hour×temp` named in the H-X1-3 bar). All three M-§9 v4 anchors and every
+    M-§7 bar are carriable by this set.
+  - **Extended tier (post-MVL, optional).** `iris`, `seeds`, `titanic`, `drybean`,
+    `covertype50k` — additional redundancy, scale, and multiclass-at-scale evidence; run
+    only after the MVL bars are met.
+
+  Public sets fetched via `sklearn.datasets`/OpenML with local cache under `data_cache/`;
+  SHA-256 of the raw file recorded in provenance.
 - **Encoding rules** (from `DATASETS.md` requirements, mandatory): continuous → standardise;
   low-cardinality ordinal → integer with meaningful order, standardised; binary → {0,1};
   **high-cardinality nominals → a small set of monosemantic binary predicates** (recipe
@@ -90,9 +103,8 @@ docs/
 
 ## 5. Synthetic control suite (ground truth known)
 
-Generator `data/synthetic.py`, 9 pinned configs = 3 structures × 3 regimes; all with
-`d = 10` standard-normal features (irrelevant features included), `n ∈ {2 000, 8 000}`,
-label noise σ ∈ {0.0, 0.3}:
+Generator `data/synthetic.py`, **6 pinned configs**; all with `d = 10` standard-normal
+features (irrelevant features included). Structures:
 
 - **ADD:** additive `y = f1(x1) + f2(x2) + f3(x3)` (monotone nonlinear f's) — honest depth 1.
 - **COMP2:** `y = f1(x1) + x2·x3` — one planted order-2 concept, honest depth 2.
@@ -100,7 +112,9 @@ label noise σ ∈ {0.0, 0.3}:
   composition unit at `F_max = 3`).
 - **NOISE:** `y` independent of `x` — honest output: nothing certified.
 
-Regimes: (clean, n=8k), (noisy, n=8k), (noisy, n=2k, near the order-2 power floor).
+Configs: COMP2 — the decisive recovery carrier — runs all three regimes: (clean, n=8k),
+(noisy σ=0.3, n=8k), (noisy, n=2k, near the order-2 power floor); ADD and COMP3 run
+(noisy, n=8k) only; NOISE runs (n=8k) only.
 Ground-truth scoring: a planted concept counts **recovered** iff a CORE concept's support
 equals the planted support; the suite reports matched-rate, false-support rate, and honest
 flatness (H-X1-2/-3 in M-§7).
@@ -227,7 +241,7 @@ parents), `controller` (ε_prune 0.001, ε_depth 0.005, δ_grow 0.005, δ_stop 0
 rounds 12), `certify` (R 8, B 20, τ_match 0.7, π_thr 0.7, μ_min 0.8, Π_min 0.7,
 δ_min 0.005), `compute` (device cpu, n_workers 16, load_threshold 8.0). CLI:
 `xplain-x1 run --dataset wine [--config path] [--override key=val …]`, plus
-`xplain-x1 battery --suite synthetic|ladder|v4-anchors`.
+`xplain-x1 battery --suite synthetic|mvl|extended|v4-anchors`.
 
 ## 13. Testing and acceptance
 
@@ -238,9 +252,10 @@ rounds 12), `certify` (R 8, B 20, τ_match 0.7, π_thr 0.7, μ_min 0.8, Π_min 0
 - **Integration gates (CI, fast):** `synthetic:COMP2(clean, 8k)` — planted concept recovered
   as CORE with correct support in a 2-restart mini-battery; `synthetic:NOISE` — zero
   certified concepts (the K2 untradeable, M-§7).
-- **Acceptance = the M-§7 bars + M-§9 anchor table**, produced by
-  `experiments/ladder.py` and `experiments/v4_anchors.py` batteries. Dev on seeds 0–7;
-  confirmatory one-shot on seeds 20+ after config freeze.
+- **Acceptance = the M-§7 bars + M-§9 anchor table on the MVL tier**, produced by
+  `experiments/ladder.py` (MVL by default, `--extended` for the second tier) and
+  `experiments/v4_anchors.py`. Dev on seeds 0–7; confirmatory one-shot on seeds 20+ after
+  config freeze.
 
 ## 14. Flagged alternatives (do not substitute silently)
 
@@ -258,12 +273,12 @@ rounds 12), `certify` (R 8, B 20, τ_match 0.7, π_thr 0.7, μ_min 0.8, Π_min 0
 
 | phase | contents | exit criterion |
 |---|---|---|
-| P0 | package skeleton, data module + registry (synthetics + zoo/iris/wine), MaskedMLP + registry + gauge, settle loop, f_ref | plain settle reaches `Fid_ref` ± 2% on iris/wine; determinism test green |
+| P0 | package skeleton, data module + registry (synthetics + zoo/wine), MaskedMLP + registry + gauge, settle loop, f_ref | plain settle reaches `Fid_ref` ± 2% on zoo/wine; determinism test green |
 | P1 | pressures + audit module | on `COMP2`: pressures raise median μ vs plain control; audit.json time series produced |
 | P2 | growth controller | `ADD` stays L=1; `COMP2/3` grow to L=2 and match ceiling; `NOISE` stays trivial |
 | P3 | certification (restarts, matching, CPSS, reality, labels) | CI gates green (§13); synthetic matched-rates reported |
 | P4 | DAG + certificate | wine run yields complete `certificate.md` + `dag.dot` |
-| P5 | ladder + v4-anchor batteries, remaining datasets | M-§7 bars table + M-§9 anchor table filled, dev seeds |
+| P5 | MVL + v4-anchor batteries (extended tier optional, after) | M-§7 bars table + M-§9 anchor table filled on MVL, dev seeds |
 
 Each phase lands as its own PR on a feature branch; merges to `main` only on owner approval
 (project `CLAUDE.md`). Battery runs obey the box-etiquette gate (§2) and then use all 64

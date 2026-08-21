@@ -292,10 +292,14 @@ not the architecture.
 
 ## 7. Hypotheses, bars, and kill criteria
 
-Pre-registered before the implementation runs; evaluated on the `DATASETS.md` ladder
-(interpretability core: Zoo, Tic-Tac-Toe, Mushroom; continuous sanity: Iris, Wine, Seeds;
-mixed interactions: Titanic, Adult; scale: Covertype subset, Bike Sharing, Dry Bean) plus
-the synthetic control suite (Solution Spec §5) whose ground-truth structure is known.
+Pre-registered before the implementation runs; evaluated on the **minimum viable ladder**
+(Solution Spec §4): six public datasets each carrying a distinct role — Zoo (monosemantic
+predicate recovery), Tic-Tac-Toe (pure composition, known ground truth), Mushroom
+(shortcut resistance, multiplicity labelling), Wine (continuous additive, v4 core anchor),
+Adult (mixed types, honest-shallow), Bike Sharing (regression, certified real order-2) —
+plus the synthetic control suite (Solution Spec §5) whose ground-truth structure is known.
+The extended tier (Iris, Seeds, Titanic, Dry Bean, Covertype subset) adds redundancy and
+scale after the MVL bars are met.
 
 | id | hypothesis | bar |
 |---|---|---|
