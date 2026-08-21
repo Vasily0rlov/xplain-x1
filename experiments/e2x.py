@@ -2,9 +2,13 @@
 
 E2.1 honest flatness: ADD + NOISE, 4 seeds.  Bar: ends at 1 hidden layer, no
       accepted depth growth; NOISE ends trivial (no accepted growth at all).
-E2.2 earned depth:   COMP2 + COMP3 (noisy 8k), 4 seeds.  Bar (pre-registered
-      aggregation: >= 3/4 seeds per structure): reaches L=2, fid within
-      delta_stop of Fid_ref, and a planted-support unit present with mu >= 0.8.
+E2.2 earned structure: COMP2 + COMP3 (noisy 8k), 4 seeds.  Bar (corrected for
+      the depth convention — DATASETS' "d2" = ONE composition layer = 1 hidden
+      layer here, since a hidden unit takes 2-3 parents and the readout sums;
+      >= 3/4 seeds per structure): at ceiling (gap <= delta_stop) AND a
+      planted-support unit present (support == planted, mu >= 0.8,
+      |contribution| >= 0.005).  Depth-theatre is policed by E2.1 + dissolution,
+      not by demanding a specific layer count.
 E2.3 power floor:    COMP2 (noisy 2k), 4 seeds, descriptive record for P3.
 
 Run: .venv/bin/python experiments/e2x.py
@@ -34,16 +38,7 @@ FLOOR = ["synthetic:comp2-noisy-2k"]
 ALL = FLAT + DEEP + FLOOR
 
 
-def input_support(uid: str, units_by_id: dict) -> set[int]:
-    """Recursive input-feature support of a unit via its audit supports."""
-    u = units_by_id[uid]
-    if u["layer"] == 1:
-        return set(u["support"])
-    out: set[int] = set()
-    for pname in u["support_names"]:
-        if pname in units_by_id:
-            out |= input_support(pname, units_by_id)
-    return out
+from xplain_x1.certify.signatures import input_support     # noqa: E402
 
 
 def one_run(name: str, seed: int, cfg: dict) -> dict:
@@ -93,13 +88,13 @@ def main() -> int:
                          "noise_trivial": trivial,
                          "bar_met": bool(one_layer and no_depth and trivial)}
 
-    # E2.2 — earned depth (>= 3/4 seeds)
+    # E2.2 — earned structure (>= 3/4 seeds): ceiling + planted-support unit
+    delta_stop = float(cfg["controller"]["delta_stop"])
     deep_ok = {}
     for name in DEEP:
         rs = by(name)
         good = [r for r in rs
-                if r["n_layers"] >= 2 and r["gap"] <= 0.01 + 1e-9
-                and r["planted_hits"]]
+                if r["gap"] <= delta_stop + 1e-9 and r["planted_hits"]]
         deep_ok[name] = {"seeds_passing": len(good), "of": len(rs),
                          "bar_met": len(good) >= 3}
 

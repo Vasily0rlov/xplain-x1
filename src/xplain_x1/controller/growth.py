@@ -140,6 +140,10 @@ def grow(ds: Dataset, splits: Splits, cfg: dict, seed: int,
     delta_grow = float(ccfg["delta_grow"])
     eps_depth = float(ccfg["eps_depth"])
 
+    discovery_scale = float(ccfg.get("discovery_scale", 0.3))
+    pressures.scale = discovery_scale       # start in discovery mode
+    prev_fid: float | None = None
+
     for rnd in range(int(ccfg["max_rounds"])):
         trace.rounds = rnd + 1
         settle(model, ds, splits, cfg, seed=seed, pressures=pressures)
@@ -178,6 +182,13 @@ def grow(ds: Dataset, splits: Splits, cfg: dict, seed: int,
 
         fid_now = evaluate(model, ds, splits, splits.val, null_stats)["fidelity"]
         gap = fid_ref - fid_now
+        # discovery/cleanup gate: full pressure only near the ceiling (M-C4)
+        pressures.scale = (1.0 if gap <= 2 * float(ccfg["delta_stop"])
+                           else discovery_scale)
+        # progress unlocks retrying a previously reverted growth kind
+        if prev_fid is not None and fid_now >= prev_fid + delta_grow:
+            failed_kinds.clear()
+        prev_fid = fid_now
         if gap <= float(ccfg["delta_stop"]):
             trace.actions.append({"action": "stop_at_ceiling", "round": rnd,
                                   "gap": round(gap, 5)})
@@ -191,10 +202,12 @@ def grow(ds: Dataset, splits: Splits, cfg: dict, seed: int,
                      and "width" not in failed_kinds)
         can_deepen = (len(model.layers) + 1 <= int(mcfg["max_layers"])
                       and len(model.layers) >= 1 and "depth" not in failed_kinds)
-        li = _least_mono_layer(audit)
+        li = min(_least_mono_layer(audit), len(model.layers) - 1)
         if can_widen:
             snapshot = copy.deepcopy(model)
             uid = _least_mono_unit(audit, li)
+            if uid is not None and uid not in model.unit_ids[li]:
+                uid = None                 # audit is pre-prune; unit may be gone
             model = add_unit(model, li, f"split:{uid}" if uid else "fresh", seed)
             model = add_unit(model, li, "fresh", seed + 7919)
             pending = {"kind": "width", "snapshot": snapshot, "fid_before": fid_now}

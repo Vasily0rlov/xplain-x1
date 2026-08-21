@@ -65,6 +65,41 @@ def cmd_run(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_certify(args: argparse.Namespace) -> int:
+    """Full pipeline with certification: restarts + CPSS + reality -> DAG + certificate."""
+    from .certify.certify import certify
+    from .data.registry import get_dataset as _get
+    from .extract.certificate import build_certificate, render_markdown
+    from .extract.dag import build_dag, to_dot
+    from .util.box import wait_until_free
+
+    cfg = load_config(args.config, args.override)
+    cfg["data"]["dataset"] = args.dataset
+    wait_until_free(float(cfg["compute"]["load_threshold"]))
+
+    cert = certify(args.dataset, cfg)
+    ds = _get(args.dataset)
+    run_dir = ROOT / "runs" / args.dataset.replace(":", "_") / "certified"
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    cert_doc = build_certificate(cert, ds, cert["splits"], cfg)
+    dag = build_dag(cert["model"], ds, cert["splits"], cert["concepts"], cfg)
+    cert["model"].save(run_dir / "model.pt")
+    save_json(run_dir / "concepts.json", cert["concepts"])
+    save_json(run_dir / "dag.json", dag)
+    (run_dir / "dag.dot").write_text(to_dot(dag))
+    save_json(run_dir / "certificate.json", cert_doc)
+    (run_dir / "certificate.md").write_text(render_markdown(cert_doc))
+    write_provenance(run_dir, config=cfg, data_hash=ds.data_hash(),
+                     seeds={"restarts": cert["R"], "cpss_runs": 2 * cert["B"],
+                            "split_seed": int(cfg["data"]["split_seed"])})
+    print(f"{args.dataset}: {cert['n_core']} CORE / "
+          f"{len(cert['concepts']) - cert['n_core']} periphery, "
+          f"fid {cert['main']['fidelity']:.3f} vs ref {cert['main']['fid_ref']:.3f}, "
+          f"E[V]<={cert['ev_bound']:.3g} -> {run_dir}")
+    return 0
+
+
 def cmd_list(args: argparse.Namespace) -> int:
     for name in available():
         print(name)
@@ -81,6 +116,12 @@ def main() -> int:
     p_run.add_argument("--seed", default=0, type=int)
     p_run.add_argument("--override", action="append", default=[])
     p_run.set_defaults(fn=cmd_run)
+
+    p_cert = sub.add_parser("certify", help="full certification pipeline on one dataset")
+    p_cert.add_argument("--dataset", required=True)
+    p_cert.add_argument("--config", default=None)
+    p_cert.add_argument("--override", action="append", default=[])
+    p_cert.set_defaults(fn=cmd_certify)
 
     p_list = sub.add_parser("list", help="list registered datasets")
     p_list.set_defaults(fn=cmd_list)

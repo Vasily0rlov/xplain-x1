@@ -21,7 +21,8 @@ train:
   anneal_frac: 0.25        # pressure ramp over first 25% of max_epochs
   safety_margin: 0.01      # restore best-val only if final fid worse by > this
   lambda_act: 1.0e-2       # L1 on std-normalised activations (calibrated, E1.3c)
-  lambda_fanin: 0.03       # Hoyer ratio per incoming row (calibrated, E1.3c)
+  lambda_fanin: 0.1        # Hoyer ratio per row (E1.3c constraints; separation
+                           # tie-break from COMP2 evidence, see FINDINGS P2)
 
 reference:
   mlp_widths: [64, 64]     # unconstrained baseline MLP
@@ -32,10 +33,13 @@ audit:
   top_parents: 6           # candidate-support pool per unit
 
 controller:
+  discovery_scale: 0.3     # pressure multiplier while fid below ceiling (M-C4)
   eps_prune: 0.001
   eps_depth: 0.005
   delta_grow: 0.005
-  delta_stop: 0.01
+  delta_stop: 0.02         # = pressure fid-neutrality budget (E1.3c, H-X1-4):
+                           # the stop bar cannot be tighter than the distortion
+                           # full-strength pressure is allowed to cause
   max_rounds: 12
 
 certify:

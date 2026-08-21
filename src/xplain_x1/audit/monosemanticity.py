@@ -9,10 +9,16 @@ mu = best val R2; the argmax support is S(u); the winning surrogate is form(u).
 """
 from __future__ import annotations
 
+import warnings
 from dataclasses import dataclass
 from itertools import combinations
 
 import numpy as np
+from scipy.linalg import LinAlgWarning
+
+warnings.filterwarnings("ignore", category=LinAlgWarning)  # ill-conditioned ridge
+                                                           # solves are expected on
+                                                           # tiny/collinear supports
 
 
 @dataclass

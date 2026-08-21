@@ -47,13 +47,18 @@ def unit_signatures(model: MaskedMLP, ds: Dataset, splits: Splits
     return sigs
 
 
-def input_support(uid: str, units_by_id: dict) -> frozenset[int]:
-    """Recursive input-feature support of a unit from its audit supports."""
+def input_support(uid: str, units_by_id: dict,
+                  _seen: frozenset[str] = frozenset()) -> frozenset[int]:
+    """Recursive input-feature support of a unit from its audit supports.
+    Cycle-guarded: ids are globally unique by construction, but a malformed
+    audit must degrade, not recurse forever."""
+    if uid in _seen:
+        return frozenset()
     u = units_by_id[uid]
     if u["layer"] == 1:
         return frozenset(u["support"])
     out: set[int] = set()
     for pname in u["support_names"]:
         if pname in units_by_id:
-            out |= input_support(pname, units_by_id)
+            out |= input_support(pname, units_by_id, _seen | {uid})
     return frozenset(out)

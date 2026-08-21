@@ -15,7 +15,7 @@ from .mlp import MaskedMLP
 
 def _clone_into(model: MaskedMLP, widths: list[int]) -> MaskedMLP:
     m = MaskedMLP(model.d_in, widths, model.d_out, model.task)
-    m._unit_counter = list(model._unit_counter)
+    m._unit_counter = max(model._unit_counter, m._unit_counter)
     return m
 
 
@@ -95,9 +95,6 @@ def insert_layer(model: MaskedMLP, pos: int) -> MaskedMLP:
     widths = model.widths
     widths.insert(pos, d)
     new = _clone_into(model, widths)
-    # counters: shift per-layer counters right of pos; new layer starts fresh
-    new._unit_counter = (list(model._unit_counter[:pos]) + [0]
-                         + list(model._unit_counter[pos:]))
     for j in range(len(model.layers)):
         _copy_layer(new, j if j < pos else j + 1, model, j)
     _copy_head(new, model)

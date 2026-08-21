@@ -21,10 +21,13 @@ def test_add_unit_fresh_extends_registry_and_barely_moves_function():
     y0 = m(x)
     m2 = add_unit(m, 0, "fresh", seed=1)
     assert m2.widths == [7, 5]
-    assert m2.unit_ids[0][:6] == m.unit_ids[0] and m2.unit_ids[0][6] == "L1U6"
+    all_old = set(m.unit_ids[0]) | set(m.unit_ids[1])
+    new_uid = m2.unit_ids[0][6]
+    assert m2.unit_ids[0][:6] == m.unit_ids[0]
+    assert new_uid.startswith("L1U") and new_uid not in all_old
     assert (m2(x) - y0).abs().max() < 0.5      # tiny outgoing init
     m3 = add_unit(m2, 0, "fresh", seed=2)
-    assert m3.unit_ids[0][7] == "L1U7"          # counter never reuses ids
+    assert m3.unit_ids[0][7] not in set(m2.unit_ids[0]) | set(m2.unit_ids[1])
 
 
 def test_add_unit_split_halves_outgoing_and_preserves_function_approx():
@@ -45,7 +48,10 @@ def test_insert_layer_identity_is_exact():
     m2 = insert_layer(m, 1)
     assert m2.widths == [6, 6, 5]
     assert torch.allclose(m2(x), y0, atol=1e-6)
-    assert m2.unit_ids[1] == [f"L2U{i}" for i in range(6)]
+    # inserted ids are fresh and GLOBALLY unique (no collision with shifted layer)
+    inserted = set(m2.unit_ids[1])
+    assert len(inserted) == 6
+    assert not inserted & (set(m.unit_ids[0]) | set(m.unit_ids[1]))
     # original layer-2 ids preserved (now layer 3)
     assert m2.unit_ids[2] == m.unit_ids[1]
 

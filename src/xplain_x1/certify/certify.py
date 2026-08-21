@@ -53,6 +53,19 @@ def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
     concepts = cluster_concepts([r["sigs"] for r in restarts],
                                 [r["supports"] for r in restarts], tau)
 
+    # E3.2 instrumentation: Pi stability of the concept set across tau values
+    tau_sweep = []
+    for t in (0.5, 0.6, 0.7, 0.8, 0.9):
+        cs = cluster_concepts([r["sigs"] for r in restarts],
+                              [r["supports"] for r in restarts], t)
+        tau_sweep.append({
+            "tau": t, "n_concepts": len(cs),
+            "n_stable": sum(1 for c in cs if c.Pi >= float(ccfg["Pi_min"])),
+            "supports_stable": sorted(
+                sorted(c.modal_support) for c in cs
+                if c.Pi >= float(ccfg["Pi_min"]) and c.members.get(0)),
+        })
+
     # 2) CPSS half-runs (cpss seed offset 100 — outside dev and confirmatory pools)
     ds = get_dataset(dataset)
     splits = make_splits(ds, int(cfg["data"]["split_seed"]),
@@ -73,6 +86,9 @@ def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
     p_universe = structure_universe_size(model.d_in, model.widths,
                                         int(cfg["audit"]["f_max"]))
     ev = ev_bound(q_mean, p_universe, pi_thr)
+    # E3.3 instrumentation: raw-feature universe comparison (v4 vacuity finding)
+    p_raw = structure_universe_size(model.d_in, [1], 1)   # d singleton features
+    ev_raw = ev_bound(q_mean, p_raw, pi_thr)
 
     # 3) reality tests on main-run units + 4) labels
     units_by_id = {u["uid"]: u for u in main["result"]["final_audit"]["units"]}
@@ -118,6 +134,8 @@ def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
         "concepts": concept_rows,
         "n_core": sum(1 for c in concept_rows if c["label"] == "CORE"),
         "ev_bound": ev, "q_mean": q_mean, "p_universe": p_universe,
+        "ev_bound_raw_universe": ev_raw, "p_raw_universe": p_raw,
+        "tau_sweep": tau_sweep,
         "main": {"widths": model.widths,
                  "fidelity": main["result"]["final_audit"]["fidelity"],
                  "fid_ref": fid_ref,

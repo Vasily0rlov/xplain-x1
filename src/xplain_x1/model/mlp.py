@@ -16,8 +16,8 @@ class MaskedMLP(nn.Module):
     def __init__(self, d_in: int, widths: list[int], d_out: int, task: str):
         super().__init__()
         self.d_in, self.d_out, self.task = d_in, d_out, task
-        self._unit_counter = [0] * (len(widths) + 1)  # per-layer id counters
-        self.layers = nn.ModuleList()
+        self._unit_counter = 0     # GLOBAL counter: ids stay unique across
+        self.layers = nn.ModuleList()   # growth, pruning, and layer insertion
         self.unit_ids: list[list[str]] = []
         prev = d_in
         for li, w in enumerate(widths):
@@ -31,8 +31,8 @@ class MaskedMLP(nn.Module):
 
     # -- identity ---------------------------------------------------------
     def _new_id(self, layer: int) -> str:
-        uid = f"L{layer + 1}U{self._unit_counter[layer]}"
-        self._unit_counter[layer] += 1
+        uid = f"L{layer + 1}U{self._unit_counter}"
+        self._unit_counter += 1
         return uid
 
     @property

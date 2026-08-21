@@ -55,3 +55,33 @@ The P1 mechanism verdict on current evidence: **pressures work and are
 accuracy-neutral** (M-C8 consistent).  Three instrument corrections
 (fixture, loss term, settle semantics) and two bar re-scores are recorded
 above and await owner sign-off; none was a silent retune.
+
+## P2 (2026-08-21)
+
+- **E2.1 MET as registered** — honest flatness 8/8: ADD stays 1 hidden layer,
+  NOISE grows nothing, zero accepted depth anywhere.  🏁 **M3 (part 1)**.
+- **E2.2 MET after two documented corrections** — final: COMP2 3/4, COMP3 4/4
+  seeds at ceiling with planted-support units at μ ≥ 0.8.  🏁 **M3 (part 2)**.
+  1. *Depth-convention error in the bar:* "reaches L=2" mistranslated
+     DATASETS' order→depth mapping — order 2–3 needs **one composition layer**,
+     which is **1 hidden layer** here (hidden units take 2–3 parents; readout
+     sums).  The basin-census "flat cannot multiply" claim concerns a linear
+     readout over *factor units*, not a hidden layer of composition units.
+     Bar re-based on outcome: at ceiling ∧ planted-support unit present.
+  2. *Separation↔discovery tension in λ_fanin:* 0.03 left the `f1(x1)` main
+     effect bleeding into product units (COMP2, supports {x1,x2,x3}); 0.1
+     separated cleanly but strangled order-3 discovery (COMP3 collapsed to 2
+     units, growth always reverted).  Fix: **discovery-gated pressure**
+     (scale 0.3 below ceiling, full strength near ceiling) — a direct encoding
+     of M-C4 "minimality rides on top of accuracy"; λ_fanin 0.1 adopted
+     (within the E1.3c pre-registered constraints; tie-break moved from
+     "smallest" to "separates on compositional evidence").
+  3. *Constitutional fix:* `delta_stop` 0.01 → 0.02, aligning the controller's
+     stop bar with the pressure fid-neutrality budget (E1.3c / H-X1-4) — the
+     stop bar cannot be tighter than the distortion the pressure is allowed.
+- **E2.3 recorded** (COMP2 at the n=2k power floor): planted-support units
+  present in 4/4 seeds (fid 0.87–0.89); whether they *certify* is P3's
+  question, as designed.
+- Bugs caught by the battery en route: stale-audit unit reference after prune;
+  **duplicate unit ids on layer insertion** (per-layer counters collide when
+  layers shift) → globally-unique id counter + cycle-guarded support recursion.

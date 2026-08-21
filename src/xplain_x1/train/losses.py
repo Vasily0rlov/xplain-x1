@@ -26,6 +26,11 @@ class Pressures:
         self.lambda_act = float(lambda_act)
         self.lambda_fanin = float(lambda_fanin)
         self.ema = ema
+        # Discovery/cleanup gate (M-C4 ordering: accuracy first, minimality on
+        # top): the controller sets scale < 1 while fidelity is below ceiling so
+        # fresh units can find weak high-order structure before being squeezed
+        # (E2.x finding: full pressure strangles order-3 discovery).
+        self.scale = 1.0
         self._std: dict[str, torch.Tensor] = {}   # keyed by unit id: survives growth
 
     def _update_std(self, model: MaskedMLP, acts: list[torch.Tensor]) -> list[torch.Tensor]:
@@ -56,7 +61,8 @@ class Pressures:
                 hoyer_terms.append((l1[live] / l2[live]).mean())
         fanin_pen = (torch.stack(hoyer_terms).mean() if hoyer_terms
                      else torch.tensor(0.0))
-        return ramp * (self.lambda_act * act_pen + self.lambda_fanin * fanin_pen)
+        return (ramp * self.scale
+                * (self.lambda_act * act_pen + self.lambda_fanin * fanin_pen))
 
 
 def make_pressures(cfg: dict) -> Pressures:

@@ -53,7 +53,7 @@ def dissolved_candidate(model: MaskedMLP, li: int, ds: Dataset, splits: Splits,
         cand.head.weight.copy_(model.head.weight)
         cand.head.bias.copy_(model.head.bias)
         cand.mask_head.copy_(model.mask_head)
-    cand._unit_counter = list(model._unit_counter)
+    cand._unit_counter = max(model._unit_counter, cand._unit_counter)
 
     # function-level distillation: candidate matches the teacher's outputs
     opt = torch.optim.AdamW(cand.parameters(), lr=1e-2)
