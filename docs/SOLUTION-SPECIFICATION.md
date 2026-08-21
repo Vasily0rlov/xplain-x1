@@ -56,7 +56,7 @@ src/xplain_x1/
   data/        # registry.py, loaders.py, synthetic.py, encode.py, splits.py
   model/       # mlp.py (masked MLP + unit registry), gauge.py, ops.py (grow/prune/merge)
   train/       # losses.py, settle.py (train loop), reference.py (f_ref)
-  audit/       # purity.py, fanin.py, contribution.py, dissolve.py, plateau.py
+  audit/       # monosemanticity.py, fanin.py, contribution.py, dissolve.py, plateau.py
   controller/  # growth.py (settle→audit→act loop, M-§4.3)
   certify/     # restarts.py, matching.py, cpss.py, reality.py, labels.py
   extract/     # dag.py, certificate.py
@@ -113,7 +113,7 @@ flatness (H-X1-2/-3 in M-§7).
 - a **unit registry**: every unit gets a persistent id `L{layer}U{counter}` at creation,
   surviving growth/prune/permutation — all audit/certify artefacts key on unit ids;
 - **growth ops** (`model/ops.py`): `add_unit(layer, init='fresh'|'split:<uid>')` (split =
-  clone the impurest unit's weights + Gaussian perturbation ×0.05, halve both clones'
+  clone the least-monosemantic unit's weights + Gaussian perturbation ×0.05, halve both clones'
   outgoing weights), `insert_layer(pos)` (initialised near-identity), `remove_unit`,
   `merge_units(a, b)` (sum outgoing weights, drop b), `dissolve_layers(ℓ, ℓ+1)` (replace by
   one distilled layer, §8);
@@ -142,13 +142,13 @@ Run after every settle, on validation data; results appended to `audit.json`.
   fidelity drop (no retraining). Edge contribution: `|w| · std(parent)` normalised per unit.
 - **Effective fan-in** `ef(u)`: count of parents with edge contribution ≥ `ε_edge = 0.02`
   of the unit's total.
-- **Purity** `μ(u)` (M-§3.2): candidate supports = all subsets of the top-6 parents by edge
+- **Monosemanticity** `μ(u)` (M-§3.2): candidate supports = all subsets of the top-6 parents by edge
   contribution with `|S| ≤ F_max = 3`; surrogates: `|S|=1` → `sklearn` isotonic ∨ 5-knot
   cubic spline (best of); `|S|∈{2,3}` → depth-3 `DecisionTreeRegressor` ∨ degree-2
   polynomial ridge (best of). Fit on train activations, score R² on val; `μ(u)` = best val
   R², `S(u)` = argmax support, `form(u)` = winning surrogate (pickled + templated to text).
 - **Plateau detector** (`audit/plateau.py`): fidelity plateau (settle criterion met) and
-  purity stall (median layer purity improved < 0.01 over last two audits).
+  monosemanticity stall (median layer `μ` improved < 0.01 over last two audits).
 - **Dissolution test** (`audit/dissolve.py`, M-§3.4): distill layers `ℓ, ℓ+1` into one layer
   (width = current `m_{ℓ+1}`) trained ≤ 50 epochs to match the composed map (MSE on
   pre-activations) then fine-tune head 10 epochs; report val fidelity delta.
@@ -165,11 +165,12 @@ loop (max 12 rounds):
     if any layer dissolution costs ≤ ε_depth: dissolve, continue
     gap = Fid_ref − Fid
     if gap ≤ δ_stop: break                       # converged at ceiling
-    if purity_stalled and gap > δ_grow:
+    if mono_stalled and gap > δ_grow:
         if width_grown_last_round and gap unchanged (< δ_grow improvement):
-            insert_layer(after impurest layer)   # depth is the remaining move
+            insert_layer(after least-monosemantic layer)  # depth is the remaining move
         else:
-            add 2 units to the impurest layer (split impurest unit + 1 fresh)
+            add 2 units to the least-monosemantic layer
+            (split its least-monosemantic unit + 1 fresh)
     else: continue settling (pressures still working)
     accept growth iff val fidelity gain ≥ δ_grow after next settle, else revert (keep a
     model snapshot per round)
@@ -201,7 +202,7 @@ monotone in val fidelity; caps + round limit guarantee termination.
   the final model; 1 000-resample bootstrap of the test set → 95% CI; pass iff
   `Δ ≥ δ_min = 0.005` and CI low > 0.
 - **Labels** (`certify/labels.py`, M-§3.7): CORE iff `μ ≥ 0.8 ∧ Π ≥ 0.7 ∧ π ≥ 0.7 ∧`
-  reality pass; else PERIPHERY with reason codes `{impure, unstable, infrequent,
+  reality pass; else PERIPHERY with reason codes `{polysemantic, unstable, infrequent,
   no_effect, multiplicitous}`. Multiplicitous = concept cluster whose matched units carry
   ≥ 2 distinct modal supports across runs.
 
@@ -231,8 +232,8 @@ rounds 12), `certify` (R 8, B 20, τ_match 0.7, π_thr 0.7, μ_min 0.8, Π_min 0
 ## 13. Testing and acceptance
 
 - **Unit tests:** gauge pass preserves outputs; growth/prune/merge/dissolve ops preserve
-  registry integrity and (where claimed) fidelity; purity of a hand-built pure unit ≈ 1 and
-  of a hand-built mixed unit ≪ 1; matching identifies permuted clones; CPSS bound arithmetic;
+  registry integrity and (where claimed) fidelity; `μ` of a hand-built monosemantic unit
+  ≈ 1 and of a hand-built mixed unit ≪ 1; matching identifies permuted clones; CPSS bound arithmetic;
   determinism (same seed ⇒ identical `concepts.json`).
 - **Integration gates (CI, fast):** `synthetic:COMP2(clean, 8k)` — planted concept recovered
   as CORE with correct support in a 2-restart mini-battery; `synthetic:NOISE` — zero
@@ -245,7 +246,7 @@ rounds 12), `certify` (R 8, B 20, τ_match 0.7, π_thr 0.7, μ_min 0.8, Π_min 0
 
 | pinned default | alternative (when to revisit) |
 |---|---|
-| L1 activation + group-lasso fan-in | proximal/hard-threshold group lasso; Hoyer sparsity (if L1 kills units or purity stalls globally) |
+| L1 activation + group-lasso fan-in | proximal/hard-threshold group lasso; Hoyer sparsity (if L1 kills units or monosemanticity stalls globally) |
 | start L=1, grow | start at data's claimed order→depth (if growth proves slow/unstable) |
 | ablation-Δ contribution | path-integrated gradients (if ablation too noisy on correlated units) |
 | greedy signature matching | Hungarian assignment (if greedy produces unstable clusters) |

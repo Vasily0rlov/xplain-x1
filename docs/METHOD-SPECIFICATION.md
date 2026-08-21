@@ -87,7 +87,7 @@ input features) with incoming edges. Define:
 - **Effective fan-in** `ef(u)`: the number of parents whose contribution to `u`'s
   pre-activation variance exceeds a threshold `ε_edge` (contribution = |w| × parent
   activation std, normalised per unit).
-- **Purity** `μ(u) ∈ [0,1]`: the held-out R² of the best surrogate `g_S` predicting `u`'s
+- **Monosemanticity** `μ(u) ∈ [0,1]`: the held-out R² of the best surrogate `g_S` predicting `u`'s
   activation from a parent subset `S`, maximised over supports `|S| ≤ F_max` (default
   `F_max = 3`), where `g_S` is drawn from a fixed simple class (1-D: monotone spline; 2–3-D:
   shallow tree or degree-2 polynomial). `μ(u)` measures whether the unit is *effectively a
@@ -142,7 +142,7 @@ The minimality objective is MDL-flavoured: prefer the model minimising
 `description length of the extracted DAG (units, edges, surrogate forms) + residual`.
 Operationally it is enforced by the growth/prune controller (§4.3) under the C4 ordering:
 every accepted structural action must preserve fidelity within budget, and among
-fidelity-preserving states the smaller one wins. Minimality is never traded against purity.
+fidelity-preserving states the smaller one wins. Minimality is never traded against monosemanticity.
 
 ### 3.6 Stability, identity, and certification objects
 
@@ -179,7 +179,7 @@ fidelity-preserving states the smaller one wins. Minimality is never traded agai
 
 A concept is **CORE** iff `μ ≥ μ_min`, `Π ≥ Π_min`, `π ≥ π_thr`, and the reality test
 passes. Everything else that survives in the final model is **PERIPHERY**, labelled with its
-failure reasons (impure / unstable / multiplicitous / below-Δ). The certificate never claims
+failure reasons (polysemantic / unstable / multiplicitous / below-Δ). The certificate never claims
 the periphery; the DAG never hides it.
 
 ## 4. The method
@@ -202,7 +202,7 @@ Total loss: `L = L_task + λ_act·L_selectivity + λ_fanin·L_fanin (+ standard 
   signatures), not by a loss.
 
 Pressures are annealed in (task loss settles first, pressures ramp to full strength) and the
-model is periodically **audited**: purity, effective fan-in, per-unit contribution, and
+model is periodically **audited**: monosemanticity, effective fan-in, per-unit contribution, and
 fidelity are measured on validation data (protocols of §3.2).
 
 ### 4.2 Phase A′ — Gauge canonicalisation (exact, zero-cost)
@@ -219,8 +219,8 @@ The controller runs a settle → audit → act loop from a deliberately small st
 by evidence — depth-honesty and minimality by construction, honouring the C4 ordering:
 
 - **Grow width** when task fidelity plateaus below the reference ceiling *and* audit shows
-  purity stalling (units saturated/polysemantic under pressure) — the signature of true
-  superposition; add or split units (split the impurest unit, perturbed).
+  monosemanticity stalling (units saturated/polysemantic under pressure) — the signature of
+  true superposition; add or split units (split the least-monosemantic unit, perturbed).
 - **Grow depth** when width growth fails to close the fidelity gap — the signature of
   unexpressed composition (C5); insert one layer.
 - **Prune** continuously: edges below `ε_edge` contribution, dead/negligible units; **merge**
@@ -245,7 +245,7 @@ Accuracy is monitored against `f_ref` throughout under the C8 budget.
 ### 4.5 Phase D — Extraction and the audit certificate
 
 - **Concept DAG:** nodes = input features, surviving units (with support, surrogate form,
-  plain-language template, purity, stability, frequency, coverage share, CORE/PERIPHERY
+  plain-language template, monosemanticity, stability, frequency, coverage share, CORE/PERIPHERY
   label), and outputs; edges = connections above `ε_edge`. Coverage share = the concept's
   ablation-Δ as a fraction of total. The expert traverses this DAG to assess legibility —
   the expert's assessment is the validation of the interpretability *soft target*
@@ -299,7 +299,7 @@ the synthetic control suite (Solution Spec §5) whose ground-truth structure is 
 
 | id | hypothesis | bar |
 |---|---|---|
-| H-X1-1 convergence | pressures produce a largely-monosemantic model where a plain MLP does not | CORE coverage share ≥ 0.7 of ablation mass on ladder datasets; median CORE purity ≥ 0.8; plain-MLP control stays far below |
+| H-X1-1 convergence | pressures produce a largely-monosemantic model where a plain MLP does not | CORE coverage share ≥ 0.7 of ablation mass on ladder datasets; median CORE monosemanticity ≥ 0.8; plain-MLP control stays far below |
 | H-X1-2 honest flatness | no invented structure | 0 certified depth-≥2 concepts on additive and pure-noise controls, all restarts |
 | H-X1-3 compositional recovery | true compositions found and certified | planted order-2/3 concepts in synthetics recovered as CORE (matched support) at ≥ 2/3 rate above the power floor; Tic-Tac-Toe lines and Bike `hour×temp` certified depth-2 |
 | H-X1-4 concept tax | interpretability ~free (C8) | held-out accuracy within 2% relative of `f_ref` (median across ladder); expectation ≈ 0 |
@@ -322,8 +322,9 @@ wall-clock > 12 h on the reference 64-thread box: the method is not practically 
 - **The `E[V]` bound's exchangeability assumption** is a modelling idealisation over a
   learned, adaptive pipeline; the bound is reported with its assumptions, and the reality
   test provides an independent, assumption-light check.
-- **Purity is surrogate-relative.** `μ` depends on the surrogate class; a fixed, simple,
-  pre-registered class keeps it honest but means "purity" = "describable in that class".
+- **Monosemanticity `μ` is surrogate-relative.** `μ` depends on the surrogate class; a
+  fixed, simple, pre-registered class keeps it honest but means "monosemantic" =
+  "describable in that class".
 - **Accuracy-neutrality (C8) is evidence-based on synthetic ground**, not a theorem; H-X1-4
   and K1 keep it falsifiable.
 - **Small-n power floors** bound what can honestly be certified (`DATASETS.md`): absence of

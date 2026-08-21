@@ -16,12 +16,12 @@ this document is for *approach-level* alternatives.
 
 Define a monosemantic unit as a **feature detector**: a unit that *activates only on one
 coherent type/region of inputs* — "fires iff odor = foul", "fires iff temp ∈ [20, 30]" —
-rather than the adopted definition (M-§3.2: purity = the unit is one simple **low-arity
+rather than the adopted definition (M-§3.2: monosemanticity `μ` = the unit is one simple **low-arity
 function** of ≤ `F_max` parents, reproducible by a fixed simple surrogate class).
 
 A detector-based variant of the method would change:
 
-- **Metric.** Replace (or augment) purity `μ` with a **selectivity index**: concentration of
+- **Metric.** Replace (or augment) monosemanticity `μ` with a **selectivity index**: concentration of
   the unit's activation distribution — e.g. activation frequency (lifetime sparsity), a
   class-/region-conditional selectivity score, or precision/recall of "unit active" against
   a candidate input predicate.
@@ -44,10 +44,10 @@ splits these deliberately):
 | unit reads as | a quantity / simple function | an event / predicate |
 | auditor can | check each computation step | recognise what the unit "is about" |
 | natural fit | continuous & graded structure (Bike `hour×temp`, Wine chemistry) | Boolean/predicate data (Zoo, Mushroom, Tic-Tac-Toe) |
-| always-on graded unit (`≈ petal_length`) | pure (correctly) | scores as non-selective — penalised despite being maximally legible |
-| narrow detector over many features | impure (correctly — not traceable) | scores as monosemantic — **nameable but not checkable** |
+| always-on graded unit (`≈ petal_length`) | monosemantic (correctly) | scores as non-selective — penalised despite being maximally legible |
+| narrow detector over many features | polysemantic (correctly — not traceable) | scores as monosemantic — **nameable but not checkable** |
 
-On predicate-style data the two definitions largely coincide (a pure low-arity function of
+On predicate-style data the two definitions largely coincide (a monosemantic low-arity function of
 binary inputs *is* a detector); they diverge on continuous data, where the current specs
 knowingly chose traceability.
 
@@ -66,7 +66,7 @@ knowingly chose traceability.
    (M-C5/H-X1-2 spirit).
 3. **Selectivity is distribution-relative.** "Fires rarely" depends on the evaluation
    distribution; under covariate shift a selective unit can become promiscuous with no
-   change in mechanism. Purity (held-out functional describability) is the more
+   change in mechanism. Monosemanticity `μ` (held-out functional describability) is the more
    shift-robust certificate object.
 4. **Certification machinery would need rework.** The CPSS universe (M-§3.6) is defined
    over supports; a detector variant needs a predicate universe (region hypotheses), which
@@ -78,10 +78,10 @@ knowingly chose traceability.
 
 ### What would justify revisiting
 
-- **Expert-review evidence** from Phase P4–P5 DAG reviews that pure-but-graded nodes are
+- **Expert-review evidence** from Phase P4–P5 DAG reviews that monosemantic-but-graded nodes are
   systematically hard for domain experts to name/validate (the soft target failing while the
   hard target passes).
-- A **hybrid reading layer** proving cheap: keep purity as the certified definition, add a
+- A **hybrid reading layer** proving cheap: keep `μ` as the certified definition, add a
   *reported-only* selectivity index per node so the DAG can render detector-style nodes as
   named events where both hold. (Lowest-cost first step; no change to certification.)
 - The **SLM/text frontier** (POSITIONING §7, stage 3): in language models the
