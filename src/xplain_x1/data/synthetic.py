@@ -26,6 +26,8 @@ _F = {
     2: lambda x: 0.5 * x + 0.3 * x**3 / (1 + x**2),
     3: lambda x: np.log1p(np.exp(x)) - 0.7,   # softplus, centred-ish
     4: lambda x: np.sign(x) * np.sqrt(np.abs(x)),
+    5: lambda x: x / (1 + np.abs(x)),
+    6: lambda x: np.expm1(np.clip(x, -3, 3) / 2),
 }
 
 CONFIGS: dict[str, dict] = {
@@ -35,6 +37,14 @@ CONFIGS: dict[str, dict] = {
     "synthetic:comp2-noisy-2k":  {"structure": "COMP2", "n": 2000, "sigma": NOISE_SIGMA},
     "synthetic:comp3-noisy-8k":  {"structure": "COMP3", "n": 8000, "sigma": NOISE_SIGMA},
     "synthetic:noise-8k":        {"structure": "NOISE", "n": 8000, "sigma": 1.0},
+}
+
+# Instrument fixtures: NOT part of the pinned certification suite (S-#5); used by
+# calibration/discrimination experiments.  ADD6 has 6 relevant inputs > F_max, so an
+# entangled unit genuinely cannot score high mu — it discriminates where COMP2
+# (intrinsic arity <= F_max) saturates the metric (E1.1 finding).
+EXTRA_CONFIGS: dict[str, dict] = {
+    "synthetic:add6-noisy-8k":   {"structure": "ADD6",  "n": 8000, "sigma": NOISE_SIGMA},
 }
 
 
@@ -55,6 +65,10 @@ def _signal(structure: str, X: np.ndarray) -> tuple[np.ndarray, dict]:
         gt = {"honest_depth": 2, "concepts": [
             {"support": [0, 1, 2], "order": 3, "planted": True},
             {"support": [3], "order": 1}]}
+    elif structure == "ADD6":
+        y = sum(_F[j](X[:, j - 1]) for j in range(1, 7))
+        gt = {"honest_depth": 1, "concepts": [
+            {"support": [j - 1], "order": 1} for j in range(1, 7)]}
     elif structure == "NOISE":
         y = np.zeros(X.shape[0])
         gt = {"honest_depth": 0, "concepts": []}
@@ -64,7 +78,7 @@ def _signal(structure: str, X: np.ndarray) -> tuple[np.ndarray, dict]:
 
 
 def make_synthetic(name: str) -> Dataset:
-    cfg = CONFIGS[name]
+    cfg = {**CONFIGS, **EXTRA_CONFIGS}[name]
     g = rng(DATA_SEED, name)
     X = g.standard_normal((cfg["n"], D))
     y_sig, gt = _signal(cfg["structure"], X)

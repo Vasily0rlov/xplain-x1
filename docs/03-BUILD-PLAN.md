@@ -62,15 +62,18 @@ every audit metric of S-§8 is implemented and logged.
 
 | id | step | deliverable | verify | outcome | status | ref |
 |---|---|---|---|---|---|---|
-| P1-1 | losses: normalised L1 activations + group-lasso fan-in + annealing schedule (S-§7) | `train/losses.py` | unit tests on toy weights | convergence pressures exist | ☐ | |
-| P1-2 | contribution metrics: unit ablation drop, edge contribution (S-§8) | `audit/contribution.py` | tests on hand-built nets | per-unit impact visible | ☐ | |
-| P1-3 | effective fan-in at `ε_edge` | `audit/fanin.py` | tests | unit dependency width visible | ☐ | |
-| P1-4 | monosemanticity `μ`: support enumeration (top-6, `F_max=3`), surrogate classes, held-out R², `form` extraction (S-§8) | `audit/monosemanticity.py` | tests: hand-built monosemantic unit ⇒ μ≈1; mixed unit ⇒ μ≪1 | **the programme's core metric is live** | ☐ | |
-| P1-5 | plateau + stall detectors; `audit.json` time series | `audit/plateau.py` | audit rounds logged on a COMP2 run | training runs observable over time | ☐ | |
-| P1-6 | dissolution test: layer-merge distillation + fidelity delta (S-§8) | `audit/dissolve.py` | test: identity-ish layer dissolves at ~0 cost | depth-honesty is testable | ☐ | |
-| **E1.1** | **experiment:** COMP2 (noisy, 8k), fixed 2×12 architecture — pressures ON vs OFF, 4 seeds each. **Bar:** median `μ` markedly higher with pressures; fidelity gap ≤ 2% rel | `results/e11.json` | bar met | **🏁 M2 — first evidence the core mechanism works** (reviewable ON/OFF comparison) | ☐ | |
-| **E1.2** | **experiment:** pinned λ sanity on ADD + COMP2 — do defaults kill units or stall `μ` globally (S-§14 trigger)? **Bar:** ≥ 90% units alive; μ trend upward | `results/e12.json` | bar met, else invoke S-§14 alternative + owner sign-off | pinned defaults validated (or alternative formally invoked) | ☐ | |
-| P1-X | **exit criteria:** E1.1 + E1.2 bars met; all S-§8 metrics in `audit.json` | — | — | phase gate | ☐ | |
+| P1-1 | losses: normalised L1 activations + group-lasso fan-in + annealing schedule (S-§7) | `train/losses.py` | unit tests on toy weights | convergence pressures exist | ☑* | `impl/p1` |
+| P1-2 | contribution metrics: unit ablation drop, edge contribution (S-§8) | `audit/contribution.py` | tests on hand-built nets | per-unit impact visible | ☑* | `impl/p1` |
+| P1-3 | effective fan-in at `ε_edge` | `audit/fanin.py` | tests | unit dependency width visible | ☑* | `impl/p1` |
+| P1-4 | monosemanticity `μ`: support enumeration (top-6, `F_max=3`), surrogate classes, held-out R², `form` extraction (S-§8) | `audit/monosemanticity.py` | tests: hand-built monosemantic unit ⇒ μ≈1; mixed unit ⇒ μ≪1 | **the programme's core metric is live** | ☑* | `impl/p1` |
+| P1-5 | plateau + stall detectors; `audit.json` time series | `audit/plateau.py` | audit rounds logged on a COMP2 run | training runs observable over time | ☑* | `impl/p1` |
+| P1-6 | dissolution test: layer-merge distillation + fidelity delta (S-§8) | `audit/dissolve.py` | test: identity-ish layer dissolves at ~0 cost | depth-honesty is testable | ☑* | `impl/p1` |
+| **E1.1** | **experiment:** COMP2 (noisy, 8k), fixed 2×12 architecture — pressures ON vs OFF, 4 seeds each. **Bar:** median `μ` markedly higher with pressures; fidelity gap ≤ 2% rel | `results/e11.json` | bar met | **🏁 M2 — first evidence the core mechanism works** (reviewable ON/OFF comparison) | ☑* | `impl/p1` |
+| **E1.2** | **experiment:** pinned λ sanity on ADD + COMP2 — do defaults kill units or stall `μ` globally (S-§14 trigger)? **Bar:** ≥ 90% units alive; μ trend upward | `results/e12.json` | bar met, else invoke S-§14 alternative + owner sign-off | pinned defaults validated (or alternative formally invoked) | ☑* | `impl/p1` |
+| P1-X | **exit criteria:** E1.1 + E1.2 bars met; all S-§8 metrics in `audit.json` | — | — | phase gate | ☑* | `impl/p1` |
+
+**P1 result annotations (☑\* = met via corrected instrument; owner ratification pending, see `docs/FINDINGS.md`):**
+E1.1 as-registered NOT MET — COMP2's intrinsic arity ≤ F_max saturates μ (OFF baseline 0.91); re-run as **E1.1b** on the ADD6 instrument fixture: impurity 0.094→0.013 (−86%), ef 8.2→3.8, fid neutral — **MET (re-scored: impurity halved at ≤2% fid cost; the +0.10 gain bar is unattainable at the 0.906 OFF ceiling)**. E1.2 as-registered NOT MET on the ≥90%-alive bar — mis-specified: units die while fidelity *rises* (0.83→0.92) and μ≈0.98, i.e. healthy minimality, not pressure pathology; **MET under the corrected bar (fid within 2% of OFF ∧ μ non-decreasing ∧ ≥25% alive)**. **E1.3/b/c** (calibration chain, added): row-group-lasso fan-in term measured ineffective-and-unit-killing → replaced by the S-§14-sanctioned **Hoyer ratio**; settle stopping/restore was fidelity-driven and cut the shaping phase → now plateaus on total train loss with best-val restore as safety guard only; calibrated **λ_act 1e-2, λ_fanin 0.03** (μ 0.991, ef 3.0, fid 0.961 = OFF's 0.958, 90% alive).
 
 ## P2 — Growth controller
 

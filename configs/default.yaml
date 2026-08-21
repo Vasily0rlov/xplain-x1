@@ -16,11 +16,12 @@ train:
   batch_size: 256
   max_epochs: 500
   weight_decay: 1.0e-4
-  plateau_rel: 0.001       # no >=0.1% relative val-fidelity gain ...
-  plateau_evals: 20        # ... over 20 evals => settled
-  anneal_frac: 0.25        # pressure ramp over first 25% of first settle
-  lambda_act: 1.0e-3       # L1 on std-normalised activations (P1)
-  lambda_fanin: 1.0e-3     # group-lasso on incoming weight rows (P1)
+  plateau_rel: 0.001       # no >=0.1% relative TOTAL-train-loss gain ...
+  plateau_evals: 20        # ... over 20 evals (post-ramp) => settled
+  anneal_frac: 0.25        # pressure ramp over first 25% of max_epochs
+  safety_margin: 0.01      # restore best-val only if final fid worse by > this
+  lambda_act: 1.0e-2       # L1 on std-normalised activations (calibrated, E1.3c)
+  lambda_fanin: 0.03       # Hoyer ratio per incoming row (calibrated, E1.3c)
 
 reference:
   mlp_widths: [64, 64]     # unconstrained baseline MLP

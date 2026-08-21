@@ -5,13 +5,13 @@ from typing import Callable
 
 from .dataset import Dataset
 from .loaders import load_wine, load_zoo
-from .synthetic import CONFIGS, make_synthetic
+from .synthetic import CONFIGS, EXTRA_CONFIGS, make_synthetic
 
 _LOADERS: dict[str, Callable[[], Dataset]] = {
     "zoo": load_zoo,
     "wine": load_wine,
 }
-for _name in CONFIGS:
+for _name in {**CONFIGS, **EXTRA_CONFIGS}:
     _LOADERS[_name] = (lambda n=_name: make_synthetic(n))
 
 # MVL build order (S-#4); extended tier appended after MVL bars are met

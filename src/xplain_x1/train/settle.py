@@ -75,17 +75,26 @@ def settle(model: MaskedMLP, ds: Dataset, splits: Splits, cfg: dict, seed: int,
                             weight_decay=float(tcfg["weight_decay"]))
     loss_fn = (F.cross_entropy if ds.task == "classification" else F.mse_loss)
 
-    best_fid, best_state, best_epoch = -np.inf, None, 0
-    evals_since_best, history = 0, []
+    # Stopping is TOTAL-train-loss driven (task + pressures): the structural
+    # shaping happens during the fidelity-flat phase, so a fidelity-plateau stop
+    # would cut it short and a best-fid restore would discard it (E1.3 finding).
+    # Best-val restore remains only as a safety guard against real degradation.
+    best_fid, best_state = -np.inf, None
+    best_loss, evals_since_best, history = np.inf, 0, []
     plateau_rel = float(tcfg["plateau_rel"])
     plateau_evals = int(tcfg["plateau_evals"])
     max_epochs = int(tcfg["max_epochs"])
     anneal_frac = float(tcfg.get("anneal_frac", 0.25))
+    safety_margin = float(tcfg.get("safety_margin", 0.01))
+    epochs_run = 0
 
     for epoch in range(max_epochs):
         model.train()
-        ramp = min(1.0, (epoch + 1) / max(1, int(max_epochs * anneal_frac)))
+        epochs_run = epoch + 1
+        ramp = (1.0 if pressures is None else
+                min(1.0, (epoch + 1) / max(1, int(max_epochs * anneal_frac))))
         perm = torch.from_numpy(g.permutation(n))
+        loss_sum, n_batches = 0.0, 0
         for s in range(0, n, batch):
             bi = perm[s:s + batch]
             opt.zero_grad()
@@ -99,19 +108,30 @@ def settle(model: MaskedMLP, ds: Dataset, splits: Splits, cfg: dict, seed: int,
                 loss = loss_fn(out, ytr[bi]) + pressures(model, acts, ramp)
             loss.backward()
             opt.step()
+            loss_sum += float(loss.item())
+            n_batches += 1
 
+        train_loss = loss_sum / max(1, n_batches)
         ev = evaluate(model, ds, splits, splits.val, null_stats)
-        history.append({"epoch": epoch, **ev})
-        improved = ev["fidelity"] > best_fid + plateau_rel * max(abs(best_fid), 1e-3)
+        history.append({"epoch": epoch, "train_loss": train_loss, **ev})
         if ev["fidelity"] > best_fid:
             best_fid = ev["fidelity"]
             best_state = {k: v.detach().clone() for k, v in model.state_dict().items()}
-            best_epoch = epoch
-        evals_since_best = 0 if improved else evals_since_best + 1
-        if evals_since_best >= plateau_evals:
-            break
+        # plateau on total train loss, once the anneal ramp is complete.
+        # CUMULATIVE criterion: patience resets when loss has fallen plateau_rel
+        # below the reference snapshot (slow-but-steady descent accumulates and
+        # keeps training; a per-epoch margin would stop it prematurely).
+        if (not np.isfinite(best_loss)
+                or train_loss < best_loss - plateau_rel * max(abs(best_loss), 1e-6)):
+            best_loss, evals_since_best = train_loss, 0
+        elif ramp >= 1.0:
+            evals_since_best += 1
+            if evals_since_best >= plateau_evals:
+                break
 
-    if best_state is not None:
-        model.load_state_dict(best_state)
-    return SettleResult(best_val_fid=float(best_fid), epochs_run=best_epoch + 1,
+    final_fid = history[-1]["fidelity"] if history else -np.inf
+    if best_state is not None and final_fid < best_fid - safety_margin:
+        model.load_state_dict(best_state)          # genuine degradation: restore
+        final_fid = best_fid
+    return SettleResult(best_val_fid=float(final_fid), epochs_run=epochs_run,
                         history=history)
