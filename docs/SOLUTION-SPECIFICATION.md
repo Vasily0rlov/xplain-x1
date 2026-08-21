@@ -72,8 +72,8 @@ docs/
 
 - **Registry:** one entry per dataset with loader, task type, encoding recipe, and metadata
   (`n`, `d`, expected order→depth from `docs/DATASETS.md`). Two tiers:
-  - **Minimum viable ladder (MVL — the build target).** `synthetic:*` (§5) plus six public
-    datasets, each the sole carrier of a distinct evidential role, in build order:
+  - **Minimum viable ladder (MVL — the build target).** `synthetic:*` (§5) plus seven
+    public datasets, each the sole carrier of a distinct evidential role, in build order:
     `zoo` (monosemantic recovery of nameable Boolean predicates; native multiclass),
     `tictactoe` (pure composition, zero main effects; the only public set with known
     ground-truth structure; below the power floor — honest partial recovery expected),
@@ -81,11 +81,12 @@ docs/
     `wine` (continuous features certifying additive; core-recovery + expert-alignment v4
     anchor; 3-class), `adult` (mixed types at moderate scale; honest-shallow certification;
     v4 anchor), `bike` (the only regression task; the certified real-data order-2
-    interaction `hour×temp` named in the H-X1-3 bar). All three M-§9 v4 anchors and every
-    M-§7 bar are carriable by this set.
-  - **Extended tier (post-MVL, optional).** `iris`, `seeds`, `titanic`, `drybean`,
-    `covertype50k` — additional redundancy, scale, and multiclass-at-scale evidence; run
-    only after the MVL bars are met.
+    interaction `hour×temp` named in the H-X1-3 bar), `drybean` (native-multiclass
+    certified interaction at scale — the strongest multiclass evidence: 7-class,
+    `Compactness×ShapeFactor1` certified depth-2 in the prior programme). All three M-§9
+    v4 anchors and every M-§7 bar are carriable by this set.
+  - **Extended tier (post-MVL, optional).** `iris`, `seeds`, `titanic`, `covertype50k` —
+    additional redundancy and scale evidence; run only after the MVL bars are met.
 
   Public sets fetched via `sklearn.datasets`/OpenML with local cache under `data_cache/`;
   SHA-256 of the raw file recorded in provenance.
