@@ -182,6 +182,39 @@ passes. Everything else that survives in the final model is **PERIPHERY**, label
 failure reasons (polysemantic / unstable / multiplicitous / below-Δ). The certificate never claims
 the periphery; the DAG never hides it.
 
+### 3.8 Representation formalism: the four-level data model
+
+The core computational formalism is deliberately the **conventional one — weight matrices**.
+The runtime model is a plain MLP (dense matrices, biases, ReLU, linear readout), trainable
+with ordinary autograd; no bespoke symbolic formalism replaces it ("enhance, don't
+replace", §1 and POSITIONING §3–4). What the method adds is three data structures layered
+*on top of* the matrices, each with a distinct job:
+
+1. **Matrices compute** — the model itself, with per-weight boolean **edge masks** so that
+   pruning is masking rather than deletion: shapes and optimiser state survive while the
+   *effective* computation becomes sparse. A dense matrix has no readable structure; a
+   heavily masked, low-fan-in one is already a graph in disguise.
+2. **The unit registry names** — matrices carry no stable notion of "which neuron is
+   which" across permutation, pruning, and growth, so every unit receives a persistent
+   identifier at creation. Together with gauge canonicalisation (§3.3, §4.2 — a normal
+   form for the matrices), this makes signatures, cross-run matching, and all audit
+   artefacts well-defined. It is the bridge between the matrix world and the concept world.
+3. **The concept DAG explains** — a *derived view*, never the executed representation:
+   nodes = input features, surviving units (support, surrogate form, `μ`, `Π`, `π`, `Δ`,
+   coverage, CORE/PERIPHERY label), and outputs; edges = masked-matrix connections above
+   `ε_edge` (§4.5). The entire training regime exists to make this reading **faithful**:
+   once fan-in is low, edges sparse, and units monosemantic at `μ_min`, the graph view
+   loses almost nothing relative to the matrices — and what it does lose is exactly the
+   labelled periphery, so the approximation gap is *shown*, not hidden.
+4. **Concepts certify** — one level above any single model: a concept `c = (S, form)` is a
+   cluster of matched units across restarts/resamples (§3.6), and it — not the unit — is
+   the object the certificate makes claims about.
+
+In one line: **matrices compute, the registry names, the DAG explains, concepts certify.**
+The gap traditional ML leaves — that the matrix representation is unreadable — is closed
+not by swapping formalisms but by training the matrices into a state where their graph
+reading is faithful, then shipping that reading with statistical evidence attached.
+
 ## 4. The method
 
 Four phases: **converge → canonicalise → certify → extract**. Phases 1–2 produce the model;
