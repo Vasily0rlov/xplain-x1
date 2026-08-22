@@ -2,7 +2,7 @@
 
 **Status:** draft for review · **Audience:** researchers · **Basis:** `docs/00-POSITIONING.md`
 (2026-08) · **Scope:** the beachhead — supervised learning on tabular/structured data with
-monosemantic columns (`docs/DATASETS.md`), realised on standard deep MLPs. The Transformer/SLM
+monosemantic columns (`data/DATASETS.md`), realised on standard deep MLPs. The Transformer/SLM
 track is out of scope here (POSITIONING §7, stage 3).
 
 > **Provenance caveat** (inherited from POSITIONING): citations were gathered from abstracts
@@ -71,7 +71,7 @@ Each commitment below is load-bearing; the method in §4 is their joint conseque
 ### 3.1 Setting
 
 Supervised task with data `(x, y)`, `x ∈ R^d`, where each input column is **monosemantic**
-(one column = one human concept; see `docs/DATASETS.md` for the data requirements — no raw
+(one column = one human concept; see `data/DATASETS.md` for the data requirements — no raw
 pixels, no PCA-rotated features, high-cardinality nominals decomposed into binary
 predicates). Model class: standard MLP `f_θ` with `L` hidden layers of widths `m_1..m_L`,
 ReLU activations, linear readout; classification via softmax/logistic, regression via
@@ -132,7 +132,7 @@ Layer `ℓ` is **earned** iff dissolving it — merging it with an adjacent laye
 distillation into a single layer — costs more than `ε_depth` in held-out fidelity. The
 model's **honest depth** is the depth at which every remaining layer is earned. The
 compositional order of the data determines the depth actually needed (order 1 ⇒ 1 hidden
-layer suffices; order 2–3 ⇒ 2; see the order→depth mapping in `docs/DATASETS.md`); the
+layer suffices; order 2–3 ⇒ 2; see the order→depth mapping in `data/DATASETS.md`); the
 method must *discover* this constructively, not assume it (§4.3), and must certify shallow
 when the data's interactions add no held-out value.
 
@@ -302,7 +302,7 @@ depth is honest at `ε_depth`; the decision routes through CORE are locally legi
 **Non-claims:** that CORE concepts are *true mechanisms* of the world (C7 — stability and
 reality tests raise the bar, they do not prove causality); that the periphery is
 interpretable; that unit semantics match domain semantics without expert review; that the
-method applies beyond data meeting the `DATASETS.md` requirements.
+method applies beyond data meeting the `data/DATASETS.md` requirements.
 
 ## 6. Relation to prior art
 
@@ -364,7 +364,7 @@ wall-clock > 12 h on the reference 64-thread box: the method is not practically 
   "describable in that class".
 - **Accuracy-neutrality (C8) is evidence-based on synthetic ground**, not a theorem; H-X1-4
   and K1 keep it falsifiable.
-- **Small-n power floors** bound what can honestly be certified (`DATASETS.md`): absence of
+- **Small-n power floors** bound what can honestly be certified (`data/DATASETS.md`): absence of
   certified depth on under-powered data is the correct output, not a failure — and
   conversely must not be sold as evidence of additivity.
 

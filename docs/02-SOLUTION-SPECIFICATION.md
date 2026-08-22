@@ -71,7 +71,7 @@ docs/
 ## 4. Data module
 
 - **Registry:** one entry per dataset with loader, task type, encoding recipe, and metadata
-  (`n`, `d`, expected order→depth from `docs/DATASETS.md`). Two tiers:
+  (`n`, `d`, expected order→depth from `data/DATASETS.md`). Two tiers:
   - **Minimum viable ladder (MVL — the build target).** `synthetic:*` (§5) plus seven
     public datasets, each the sole carrier of a distinct evidential role, in build order:
     `zoo` (monosemantic recovery of nameable Boolean predicates; native multiclass),
@@ -90,7 +90,7 @@ docs/
 
   Public sets fetched via `sklearn.datasets`/OpenML with local cache under `data_cache/`;
   SHA-256 of the raw file recorded in provenance.
-- **Encoding rules** (from `DATASETS.md` requirements, mandatory): continuous → standardise;
+- **Encoding rules** (from `data/DATASETS.md` requirements, mandatory): continuous → standardise;
   low-cardinality ordinal → integer with meaningful order, standardised; binary → {0,1};
   **high-cardinality nominals → a small set of monosemantic binary predicates** (recipe
   stored per dataset in the registry; never one-hot, never arbitrary ordinal codes);

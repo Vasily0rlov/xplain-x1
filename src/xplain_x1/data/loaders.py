@@ -1,6 +1,6 @@
 """Public dataset loaders + encodings (S-#4): the MVL public datasets.
 
-Encoding rules (DATASETS.md, mandatory): continuous -> standardise; low-card
+Encoding rules (data/DATASETS.md, mandatory): continuous -> standardise; low-card
 ordinal -> integer with meaningful order; binary -> {0,1}; low-cardinality
 nominals -> named binary VALUE PREDICATES ("odor=foul") for values with
 prevalence in [5%, 95%] (semantically distinct low-card values are legitimate

@@ -1,0 +1,86 @@
+{
+  "experiment": "E6.1+E6.2",
+  "git_commit": "2841f38ab1937e870e41374536de5ddf984614a2",
+  "synthetic": [
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "n_groups": 10,
+      "d": 10,
+      "groups_all_singleton": true,
+      "n_routes": 3,
+      "n_core_routes": 2,
+      "route_coverage": 0.997,
+      "core_route_supports": [
+        [
+          "x1"
+        ],
+        [
+          "x3"
+        ]
+      ],
+      "core_route_Pi": [
+        1.0,
+        1.0
+      ],
+      "ev_bound_routes": 0.1800357142857143,
+      "n_core_units": 3,
+      "fid": 0.930865035189268,
+      "fid_ref": 0.9269984482818517,
+      "wall_s": 95.2
+    },
+    {
+      "dataset": "synthetic:comp2-clean-8k",
+      "n_groups": 10,
+      "d": 10,
+      "groups_all_singleton": true,
+      "n_routes": 2,
+      "n_core_routes": 2,
+      "route_coverage": 1.0,
+      "core_route_supports": [
+        [
+          "x1"
+        ],
+        [
+          "x2",
+          "x3"
+        ]
+      ],
+      "core_route_Pi": [
+        1.0,
+        1.0
+      ],
+      "ev_bound_routes": 0.11808035714285717,
+      "n_core_units": 4,
+      "fid": 0.9815188031188794,
+      "fid_ref": 0.9981684935291121,
+      "wall_s": 148.4
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "n_groups": 10,
+      "d": 10,
+      "groups_all_singleton": true,
+      "n_routes": 3,
+      "n_core_routes": 2,
+      "route_coverage": 1.0,
+      "core_route_supports": [
+        [
+          "x1"
+        ],
+        [
+          "x3"
+        ]
+      ],
+      "core_route_Pi": [
+        1.0,
+        0.875
+      ],
+      "ev_bound_routes": 0.1080357142857143,
+      "n_core_units": 4,
+      "fid": 0.9224856366159383,
+      "fid_ref": 0.9302167673223771,
+      "wall_s": 90.5
+    }
+  ],
+  "real": []
+}

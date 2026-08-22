@@ -1,1 +1,4 @@
 [box] load 0.45 < 8.0 — proceeding
+synthetic:add-noisy-8k: groups singleton=True core_routes=2 vs core_units=3 (95.2s)
+synthetic:comp2-clean-8k: groups singleton=True core_routes=2 vs core_units=4 (148.4s)
+synthetic:comp2-noisy-8k: groups singleton=True core_routes=2 vs core_units=4 (90.5s)

@@ -15,7 +15,7 @@ periphery; the deliverables are a concept DAG and an audit certificate.
 | [docs/01-METHOD-SPECIFICATION.md](docs/01-METHOD-SPECIFICATION.md) | formal method (researcher-facing) |
 | [docs/02-SOLUTION-SPECIFICATION.md](docs/02-SOLUTION-SPECIFICATION.md) | implementable technical spec, pinned defaults |
 | [docs/03-BUILD-PLAN.md](docs/03-BUILD-PLAN.md) | trackable delivery plan, milestones M1–M9 |
-| [docs/DATASETS.md](docs/DATASETS.md) | dataset survey + method data requirements |
+| [data/DATASETS.md](data/DATASETS.md) | dataset survey + method data requirements |
 | [docs/ALTERNATIVE-OPTIONS.md](docs/ALTERNATIVE-OPTIONS.md) | approach-level options not taken |
 | [docs/FINDINGS.md](docs/FINDINGS.md) | experiment verdicts + instrument corrections |
 
