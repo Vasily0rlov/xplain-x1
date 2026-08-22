@@ -65,6 +65,20 @@ def test_routes_chain_collapse_and_multiplicity():
     assert {tuple(sorted(r.certified_support)) for r in routes} >= {(2,), (3,)}
 
 
+def test_routes_modal_beats_underdetection():
+    # 7 runs detect the full product {0,1,2}; 1 run under-detects {0}.
+    # Certified support must be the MODAL {0,1,2}, not the minimal {0};
+    # the common core {0} is reported separately.
+    full, part = frozenset({0, 1, 2}), frozenset({0})
+    run_gs = {r: {full: 0.95} for r in range(7)}
+    run_gs[7] = {part: 0.9}
+    routes = build_routes(run_gs, {full: ["L1U0"]}, run_gs[0], 8, 0.8)
+    r = routes[0]
+    assert r.certified_support == full
+    assert r.common_core == part
+    assert r.Pi == 1.0                    # presence unified across the chain
+
+
 def test_route_selection_and_universe():
     A = frozenset({0})
     routes = build_routes({0: {A: 0.9}}, {A: ["u"]}, {A: 0.9}, 1, 0.8)

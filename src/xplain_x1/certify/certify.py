@@ -171,6 +171,8 @@ def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
         row = {"rid": rt.rid,
                "support_groups": sorted(rt.certified_support),
                "support_names": [gnames[g] for g in sorted(rt.certified_support)],
+               "common_core": sorted(rt.common_core),
+               "common_core_names": [gnames[g] for g in sorted(rt.common_core)],
                "variants": rt.variants,
                "Pi": rt.Pi, "pi": pi_routes[rt.rid],
                "members_main": rt.members_main, "mu": rt.best_mu_main,

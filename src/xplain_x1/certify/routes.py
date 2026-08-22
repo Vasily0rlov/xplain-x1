@@ -26,7 +26,12 @@ import numpy as np
 @dataclass
 class Route:
     rid: str
-    certified_support: frozenset[int]                 # minimal variant (groups)
+    certified_support: frozenset[int]   # MODAL variant (most runs agree on it);
+    common_core: frozenset[int] = frozenset()   # intersection of variants —
+    # the conservative "at least these are involved" claim.  Minimal-variant
+    # certification was wrong for under-detection chains (a COMP3 run that only
+    # detected {x1} of the product {x1,x2,x3} would drag the certified support
+    # down to {x1}); modal certification names what the runs typically found.
     variants: list[list[int]] = field(default_factory=list)
     present_runs: set[int] = field(default_factory=set)
     Pi: float = 0.0
@@ -75,11 +80,20 @@ def build_routes(run_gs: dict[int, dict[frozenset[int], float]],
                 variants[g] |= variants.pop(g2)
                 merged_into[g2] = g
 
+    # per-variant run counts, for modal-variant selection
+    variant_runs: dict[frozenset[int], int] = {}
+    for gs_map in run_gs.values():
+        for gs in gs_map:
+            variant_runs[gs] = variant_runs.get(gs, 0) + 1
+
     routes = []
     for i, g in enumerate(sorted(variants, key=lambda s: (len(s), sorted(s)))):
-        var_list = sorted(sorted(v) for v in variants[g])
+        vset = variants[g]
+        var_list = sorted(sorted(v) for v in vset)
+        modal = max(vset, key=lambda v: (variant_runs.get(v, 0), -len(v)))
+        core = frozenset.intersection(*vset)
         members, mu = [], None
-        for v in variants[g]:
+        for v in vset:
             members += main_members.get(v, [])
             m = main_mu.get(v)
             if m is not None:
@@ -88,7 +102,8 @@ def build_routes(run_gs: dict[int, dict[frozenset[int], float]],
             not (set(a) <= set(b) or set(b) <= set(a))
             for ai, a in enumerate(var_list) for b in var_list[ai + 1:])
         routes.append(Route(
-            rid=f"r{i}", certified_support=g, variants=var_list,
+            rid=f"r{i}", certified_support=modal, common_core=core,
+            variants=var_list,
             present_runs=presence[g], Pi=len(presence[g]) / n_runs,
             members_main=sorted(set(members)), best_mu_main=mu,
             multiplicitous=incomparable))

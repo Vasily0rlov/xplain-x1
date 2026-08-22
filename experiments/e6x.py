@@ -22,7 +22,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from xplain_x1.certify.certify import certify              # noqa: E402
 from xplain_x1.data.registry import get_dataset            # noqa: E402
 from xplain_x1.util.box import wait_until_free             # noqa: E402
-from xplain_x1.util.io import save_json                    # noqa: E402
+from xplain_x1.util.io import load_json, save_json         # noqa: E402
 from xplain_x1.util.provenance import git_commit           # noqa: E402
 
 SYNTH = ["synthetic:add-noisy-8k", "synthetic:comp2-clean-8k",
@@ -47,6 +47,7 @@ def run_one(name: str, cfg: dict) -> dict:
         "n_core_routes": cert["n_core_routes"],
         "route_coverage": round(cov, 3),
         "core_route_supports": [r["support_names"] for r in core_routes],
+        "core_route_group_ids": [r["support_groups"] for r in core_routes],
         "core_route_Pi": [r["Pi"] for r in core_routes],
         "ev_bound_routes": cert["ev_bound_routes"],
         "n_core_units": cert["n_core"],
@@ -74,9 +75,17 @@ def main() -> int:
               f"core_routes={row['n_core_routes']} vs core_units="
               f"{row['n_core_units']} ({row['wall_s']}s)", flush=True)
         save_json(ROOT / "experiments" / "results" / "e6x.json", out)
-    e61_ok = all(r["groups_all_singleton"]
-                 and r["n_core_routes"] == r["n_core_units"]
-                 for r in out["synthetic"])
+    # reduction bar: singleton groups AND route-level CORE support-SETS equal
+    # e31's distinct unit-level CORE supports (unit counts double-count concepts
+    # sharing a support — the route layer deduplicates them, correctly)
+    e31 = load_json(ROOT / "experiments" / "results" / "e31.json")
+    e31_supports = {r["dataset"]: {tuple(sorted(s)) for s in r["core_supports"]}
+                    for r in e31["rows"]}
+    e61_ok = all(
+        r["groups_all_singleton"]
+        and {tuple(sorted(g)) for g in r["core_route_group_ids"]}
+        == e31_supports.get(r["dataset"], set())
+        for r in out["synthetic"])
     out["e61_bar_met"] = bool(e61_ok)
     print(f"E6.1 reduction: {'MET' if e61_ok else 'NOT MET'}", flush=True)
 
