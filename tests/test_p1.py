@@ -65,6 +65,12 @@ def test_contribution_orders_units():
     ds.y = np.maximum(ds.X[:, 0], 0) * 2.0
     splits = make_splits(ds, split_seed=1000)
     m = _handbuilt_net()
+    # the model must live in the SCALED-target space (regression targets are
+    # standardised): out_scaled = (2*relu(x0) - y_mean) / y_std
+    import torch as _t
+    with _t.no_grad():
+        m.head.weight.mul_(1.0 / splits.y_std)
+        m.head.bias.fill_(-splits.y_mean / splits.y_std)
     drops = unit_ablation_drops(m, ds, splits, null_statistics(ds, splits))
     assert drops["L1U0"] > 0.5
     assert drops["L1U0"] > drops["L1U1"]
@@ -103,10 +109,14 @@ def test_dead_unit_mu_is_one():
 
 
 def test_dissolution_of_redundant_layer_is_cheap():
+    # needs a real training budget: at ~40 epochs even a FROM-SCRATCH flat model
+    # cannot fit ADD's three nonlinearities, so the teacher-vs-flat gap would be
+    # a budget artifact, not earned depth
+    cfg = {"train": {**CFG["train"], "max_epochs": 150, "plateau_evals": 15}}
     ds = make_synthetic("synthetic:add-noisy-8k")
     splits = make_splits(ds, split_seed=1000)
     m = build_model(ds.d, [12, 12], ds.task, ds.n_classes, seed=0)
-    settle(m, ds, splits, CFG, seed=0)   # additive task: depth 2 is theatre
+    settle(m, ds, splits, cfg, seed=0)   # additive task: depth 2 is theatre
     cost, cand = dissolution_cost(m, 0, ds, splits, seed=0)
     assert cost < 0.02, f"dissolving an unearned layer cost {cost:.4f}"
     assert cand.widths == [12]

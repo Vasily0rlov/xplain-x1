@@ -30,8 +30,9 @@ def _row_losses(model: MaskedMLP, ds: Dataset, splits: Splits,
         ll_null = -np.log(np.clip(null_stats["class_prior"][y], 1e-12, 1))
         return ll, ll_null
     pred = out.squeeze(1).numpy()
-    se = (pred - y) ** 2
-    se_null = (y - null_stats["y_train_mean"]) ** 2
+    y_scaled = splits.scale_y(y)
+    se = (pred - y_scaled) ** 2
+    se_null = (y_scaled - 0.0) ** 2            # scaled train mean is 0
     return se, se_null
 
 

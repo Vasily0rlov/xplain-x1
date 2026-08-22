@@ -22,9 +22,14 @@ class Splits:
     probe: np.ndarray          # indices into the full X, fixed across restarts
     mean: np.ndarray           # standardisation fit on TRAIN only
     std: np.ndarray
+    y_mean: float = 0.0        # regression target scaling (train-fit); 0/1 for
+    y_std: float = 1.0         # classification so scaled == raw
 
     def standardise(self, X: np.ndarray) -> np.ndarray:
         return ((X - self.mean) / self.std).astype(np.float32)
+
+    def scale_y(self, y: np.ndarray) -> np.ndarray:
+        return ((y - self.y_mean) / self.y_std).astype(np.float32)
 
 
 def make_splits(ds: Dataset, split_seed: int, probe_size: int = 2048,
@@ -57,8 +62,13 @@ def make_splits(ds: Dataset, split_seed: int, probe_size: int = 2048,
     mean[cm] = Xtr[:, cm].mean(axis=0)
     s = Xtr[:, cm].std(axis=0)
     std[cm] = np.where(s > 1e-8, s, 1.0)
+    y_mean, y_std = 0.0, 1.0
+    if ds.task == "regression":            # unscaled targets (bike counts 0-977)
+        y_mean = float(ds.y[train].mean())  # made MSE untrainable at lr 1e-3
+        y_std = float(max(ds.y[train].std(), 1e-8))
     return Splits(train=np.sort(train), val=np.sort(val), test=np.sort(test),
-                  probe=np.sort(probe), mean=mean, std=std)
+                  probe=np.sort(probe), mean=mean, std=std,
+                  y_mean=y_mean, y_std=y_std)
 
 
 def cpss_pairs(train_idx: np.ndarray, n_pairs: int, split_seed: int

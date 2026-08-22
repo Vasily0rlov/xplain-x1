@@ -93,7 +93,15 @@ def main() -> int:
     wait_until_free(float(cfg["compute"]["load_threshold"]))
     t_start = time.time()
     rows = []
+    prior = ROOT / "experiments" / "results" / "e51.json"
+    if prior.exists():                      # resume: keep completed datasets
+        old = load_json(prior)
+        rows = [r for r in old.get("rows", [])]
+        print(f"resuming with {len(rows)} completed rows", flush=True)
+    done = {r["dataset"] for r in rows}
     for name in MVL_PUBLIC:
+        if name in done:
+            continue
         row = dataset_row(name, cfg)
         rows.append(row)
         print(f"{name}: fid_ratio {row['fid_ratio']} core {row['n_core']}/"

@@ -56,18 +56,30 @@ def dissolved_candidate(model: MaskedMLP, li: int, ds: Dataset, splits: Splits,
     cand._unit_counter = max(model._unit_counter, cand._unit_counter)
 
     # function-level distillation: candidate matches the teacher's outputs
+    # (two-phase lr: coarse fit then fine polish — the delta this test reports
+    # gates depth-honesty, so distillation quality must not be the bottleneck)
     opt = torch.optim.AdamW(cand.parameters(), lr=1e-2)
-    for _ in range(distill_epochs):
+    for ep in range(distill_epochs):
+        if ep == int(distill_epochs * 0.6):
+            for g in opt.param_groups:
+                g["lr"] = 2e-3
         opt.zero_grad()
         F.mse_loss(cand(Xtr), teacher_out).backward()
         opt.step()
 
-    # brief head-only fine-tune on the task
-    ytr = (torch.from_numpy(ds.y[splits.train]) if ds.task == "classification"
-           else torch.from_numpy(ds.y[splits.train]).unsqueeze(1))
+    # brief WHOLE-candidate task fine-tune from the distilled warm start:
+    # earned depth is representational (M-#3.4) — the question is whether the
+    # function is expressible one layer shallower at this width, not whether
+    # distillation alone can copy the teacher's off-manifold quirks.
+    from ..train.settle import _tensors
+    _, ytr = _tensors(ds, splits, splits.train)
     loss_fn = F.cross_entropy if ds.task == "classification" else F.mse_loss
-    opt = torch.optim.AdamW(cand.head.parameters(), lr=1e-3)
-    for _ in range(head_epochs):
+    task_epochs = max(head_epochs, 300)      # full-batch epochs are ~free; a
+    opt = torch.optim.AdamW(cand.parameters(), lr=3e-3)   # starved fine-tune
+    for ep in range(task_epochs):            # fakes "earned" depth
+        if ep == task_epochs // 2:
+            for g in opt.param_groups:
+                g["lr"] = 1e-3
         opt.zero_grad()
         loss_fn(cand(Xtr), ytr).backward()
         opt.step()

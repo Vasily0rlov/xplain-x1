@@ -14,7 +14,7 @@ import numpy as np
 import torch
 
 from ..audit.audit import mu_stalled, run_audit
-from ..audit.contribution import edge_contributions
+from ..audit.contribution import edge_contributions, unit_ablation_drops
 from ..audit.dissolve import dissolution_cost
 from ..data.dataset import Dataset
 from ..data.splits import Splits
@@ -59,42 +59,80 @@ def _least_mono_unit(audit: dict, li: int) -> str | None:
 
 def _prune_step(model: MaskedMLP, audit: dict, ds: Dataset, splits: Splits,
                 cfg: dict, actions: list[dict]) -> MaskedMLP:
+    """Every structural mutation here is BUDGETED (S-#9: pruning is accepted
+    only if it costs <= eps_prune).  Unbudgeted edge-masking/merging measurably
+    wrecked near-separable models (mushroom: pseudo-R2 is calibration-sensitive,
+    a few flipped rows explode log-loss)."""
     acfg, ccfg = cfg["audit"], cfg["controller"]
+    null_stats = null_statistics(ds, splits)
+    eps = float(ccfg["eps_prune"]) * max(abs(audit["fidelity"]), 1e-3)
+    fid0 = evaluate(model, ds, splits, splits.val, null_stats)["fidelity"]
     Xtr = splits.standardise(ds.X[splits.train])
     with torch.no_grad():
         acts = model.hidden(torch.from_numpy(Xtr))
     parent_acts = [Xtr] + [a.numpy() for a in acts[:-1]]
 
+    saved_masks = [model.mask(li).clone() for li in range(len(model.layers))]
     cut = prune_edges(model, edge_contributions(model, parent_acts),
                       float(acfg["eps_edge"]))
     if cut:
-        actions.append({"action": "prune_edges", "n": cut})
+        fid1 = evaluate(model, ds, splits, splits.val, null_stats)["fidelity"]
+        if fid1 < fid0 - eps:                    # jointly too costly: revert
+            with torch.no_grad():
+                for li, m in enumerate(saved_masks):
+                    model.mask(li).copy_(m)
+            actions.append({"action": "prune_edges_reverted", "n": cut,
+                            "cost": round(fid0 - fid1, 4)})
+        else:
+            actions.append({"action": "prune_edges", "n": cut})
 
-    # dead / no-effect units (keep >= 1 unit per layer)
-    dead: set[str] = set()
+    # Truly dead units (never activate): jointly safe to remove in one batch.
     by_layer: dict[int, list[dict]] = {}
     for u in audit["units"]:
         by_layer.setdefault(u["layer"] - 1, []).append(u)
-    for li, units in by_layer.items():
-        removable = [u["uid"] for u in units
-                     if u["act_std"] <= 1e-6
-                     or abs(u["contribution"]) < float(ccfg["eps_prune"])
-                     * max(abs(audit["fidelity"]), 1e-3)]
-        keep_at_least = max(1, len(units) - len(removable))
-        if keep_at_least < 1:
-            removable = removable[:-1]
-        if len(removable) == len(units):
-            removable = removable[1:]
-        dead.update(removable)
+    dead = {u["uid"] for units in by_layer.values() for u in units
+            if u["act_std"] <= 1e-6}
+    for li, units in by_layer.items():           # never empty a layer
+        if all(u["uid"] in dead for u in units):
+            dead.discard(units[0]["uid"])
     if dead:
         model = remove_units(model, dead)
         actions.append({"action": "remove_units", "uids": sorted(dead)})
 
-    # near-duplicate merge: incoming-weight cosine > tau AND val act corr > 0.95
+    # Low-contribution units: SEQUENTIAL removal under a fidelity budget.
+    # Batch removal by marginal ablation is unsound on redundant structure
+    # (mushroom: backup rules each ablate cheaply alone, jointly load-bearing).
+    fid_start = evaluate(model, ds, splits, splits.val, null_stats)["fidelity"]
+    removed: list[str] = []
+    for _ in range(sum(model.widths)):
+        cands = sorted(
+            ((u, d) for u, d in
+             unit_ablation_drops(model, ds, splits, null_stats).items()
+             if abs(d) < eps),
+            key=lambda t: abs(t[1]))
+        cands = [(u, d) for u, d in cands
+                 if any(u in ids and len(ids) > 1 for ids in model.unit_ids)]
+        if not cands:
+            break
+        uid = cands[0][0]
+        trial = remove_units(model, {uid})
+        fid_now = evaluate(trial, ds, splits, splits.val, null_stats)["fidelity"]
+        if fid_now < fid_start - eps:            # joint cost exceeded budget
+            break
+        model = trial
+        removed.append(uid)
+    if removed:
+        actions.append({"action": "remove_units_seq", "uids": removed})
+
+    # Near-duplicate merge, BUDGETED per merge: summing outgoing weights is
+    # exact only for identical activations; corr 0.95 is not identity, so each
+    # merge must prove itself on val or be rejected.
     tau = float(cfg["certify"]["tau_match"])
     Xva = splits.standardise(ds.X[splits.val])
     with torch.no_grad():
         acts_va = [a.numpy() for a in model.hidden(torch.from_numpy(Xva))]
+    fid_cur = evaluate(model, ds, splits, splits.val, null_stats)["fidelity"]
+    tried: set[tuple[str, str]] = set()
     merged = True
     while merged:
         merged = False
@@ -105,12 +143,23 @@ def _prune_step(model: MaskedMLP, audit: dict, ds: Dataset, splits: Splits,
             A = acts_va[li]
             for i in range(len(W)):
                 for j in range(i + 1, len(W)):
+                    keep = model.unit_ids[li][i]
+                    drop = model.unit_ids[li][j]
+                    if (keep, drop) in tried:
+                        continue
                     if cos[i, j] > tau and A[:, i].std() > 1e-6 and A[:, j].std() > 1e-6:
                         corr = float(np.corrcoef(A[:, i], A[:, j])[0, 1])
                         if corr > 0.95:
-                            keep = model.unit_ids[li][i]
-                            drop = model.unit_ids[li][j]
-                            model = merge_units(model, keep, drop)
+                            tried.add((keep, drop))
+                            trial = merge_units(model, keep, drop)
+                            fid_t = evaluate(trial, ds, splits, splits.val,
+                                             null_stats)["fidelity"]
+                            if fid_t < fid_cur - eps:
+                                actions.append({"action": "merge_rejected",
+                                                "keep": keep, "drop": drop,
+                                                "cost": round(fid_cur - fid_t, 4)})
+                                continue
+                            model, fid_cur = trial, fid_t
                             actions.append({"action": "merge", "keep": keep,
                                             "drop": drop})
                             with torch.no_grad():

@@ -12,7 +12,11 @@ from .mlp import MaskedMLP
 
 
 @torch.no_grad()
-def gauge_pass(model: MaskedMLP, probe_x: torch.Tensor, atol: float = 1e-5) -> None:
+def gauge_pass(model: MaskedMLP, probe_x: torch.Tensor, atol: float = 1e-5,
+               rtol: float = 3e-5) -> None:
+    # Fidelity check is RELATIVE to output magnitude: float32 rounding at ReLU
+    # boundaries scales with logit size (near-separable data has logits O(20+),
+    # tripping any fixed absolute tolerance while being ~1e-5 relative).
     before = model(probe_x).clone()
     acts = model.hidden(probe_x)
 
@@ -41,4 +45,6 @@ def gauge_pass(model: MaskedMLP, probe_x: torch.Tensor, atol: float = 1e-5) -> N
 
     after = model(probe_x)
     max_diff = (before - after).abs().max().item()
-    assert max_diff < atol, f"gauge pass changed outputs by {max_diff:.2e}"
+    tol = max(atol, rtol * before.abs().max().item())
+    assert max_diff < tol, (
+        f"gauge pass changed outputs by {max_diff:.2e} (tol {tol:.2e})")

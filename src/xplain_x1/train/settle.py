@@ -30,7 +30,7 @@ def _tensors(ds: Dataset, splits: Splits, idx: np.ndarray):
     if ds.task == "classification":
         y = torch.from_numpy(ds.y[idx])
     else:
-        y = torch.from_numpy(ds.y[idx]).unsqueeze(1)
+        y = torch.from_numpy(splits.scale_y(ds.y[idx])).unsqueeze(1)
     return X, y
 
 
@@ -46,8 +46,9 @@ def evaluate(model: MaskedMLP, ds: Dataset, splits: Splits, idx: np.ndarray,
         fid = classification_fidelity(proba, y, null_stats["class_prior"])
         acc = accuracy(proba, y, ds.task)
     else:
-        pred = out.squeeze(1).numpy()
-        fid = regression_fidelity(pred, y, null_stats["y_train_mean"])
+        pred = out.squeeze(1).numpy()          # model lives in scaled-y space;
+        y_scaled = splits.scale_y(y)           # R2 is affine-invariant so fid
+        fid = regression_fidelity(pred, y_scaled, 0.0)  # is unchanged in it
         acc = None
     return {"fidelity": fid, "accuracy": acc}
 
@@ -79,7 +80,13 @@ def settle(model: MaskedMLP, ds: Dataset, splits: Splits, cfg: dict, seed: int,
     # shaping happens during the fidelity-flat phase, so a fidelity-plateau stop
     # would cut it short and a best-fid restore would discard it (E1.3 finding).
     # Best-val restore remains only as a safety guard against real degradation.
-    best_fid, best_state = -np.inf, None
+    # The ENTRY state is the first restore candidate: a settle must never end
+    # worse than it began by more than the safety margin (without this, each
+    # settle can ratchet fidelity down — pressure trades logit calibration for
+    # penalty on near-separable data, and pseudo-R2 is calibration-sensitive).
+    entry_ev = evaluate(model, ds, splits, splits.val, null_stats)
+    best_fid = entry_ev["fidelity"]
+    best_state = {k: v.detach().clone() for k, v in model.state_dict().items()}
     best_loss, evals_since_best, history = np.inf, 0, []
     plateau_rel = float(tcfg["plateau_rel"])
     plateau_evals = int(tcfg["plateau_evals"])
