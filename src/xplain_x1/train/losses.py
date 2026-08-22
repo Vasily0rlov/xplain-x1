@@ -31,6 +31,11 @@ class Pressures:
         # fresh units can find weak high-order structure before being squeezed
         # (E2.x finding: full pressure strangles order-3 discovery).
         self.scale = 1.0
+        # E6.3 canonicalisation probe: a tiny DETERMINISTIC per-feature
+        # preference (identical across runs/seeds) added as L1 on input-layer
+        # edges, tipping equal-loss carvings the same way in every restart.
+        # None = off (default); else a [d] tensor of per-feature costs.
+        self.feature_pref: torch.Tensor | None = None
         self._std: dict[str, torch.Tensor] = {}   # keyed by unit id: survives growth
 
     def _update_std(self, model: MaskedMLP, acts: list[torch.Tensor]) -> list[torch.Tensor]:
@@ -61,10 +66,19 @@ class Pressures:
                 hoyer_terms.append((l1[live] / l2[live]).mean())
         fanin_pen = (torch.stack(hoyer_terms).mean() if hoyer_terms
                      else torch.tensor(0.0))
+        pref_pen = torch.tensor(0.0)
+        if self.feature_pref is not None:
+            w0 = model.layers[0].weight * model.mask(0)
+            pref_pen = (w0.abs() * self.feature_pref.unsqueeze(0)).mean()
         return (ramp * self.scale
-                * (self.lambda_act * act_pen + self.lambda_fanin * fanin_pen))
+                * (self.lambda_act * act_pen + self.lambda_fanin * fanin_pen
+                   + pref_pen))
 
 
-def make_pressures(cfg: dict) -> Pressures:
+def make_pressures(cfg: dict, d_in: int | None = None) -> Pressures:
     t = cfg["train"]
-    return Pressures(t["lambda_act"], t["lambda_fanin"])
+    p = Pressures(t["lambda_act"], t["lambda_fanin"])
+    lam_pref = float(t.get("lambda_pref", 0.0))
+    if lam_pref > 0 and d_in:
+        p.feature_pref = lam_pref * torch.arange(d_in, dtype=torch.float32) / d_in
+    return p

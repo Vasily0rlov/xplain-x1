@@ -97,10 +97,6 @@ review; (b) H-X1-2 honest-flatness violations (does detectorisation invent thres
 `E[V]`, CI widths); (e) concept tax. Adopt the detector or hybrid variant only if (a)
 improves without degrading (b)–(e).
 
----
-
-*New approach-level options go here as further entries (A2, A3, …) with the same structure:
-option → interpretability summary → caveats → revisit triggers → assessment protocol.*
 
 ## A2. Explicit abstraction levels (is-a hierarchy above composition)
 
@@ -170,3 +166,8 @@ recover the planted/known hierarchy (levels stable across runs)?  (b) do
 per-level E[V] bounds stay non-vacuous?  (c) does the expert find the
 multi-level DAG more navigable (soft target)?  Adopt per level only where
 (a)+(b) hold.
+
+---
+
+*New approach-level options go here as further entries (A3, A4, …) with the same structure:
+option → interpretability summary → caveats → revisit triggers → assessment protocol.*

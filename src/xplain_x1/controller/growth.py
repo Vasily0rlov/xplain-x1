@@ -179,7 +179,7 @@ def grow(ds: Dataset, splits: Splits, cfg: dict, seed: int,
     mcfg, ccfg = cfg["model"], cfg["controller"]
     null_stats = null_statistics(ds, splits)
     probe = _probe_tensor(ds, splits)
-    pressures = make_pressures(cfg)
+    pressures = make_pressures(cfg, ds.d)
 
     model = build_model(ds.d, [int(mcfg["init_width"])] * int(mcfg["init_layers"]),
                         ds.task, ds.n_classes, seed=seed)
