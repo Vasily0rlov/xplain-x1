@@ -4,18 +4,25 @@ from __future__ import annotations
 from typing import Callable
 
 from .dataset import Dataset
-from .loaders import load_wine, load_zoo
+from .loaders import (load_adult, load_bike, load_drybean, load_mushroom,
+                      load_tictactoe, load_wine, load_zoo)
 from .synthetic import CONFIGS, EXTRA_CONFIGS, make_synthetic
 
 _LOADERS: dict[str, Callable[[], Dataset]] = {
     "zoo": load_zoo,
     "wine": load_wine,
+    "tictactoe": load_tictactoe,
+    "mushroom": load_mushroom,
+    "adult": load_adult,
+    "bike": load_bike,
+    "drybean": load_drybean,
 }
 for _name in {**CONFIGS, **EXTRA_CONFIGS}:
     _LOADERS[_name] = (lambda n=_name: make_synthetic(n))
 
-# MVL build order (S-#4); extended tier appended after MVL bars are met
-MVL = list(CONFIGS) + ["zoo", "wine"]  # P0 subset; grows in P5 with the rest of the MVL
+# MVL (S-#4): synthetics + seven public datasets, small -> large
+MVL_PUBLIC = ["zoo", "tictactoe", "wine", "mushroom", "drybean", "bike", "adult"]
+MVL = list(CONFIGS) + MVL_PUBLIC
 
 
 def available() -> list[str]:
