@@ -1,0 +1,590 @@
+{
+  "experiment": "E-C.1 confirmatory",
+  "git_commit": "cbbdf7d1ea0e64b9a745caa34f8b14040e5554b7",
+  "config_hash": "576141a499543ceb00a92545433ccbab9a8028782de39dc700ff39de1e39d9f6",
+  "seed_base": 20,
+  "synthetic": [
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "n_core": 3,
+      "core": [
+        {
+          "names": [
+            "x1"
+          ],
+          "share": 0.3757,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "x2"
+          ],
+          "share": 0.3102,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "x3"
+          ],
+          "share": 0.189,
+          "Pi": 1.0,
+          "pi": 1.0
+        }
+      ],
+      "core_share_sum": 0.875,
+      "fanova_r2": 0.8999,
+      "reliance_top": [
+        {
+          "group": "x1",
+          "min_reliance": 0.7295,
+          "max_reliance": 0.7534
+        },
+        {
+          "group": "x2",
+          "min_reliance": 0.6738,
+          "max_reliance": 0.6863
+        },
+        {
+          "group": "x3",
+          "min_reliance": 0.3921,
+          "max_reliance": 0.4101
+        }
+      ],
+      "planted": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "planted_core": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "max_core_order": 1
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "n_core": 2,
+      "core": [
+        {
+          "names": [
+            "x2",
+            "x3"
+          ],
+          "share": 0.4917,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "x1"
+          ],
+          "share": 0.3055,
+          "Pi": 1.0,
+          "pi": 1.0
+        }
+      ],
+      "core_share_sum": 0.797,
+      "fanova_r2": 0.7996,
+      "reliance_top": [
+        {
+          "group": "x2",
+          "min_reliance": 1.2549,
+          "max_reliance": 1.2855
+        },
+        {
+          "group": "x3",
+          "min_reliance": 1.1813,
+          "max_reliance": 1.21
+        },
+        {
+          "group": "x1",
+          "min_reliance": 0.5998,
+          "max_reliance": 0.6379
+        }
+      ],
+      "planted": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "planted_core": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "max_core_order": 2
+    },
+    {
+      "dataset": "synthetic:comp3-noisy-8k",
+      "n_core": 2,
+      "core": [
+        {
+          "names": [
+            "x4"
+          ],
+          "share": 0.42,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "x1",
+            "x2",
+            "x3"
+          ],
+          "share": 0.2506,
+          "Pi": 1.0,
+          "pi": 0.925
+        }
+      ],
+      "core_share_sum": 0.671,
+      "fanova_r2": 0.4627,
+      "reliance_top": [
+        {
+          "group": "x3",
+          "min_reliance": 1.0262,
+          "max_reliance": 1.1116
+        },
+        {
+          "group": "x2",
+          "min_reliance": 0.9433,
+          "max_reliance": 1.0254
+        },
+        {
+          "group": "x1",
+          "min_reliance": 0.9203,
+          "max_reliance": 0.9931
+        }
+      ],
+      "planted": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "planted_core": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "max_core_order": 3
+    },
+    {
+      "dataset": "synthetic:noise-8k",
+      "n_core": 0,
+      "core": [],
+      "core_share_sum": 0,
+      "fanova_r2": 0.6569,
+      "reliance_top": [
+        {
+          "group": "x2",
+          "min_reliance": -0.0,
+          "max_reliance": 0.0023
+        },
+        {
+          "group": "x3",
+          "min_reliance": -0.0,
+          "max_reliance": 0.0016
+        },
+        {
+          "group": "x5",
+          "min_reliance": 0.0,
+          "max_reliance": 0.0093
+        }
+      ],
+      "planted": [],
+      "planted_core": [],
+      "max_core_order": 0
+    }
+  ],
+  "real": [
+    {
+      "dataset": "mushroom",
+      "n_core": 4,
+      "core": [
+        {
+          "names": [
+            "odor=n"
+          ],
+          "share": 0.4813,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "bruises%3F"
+          ],
+          "share": 0.1605,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "gill-spacing"
+          ],
+          "share": 0.0839,
+          "Pi": 0.8,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "odor=s"
+          ],
+          "share": 0.035,
+          "Pi": 1.0,
+          "pi": 0.825
+        }
+      ],
+      "core_share_sum": 0.761,
+      "fanova_r2": 0.998,
+      "reliance_top": [
+        {
+          "group": "odor=f",
+          "min_reliance": 0.8096,
+          "max_reliance": 1.7258
+        },
+        {
+          "group": "stalk-shape",
+          "min_reliance": 0.2521,
+          "max_reliance": 1.277
+        },
+        {
+          "group": "gill-size",
+          "min_reliance": 0.1205,
+          "max_reliance": 0.717
+        }
+      ]
+    },
+    {
+      "dataset": "drybean",
+      "n_core": 17,
+      "core": [
+        {
+          "names": [
+            "Area"
+          ],
+          "share": 0.4812,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "AspectRation"
+          ],
+          "share": 0.3228,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "MinorAxisLength"
+          ],
+          "share": 0.2589,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "Perimeter"
+          ],
+          "share": 0.1429,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "MajorAxisLength"
+          ],
+          "share": 0.1303,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "ShapeFactor2"
+          ],
+          "share": 0.1293,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "roundness"
+          ],
+          "share": 0.1157,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "Compactness"
+          ],
+          "share": 0.1055,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "ShapeFactor1"
+          ],
+          "share": 0.0947,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "ShapeFactor4"
+          ],
+          "share": 0.0946,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "ConvexArea"
+          ],
+          "share": 0.044,
+          "Pi": 1.0,
+          "pi": 0.8
+        },
+        {
+          "names": [
+            "AspectRation",
+            "ShapeFactor2"
+          ],
+          "share": 0.0424,
+          "Pi": 1.0,
+          "pi": 0.95
+        },
+        {
+          "names": [
+            "Solidity"
+          ],
+          "share": 0.026,
+          "Pi": 1.0,
+          "pi": 0.975
+        },
+        {
+          "names": [
+            "Area",
+            "ShapeFactor2"
+          ],
+          "share": 0.022,
+          "Pi": 1.0,
+          "pi": 0.975
+        },
+        {
+          "names": [
+            "Area",
+            "AspectRation"
+          ],
+          "share": 0.0174,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "Area",
+            "MajorAxisLength"
+          ],
+          "share": 0.0151,
+          "Pi": 1.0,
+          "pi": 0.8
+        },
+        {
+          "names": [
+            "MinorAxisLength",
+            "ShapeFactor2"
+          ],
+          "share": 0.0104,
+          "Pi": 0.8,
+          "pi": 0.775
+        }
+      ],
+      "core_share_sum": 2.053,
+      "fanova_r2": 0.9676,
+      "reliance_top": [
+        {
+          "group": "G0{Area, Perimeter, MajorAxisLength, +3}",
+          "min_reliance": 0.9763,
+          "max_reliance": 1.9648
+        },
+        {
+          "group": "G2{AspectRation, Eccentricity, roundness, +2}",
+          "min_reliance": 0.4977,
+          "max_reliance": 1.2187
+        },
+        {
+          "group": "G1{MinorAxisLength, ShapeFactor1}",
+          "min_reliance": 0.2703,
+          "max_reliance": 1.747
+        }
+      ]
+    },
+    {
+      "dataset": "bike",
+      "n_core": 4,
+      "core": [
+        {
+          "names": [
+            "hour"
+          ],
+          "share": 0.5882,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "temp"
+          ],
+          "share": 0.0671,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "hour",
+            "weekday"
+          ],
+          "share": 0.0667,
+          "Pi": 1.0,
+          "pi": 0.975
+        },
+        {
+          "names": [
+            "year"
+          ],
+          "share": 0.0255,
+          "Pi": 1.0,
+          "pi": 1.0
+        }
+      ],
+      "core_share_sum": 0.747,
+      "fanova_r2": 0.8771,
+      "reliance_top": [
+        {
+          "group": "hour",
+          "min_reliance": 1.4936,
+          "max_reliance": 1.5618
+        },
+        {
+          "group": "workingday",
+          "min_reliance": 0.1635,
+          "max_reliance": 0.1997
+        },
+        {
+          "group": "G9{temp, feel_temp}",
+          "min_reliance": 0.0552,
+          "max_reliance": 0.1347
+        }
+      ]
+    },
+    {
+      "dataset": "adult",
+      "n_core": 5,
+      "core": [
+        {
+          "names": [
+            "marital-status=Married-civ-spouse"
+          ],
+          "share": 0.0604,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "capital-gain"
+          ],
+          "share": 0.0528,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "age"
+          ],
+          "share": 0.037,
+          "Pi": 1.0,
+          "pi": 0.975
+        },
+        {
+          "names": [
+            "education-num"
+          ],
+          "share": 0.0298,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "hours-per-week"
+          ],
+          "share": 0.0184,
+          "Pi": 1.0,
+          "pi": 0.975
+        }
+      ],
+      "core_share_sum": 0.198,
+      "fanova_r2": 0.5967,
+      "reliance_top": [
+        {
+          "group": "capital-gain",
+          "min_reliance": 0.2522,
+          "max_reliance": 0.347
+        },
+        {
+          "group": "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+          "min_reliance": 0.1314,
+          "max_reliance": 0.2715
+        },
+        {
+          "group": "education-num",
+          "min_reliance": 0.1023,
+          "max_reliance": 0.1072
+        }
+      ]
+    }
+  ],
+  "verdict": {
+    "e71_synthetic": true,
+    "real_certifying": [
+      "mushroom",
+      "drybean",
+      "bike"
+    ],
+    "e72_clause1": true,
+    "wall_hours": 0.48
+  }
+}

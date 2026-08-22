@@ -1,0 +1,66 @@
+{
+  "experiment": "E1.2",
+  "bar": ">=90% units alive; mu trend upward",
+  "git_commit": "2f49a388bfe88f63a9c0f0f0da8cb45d2e2f7e00",
+  "results": [
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "audits": [
+        {
+          "round": 0,
+          "fidelity": 0.9055717103510923,
+          "median_mu_live": 0.9759106338024139,
+          "n_live": 18,
+          "n_units": 24
+        },
+        {
+          "round": 1,
+          "fidelity": 0.9235711101218086,
+          "median_mu_live": 0.9819690585136414,
+          "n_live": 16,
+          "n_units": 24
+        },
+        {
+          "round": 2,
+          "fidelity": 0.9273609072104285,
+          "median_mu_live": 0.9808952212333679,
+          "n_live": 16,
+          "n_units": 24
+        }
+      ],
+      "alive_frac": 0.667,
+      "mu_trend_up": true,
+      "bar_met": false
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "audits": [
+        {
+          "round": 0,
+          "fidelity": 0.929524433449558,
+          "median_mu_live": 0.9513870477676392,
+          "n_live": 20,
+          "n_units": 24
+        },
+        {
+          "round": 1,
+          "fidelity": 0.9351481503608037,
+          "median_mu_live": 0.9673344790935516,
+          "n_live": 20,
+          "n_units": 24
+        },
+        {
+          "round": 2,
+          "fidelity": 0.9366877844519513,
+          "median_mu_live": 0.9712703824043274,
+          "n_live": 19,
+          "n_units": 24
+        }
+      ],
+      "alive_frac": 0.792,
+      "mu_trend_up": true,
+      "bar_met": false
+    }
+  ],
+  "bar_met": false
+}

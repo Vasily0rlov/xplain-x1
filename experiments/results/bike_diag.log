@@ -1,0 +1,4 @@
+fid 0.895
+raw shares: [((3,), 0.4305), ((10,), 0.1011), ((3, 5), 0.0832), ((1,), 0.0547), ((1, 3), 0.0308), ((12,), 0.0255), ((2,), 0.0158), ((11,), 0.0124)]
+recon_r2: 0.8088
+feature idx: {'season': 0, 'year': 1, 'month': 2, 'hour': 3, 'holiday': 4, 'weekday': 5, 'workingday': 6, 'weather=clear': 7, 'weather=misty': 8, 'weather=rain': 9, 'temp': 10, 'feel_temp': 11, 'humidity': 12, 'windspeed': 13}

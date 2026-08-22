@@ -1,0 +1,1145 @@
+{
+  "experiment": "E4.1",
+  "git_commit": "822caf1399dddd5326f47307eebbaa61c152b778",
+  "verdict": {
+    "artifacts_complete": true,
+    "n_core": 0,
+    "core_supports": [],
+    "core_on_known_wine_core": 0,
+    "flavanoids_or_proline_core": false,
+    "core_Pi": {},
+    "v4_anchor_Pi": 1.0,
+    "fidelity_ratio": 1.0166,
+    "v4_anchor_fid_ratio": 0.766,
+    "bar_met": false,
+    "wall_s": 161.8
+  },
+  "concepts": [
+    {
+      "cid": "c0",
+      "Pi": 0.375,
+      "members": {
+        "0": "L1U4",
+        "2": "L1U2",
+        "6": "L1U3"
+      },
+      "modal_support": [
+        0,
+        6,
+        11
+      ],
+      "support_variants": [
+        [
+          0,
+          6,
+          11
+        ],
+        [
+          0,
+          11
+        ],
+        [
+          3,
+          11,
+          12
+        ]
+      ],
+      "multiplicitous": true,
+      "uid_main": "L1U4",
+      "mu": 0.9435674548149109,
+      "form": "poly(2)",
+      "support_names": [
+        "od280/od315_of_diluted_wines",
+        "alcohol",
+        "flavanoids"
+      ],
+      "layer": 1,
+      "contribution": 0.21993370958676495,
+      "pi": 0.4,
+      "delta": 0.2968647963275304,
+      "ci_low": 0.16165441218159532,
+      "ci_high": 0.46599050327160657,
+      "label": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "multiplicitous"
+      ],
+      "coverage_share": 0.4931
+    },
+    {
+      "cid": "c1",
+      "Pi": 0.875,
+      "members": {
+        "0": "L1U0",
+        "2": "L1U6",
+        "3": "L1U4",
+        "4": "L1U1",
+        "5": "L1U5",
+        "6": "L1U4",
+        "7": "L1U0"
+      },
+      "modal_support": [
+        8,
+        9,
+        12
+      ],
+      "support_variants": [
+        [
+          0,
+          3,
+          9
+        ],
+        [
+          0,
+          8,
+          9
+        ],
+        [
+          0,
+          2,
+          8
+        ],
+        [
+          8,
+          9,
+          12
+        ],
+        [
+          4,
+          6,
+          12
+        ],
+        [
+          0,
+          3,
+          10
+        ]
+      ],
+      "multiplicitous": true,
+      "uid_main": "L1U0",
+      "mu": 0.8963489532470703,
+      "form": "poly(2)",
+      "support_names": [
+        "alcohol",
+        "alcalinity_of_ash",
+        "color_intensity"
+      ],
+      "layer": 1,
+      "contribution": 0.06406331973687251,
+      "pi": 0.625,
+      "delta": 0.010172347001884408,
+      "ci_low": -0.017727424765863826,
+      "ci_high": 0.0401146283054581,
+      "label": "PERIPHERY",
+      "reasons": [
+        "infrequent",
+        "no_effect",
+        "multiplicitous"
+      ],
+      "coverage_share": 0.0169
+    },
+    {
+      "cid": "c2",
+      "Pi": 0.5,
+      "members": {
+        "0": "L1U3",
+        "3": "L1U1",
+        "6": "L1U2",
+        "7": "L1U7"
+      },
+      "modal_support": [
+        6,
+        9,
+        11
+      ],
+      "support_variants": [
+        [
+          6,
+          9,
+          11
+        ],
+        [
+          0,
+          6,
+          11
+        ]
+      ],
+      "multiplicitous": true,
+      "uid_main": "L1U3",
+      "mu": 0.9819733500480652,
+      "form": "poly(2)",
+      "support_names": [
+        "color_intensity",
+        "flavanoids",
+        "od280/od315_of_diluted_wines"
+      ],
+      "layer": 1,
+      "contribution": 0.1090657232464346,
+      "pi": 0.6,
+      "delta": 0.22433957497591228,
+      "ci_low": 0.006758377477215723,
+      "ci_high": 0.5126366911039115,
+      "label": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "multiplicitous"
+      ],
+      "coverage_share": 0.3726
+    },
+    {
+      "cid": "c3",
+      "Pi": 0.375,
+      "members": {
+        "0": "L1U6",
+        "1": "L1U0",
+        "5": "L1U3"
+      },
+      "modal_support": [
+        0,
+        1,
+        9
+      ],
+      "support_variants": [
+        [
+          0,
+          1,
+          9
+        ],
+        [
+          0,
+          1,
+          12
+        ],
+        [
+          9,
+          10,
+          12
+        ]
+      ],
+      "multiplicitous": true,
+      "uid_main": "L1U6",
+      "mu": 0.916084885597229,
+      "form": "poly(2)",
+      "support_names": [
+        "alcohol",
+        "malic_acid",
+        "color_intensity"
+      ],
+      "layer": 1,
+      "contribution": 0.07211984936293547,
+      "pi": 0.425,
+      "delta": 0.07590154147353012,
+      "ci_low": -0.02355684751699584,
+      "ci_high": 0.21659695438267484,
+      "label": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "no_effect",
+        "multiplicitous"
+      ],
+      "coverage_share": 0.1261
+    },
+    {
+      "cid": "c4",
+      "Pi": 0.625,
+      "members": {
+        "0": "L1U1",
+        "2": "L1U7",
+        "4": "L1U0",
+        "5": "L1U4",
+        "7": "L1U5"
+      },
+      "modal_support": [
+        2,
+        4,
+        9
+      ],
+      "support_variants": [
+        [
+          2,
+          4,
+          9
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          4,
+          9,
+          12
+        ]
+      ],
+      "multiplicitous": true,
+      "uid_main": "L1U1",
+      "mu": 0.9332723617553711,
+      "form": "poly(2)",
+      "support_names": [
+        "ash",
+        "magnesium",
+        "color_intensity"
+      ],
+      "layer": 1,
+      "contribution": 0.11837627727989519,
+      "pi": 0.3,
+      "delta": 0.024648724906495723,
+      "ci_low": -0.01322922827647732,
+      "ci_high": 0.08292792813254438,
+      "label": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "no_effect",
+        "multiplicitous"
+      ],
+      "coverage_share": 0.0409
+    },
+    {
+      "cid": "c5",
+      "Pi": 0.125,
+      "members": {
+        "0": "L1U8"
+      },
+      "modal_support": [
+        5,
+        8,
+        9
+      ],
+      "support_variants": [
+        [
+          5,
+          8,
+          9
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": "L1U8",
+      "mu": 0.9545342326164246,
+      "form": "poly(2)",
+      "support_names": [
+        "color_intensity",
+        "proanthocyanins",
+        "total_phenols"
+      ],
+      "layer": 1,
+      "contribution": -0.023460639305739606,
+      "pi": 0.175,
+      "delta": -0.013661879982370895,
+      "ci_low": -0.06516162240805698,
+      "ci_high": 0.0208529361207375,
+      "label": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "no_effect"
+      ],
+      "coverage_share": -0.0227
+    },
+    {
+      "cid": "c6",
+      "Pi": 0.25,
+      "members": {
+        "0": "L1U9",
+        "1": "L1U9"
+      },
+      "modal_support": [
+        8
+      ],
+      "support_variants": [
+        [
+          8
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": "L1U9",
+      "mu": 0.9425665736198425,
+      "form": "smooth",
+      "support_names": [
+        "proanthocyanins"
+      ],
+      "layer": 1,
+      "contribution": -0.009027844134203211,
+      "pi": 0.025,
+      "delta": -0.01617344234770257,
+      "ci_low": -0.04359710780709058,
+      "ci_high": 0.0008118250111223466,
+      "label": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "no_effect"
+      ],
+      "coverage_share": -0.0269
+    },
+    {
+      "cid": "e0",
+      "Pi": 0.125,
+      "members": {
+        "1": "L1U5"
+      },
+      "modal_support": [
+        8,
+        9,
+        10
+      ],
+      "support_variants": [
+        [
+          8,
+          9,
+          10
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e1",
+      "Pi": 0.125,
+      "members": {
+        "1": "L1U7"
+      },
+      "modal_support": [
+        6,
+        7,
+        12
+      ],
+      "support_variants": [
+        [
+          6,
+          7,
+          12
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e2",
+      "Pi": 0.125,
+      "members": {
+        "1": "L1U4"
+      },
+      "modal_support": [
+        2,
+        3,
+        12
+      ],
+      "support_variants": [
+        [
+          2,
+          3,
+          12
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e3",
+      "Pi": 0.125,
+      "members": {
+        "1": "L1U1"
+      },
+      "modal_support": [
+        4,
+        6,
+        9
+      ],
+      "support_variants": [
+        [
+          4,
+          6,
+          9
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e4",
+      "Pi": 0.125,
+      "members": {
+        "1": "L1U8"
+      },
+      "modal_support": [
+        2,
+        3,
+        4
+      ],
+      "support_variants": [
+        [
+          2,
+          3,
+          4
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e5",
+      "Pi": 0.125,
+      "members": {
+        "1": "L1U6"
+      },
+      "modal_support": [
+        0,
+        4
+      ],
+      "support_variants": [
+        [
+          0,
+          4
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e6",
+      "Pi": 0.125,
+      "members": {
+        "2": "L1U9"
+      },
+      "modal_support": [
+        1,
+        5,
+        9
+      ],
+      "support_variants": [
+        [
+          1,
+          5,
+          9
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e7",
+      "Pi": 0.125,
+      "members": {
+        "2": "L1U1"
+      },
+      "modal_support": [
+        7,
+        10,
+        11
+      ],
+      "support_variants": [
+        [
+          7,
+          10,
+          11
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e8",
+      "Pi": 0.125,
+      "members": {
+        "2": "L1U0"
+      },
+      "modal_support": [
+        2
+      ],
+      "support_variants": [
+        [
+          2
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e9",
+      "Pi": 0.125,
+      "members": {
+        "3": "L1U5"
+      },
+      "modal_support": [
+        6,
+        9,
+        10
+      ],
+      "support_variants": [
+        [
+          6,
+          9,
+          10
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e10",
+      "Pi": 0.125,
+      "members": {
+        "3": "L1U7"
+      },
+      "modal_support": [
+        3,
+        11,
+        12
+      ],
+      "support_variants": [
+        [
+          3,
+          11,
+          12
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e11",
+      "Pi": 0.125,
+      "members": {
+        "3": "L1U6"
+      },
+      "modal_support": [
+        5,
+        7,
+        12
+      ],
+      "support_variants": [
+        [
+          5,
+          7,
+          12
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e12",
+      "Pi": 0.125,
+      "members": {
+        "3": "L1U8"
+      },
+      "modal_support": [
+        0,
+        3,
+        4
+      ],
+      "support_variants": [
+        [
+          0,
+          3,
+          4
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e13",
+      "Pi": 0.125,
+      "members": {
+        "3": "L1U2"
+      },
+      "modal_support": [
+        3,
+        5,
+        9
+      ],
+      "support_variants": [
+        [
+          3,
+          5,
+          9
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e14",
+      "Pi": 0.125,
+      "members": {
+        "4": "L1U5"
+      },
+      "modal_support": [
+        8,
+        9,
+        10
+      ],
+      "support_variants": [
+        [
+          8,
+          9,
+          10
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e15",
+      "Pi": 0.125,
+      "members": {
+        "4": "L1U2"
+      },
+      "modal_support": [
+        0,
+        3,
+        6
+      ],
+      "support_variants": [
+        [
+          0,
+          3,
+          6
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e16",
+      "Pi": 0.125,
+      "members": {
+        "4": "L1U3"
+      },
+      "modal_support": [
+        1,
+        11,
+        12
+      ],
+      "support_variants": [
+        [
+          1,
+          11,
+          12
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e17",
+      "Pi": 0.125,
+      "members": {
+        "4": "L1U4"
+      },
+      "modal_support": [
+        6,
+        11,
+        12
+      ],
+      "support_variants": [
+        [
+          6,
+          11,
+          12
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e18",
+      "Pi": 0.125,
+      "members": {
+        "4": "L1U6"
+      },
+      "modal_support": [
+        3,
+        6,
+        10
+      ],
+      "support_variants": [
+        [
+          3,
+          6,
+          10
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e19",
+      "Pi": 0.125,
+      "members": {
+        "5": "L1U1"
+      },
+      "modal_support": [
+        6,
+        10,
+        11
+      ],
+      "support_variants": [
+        [
+          6,
+          10,
+          11
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e20",
+      "Pi": 0.125,
+      "members": {
+        "5": "L1U6"
+      },
+      "modal_support": [
+        0,
+        3,
+        11
+      ],
+      "support_variants": [
+        [
+          0,
+          3,
+          11
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e21",
+      "Pi": 0.125,
+      "members": {
+        "5": "L1U7"
+      },
+      "modal_support": [
+        3,
+        6,
+        12
+      ],
+      "support_variants": [
+        [
+          3,
+          6,
+          12
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e22",
+      "Pi": 0.125,
+      "members": {
+        "6": "L1U0"
+      },
+      "modal_support": [
+        6,
+        11,
+        12
+      ],
+      "support_variants": [
+        [
+          6,
+          11,
+          12
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e23",
+      "Pi": 0.125,
+      "members": {
+        "6": "L1U1"
+      },
+      "modal_support": [
+        3,
+        9,
+        12
+      ],
+      "support_variants": [
+        [
+          3,
+          9,
+          12
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e24",
+      "Pi": 0.125,
+      "members": {
+        "6": "L1U6"
+      },
+      "modal_support": [
+        0,
+        2,
+        4
+      ],
+      "support_variants": [
+        [
+          0,
+          2,
+          4
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e25",
+      "Pi": 0.125,
+      "members": {
+        "6": "L1U7"
+      },
+      "modal_support": [
+        2,
+        6,
+        9
+      ],
+      "support_variants": [
+        [
+          2,
+          6,
+          9
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e26",
+      "Pi": 0.125,
+      "members": {
+        "6": "L1U9"
+      },
+      "modal_support": [
+        2
+      ],
+      "support_variants": [
+        [
+          2
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e27",
+      "Pi": 0.125,
+      "members": {
+        "7": "L1U4"
+      },
+      "modal_support": [
+        0,
+        3,
+        12
+      ],
+      "support_variants": [
+        [
+          0,
+          3,
+          12
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e28",
+      "Pi": 0.125,
+      "members": {
+        "7": "L1U3"
+      },
+      "modal_support": [
+        6,
+        8,
+        9
+      ],
+      "support_variants": [
+        [
+          6,
+          8,
+          9
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    },
+    {
+      "cid": "e29",
+      "Pi": 0.125,
+      "members": {
+        "7": "L1U9"
+      },
+      "modal_support": [
+        9
+      ],
+      "support_variants": [
+        [
+          9
+        ]
+      ],
+      "multiplicitous": false,
+      "uid_main": null,
+      "label": "PERIPHERY",
+      "reasons": [
+        "absent_in_main"
+      ],
+      "coverage_share": 0.0
+    }
+  ]
+}

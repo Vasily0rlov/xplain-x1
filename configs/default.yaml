@@ -1,0 +1,58 @@
+# XPLAIN-x1 pinned defaults (S-#12).  Nothing numeric is hard-coded outside this file.
+data:
+  dataset: null            # set via CLI
+  split_seed: 1000
+  probe_size: 2048
+  fractions: [0.6, 0.2, 0.2]
+
+model:
+  init_layers: 1           # start shallow (M-#4.3): depth must be earned
+  init_width: 8
+  max_layers: 4
+  max_total_units: 96
+
+train:
+  lr: 1.0e-3
+  batch_size: 256
+  max_epochs: 500
+  weight_decay: 1.0e-4
+  plateau_rel: 0.001       # no >=0.1% relative TOTAL-train-loss gain ...
+  plateau_evals: 20        # ... over 20 evals (post-ramp) => settled
+  anneal_frac: 0.25        # pressure ramp over first 25% of max_epochs
+  safety_margin: 0.01      # restore best-val only if final fid worse by > this
+  lambda_act: 1.0e-2       # L1 on std-normalised activations (calibrated, E1.3c)
+  lambda_fanin: 0.1        # Hoyer ratio per row (E1.3c constraints; separation
+                           # tie-break from COMP2 evidence, see FINDINGS P2)
+
+reference:
+  mlp_widths: [64, 64]     # unconstrained baseline MLP
+
+audit:
+  eps_edge: 0.02           # edge contribution threshold
+  f_max: 3                 # surrogate arity cap
+  top_parents: 6           # candidate-support pool per unit
+
+controller:
+  discovery_scale: 0.3     # pressure multiplier while fid below ceiling (M-C4)
+  eps_prune: 0.001
+  eps_depth: 0.005
+  delta_grow: 0.005
+  delta_stop: 0.02         # = pressure fid-neutrality budget (E1.3c, H-X1-4):
+                           # the stop bar cannot be tighter than the distortion
+                           # full-strength pressure is allowed to cause
+  max_rounds: 12
+
+certify:
+  restarts: 8              # dev; 16 for confirmatory batteries
+  cpss_pairs: 20
+  tau_match: 0.7
+  pi_thr: 0.7
+  mu_min: 0.8
+  Pi_min: 0.7
+  delta_min: 0.005
+  bootstrap: 1000
+
+compute:
+  device: cpu
+  n_workers: 16
+  load_threshold: 8.0

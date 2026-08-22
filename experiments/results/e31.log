@@ -1,0 +1,9 @@
+[box] load 14.46 >= 8.0 — waiting 60s
+[box] load 5.31 < 8.0 — proceeding
+synthetic:add-noisy-8k: core 3, planted [] -> recovered [], bar True, 59.4s
+synthetic:comp2-clean-8k: core 5, planted [[1, 2]] -> recovered [[1, 2]], bar True, 132.6s
+synthetic:comp2-noisy-8k: core 6, planted [[1, 2]] -> recovered [[1, 2]], bar True, 100.7s
+synthetic:comp2-noisy-2k: core 2, planted [[1, 2]] -> recovered [[1, 2]], bar None, 66.3s
+synthetic:comp3-noisy-8k: core 3, planted [[0, 1, 2]] -> recovered [[0, 1, 2]], bar True, 266.5s
+synthetic:noise-8k: core 0, planted [] -> recovered [], bar True, 41.4s
+E3.1 verdict: MET

@@ -1,0 +1,8 @@
+['hour'] share 0.3855 all [0.3855, 0.0] Pi 0.5 pi 0.5 PERIPHERY ['unstable', 'infrequent']
+['temp'] share 0.0905 all [0.0905, 0.0] Pi 0.5 pi 0.5 PERIPHERY ['unstable', 'infrequent']
+['hour', 'weekday'] share 0.0745 all [0.0745, 0.0] Pi 0.5 pi 0.5 PERIPHERY ['unstable', 'infrequent']
+['year'] share 0.049 all [0.049, 0.0] Pi 0.5 pi 0.5 PERIPHERY ['unstable', 'infrequent']
+['year', 'hour'] share 0.0276 all [0.0276, 0.0] Pi 0.5 pi 0.5 PERIPHERY ['unstable', 'infrequent']
+['humidity'] share 0.0228 all [0.0228, 0.0] Pi 0.5 pi 0.5 PERIPHERY ['unstable', 'infrequent']
+['month'] share 0.0141 all [0.0141, 0.0] Pi 0.5 pi 0.0 PERIPHERY ['unstable', 'infrequent']
+['feel_temp'] share 0.0111 all [0.0111, 0.0] Pi 0.5 pi 0.25 PERIPHERY ['unstable', 'infrequent']

@@ -1,0 +1,769 @@
+{
+  "experiment": "E2.x",
+  "git_commit": "7c7f9e0f8cc723c7236538aa8f5da25793184b5d",
+  "runs": [
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "seed": 0,
+      "widths": [
+        6
+      ],
+      "n_layers": 1,
+      "rounds": 2,
+      "fid": 0.9302169928577219,
+      "fid_ref": 0.9269984482818517,
+      "gap": -0.0032185445758701192,
+      "accepted_growth": [
+        "accept_width"
+      ],
+      "planted_hits": [],
+      "median_mu_live": 0.9989777505397797,
+      "actions": [
+        "prune_edges",
+        "merge",
+        "merge",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "merge",
+        "stop_at_ceiling"
+      ],
+      "wall_s": 20.7
+    },
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "seed": 1,
+      "widths": [
+        7
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": 0.9299340927230938,
+      "fid_ref": 0.9269984482818517,
+      "gap": -0.002935644441242058,
+      "accepted_growth": [],
+      "planted_hits": [],
+      "median_mu_live": 0.9994454383850098,
+      "actions": [
+        "prune_edges",
+        "remove_units",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 17.5
+    },
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "seed": 2,
+      "widths": [
+        6
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": 0.925438827865221,
+      "fid_ref": 0.9269984482818517,
+      "gap": 0.0015596204166307137,
+      "accepted_growth": [],
+      "planted_hits": [],
+      "median_mu_live": 0.9982875883579254,
+      "actions": [
+        "prune_edges",
+        "remove_units",
+        "merge",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 16.9
+    },
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "seed": 3,
+      "widths": [
+        6
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": 0.9270030266652771,
+      "fid_ref": 0.9269984482818517,
+      "gap": -4.578383425379862e-06,
+      "accepted_growth": [],
+      "planted_hits": [],
+      "median_mu_live": 0.9991445243358612,
+      "actions": [
+        "prune_edges",
+        "remove_units",
+        "merge",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 19.5
+    },
+    {
+      "dataset": "synthetic:noise-8k",
+      "seed": 0,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": -0.009851900594949115,
+      "fid_ref": -0.009266317597997453,
+      "gap": 0.0005855829969516613,
+      "accepted_growth": [],
+      "planted_hits": [],
+      "median_mu_live": 0.9996715188026428,
+      "actions": [
+        "prune_edges",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 15.6
+    },
+    {
+      "dataset": "synthetic:noise-8k",
+      "seed": 1,
+      "widths": [
+        7
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": -0.002621580531175116,
+      "fid_ref": -0.009266317597997453,
+      "gap": -0.006644737066822337,
+      "accepted_growth": [],
+      "planted_hits": [],
+      "median_mu_live": 1.0,
+      "actions": [
+        "prune_edges",
+        "remove_units",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 12.0
+    },
+    {
+      "dataset": "synthetic:noise-8k",
+      "seed": 2,
+      "widths": [
+        4
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": -0.005719381700579396,
+      "fid_ref": -0.009266317597997453,
+      "gap": -0.0035469358974180576,
+      "accepted_growth": [],
+      "planted_hits": [],
+      "median_mu_live": 0.9863629639148712,
+      "actions": [
+        "prune_edges",
+        "merge",
+        "stop_at_ceiling",
+        "prune_edges",
+        "remove_units"
+      ],
+      "wall_s": 13.3
+    },
+    {
+      "dataset": "synthetic:noise-8k",
+      "seed": 3,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": -0.001545155298444456,
+      "fid_ref": -0.009266317597997453,
+      "gap": -0.007721162299552997,
+      "accepted_growth": [],
+      "planted_hits": [],
+      "median_mu_live": 1.0,
+      "actions": [
+        "prune_edges",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 16.6
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "seed": 0,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": 0.9241354289997067,
+      "fid_ref": 0.9302167673223771,
+      "gap": 0.006081338322670438,
+      "accepted_growth": [],
+      "planted_hits": [
+        "L1U3",
+        "L1U6"
+      ],
+      "median_mu_live": 0.9791662991046906,
+      "actions": [
+        "prune_edges",
+        "stop_at_ceiling"
+      ],
+      "wall_s": 19.3
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "seed": 1,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": 0.9250692822668535,
+      "fid_ref": 0.9302167673223771,
+      "gap": 0.0051474850555236484,
+      "accepted_growth": [],
+      "planted_hits": [
+        "L1U6",
+        "L1U7"
+      ],
+      "median_mu_live": 0.9776066243648529,
+      "actions": [
+        "prune_edges",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 21.4
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "seed": 2,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "rounds": 4,
+      "fid": 0.8631509853759564,
+      "fid_ref": 0.9302167673223771,
+      "gap": 0.06706578194642077,
+      "accepted_growth": [],
+      "planted_hits": [
+        "L1U1",
+        "L1U0",
+        "L1U5",
+        "L1U6"
+      ],
+      "median_mu_live": 0.9512511193752289,
+      "actions": [
+        "prune_edges",
+        "grow_width",
+        "revert_width",
+        "prune_edges",
+        "grow_depth",
+        "revert_depth",
+        "stop_no_moves",
+        "prune_edges"
+      ],
+      "wall_s": 35.1
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "seed": 3,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": 0.9206345926159261,
+      "fid_ref": 0.9302167673223771,
+      "gap": 0.009582174706451063,
+      "accepted_growth": [],
+      "planted_hits": [
+        "L1U5"
+      ],
+      "median_mu_live": 0.9785787463188171,
+      "actions": [
+        "prune_edges",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 19.5
+    },
+    {
+      "dataset": "synthetic:comp3-noisy-8k",
+      "seed": 0,
+      "widths": [
+        12,
+        11
+      ],
+      "n_layers": 2,
+      "rounds": 12,
+      "fid": 0.8947542809782206,
+      "fid_ref": 0.9082832709348491,
+      "gap": 0.013528989956628434,
+      "accepted_growth": [
+        "accept_width",
+        "accept_width",
+        "accept_width",
+        "accept_width",
+        "accept_width",
+        "accept_width",
+        "accept_depth",
+        "accept_width"
+      ],
+      "planted_hits": [
+        "L1U0",
+        "L1U10",
+        "L1U5",
+        "L1U1",
+        "L1U4",
+        "L2U22",
+        "L2U23",
+        "L2U24",
+        "L2U25",
+        "L2U26",
+        "L2U30",
+        "L2U28"
+      ],
+      "median_mu_live": 0.9919775128364563,
+      "actions": [
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "grow_width",
+        "revert_width",
+        "grow_depth",
+        "accept_depth",
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 70.4
+    },
+    {
+      "dataset": "synthetic:comp3-noisy-8k",
+      "seed": 1,
+      "widths": [
+        12
+      ],
+      "n_layers": 1,
+      "rounds": 9,
+      "fid": 0.8921528856367358,
+      "fid_ref": 0.9082832709348491,
+      "gap": 0.01613038529811328,
+      "accepted_growth": [
+        "accept_width",
+        "accept_width",
+        "accept_width",
+        "accept_width",
+        "accept_width"
+      ],
+      "planted_hits": [
+        "L1U3",
+        "L1U2",
+        "L1U9",
+        "L1U11"
+      ],
+      "median_mu_live": 0.8436889946460724,
+      "actions": [
+        "prune_edges",
+        "merge",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "merge",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "stop_at_ceiling"
+      ],
+      "wall_s": 61.1
+    },
+    {
+      "dataset": "synthetic:comp3-noisy-8k",
+      "seed": 2,
+      "widths": [
+        10
+      ],
+      "n_layers": 1,
+      "rounds": 10,
+      "fid": 0.8911513380468753,
+      "fid_ref": 0.9082832709348491,
+      "gap": 0.017131932887973766,
+      "accepted_growth": [
+        "accept_width",
+        "accept_width",
+        "accept_width",
+        "accept_width",
+        "accept_width",
+        "accept_width",
+        "accept_width"
+      ],
+      "planted_hits": [
+        "L1U18",
+        "L1U9",
+        "L1U1",
+        "L1U11",
+        "L1U12",
+        "L1U2",
+        "L1U13",
+        "L1U15"
+      ],
+      "median_mu_live": 0.9889132082462311,
+      "actions": [
+        "prune_edges",
+        "remove_units",
+        "merge",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "merge",
+        "prune_edges",
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "merge",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "merge",
+        "merge",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "merge",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "stop_at_ceiling"
+      ],
+      "wall_s": 69.3
+    },
+    {
+      "dataset": "synthetic:comp3-noisy-8k",
+      "seed": 3,
+      "widths": [
+        10,
+        9
+      ],
+      "n_layers": 2,
+      "rounds": 9,
+      "fid": 0.9045777029278367,
+      "fid_ref": 0.9082832709348491,
+      "gap": 0.003705568007012383,
+      "accepted_growth": [
+        "accept_width",
+        "accept_depth",
+        "accept_width",
+        "accept_width"
+      ],
+      "planted_hits": [
+        "L1U3",
+        "L1U2",
+        "L1U6",
+        "L1U7",
+        "L1U0",
+        "L1U27",
+        "L2U18",
+        "L2U22",
+        "L2U24",
+        "L2U20",
+        "L2U21",
+        "L2U25"
+      ],
+      "median_mu_live": 0.9909933805465698,
+      "actions": [
+        "prune_edges",
+        "remove_units",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "prune_edges",
+        "grow_width",
+        "revert_width",
+        "grow_depth",
+        "accept_depth",
+        "prune_edges",
+        "remove_units",
+        "prune_edges",
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 83.7
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-2k",
+      "seed": 0,
+      "widths": [
+        6
+      ],
+      "n_layers": 1,
+      "rounds": 3,
+      "fid": 0.88881316080625,
+      "fid_ref": 0.8816257568839104,
+      "gap": -0.007187403922339519,
+      "accepted_growth": [
+        "accept_width"
+      ],
+      "planted_hits": [
+        "L1U3"
+      ],
+      "median_mu_live": 0.9789904952049255,
+      "actions": [
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "merge",
+        "prune_edges",
+        "remove_units",
+        "stop_at_ceiling",
+        "prune_edges",
+        "remove_units"
+      ],
+      "wall_s": 14.5
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-2k",
+      "seed": 1,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "rounds": 2,
+      "fid": 0.8729399634547665,
+      "fid_ref": 0.8816257568839104,
+      "gap": 0.008685793429143884,
+      "accepted_growth": [
+        "accept_width"
+      ],
+      "planted_hits": [
+        "L1U7",
+        "L1U0"
+      ],
+      "median_mu_live": 0.9766615033149719,
+      "actions": [
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "merge",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 11.2
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-2k",
+      "seed": 2,
+      "widths": [
+        8,
+        8
+      ],
+      "n_layers": 2,
+      "rounds": 6,
+      "fid": 0.8649751941023901,
+      "fid_ref": 0.8816257568839104,
+      "gap": 0.01665056278152033,
+      "accepted_growth": [
+        "accept_width",
+        "accept_depth"
+      ],
+      "planted_hits": [
+        "L1U5",
+        "L1U6",
+        "L2U20",
+        "L2U19",
+        "L2U21"
+      ],
+      "median_mu_live": 0.9931025505065918,
+      "actions": [
+        "prune_edges",
+        "grow_width",
+        "accept_width",
+        "prune_edges",
+        "remove_units",
+        "merge",
+        "prune_edges",
+        "grow_width",
+        "revert_width",
+        "grow_depth",
+        "accept_depth",
+        "prune_edges",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 19.2
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-2k",
+      "seed": 3,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "rounds": 1,
+      "fid": 0.8843068437442393,
+      "fid_ref": 0.8816257568839104,
+      "gap": -0.002681086860328863,
+      "accepted_growth": [],
+      "planted_hits": [
+        "L1U7",
+        "L1U2",
+        "L1U1",
+        "L1U6"
+      ],
+      "median_mu_live": 0.9766975343227386,
+      "actions": [
+        "prune_edges",
+        "stop_at_ceiling",
+        "prune_edges"
+      ],
+      "wall_s": 8.8
+    }
+  ],
+  "e21": {
+    "synthetic:add-noisy-8k": {
+      "one_layer": true,
+      "no_accepted_depth": true,
+      "noise_trivial": true,
+      "bar_met": true
+    },
+    "synthetic:noise-8k": {
+      "one_layer": true,
+      "no_accepted_depth": true,
+      "noise_trivial": true,
+      "bar_met": true
+    }
+  },
+  "e22": {
+    "synthetic:comp2-noisy-8k": {
+      "seeds_passing": 3,
+      "of": 4,
+      "bar_met": true
+    },
+    "synthetic:comp3-noisy-8k": {
+      "seeds_passing": 4,
+      "of": 4,
+      "bar_met": true
+    }
+  },
+  "e23_descriptive": [
+    {
+      "seed": 0,
+      "widths": [
+        6
+      ],
+      "fid": 0.88881316080625,
+      "gap": -0.007187403922339519,
+      "planted_hits": [
+        "L1U3"
+      ],
+      "rounds": 3
+    },
+    {
+      "seed": 1,
+      "widths": [
+        8
+      ],
+      "fid": 0.8729399634547665,
+      "gap": 0.008685793429143884,
+      "planted_hits": [
+        "L1U7",
+        "L1U0"
+      ],
+      "rounds": 2
+    },
+    {
+      "seed": 2,
+      "widths": [
+        8,
+        8
+      ],
+      "fid": 0.8649751941023901,
+      "gap": 0.01665056278152033,
+      "planted_hits": [
+        "L1U5",
+        "L1U6",
+        "L2U20",
+        "L2U19",
+        "L2U21"
+      ],
+      "rounds": 6
+    },
+    {
+      "seed": 3,
+      "widths": [
+        8
+      ],
+      "fid": 0.8843068437442393,
+      "gap": -0.002681086860328863,
+      "planted_hits": [
+        "L1U7",
+        "L1U2",
+        "L1U1",
+        "L1U6"
+      ],
+      "rounds": 1
+    }
+  ],
+  "e21_bar_met": true,
+  "e22_bar_met": true
+}

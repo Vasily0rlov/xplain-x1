@@ -1,0 +1,189 @@
+{
+  "experiment": "E0.1",
+  "bar": "median val fid >= Fid_ref - 2% rel",
+  "git_commit": "2f49a388bfe88f63a9c0f0f0da8cb45d2e2f7e00",
+  "runs": [
+    {
+      "dataset": "zoo",
+      "seed": 0,
+      "val": {
+        "fidelity": 0.9258335663502287,
+        "accuracy": 0.95
+      },
+      "test": {
+        "fidelity": 0.8688731419752459,
+        "accuracy": 0.9523809523809523
+      },
+      "epochs": 500,
+      "wall_s": 1.5
+    },
+    {
+      "dataset": "zoo",
+      "seed": 1,
+      "val": {
+        "fidelity": 0.9023247845797426,
+        "accuracy": 0.95
+      },
+      "test": {
+        "fidelity": 0.8315827634080366,
+        "accuracy": 0.9523809523809523
+      },
+      "epochs": 500,
+      "wall_s": 1.6
+    },
+    {
+      "dataset": "zoo",
+      "seed": 2,
+      "val": {
+        "fidelity": 0.9152025188625234,
+        "accuracy": 0.95
+      },
+      "test": {
+        "fidelity": 0.8696606914136211,
+        "accuracy": 0.9523809523809523
+      },
+      "epochs": 500,
+      "wall_s": 1.8
+    },
+    {
+      "dataset": "zoo",
+      "seed": 3,
+      "val": {
+        "fidelity": 0.9122112107791417,
+        "accuracy": 0.95
+      },
+      "test": {
+        "fidelity": 0.8309863647925508,
+        "accuracy": 0.9523809523809523
+      },
+      "epochs": 500,
+      "wall_s": 1.7
+    },
+    {
+      "dataset": "wine",
+      "seed": 0,
+      "val": {
+        "fidelity": 0.9625154014233156,
+        "accuracy": 0.9722222222222222
+      },
+      "test": {
+        "fidelity": 0.8603112126846356,
+        "accuracy": 0.9444444444444444
+      },
+      "epochs": 500,
+      "wall_s": 1.6
+    },
+    {
+      "dataset": "wine",
+      "seed": 1,
+      "val": {
+        "fidelity": 0.9651112889753549,
+        "accuracy": 0.9722222222222222
+      },
+      "test": {
+        "fidelity": 0.8975757578427279,
+        "accuracy": 0.9722222222222222
+      },
+      "epochs": 500,
+      "wall_s": 1.6
+    },
+    {
+      "dataset": "wine",
+      "seed": 2,
+      "val": {
+        "fidelity": 0.9512534189653908,
+        "accuracy": 0.9722222222222222
+      },
+      "test": {
+        "fidelity": 0.8889882198858049,
+        "accuracy": 0.9722222222222222
+      },
+      "epochs": 500,
+      "wall_s": 1.6
+    },
+    {
+      "dataset": "wine",
+      "seed": 3,
+      "val": {
+        "fidelity": 0.9731931604827347,
+        "accuracy": 0.9722222222222222
+      },
+      "test": {
+        "fidelity": 0.8780281564981169,
+        "accuracy": 0.9722222222222222
+      },
+      "epochs": 500,
+      "wall_s": 1.6
+    }
+  ],
+  "refs": {
+    "zoo": {
+      "dataset": "zoo",
+      "mlp": {
+        "val": {
+          "fidelity": 0.9130616013846671,
+          "accuracy": 0.95
+        },
+        "test": {
+          "fidelity": 0.8736395752210351,
+          "accuracy": 0.9523809523809523
+        }
+      },
+      "hgb": {
+        "val": {
+          "fidelity": 0.8034585571981301,
+          "accuracy": 0.9
+        },
+        "test": {
+          "fidelity": 0.6353643053046666,
+          "accuracy": 0.9047619047619048
+        }
+      },
+      "winner": "mlp",
+      "fid_ref_val": 0.9130616013846671,
+      "fid_ref_test": 0.8736395752210351,
+      "acc_ref_val": 0.95
+    },
+    "wine": {
+      "dataset": "wine",
+      "mlp": {
+        "val": {
+          "fidelity": 0.940196239367143,
+          "accuracy": 0.9722222222222222
+        },
+        "test": {
+          "fidelity": 0.903015364188799,
+          "accuracy": 0.9722222222222222
+        }
+      },
+      "hgb": {
+        "val": {
+          "fidelity": 0.7285556154081292,
+          "accuracy": 0.9444444444444444
+        },
+        "test": {
+          "fidelity": 0.9578859941588158,
+          "accuracy": 0.9722222222222222
+        }
+      },
+      "winner": "mlp",
+      "fid_ref_val": 0.940196239367143,
+      "fid_ref_test": 0.903015364188799,
+      "acc_ref_val": 0.9722222222222222
+    }
+  },
+  "verdict": {
+    "zoo": {
+      "median_val_fid": 0.9152,
+      "fid_ref_val": 0.9131,
+      "ref_winner": "mlp",
+      "bar_met": true
+    },
+    "wine": {
+      "median_val_fid": 0.9651,
+      "fid_ref_val": 0.9402,
+      "ref_winner": "mlp",
+      "bar_met": true
+    }
+  }
+}

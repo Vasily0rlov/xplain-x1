@@ -1,0 +1,16 @@
+[box] load 7.70 < 8.0 — proceeding
+synthetic:add-noisy-8k: groups singleton=True core_routes=2 vs core_units=3 (88.8s)
+synthetic:comp2-clean-8k: groups singleton=True core_routes=2 vs core_units=4 (151.3s)
+synthetic:comp2-noisy-8k: groups singleton=True core_routes=2 vs core_units=4 (89.0s)
+synthetic:comp3-noisy-8k: groups singleton=True core_routes=2 vs core_units=1 (251.9s)
+synthetic:noise-8k: groups singleton=True core_routes=0 vs core_units=0 (42.1s)
+E6.1 reduction: NOT MET
+/opt/xplain-x1/.venv/lib/python3.11/site-packages/numpy/lib/_function_base_impl.py:3023: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/opt/xplain-x1/.venv/lib/python3.11/site-packages/numpy/lib/_function_base_impl.py:3024: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+mushroom: groups 61/65 core_routes 0/16 cov 0.0 (64.4s)
+drybean: groups 6/16 core_routes 2/5 cov 1.0 (86.5s)
+bike: groups 12/14 core_routes 1/4 cov 0.969 (567.8s)
+adult: groups 26/27 core_routes 1/7 cov 0.014 (790.2s)
+E6.2: {'datasets_certifying': ['drybean', 'bike'], 'bike_hour_temp_route': False, 'bar_met': False}

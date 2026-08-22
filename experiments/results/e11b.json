@@ -1,0 +1,84 @@
+{
+  "experiment": "E1.1b",
+  "dataset": "synthetic:add6-noisy-8k",
+  "widths": [
+    12,
+    12
+  ],
+  "bar": "mu gain >= 0.1, fid within 2%",
+  "git_commit": "2f49a388bfe88f63a9c0f0f0da8cb45d2e2f7e00",
+  "runs": [
+    {
+      "seed": 0,
+      "pressures": true,
+      "fidelity": 0.9577199132383417,
+      "median_mu_live": 0.9885649085044861,
+      "median_ef_live": 3.0,
+      "n_live": 23
+    },
+    {
+      "seed": 0,
+      "pressures": false,
+      "fidelity": 0.9579747553689795,
+      "median_mu_live": 0.900264173746109,
+      "median_ef_live": 8.5,
+      "n_live": 24
+    },
+    {
+      "seed": 1,
+      "pressures": true,
+      "fidelity": 0.9628983342327709,
+      "median_mu_live": 0.9930442273616791,
+      "median_ef_live": 3.5,
+      "n_live": 20
+    },
+    {
+      "seed": 1,
+      "pressures": false,
+      "fidelity": 0.9588116031531118,
+      "median_mu_live": 0.887660562992096,
+      "median_ef_live": 8.5,
+      "n_live": 24
+    },
+    {
+      "seed": 2,
+      "pressures": true,
+      "fidelity": 0.9612787037329027,
+      "median_mu_live": 0.9852959326459614,
+      "median_ef_live": 4.0,
+      "n_live": 22
+    },
+    {
+      "seed": 2,
+      "pressures": false,
+      "fidelity": 0.960984169437725,
+      "median_mu_live": 0.9130968451499939,
+      "median_ef_live": 8.0,
+      "n_live": 24
+    },
+    {
+      "seed": 3,
+      "pressures": true,
+      "fidelity": 0.9555987850027358,
+      "median_mu_live": 0.9436589479446411,
+      "median_ef_live": 6.0,
+      "n_live": 23
+    },
+    {
+      "seed": 3,
+      "pressures": false,
+      "fidelity": 0.9597062373950882,
+      "median_mu_live": 0.9117941856384277,
+      "median_ef_live": 8.0,
+      "n_live": 23
+    }
+  ],
+  "verdict": {
+    "mu_on": 0.9869,
+    "mu_off": 0.906,
+    "mu_gain": 0.0809,
+    "fid_on": 0.9595,
+    "fid_off": 0.9593,
+    "bar_met": false
+  }
+}
