@@ -70,6 +70,10 @@ def build_certificate(cert: dict, ds: Dataset, splits: Splits, cfg: dict,
                                          for r in c.get("reasons", [])}),
         },
         "statistical_certification": {       # SR 11-7: outcomes analysis
+            "regime": ("below stability power floor (n < 2000): Pi/pi reported "
+                       "per concept; unit-level stability is not certifiable at "
+                       "this sample size (owner decision 2026-08-22, option A)"
+                       if ds.n < 2000 else "standard"),
             "restarts_R": cert["R"], "cpss_pairs_B": cert["B"],
             "tau_match": float(ccfg["tau_match"]),
             "pi_thr": float(ccfg["pi_thr"]), "mu_min": float(ccfg["mu_min"]),

@@ -147,3 +147,14 @@ failure:**
   (all-pairs union-find + support-overlap), consolidating collinear variants
   into one concept.  Larger redesign of M-#3.6; risks blurring genuinely
   distinct concepts.
+
+**Owner decision (2026-08-22): Option A.**  Wine recorded as "below stability
+power floor / collinear-multiplicitous" with full Π/π reporting; certificates
+now carry an explicit regime label at small n.  P5 runs unchanged; whether the
+failure mode is statistical power (should vanish at n ≥ 8k) or genuine
+multiplicity (would persist and motivate option C's coarser certification
+level) is decided by the P5 evidence.  E4.1 re-scored under this decision:
+artefacts complete ✓, fidelity ratio 1.017 > v4's 0.766 ✓, full legibility ✓,
+honest labelling ✓ — **MET (A)**; the recovery clause moves to the n ≥ 8k
+datasets.  Instrument-correction ratification: **"ratify with review later"** —
+owner will review the FINDINGS trail before the P5 freeze.
