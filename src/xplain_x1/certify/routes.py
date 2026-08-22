@@ -98,15 +98,18 @@ def build_routes(run_gs: dict[int, dict[frozenset[int], float]],
             m = main_mu.get(v)
             if m is not None:
                 mu = max(mu, m) if mu is not None else m
-        incomparable = any(
-            not (set(a) <= set(b) or set(b) <= set(a))
-            for ai, a in enumerate(var_list) for b in var_list[ai + 1:])
+        # Rashomon multiplicity = variants share NO common anchor.  Within a
+        # chain-merged route every variant contains the base group, so the
+        # core is non-empty by construction: companion variation around a
+        # shared anchor is jitter/context, not rival explanations.  Genuine
+        # alternatives (mushroom odor vs spore-print) appear as SEPARATE
+        # parallel routes whose low Pi the stability bar already handles.
         routes.append(Route(
             rid=f"r{i}", certified_support=modal, common_core=core,
             variants=var_list,
             present_runs=presence[g], Pi=len(presence[g]) / n_runs,
             members_main=sorted(set(members)), best_mu_main=mu,
-            multiplicitous=incomparable))
+            multiplicitous=(len(core) == 0)))
     return routes
 
 

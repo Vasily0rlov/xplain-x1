@@ -1,0 +1,257 @@
+{
+ "routes": [
+  {
+   "rid": "r0",
+   "support_groups": [
+    0
+   ],
+   "support_names": [
+    "G0{Area, Perimeter, MajorAxisLength, +3}"
+   ],
+   "common_core": [
+    0
+   ],
+   "common_core_names": [
+    "G0{Area, Perimeter, MajorAxisLength, +3}"
+   ],
+   "variants": [
+    [
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     4
+    ],
+    [
+     0,
+     1,
+     5
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     2,
+     4
+    ],
+    [
+     0,
+     2,
+     5
+    ],
+    [
+     0,
+     5
+    ]
+   ],
+   "Pi": 1.0,
+   "pi": 1.0,
+   "members_main": [
+    "L1U0",
+    "L1U1",
+    "L1U3",
+    "L1U6",
+    "L1U7"
+   ],
+   "mu": 0.9713094234466553,
+   "multiplicitous": true,
+   "delta": 0.9339468742398833,
+   "ci_low": 0.8970479655032698,
+   "ci_high": 0.9684211910243562,
+   "label": "PERIPHERY",
+   "reasons": [
+    "multiplicitous"
+   ]
+  },
+  {
+   "rid": "r1",
+   "support_groups": [
+    1,
+    2
+   ],
+   "support_names": [
+    "G1{MinorAxisLength, ShapeFactor1}",
+    "G2{AspectRation, Eccentricity, roundness, +2}"
+   ],
+   "common_core": [
+    1
+   ],
+   "common_core_names": [
+    "G1{MinorAxisLength, ShapeFactor1}"
+   ],
+   "variants": [
+    [
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     2,
+     3
+    ],
+    [
+     1,
+     2,
+     4
+    ],
+    [
+     1,
+     2,
+     5
+    ]
+   ],
+   "Pi": 0.875,
+   "pi": 0.925,
+   "members_main": [
+    "L1U2",
+    "L1U4",
+    "L1U5"
+   ],
+   "mu": 0.9813281297683716,
+   "multiplicitous": true,
+   "delta": 0.7686345921702273,
+   "ci_low": 0.7147259322509402,
+   "ci_high": 0.8261533986916354,
+   "label": "PERIPHERY",
+   "reasons": [
+    "multiplicitous"
+   ]
+  },
+  {
+   "rid": "r2",
+   "support_groups": [
+    2
+   ],
+   "support_names": [
+    "G2{AspectRation, Eccentricity, roundness, +2}"
+   ],
+   "common_core": [
+    2
+   ],
+   "common_core_names": [
+    "G2{AspectRation, Eccentricity, roundness, +2}"
+   ],
+   "variants": [
+    [
+     2
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "Pi": 0.375,
+   "pi": 0.55,
+   "members_main": [],
+   "mu": null,
+   "multiplicitous": false,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ]
+  },
+  {
+   "rid": "r3",
+   "support_groups": [
+    4
+   ],
+   "support_names": [
+    "Solidity"
+   ],
+   "common_core": [
+    4
+   ],
+   "common_core_names": [
+    "Solidity"
+   ],
+   "variants": [
+    [
+     4
+    ]
+   ],
+   "Pi": 0.125,
+   "pi": 0.1,
+   "members_main": [],
+   "mu": null,
+   "multiplicitous": false,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ]
+  },
+  {
+   "rid": "r4",
+   "support_groups": [
+    5
+   ],
+   "support_names": [
+    "ShapeFactor4"
+   ],
+   "common_core": [
+    5
+   ],
+   "common_core_names": [
+    "ShapeFactor4"
+   ],
+   "variants": [
+    [
+     5
+    ]
+   ],
+   "Pi": 0.125,
+   "pi": 0.15,
+   "members_main": [],
+   "mu": null,
+   "multiplicitous": false,
+   "label": "PERIPHERY",
+   "reasons": [
+    "absent_in_main"
+   ]
+  }
+ ],
+ "groups": [
+  [
+   "Area",
+   "Perimeter",
+   "MajorAxisLength",
+   "ConvexArea",
+   "EquivDiameter",
+   "ShapeFactor2"
+  ],
+  [
+   "MinorAxisLength",
+   "ShapeFactor1"
+  ],
+  [
+   "AspectRation",
+   "Eccentricity",
+   "roundness",
+   "Compactness",
+   "ShapeFactor3"
+  ],
+  [
+   "Extent"
+  ],
+  [
+   "Solidity"
+  ],
+  [
+   "ShapeFactor4"
+  ]
+ ]
+}
