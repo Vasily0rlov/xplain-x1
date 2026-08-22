@@ -64,10 +64,14 @@ def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
     mu_min = float(ccfg["mu_min"])
     pi_thr = float(ccfg["pi_thr"])
     workers = n_workers or int(cfg["compute"]["n_workers"])
+    # seed_base 0 = dev (restarts 0..R-1, halves 100+i); confirmatory uses 20
+    # (restarts 20..; halves 2100+i) — untouched by any dev run
+    seed_base = int(ccfg.get("seed_base", 0))
 
     # 1) restarts (dev seeds 0..R-1; run 0 anchors)
     restarts = Parallel(n_jobs=min(workers, R), backend="loky")(
-        delayed(_one_restart)(dataset, cfg, s, min(workers, R)) for s in range(R))
+        delayed(_one_restart)(dataset, cfg, seed_base + s, min(workers, R))
+        for s in range(R))
     main = restarts[0]
     concepts = cluster_concepts([r["sigs"] for r in restarts],
                                 [r["supports"] for r in restarts], tau)
@@ -94,7 +98,7 @@ def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
     halves = [h for pair in pairs for h in pair]
     fid_ref = main["result"]["fid_ref"]
     half_results = Parallel(n_jobs=min(workers, len(halves)), backend="loky")(
-        delayed(_one_half)(dataset, cfg, 100 + i, h, fid_ref,
+        delayed(_one_half)(dataset, cfg, seed_base * 100 + 100 + i, h, fid_ref,
                            min(workers, len(halves)))
         for i, h in enumerate(halves))
     pi = selection_frequencies(main["sigs"], half_results, tau, mu_min)
