@@ -251,3 +251,16 @@ earlier flag over-fired and blocked drybean's Π=1.00/π=1.00/Δ=0.93 size route
   stable across runs.  Adult's and mushroom's remaining failures are the honest
   cases (instability/alternatives), not instrument artefacts, on present
   evidence.
+
+### E6.3 — canonicalisation probe: NULL RESULT (and a principled reason)
+
+Deterministic per-feature preference (λ_pref 0.01 as input-edge L1, identical
+across runs) on drybean: **zero effect** — unit-level Π distribution
+(0.25–0.5) and fidelity (0.882) identical to control.  Carvings are fixed
+early by init/SGD trajectory; a static linear preference has no grip on the
+within-group rotations that distinguish equal-loss carvings.  Deeper: even a
+*working* canonicalisation would be epistemically suspect — if runs agree
+because a shared bias made them agree, Π measures the bias, not discovered
+stability.  The probe's null result strengthens the route-level design as the
+correct answer rather than a fallback.  Probe retired; mechanism stays in the
+codebase config-gated at 0 (default off).

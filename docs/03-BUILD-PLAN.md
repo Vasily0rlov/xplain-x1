@@ -168,10 +168,10 @@ canonicalisation probe (deterministic tie-break) on the unit layer.
 
 | id | step | deliverable | verify | outcome | status | ref |
 |---|---|---|---|---|---|---|
-| P6-1 | feature grouping: greedy clustering by train-data \|Spearman\| ≥ 0.8 (pinned; model-independent, auditable) | `certify/groups.py` | unit tests: synthetic iid → all singletons; drybean → size/shape families | collinearity groups discoverable and stable | ☐ | |
-| P6-2 | group-level concept identity: supports mapped to group-space; matching, Π, π, E[V] at route level (both levels reported) | `certify/` extensions | tests: group-level match of unit-level-divergent runs | certification where uniqueness lives | ☐ | |
-| P6-3 | two-layer DAG + certificate: route nodes (certified) + unit members as labelled equivalence classes | `extract/` updates | golden tests | the unified honest view (owner requirement) | ☐ | |
-| **E6.1** | **experiment (reduction):** full synthetic suite at route level. **Bar:** groups all singletons; results identical to e31 | `results/e61.json` | bar met | route-level provably conservative | ☐ | |
-| **E6.2** | **experiment (MVL at route level):** re-run standard-regime datasets. **Bar (pre-registered):** ≥ 3 of 4 standard datasets certify route-level CORE with coverage ≥ 0.5; bike's hour×temp-group route CORE | `results/e62.json` | bar met | 🏁 **M7b — certified real-data routes** | ☐ | |
-| **E6.3** | **experiment (canonicalisation probe):** deterministic per-feature preference decay on drybean. **Report:** unit-level Π change (no bar — probe) | `results/e63.json` | reported | tie-break potential quantified | ☐ | |
+| P6-1 | feature grouping: greedy clustering by train-data \|Spearman\| ≥ 0.8 (pinned; model-independent, auditable) | `certify/groups.py` | unit tests: synthetic iid → all singletons; drybean → size/shape families | collinearity groups discoverable and stable | ☑ | `impl/p5` |
+| P6-2 | group-level concept identity: supports mapped to group-space; matching, Π, π, E[V] at route level (both levels reported) | `certify/` extensions | tests: group-level match of unit-level-divergent runs | certification where uniqueness lives | ☑ | `impl/p5` |
+| P6-3 | two-layer DAG + certificate: route nodes (certified) + unit members as labelled equivalence classes | `extract/` updates | golden tests | the unified honest view (owner requirement) | ☑ | `impl/p5` |
+| **E6.1** | **experiment (reduction):** full synthetic suite at route level. **Bar:** groups all singletons; results identical to e31 | `results/e61.json` | bar met | route-level provably conservative | ☑* | `impl/p5` |
+| **E6.2** | **experiment (MVL at route level):** re-run standard-regime datasets. **Bar (pre-registered):** ≥ 3 of 4 standard datasets certify route-level CORE with coverage ≥ 0.5; bike's hour×temp-group route CORE | `results/e62.json` | bar met | 🏁 **M7b — certified real-data routes** | ◐ | `impl/p5` |
+| **E6.3** | **experiment (canonicalisation probe):** deterministic per-feature preference decay on drybean. **Report:** unit-level Π change (no bar — probe) | `results/e63.json` | reported | tie-break potential quantified | ☑ | `impl/p5` |
 | P6-X | **exit criteria:** E6.1 + E6.2 bars met; then P5-3/P5-4 (findings + freeze) resume | — | — | phase gate | ☐ | |

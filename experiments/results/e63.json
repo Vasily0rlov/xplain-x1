@@ -1,0 +1,114 @@
+{
+  "experiment": "E6.3",
+  "git_commit": "721fd65279e558ca05484a5f89b6de2c41834187",
+  "arms": [
+    {
+      "lambda_pref": 0.0,
+      "fid": 0.8817009842442187,
+      "fid_ref": 0.8960529601850736,
+      "n_core_units": 0,
+      "top_unit_Pis": [
+        0.5,
+        0.5,
+        0.375,
+        0.5,
+        0.375,
+        0.25
+      ],
+      "top_unit_pis": [
+        0.25,
+        0.575,
+        0.075,
+        0.25,
+        0.625,
+        0.125
+      ],
+      "top_unit_supports": [
+        [
+          "ConvexArea",
+          "AspectRation",
+          "Perimeter"
+        ],
+        [
+          "Area",
+          "ShapeFactor1",
+          "roundness"
+        ],
+        [
+          "Eccentricity",
+          "MajorAxisLength",
+          "ShapeFactor4"
+        ],
+        [
+          "MinorAxisLength",
+          "Compactness",
+          "ShapeFactor4"
+        ]
+      ],
+      "n_core_routes": 2,
+      "route_supports": [
+        [
+          "G0{Area, Perimeter, MajorAxisLength, +3}"
+        ],
+        [
+          "G1{MinorAxisLength, ShapeFactor1}",
+          "G2{AspectRation, Eccentricity, roundness, +2}"
+        ]
+      ]
+    },
+    {
+      "lambda_pref": 0.01,
+      "fid": 0.88176967877562,
+      "fid_ref": 0.8960529601850736,
+      "n_core_units": 0,
+      "top_unit_Pis": [
+        0.5,
+        0.5,
+        0.375,
+        0.5,
+        0.375,
+        0.25
+      ],
+      "top_unit_pis": [
+        0.25,
+        0.55,
+        0.075,
+        0.3,
+        0.625,
+        0.125
+      ],
+      "top_unit_supports": [
+        [
+          "ConvexArea",
+          "AspectRation",
+          "Perimeter"
+        ],
+        [
+          "Area",
+          "ShapeFactor1",
+          "roundness"
+        ],
+        [
+          "Eccentricity",
+          "MajorAxisLength",
+          "ShapeFactor4"
+        ],
+        [
+          "MinorAxisLength",
+          "Compactness",
+          "ShapeFactor4"
+        ]
+      ],
+      "n_core_routes": 2,
+      "route_supports": [
+        [
+          "G0{Area, Perimeter, MajorAxisLength, +3}"
+        ],
+        [
+          "G1{MinorAxisLength, ShapeFactor1}",
+          "G2{AspectRation, Eccentricity, roundness, +2}"
+        ]
+      ]
+    }
+  ]
+}
