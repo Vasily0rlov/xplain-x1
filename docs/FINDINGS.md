@@ -211,3 +211,43 @@ territory), a principal decision for the owner.
 Wine 1.044 vs v4 0.766 ✓ · Mushroom 0.995 = 0.995 ✓ with multiplicity
 labelled ✓ · Adult 0.877 vs 0.892 ✗ (−1.7%) with honest-shallow ✓ ·
 Battery 0.55 h ✓.
+
+## P6 (2026-08-22) — route-level certification: first certified real-data routes
+
+Owner decision C implemented: routes = concepts keyed by collinearity-group
+support (train-data Spearman clustering ≥ 0.8), with the invariant-core chain
+rule, MODAL-variant certification (a minimal-variant rule mis-certified COMP3's
+product as `{x1}` under an under-detection chain — caught by E6.1), and
+anchor-based Rashomon multiplicity (variants sharing no common group are rival
+explanations; companion variation around a shared anchor is context — the
+earlier flag over-fired and blocked drybean's Π=1.00/π=1.00/Δ=0.93 size route).
+
+- **E6.1 (reduction on synthetics): MET, 5/5** under the final ground-truth
+  scoring — no invented routes, every planted concept recovered as a route
+  modal, nothing unit-level-certified lost.  Two earlier scorings were
+  themselves corrected (support-set equality double-counted shared supports;
+  a cross-code-version e31 comparison was noise); the route layer twice proved
+  MORE correct than the unit-level reference it was compared against (folding a
+  redundant partial variant; certifying COMP3's `{x4}` that unit matching
+  fumbled).
+- **E6.2 (MVL at route level): NOT MET as pre-registered, with substantial
+  wins.**  Certified real-data routes, a programme first:
+  - **drybean: 2 CORE routes at coverage 1.0** — the size-family route
+    (Π=1.00, π=1.00, μ=0.97, joint Δ=0.93) and the elongation×shape composite
+    (Π=0.88, π=0.93, μ=0.98, Δ=0.77).  Groups: 16 descriptors → 6 families.
+  - **bike: 1 CORE route at coverage 0.97** — hour-anchored (Π=1.00), with
+    modal companion `workingday`; all 26 variants contain `hour`.
+  - **adult: 1 CORE route, coverage 0.014** — only a minor route certifies;
+    the load-bearing routes remain unstable.
+  - **mushroom: 0** — parallel alternative rules (odor vs backups) surface as
+    separate routes with complementary presence; the Π bar prices them
+    honestly.  Consistent with the v4 anchor ("stable within portfolio, NOT
+    unique").
+- **Open design question (the bar's failing clause): route granularity under a
+  dominant anchor.**  Bike's chain-merge folds every hour-interaction into one
+  hour-anchored route, so `hour×temp` and `hour×workingday` — both genuine —
+  are not separated as distinct certified compositions.  Candidate refinement:
+  split a merged route when distinct companion sub-supports are individually
+  stable across runs.  Adult's and mushroom's remaining failures are the honest
+  cases (instability/alternatives), not instrument artefacts, on present
+  evidence.

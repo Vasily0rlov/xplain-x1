@@ -82,17 +82,24 @@ def main() -> int:
     # reduction bar: singleton groups AND route-level CORE support-SETS equal
     # e31's distinct unit-level CORE supports (unit counts double-count concepts
     # sharing a support — the route layer deduplicates them, correctly)
-    # COVERAGE property, WITHIN-RUN (comparing against an e31 snapshot from an
-    # older code state is cross-version noise): (a) singleton groups; (b) every
-    # route modal is a same-run unit-level CORE support; (c) every same-run
-    # unit-level CORE support appears among certified routes' variants.
+    # GROUND-TRUTH scoring (synthetics have it; earlier bars were both too
+    # strict and too loose — route level can legitimately EXCEED unit-level
+    # certification when unit attribution-matching fumbles jitter):
+    # (a) singleton groups; (b) no invented routes (modals within ground-truth
+    # supports); (c) planted supports recovered as modals; (d) nothing the unit
+    # level certified is lost (unit cores within route coverage).
     def reduction_ok(r: dict) -> bool:
-        ref = {tuple(s) for s in r["core_unit_supports"]}
+        ds = get_dataset(r["dataset"])
+        gt = {tuple(sorted(c["support"]))
+              for c in ds.ground_truth["concepts"]}
+        planted = {tuple(sorted(c["support"]))
+                   for c in ds.ground_truth["concepts"] if c.get("planted")}
+        unit_ref = {tuple(s) for s in r["core_unit_supports"]}
         modals = {tuple(sorted(g)) for g in r["core_route_group_ids"]}
         covered = {tuple(sorted(v)) for vs in r["core_route_variants"]
                    for v in vs}
-        return (r["groups_all_singleton"] and modals <= ref
-                and ref <= covered | modals)
+        return (r["groups_all_singleton"] and modals <= gt
+                and planted <= modals and unit_ref <= covered | modals)
 
     e61_ok = all(reduction_ok(r) for r in out["synthetic"])
     out["e61_bar_met"] = bool(e61_ok)
