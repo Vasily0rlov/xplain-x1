@@ -101,3 +101,72 @@ improves without degrading (b)–(e).
 
 *New approach-level options go here as further entries (A2, A3, …) with the same structure:
 option → interpretability summary → caveats → revisit triggers → assessment protocol.*
+
+## A2. Explicit abstraction levels (is-a hierarchy above composition)
+
+**Status:** not adopted · candidate for a future iteration · recorded 2026-08-22
+(owner request, following the depth-vs-abstraction terminology discussion).
+
+### The option
+
+Give the representation an explicit ABSTRACTION axis, orthogonal to depth
+(which is strictly compositional order in the current method):
+
+- **Recursive grouping** — groups of groups: the P6 collinearity groups
+  (feature → determinable, e.g. Area/Perimeter/… → SIZE) applied again at
+  group level, yielding a ladder of determinables (SIZE + SHAPE → MORPHOLOGY).
+- **Route taxonomies** — routes clustered by shared anchors/sub-supports into
+  more abstract route families, certified at each level with the same
+  machinery (Π/π/E[V] per level).
+- **Typed DAG edges** — distinguish `comprised-of` (composition, today's only
+  edge meaning) from `is-a` (abstraction), so a unit like `milk ∧ hair` can be
+  linked upward as an instance of class-predicate "mammal" where the data
+  warrants it.
+
+### Where abstraction already lives in the current method (implicit)
+
+1. **Type vs token** — a concept/route is the class; the delivered model's
+   unit is the instance.  All certification statistics are type-level claims
+   validated over token instantiations.
+2. **Feature → group (P6)** — one explicit determinable step, adopted because
+   certification demanded it: uniqueness lives at the more abstract level.
+3. **Abstraction through depth on predicate data** — a learned conjunction of
+   Boolean predicates IS a class predicate (FCA-style formal concept), so
+   composition and abstraction coincide there; on continuous data they diverge
+   and depth stays purely compositional.
+
+### Caveats
+
+1. **Only certify levels the data forces.**  P6's lesson generalises: an
+   abstraction level earns its place when stability/uniqueness exists there
+   and not below.  Imposing a taxonomy a priori would be representational
+   ideology — the opposite of the programme's certify-what-is-stable stance.
+2. **Level discovery needs its own stability validation** (do the same
+   higher groups re-emerge across runs/resamples?) and its own FDR universe
+   per level; bounds must stay non-vacuous as universes shrink.
+3. **Expert semantics risk**: auto-named abstract nodes (G0{Area, …}) are
+   less nameable than their members; naming remains the expert's soft-target
+   review.
+4. **DAG complexity**: two edge types and multi-level nodes raise the
+   reading burden; the two-layer view (routes + members) should stay the
+   default, with deeper levels expand-on-demand.
+
+### Revisit triggers
+
+- A dataset with KNOWN taxonomy structure certifying flat routes that
+  visibly share structure — the designed probe is **20 Newsgroups**
+  (two-level label taxonomy; does the DAG recover comp.*/rec.* as
+  intermediate abstractions?), already surveyed in `data/DATASETS.md`.
+- P6 route tables on wider datasets showing many routes with common
+  anchors/sub-supports (the raw material of a route taxonomy).
+- Expert review reporting that group-level nodes remain too concrete to
+  audit at domain level.
+
+### Assessment protocol (when picked up)
+
+Extend the E6 battery with a taxonomy-bearing dataset (20 Newsgroups or a
+synthetic with planted 2-level structure): (a) does recursive grouping
+recover the planted/known hierarchy (levels stable across runs)?  (b) do
+per-level E[V] bounds stay non-vacuous?  (c) does the expert find the
+multi-level DAG more navigable (soft target)?  Adopt per level only where
+(a)+(b) hold.
