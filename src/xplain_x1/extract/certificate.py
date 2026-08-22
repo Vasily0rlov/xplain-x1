@@ -97,6 +97,18 @@ def build_certificate(cert: dict, ds: Dataset, splits: Splits, cfg: dict,
                      "(the level stable across retrainings); unit members are "
                      "one carving from an explicit equivalence class."),
         },
+        "function_decomposition": {          # P7 Layer F: the certified claims
+            "note": ("Purified weighted-fANOVA components of the learned "
+                     "function under the DECLARED empirical training measure "
+                     "(unique given the measure; carving-invariant).  Shares "
+                     "are out-of-sample covariances on validation."),
+            "components": cert.get("components", []),
+            "n_core": cert.get("n_core_components", 0),
+            "group_shares": cert.get("group_shares", {}),
+            "ev_bound": cert.get("ev_bound_components"),
+            "recon_r2": cert.get("fanova_r2"),
+        },
+        "portfolio_reliance": cert.get("reliance", []),   # P7 Layer R
         "non_claims": [
             "CORE concepts are stable, real structures - not proven causal "
             "mechanisms of the world (M-C7).",
@@ -148,6 +160,25 @@ def render_markdown(cert_doc: dict) -> str:
             f"{c['form']}({', '.join(c['support_names'])}) | {c['mu']:.2f} | "
             f"{c['Pi']:.2f} | {c['pi']:.2f} | {c['delta']:.4f} "
             f"[{c['ci_low']:.4f}, {c['ci_high']:.4f}] | {c['coverage_share']} |")
+    fd = cert_doc.get("function_decomposition", {})
+    if fd.get("components"):
+        lines += ["", "## Certified function components (Layer F — unique under the declared measure)",
+                  f"reconstruction R² {fd.get('recon_r2')} · E[V] <= "
+                  f"{fd.get('ev_bound'):.3g}" if fd.get("ev_bound") is not None else "",
+                  "| component | groups | share | Pi | pi | label |",
+                  "|---|---|---|---|---|---|"]
+        for c in sorted(fd["components"], key=lambda c: -c["share_main"]):
+            lines.append(
+                f"| {' × '.join(c['support_names'])} | "
+                f"{', '.join(c['group_names'])} | {c['share_main']:.3f} | "
+                f"{c['Pi']:.2f} | {c['pi']:.2f} | {c['label']}"
+                + (f" ({', '.join(c['reasons'])})" if c["reasons"] else "") + " |")
+    rel = cert_doc.get("portfolio_reliance", [])
+    if rel:
+        lines += ["", "## Portfolio reliance (Layer R — every restart relies on)",
+                  "| group | min reliance | max |", "|---|---|---|"]
+        for r in sorted(rel, key=lambda r: -r["min_reliance"])[:10]:
+            lines.append(f"| {r['group']} | {r['min_reliance']} | {r['max_reliance']} |")
     rts = cert_doc.get("routes", {})
     if rts.get("rows"):
         lines += ["", "## Certified routes (group level — stable across retrainings)",

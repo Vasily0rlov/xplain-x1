@@ -175,3 +175,21 @@ canonicalisation probe (deterministic tie-break) on the unit layer.
 | **E6.2** | **experiment (MVL at route level):** re-run standard-regime datasets. **Bar (pre-registered):** ≥ 3 of 4 standard datasets certify route-level CORE with coverage ≥ 0.5; bike's hour×temp-group route CORE | `results/e62.json` | bar met | 🏁 **M7b — certified real-data routes** | ◐ | `impl/p5` |
 | **E6.3** | **experiment (canonicalisation probe):** deterministic per-feature preference decay on drybean. **Report:** unit-level Π change (no bar — probe) | `results/e63.json` | reported | tie-break potential quantified | ☑ | `impl/p5` |
 | P6-X | **exit criteria:** E6.1 + E6.2 bars met; then P5-3/P5-4 (findings + freeze) resume | — | — | phase gate | ☐ | |
+
+## P7 — Function-level certification: fANOVA components (owner decision 2026-08-22, post-research)
+
+**Goal:** the certified claims move to the unique, carving-invariant level — purified
+weighted-fANOVA components of the learned function under the declared empirical measure
+(Layer F), with MCR-style portfolio reliance rows (Layer R).  Kept deliberately simple:
+bin → backfit → mass-moving purification, one code path for all data types; shares scored
+out-of-sample.  Companion-split shelved (superseded at the right level).
+
+| id | step | deliverable | verify | outcome | status | ref |
+|---|---|---|---|---|---|---|
+| P7-1 | `certify/fanova.py`: binning, backfit, exact purification, OOS shares, triple screen (residualised) | module + 5 tests | zero-mean-slice property; comp2/comp3/noise ground-truth tests | the unique certified object is computable | ☑ | `impl/p5` |
+| P7-2 | integration: components per restart + CPSS half; Π_F/π_F/E[V]; group-aggregated shares; Layer R reliance | certify() extensions | battery | components certified with the same machinery | ☑ | `impl/p5` |
+| P7-3 | certificate: Layer F table (declared measure stated) + Layer R rows | render | golden run | regulator-facing function-level claims | ☑ | `impl/p5` |
+| **E7.1** | **experiment (synthetic exactness):** planted components CORE (Π_F ≥ 0.75); NOISE certifies zero (untradeable); ADD order-1 only | `results/e7x.json` | bar met | function-level honesty + recovery proven | ◐ | |
+| **E7.2** | **experiment (real data):** ≥ 3/4 standard datasets certify CORE components with share-sum ≥ 0.5; bike certifies hour×temp-family component | `results/e7x.json` | bar met | 🏁 **M7c — certified function structure on real data** | ◐ | |
+| **E7.3** | route/component concordance | reported | descriptive | two layers cross-validated | ◐ | |
+| P7-X | **exit criteria:** E7.1 + E7.2 bars met → freeze + confirmatory | — | — | phase gate | ☐ | |

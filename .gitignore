@@ -7,3 +7,4 @@ runs/
 experiments/results/*.tmp
 .pytest_cache/
 uv.lock
+papers/

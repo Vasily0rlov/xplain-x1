@@ -4,6 +4,7 @@ frame; the deliverable model is run 0's model.
 """
 from __future__ import annotations
 
+import numpy as np
 from joblib import Parallel, delayed
 
 from ..data.registry import get_dataset
@@ -23,8 +24,11 @@ def _one_restart(dataset: str, cfg: dict, seed: int, n_workers: int) -> dict:
     sigs = unit_signatures(r["model"], ds, r["splits"])
     units_by_id = {u["uid"]: u for u in r["final_audit"]["units"]}
     supports = {s.uid: input_support(s.uid, units_by_id) for s in sigs}
+    from .fanova import component_shares
+    fdec = component_shares(r["model"], ds, r["splits"])
     return {"seed": seed, "result": r, "sigs": sigs, "supports": supports,
-            "mu": {u["uid"]: u["mu"] for u in r["final_audit"]["units"]}}
+            "mu": {u["uid"]: u["mu"] for u in r["final_audit"]["units"]},
+            "components": fdec["components"], "fanova_r2": fdec["recon_r2"]}
 
 
 def _one_half(dataset: str, cfg: dict, seed: int, half, fid_ref: float,
@@ -34,9 +38,12 @@ def _one_half(dataset: str, cfg: dict, seed: int, half, fid_ref: float,
     ds = get_dataset(dataset)
     sigs = unit_signatures(r["model"], ds, r["splits"])
     units_by_id = {u["uid"]: u for u in r["final_audit"]["units"]}
+    from .fanova import component_shares
+    fdec = component_shares(r["model"], ds, r["splits"])
     return {"sigs": sigs,
             "mu": {u["uid"]: u["mu"] for u in r["final_audit"]["units"]},
-            "supports": {s.uid: input_support(s.uid, units_by_id) for s in sigs}}
+            "supports": {s.uid: input_support(s.uid, units_by_id) for s in sigs},
+            "components": fdec["components"]}
 
 
 def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
@@ -201,9 +208,87 @@ def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
             row.update({"label": "PERIPHERY", "reasons": ["absent_in_main"]})
         route_rows.append(row)
 
+    # ---- Layer F (P7): certified fANOVA components of the learned function --
+    from math import comb as _comb
+
+    from .fanova import V_MIN
+    all_supports: set[tuple] = set()
+    for rr in restarts:
+        all_supports |= set(rr["components"])
+    comp_rows = []
+    half_comp = [hr.get("components", {}) for hr in half_results]
+    for u in sorted(all_supports, key=lambda s: (len(s), s)):
+        share_main = restarts[0]["components"].get(u, 0.0)
+        Pi_F = sum(1 for rr in restarts if u in rr["components"]) / R
+        pi_F = (sum(1 for hc in half_comp if u in hc) / max(1, len(half_comp)))
+        gs = sorted({int(gi[f]) for f in u})
+        reasons = []
+        if share_main < V_MIN:
+            reasons.append("absent_in_main")
+        if Pi_F < float(ccfg["Pi_min"]):
+            reasons.append("unstable")
+        if pi_F < pi_thr:
+            reasons.append("infrequent")
+        comp_rows.append({
+            "support": list(u),
+            "support_names": [ds.feature_names[f] for f in u],
+            "group_support": gs,
+            "group_names": [gnames[g] for g in gs],
+            "share_main": share_main,
+            "shares_all": [rr["components"].get(u, 0.0) for rr in restarts],
+            "Pi": round(Pi_F, 3), "pi": round(pi_F, 3),
+            "label": "CORE" if not reasons else "PERIPHERY",
+            "reasons": reasons})
+    q_comp = float(np.mean([len(hc) for hc in half_comp])) if half_comp else 0.0
+    p_comp = sum(_comb(ds.d, a) for a in range(1, min(3, ds.d) + 1))
+    ev_comp = ev_bound(q_comp, p_comp, pi_thr)
+    # group-aggregated certified shares (collinearity-robust claims)
+    group_shares: dict[tuple, float] = {}
+    for row in comp_rows:
+        if row["label"] == "CORE":
+            key = tuple(row["group_support"])
+            group_shares[key] = group_shares.get(key, 0.0) + row["share_main"]
+
+    # ---- Layer R: portfolio range statements (MCR-style group reliance) ----
+    # "every restart relies on group G by >= min_reliance": fidelity drop when
+    # the group's features are jointly permuted on val, minimised over restarts.
+    from ..train.settle import evaluate as _eval
+    from ..train.settle import null_statistics as _nulls
+    reliance_rows = []
+    rng_r = np.random.default_rng(int(cfg["data"]["split_seed"]))
+    perm = rng_r.permutation(len(splits.val))
+    null_stats_r = _nulls(ds, splits)
+    for g_id, group in enumerate(groups):
+        drops = []
+        X_orig = ds.X
+        Xp = ds.X.copy()
+        for f in group:
+            Xp[splits.val, f] = Xp[splits.val[perm], f]
+        for rr in restarts:
+            mdl = rr["result"]["model"]
+            base = rr["result"]["final_audit"]["fidelity"]
+            try:
+                ds.X = Xp
+                fid_p = _eval(mdl, ds, splits, splits.val,
+                              null_stats_r)["fidelity"]
+            finally:
+                ds.X = X_orig
+            drops.append(base - fid_p)
+        reliance_rows.append({
+            "group": gnames[g_id],
+            "min_reliance": round(float(min(drops)), 4),
+            "max_reliance": round(float(max(drops)), 4)})
+
     return {
         "dataset": dataset, "R": R, "B": B,
         "concepts": concept_rows,
+        "components": comp_rows,
+        "n_core_components": sum(1 for c in comp_rows if c["label"] == "CORE"),
+        "group_shares": {",".join(map(str, k)): round(v, 4)
+                         for k, v in group_shares.items()},
+        "ev_bound_components": ev_comp, "p_components_universe": p_comp,
+        "fanova_r2": restarts[0].get("fanova_r2"),
+        "reliance": reliance_rows,
         "routes": route_rows,
         "n_core_routes": sum(1 for r in route_rows if r["label"] == "CORE"),
         "groups": [[ds.feature_names[j] for j in g] for g in groups],
