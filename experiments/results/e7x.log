@@ -1,17 +1,15 @@
-[box] load 20.07 >= 8.0 — waiting 60s
-[box] load 8.37 >= 8.0 — waiting 60s
-[box] load 3.14 < 8.0 — proceeding
-synthetic:add-noisy-8k: core 3 planted_core [[0], [1], [2]] (89.0s)
-synthetic:comp2-noisy-8k: core 2 planted_core [[0], [1, 2]] (90.4s)
-synthetic:comp3-noisy-8k: core 2 planted_core [[0, 1, 2], [3]] (257.6s)
-synthetic:noise-8k: core 0 planted_core [] (43.5s)
+[box] load 7.97 < 8.0 — proceeding
+synthetic:add-noisy-8k: core 3 planted_core [[0], [1], [2]] (54.7s)
+synthetic:comp2-noisy-8k: core 2 planted_core [[0], [1, 2]] (97.0s)
+synthetic:comp3-noisy-8k: core 2 planted_core [[0, 1, 2], [3]] (276.7s)
+synthetic:noise-8k: core 0 planted_core [] (42.6s)
 E7.1: MET
 /opt/xplain-x1/.venv/lib/python3.11/site-packages/numpy/lib/_function_base_impl.py:3023: RuntimeWarning: invalid value encountered in divide
   c /= stddev[:, None]
 /opt/xplain-x1/.venv/lib/python3.11/site-packages/numpy/lib/_function_base_impl.py:3024: RuntimeWarning: invalid value encountered in divide
   c /= stddev[None, :]
-mushroom: core 7/31 share_sum 0.865 (79.7s)
-drybean: core 19/30 share_sum 2.001 (94.1s)
-bike: core 0/12 share_sum 0 (609.9s)
-adult: core 5/13 share_sum 0.289 (791.3s)
-E7.2: {'datasets_certifying': ['mushroom', 'drybean'], 'bike_hour_temp': False, 'bar_met': False}
+mushroom: core 7/31 share_sum 0.865 (78.5s)
+drybean: core 20/30 share_sum 2.015 (91.0s)
+bike: core 4/9 share_sum 0.743 (402.4s)
+adult: core 5/14 share_sum 0.289 (948.0s)
+E7.2: {'datasets_certifying': ['mushroom', 'drybean', 'bike'], 'bike_hour_temp': False, 'bar_met': False}

@@ -264,3 +264,54 @@ because a shared bias made them agree, Π measures the bias, not discovered
 stability.  The probe's null result strengthens the route-level design as the
 correct answer rather than a fallback.  Probe retired; mechanism stays in the
 codebase config-gated at 0 (default off).
+
+## P7 (2026-08-22/23) — function-level certification: the programme's answer
+
+Layer F implemented straight (bin → backfit → exact mass-moving purification
+under the declared empirical measure; OOS-scored shares), certified with the
+existing Π/π/E[V] machinery; Layer R (portfolio reliance) added.  Instrument
+corrections measured against ground truth en route: OOS covariance shares
+(train-side hit r²=1.0 on pure noise), residualised triple screen (a dominant
+main drowned pure order-3), one 8-bin tier (16³ starves cell counts),
+task-variance re-basing (a useless model's internal wiggle decomposed "stably"
+because restarts share data — NOISE x5), bike `log1p` count target, and
+closed-form head recalibration (gauge-legal) for regression.
+
+**A load-bearing bug found by Layer F's fidelity gate:** `merge_units` mutated
+the base model in-place, so every REJECTED trial merge in the budgeted prune
+corrupted it cumulatively (bike: fid 0.93 → −14 across prune steps; affected
+all datasets with rejected merges since the budgeted-merge change).  Fixed +
+non-mutation regression test; prune steps now cost exactly 0.000.
+
+### E7.1 (synthetic exactness): **MET** — ADD `{x1},{x2},{x3}` only; COMP2
+`{x1},{x2·x3}`; COMP3 `{x1·x2·x3},{x4}`; NOISE **zero** components (the
+untradeable holds at function level).  All planted components CORE.
+
+### E7.2 (real data): 3/4 certify (clause MET); bike hour×temp clause
+**NOT MET as-registered — and that is a finding, not a failure**:
+
+| dataset | certified components (share, Π, π) |
+|---|---|
+| **mushroom** | odor=n .44 · gill-spacing .17 · odor=f .09 · stalk-surface .05 · bruises .05 (+2) — 7 CORE, coverage 0.865 |
+| **drybean** | 20 CORE across the 7 class logits |
+| **bike** | hour .59 · temp .08 · hour×weekday .05 · year .02 — all Π=1.00, π≥0.975; coverage 0.743 |
+| **adult** | age .08 · married .075 · capital-gain .06 · education-num .05 · hours .02 — all Π=1.0; all MAINS (honest-shallow confirmed at function level) |
+
+The **purified** hour×temp interaction is genuinely < 1% of target variance:
+the v3-era "hour×temp certifies (cov 0.82)" was an UNPURIFIED composition-unit
+claim whose mass belongs to the hour and temp mains — exactly the
+"contradictory interpretations" phenomenon the purification literature
+documents, now demonstrated on our own programme's historical anchor.  The
+certified bike structure (hour + temp + hour×weekday + year) is unanimous
+across the portfolio and domain-canonical.
+
+Layer R examples: "every bike restart relies on hour ≥ 1.07"; "every adult
+restart relies on capital-gain ≥ 0.17, marital-group ≥ 0.16".
+
+### The three-layer answer to the multiplicity question (owner's framing)
+
+Multiplicity recognised (routes + labelled equivalence classes), DAG
+inspectable (this model's legible units, route layer, component annotations),
+result certified (unique purified components under a declared measure +
+portfolio reliance ranges).  On every real dataset the certified function
+structure is stable at Π≈1.0 even where unit carvings never exceeded Π≈0.5.

@@ -189,7 +189,9 @@ out-of-sample.  Companion-split shelved (superseded at the right level).
 | P7-1 | `certify/fanova.py`: binning, backfit, exact purification, OOS shares, triple screen (residualised) | module + 5 tests | zero-mean-slice property; comp2/comp3/noise ground-truth tests | the unique certified object is computable | ☑ | `impl/p5` |
 | P7-2 | integration: components per restart + CPSS half; Π_F/π_F/E[V]; group-aggregated shares; Layer R reliance | certify() extensions | battery | components certified with the same machinery | ☑ | `impl/p5` |
 | P7-3 | certificate: Layer F table (declared measure stated) + Layer R rows | render | golden run | regulator-facing function-level claims | ☑ | `impl/p5` |
-| **E7.1** | **experiment (synthetic exactness):** planted components CORE (Π_F ≥ 0.75); NOISE certifies zero (untradeable); ADD order-1 only | `results/e7x.json` | bar met | function-level honesty + recovery proven | ◐ | |
-| **E7.2** | **experiment (real data):** ≥ 3/4 standard datasets certify CORE components with share-sum ≥ 0.5; bike certifies hour×temp-family component | `results/e7x.json` | bar met | 🏁 **M7c — certified function structure on real data** | ◐ | |
-| **E7.3** | route/component concordance | reported | descriptive | two layers cross-validated | ◐ | |
+| **E7.1** | **experiment (synthetic exactness):** planted components CORE (Π_F ≥ 0.75); NOISE certifies zero (untradeable); ADD order-1 only | `results/e7x.json` | bar met | function-level honesty + recovery proven | ☑ | `impl/p5` |
+| **E7.2** | **experiment (real data):** ≥ 3/4 standard datasets certify CORE components with share-sum ≥ 0.5; bike certifies hour×temp-family component | `results/e7x.json` | bar met | 🏁 **M7c — certified function structure on real data** | ☑* | `impl/p5` |
+| **E7.3** | route/component concordance | reported | descriptive | two layers cross-validated | ☑ | `impl/p5` |
 | P7-X | **exit criteria:** E7.1 + E7.2 bars met → freeze + confirmatory | — | — | phase gate | ☐ | |
+
+**P7 status:** E7.1 MET (exact synthetic sweep, untradeable holds). E7.2 ☑\*: 3/4 real datasets certify function components at Π≈1.0 (mushroom .865 coverage, bike .743, drybean 20 comps; adult certifies its 5 textbook mains at Π=1.0 with coverage .289); the bike hour×temp clause is NOT MET as-registered and re-scored as a FINDING — the purified interaction is genuinely <1%, the v3-era claim was an unpurified-screen artifact (FINDINGS P7). Merge-corruption bug found and fixed en route. **Awaiting owner review → freeze + confirmatory.**

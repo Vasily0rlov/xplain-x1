@@ -1,6 +1,6 @@
 {
   "experiment": "E7",
-  "git_commit": "29c679fad7ade6ccd63c7c87aacde45b8942db5b",
+  "git_commit": "77309fed70bdf6a685e4e5df7d8c1a9492c1d690",
   "synthetic": [
     {
       "dataset": "synthetic:add-noisy-8k",
@@ -11,7 +11,7 @@
           "names": [
             "x1"
           ],
-          "share": 0.3828,
+          "share": 0.3829,
           "Pi": 1.0,
           "pi": 1.0
         },
@@ -19,7 +19,7 @@
           "names": [
             "x2"
           ],
-          "share": 0.3096,
+          "share": 0.3097,
           "Pi": 1.0,
           "pi": 1.0
         },
@@ -32,10 +32,10 @@
           "pi": 1.0
         }
       ],
-      "core_share_sum": 0.879,
+      "core_share_sum": 0.88,
       "group_shares": {
-        "0": 0.3828,
-        "1": 0.3096,
+        "0": 0.3829,
+        "1": 0.3097,
         "2": 0.1871
       },
       "ev_bound_components": 0.1285714285714286,
@@ -50,22 +50,22 @@
       ],
       "reliance_top": [
         {
+          "group": "x1",
+          "min_reliance": 0.7411,
+          "max_reliance": 0.7519
+        },
+        {
           "group": "x2",
-          "min_reliance": 0.6622,
-          "max_reliance": 0.6841
+          "min_reliance": 0.6636,
+          "max_reliance": 0.6835
         },
         {
           "group": "x3",
-          "min_reliance": 0.3853,
-          "max_reliance": 0.4051
-        },
-        {
-          "group": "x1",
-          "min_reliance": 0.1961,
-          "max_reliance": 0.8773
+          "min_reliance": 0.3961,
+          "max_reliance": 0.4058
         }
       ],
-      "wall_s": 89.0,
+      "wall_s": 54.7,
       "planted": [
         [
           0
@@ -100,7 +100,7 @@
             "x2",
             "x3"
           ],
-          "share": 0.4964,
+          "share": 0.4965,
           "Pi": 1.0,
           "pi": 1.0
         },
@@ -108,17 +108,17 @@
           "names": [
             "x1"
           ],
-          "share": 0.3132,
+          "share": 0.3133,
           "Pi": 1.0,
           "pi": 1.0
         }
       ],
       "core_share_sum": 0.81,
       "group_shares": {
-        "0": 0.3132,
-        "1,2": 0.4964
+        "0": 0.3133,
+        "1,2": 0.4965
       },
-      "ev_bound_components": 0.060035714285714296,
+      "ev_bound_components": 0.057142857142857155,
       "fanova_r2": 0.8003,
       "core_routes": [
         [
@@ -132,21 +132,21 @@
       "reliance_top": [
         {
           "group": "x2",
-          "min_reliance": 1.1972,
-          "max_reliance": 1.3113
+          "min_reliance": 1.1918,
+          "max_reliance": 1.3086
         },
         {
           "group": "x3",
-          "min_reliance": 1.1577,
-          "max_reliance": 1.2235
+          "min_reliance": 1.1507,
+          "max_reliance": 1.2187
         },
         {
           "group": "x1",
-          "min_reliance": 0.5655,
-          "max_reliance": 0.6416
+          "min_reliance": 0.5633,
+          "max_reliance": 0.6361
         }
       ],
-      "wall_s": 90.4,
+      "wall_s": 97.0,
       "planted": [
         [
           0
@@ -176,9 +176,9 @@
           "names": [
             "x4"
           ],
-          "share": 0.4224,
-          "Pi": 0.875,
-          "pi": 0.925
+          "share": 0.4225,
+          "Pi": 1.0,
+          "pi": 1.0
         },
         {
           "names": [
@@ -186,17 +186,17 @@
             "x2",
             "x3"
           ],
-          "share": 0.2476,
-          "Pi": 0.875,
-          "pi": 0.8
+          "share": 0.2477,
+          "Pi": 1.0,
+          "pi": 0.95
         }
       ],
       "core_share_sum": 0.67,
       "group_shares": {
-        "3": 0.4224,
-        "0,1,2": 0.2476
+        "3": 0.4225,
+        "0,1,2": 0.2477
       },
-      "ev_bound_components": 0.0875089285714286,
+      "ev_bound_components": 0.09289285714285715,
       "fanova_r2": 0.4794,
       "core_routes": [
         [
@@ -211,21 +211,21 @@
       "reliance_top": [
         {
           "group": "x3",
-          "min_reliance": 0.9692,
-          "max_reliance": 1.115
+          "min_reliance": 1.0264,
+          "max_reliance": 1.137
         },
         {
           "group": "x2",
-          "min_reliance": 0.8784,
-          "max_reliance": 1.0076
+          "min_reliance": 0.9446,
+          "max_reliance": 1.0233
         },
         {
           "group": "x1",
-          "min_reliance": 0.8513,
-          "max_reliance": 1.0082
+          "min_reliance": 0.9027,
+          "max_reliance": 0.9636
         }
       ],
-      "wall_s": 257.6,
+      "wall_s": 276.7,
       "planted": [
         [
           0,
@@ -260,22 +260,22 @@
       "core_routes": [],
       "reliance_top": [
         {
-          "group": "x4",
+          "group": "x2",
           "min_reliance": 0.0,
-          "max_reliance": 0.0036
-        },
-        {
-          "group": "x7",
-          "min_reliance": -0.0,
-          "max_reliance": 0.0
+          "max_reliance": 0.0034
         },
         {
           "group": "x6",
-          "min_reliance": -0.001,
-          "max_reliance": 0.0
+          "min_reliance": 0.0,
+          "max_reliance": 0.0002
+        },
+        {
+          "group": "x7",
+          "min_reliance": 0.0,
+          "max_reliance": 0.0003
         }
       ],
-      "wall_s": 43.5,
+      "wall_s": 42.6,
       "planted": [],
       "planted_core": [],
       "max_core_order": 0
@@ -317,7 +317,7 @@
           ],
           "share": 0.053,
           "Pi": 0.875,
-          "pi": 0.85
+          "pi": 0.875
         },
         {
           "names": [
@@ -354,7 +354,7 @@
         "32": 0.053,
         "35": 0.04
       },
-      "ev_bound_components": 0.012480394162575017,
+      "ev_bound_components": 0.012521685761047466,
       "fanova_r2": 0.9991,
       "core_routes": [],
       "reliance_top": [
@@ -374,12 +374,12 @@
           "max_reliance": 1.0074
         }
       ],
-      "wall_s": 79.7
+      "wall_s": 78.5
     },
     {
       "dataset": "drybean",
       "n_components": 30,
-      "n_core": 19,
+      "n_core": 20,
       "core": [
         {
           "names": [
@@ -462,17 +462,17 @@
           "pi": 0.825
         }
       ],
-      "core_share_sum": 2.001,
+      "core_share_sum": 2.015,
       "group_shares": {
         "0": 0.9543,
         "1": 0.3875,
         "2": 0.4196,
         "4": 0.0146,
         "5": 0.1181,
-        "0,2": 0.0945,
+        "0,2": 0.1084,
         "0,1": 0.0123
       },
-      "ev_bound_components": 1.814388020833334,
+      "ev_bound_components": 1.8184267241379315,
       "fanova_r2": 0.9548,
       "core_routes": [
         [
@@ -487,30 +487,69 @@
         {
           "group": "G0{Area, Perimeter, MajorAxisLength, +3}",
           "min_reliance": 0.8105,
-          "max_reliance": 3.1256
-        },
-        {
-          "group": "G2{AspectRation, Eccentricity, roundness, +2}",
-          "min_reliance": 0.5458,
-          "max_reliance": 1.0844
+          "max_reliance": 2.9396
         },
         {
           "group": "G1{MinorAxisLength, ShapeFactor1}",
-          "min_reliance": 0.5293,
+          "min_reliance": 0.5126,
           "max_reliance": 1.4719
+        },
+        {
+          "group": "G2{AspectRation, Eccentricity, roundness, +2}",
+          "min_reliance": 0.461,
+          "max_reliance": 1.0556
         }
       ],
-      "wall_s": 94.1
+      "wall_s": 91.0
     },
     {
       "dataset": "bike",
-      "n_components": 12,
-      "n_core": 0,
-      "core": [],
-      "core_share_sum": 0,
-      "group_shares": {},
-      "ev_bound_components": 0.08851612473347549,
-      "fanova_r2": 0.8088,
+      "n_components": 9,
+      "n_core": 4,
+      "core": [
+        {
+          "names": [
+            "hour"
+          ],
+          "share": 0.589,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "temp"
+          ],
+          "share": 0.0804,
+          "Pi": 1.0,
+          "pi": 1.0
+        },
+        {
+          "names": [
+            "hour",
+            "weekday"
+          ],
+          "share": 0.0511,
+          "Pi": 1.0,
+          "pi": 0.975
+        },
+        {
+          "names": [
+            "year"
+          ],
+          "share": 0.0222,
+          "Pi": 1.0,
+          "pi": 1.0
+        }
+      ],
+      "core_share_sum": 0.743,
+      "group_shares": {
+        "1": 0.0222,
+        "3": 0.589,
+        "9": 0.0804,
+        "3,5": 0.0511
+      },
+      "ev_bound_components": 0.20655983475479744,
+      "fanova_r2": 0.8918,
       "core_routes": [
         [
           "hour",
@@ -519,27 +558,27 @@
       ],
       "reliance_top": [
         {
-          "group": "holiday",
-          "min_reliance": -0.1099,
-          "max_reliance": 0.7852
+          "group": "hour",
+          "min_reliance": 1.0666,
+          "max_reliance": 1.5569
         },
         {
-          "group": "windspeed",
-          "min_reliance": -0.1271,
-          "max_reliance": 0.1164
+          "group": "G9{temp, feel_temp}",
+          "min_reliance": 0.1046,
+          "max_reliance": 0.193
         },
         {
-          "group": "weather=rain",
-          "min_reliance": -0.252,
-          "max_reliance": 3.6831
+          "group": "workingday",
+          "min_reliance": 0.0865,
+          "max_reliance": 0.1991
         }
       ],
-      "wall_s": 609.9,
+      "wall_s": 402.4,
       "hour_temp_component": false
     },
     {
       "dataset": "adult",
-      "n_components": 13,
+      "n_components": 14,
       "n_core": 5,
       "core": [
         {
@@ -547,7 +586,7 @@
             "age"
           ],
           "share": 0.0785,
-          "Pi": 0.75,
+          "Pi": 1.0,
           "pi": 0.975
         },
         {
@@ -555,7 +594,7 @@
             "marital-status=Married-civ-spouse"
           ],
           "share": 0.075,
-          "Pi": 0.75,
+          "Pi": 1.0,
           "pi": 0.975
         },
         {
@@ -563,7 +602,7 @@
             "capital-gain"
           ],
           "share": 0.0641,
-          "Pi": 0.75,
+          "Pi": 1.0,
           "pi": 1.0
         },
         {
@@ -571,15 +610,15 @@
             "education-num"
           ],
           "share": 0.0529,
-          "Pi": 0.75,
-          "pi": 0.95
+          "Pi": 1.0,
+          "pi": 1.0
         },
         {
           "names": [
             "hours-per-week"
           ],
           "share": 0.0183,
-          "Pi": 0.75,
+          "Pi": 1.0,
           "pi": 0.975
         }
       ],
@@ -591,7 +630,7 @@
         "22": 0.0641,
         "24": 0.0183
       },
-      "ev_bound_components": 0.04116759385407206,
+      "ev_bound_components": 0.04172769073569482,
       "fanova_r2": 0.7638,
       "core_routes": [
         [
@@ -600,29 +639,30 @@
       ],
       "reliance_top": [
         {
+          "group": "capital-gain",
+          "min_reliance": 0.1658,
+          "max_reliance": 0.3468
+        },
+        {
           "group": "G5{marital-status=Married-civ-spouse, relationship=Husband}",
-          "min_reliance": 0.1724,
-          "max_reliance": 0.3834
+          "min_reliance": 0.1593,
+          "max_reliance": 0.2895
         },
         {
           "group": "education-num",
-          "min_reliance": 0.0525,
-          "max_reliance": 0.1457
-        },
-        {
-          "group": "age",
-          "min_reliance": 0.03,
-          "max_reliance": 0.2604
+          "min_reliance": 0.0966,
+          "max_reliance": 0.13
         }
       ],
-      "wall_s": 791.3
+      "wall_s": 948.0
     }
   ],
   "e71_bar_met": true,
   "e72": {
     "datasets_certifying": [
       "mushroom",
-      "drybean"
+      "drybean",
+      "bike"
     ],
     "bike_hour_temp": false,
     "bar_met": false
