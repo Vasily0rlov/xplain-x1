@@ -1,0 +1,14 @@
+[box] load 0.35 < 8.0 — proceeding
+synthetic:add-noisy-8k: core 3 share_sum 0.875 planted_core [[0], [1], [2]]
+synthetic:comp2-noisy-8k: core 2 share_sum 0.797 planted_core [[0], [1, 2]]
+synthetic:comp3-noisy-8k: core 2 share_sum 0.671 planted_core [[0, 1, 2], [3]]
+synthetic:noise-8k: core 0 share_sum 0 planted_core []
+/opt/xplain-x1/.venv/lib/python3.11/site-packages/numpy/lib/_function_base_impl.py:3023: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/opt/xplain-x1/.venv/lib/python3.11/site-packages/numpy/lib/_function_base_impl.py:3024: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+mushroom: core 4 share_sum 0.761
+drybean: core 17 share_sum 2.053
+bike: core 4 share_sum 0.747
+adult: core 5 share_sum 0.198
+CONFIRMATORY: {'e71_synthetic': True, 'real_certifying': ['mushroom', 'drybean', 'bike'], 'e72_clause1': True, 'wall_hours': 0.48}

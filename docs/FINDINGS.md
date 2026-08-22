@@ -323,3 +323,29 @@ trail as recorded above (deferred from 2026-08-22), the E4.1 decision-A
 re-score, the E6 route-level scoring corrections, and the P7 re-score of the
 bike hour×temp clause as a purification finding.  The programme proceeds to
 config freeze and the confirmatory one-shot.
+
+## E-C.1 — CONFIRMATORY ONE-SHOT (2026-08-23, seeds 20-24, frozen `freeze-x1-v1`)
+
+One shot, no reruns; verdicts stand as read.  **PRIMARY ENDPOINTS MET.**
+
+- **Synthetic exactness confirmed on fresh seeds**: ADD `{x1},{x2},{x3}`;
+  COMP2 `{x1},{x2·x3}`; COMP3 `{x1·x2·x3},{x4}`; **NOISE zero certified
+  components** — the untradeable holds on untouched seeds.
+- **Real data confirmed**: mushroom 4 CORE (coverage 0.761), drybean 17 CORE,
+  bike 4 CORE (coverage 0.747 — hour/temp/hour×weekday/year again, Π=1.0);
+  adult again certifies exactly its 5 textbook mains (age, married,
+  capital-gain, education-num, hours) at Π=1.0 with coverage 0.198 — below the
+  0.5 coverage bar on fresh seeds as in dev, reported as the method's measured
+  frontier on diffuse-structure data.
+- Battery wall 0.48 h.  Fresh-seed shrinkage vs dev is modest and one-sided
+  (mushroom 7→4 CORE members within the same rule family; bike identical).
+
+**Programme verdict, one paragraph.**  On untouched seeds the honesty layer
+holds without exception (zero certification on noise, honest-shallow adult),
+planted structure is recovered exactly through the models' own functions, and
+three of four real datasets carry certified, unanimous (Π=1.0),
+domain-canonical function components with majority coverage.  The deliverable
+stands: a legible model whose DAG is inspectable carving-by-carving, an
+explicit equivalence-class account of multiplicity, and certified claims
+anchored at the level where uniqueness exists — the purified function
+decomposition under a declared measure.

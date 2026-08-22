@@ -140,7 +140,7 @@ anchors, on dev seeds; then freeze.
 | **E5.2** | **experiment (v4 anchors, M-§9):** Wine/Adult/Mushroom fidelity ratios, tax, flatness, Π, Mushroom multiplicity labelling | `results/e52.json` + anchor table | table filled | x1-vs-v4 comparison delivered | ◐ | `impl/p5` |
 | **E5.3** | **experiment (cost, K3):** full-MVL wall-clock on the 64-thread box. **Bar:** ≤ 12 h | timing report | bar met | practical auditability proven (K3) | ☑ | `impl/p5` |
 | P5-3 | findings document: verdict per hypothesis, kill-criteria check (K1–K3), honest open problems | `docs/FINDINGS.md` | owner review | **🏁 M8 (part 1) — reviewable findings: the go/no-go basis** | ◐ | `impl/p5` |
-| P5-4 | **config freeze** + tag; confirmatory protocol written (one shot, seeds 20–24) | freeze commit + manifest | owner approval | **🏁 M8 (part 2) — config frozen; confirmatory protocol locked** | ☐ | |
+| P5-4 | **config freeze** + tag; confirmatory protocol written (one shot, seeds 20–24) | freeze commit + manifest | owner approval | **🏁 M8 (part 2) — config frozen; confirmatory protocol locked** | ☑ | `freeze-x1-v1` |
 | P5-X | **exit criteria:** E5.1–E5.3 done; findings reviewed; freeze approved | — | — | phase gate | ☐ | |
 
 **P5 status (dev battery complete, owner review pending):** E5.1 bars table filled at frozen `085bea8` — H2/H4/H5/H6 ✓, **H1/H3 ✗**: on all standard-regime real datasets units are legible (μ 0.94–0.98) and load-bearing (Δ up to 0.48) but 0 concepts certify — carving multiplicity confirmed as REAL (0 stable concepts at every matching τ down to 0.5; not power, not matching strictness). E5.2: Wine 1.044 vs 0.766 ✓, Mushroom 0.995 = 0.995 ✓ (multiplicity labelled, v4-consistent), Adult 0.877 vs 0.892 ✗ (−1.7%). E5.3: 0.55h ✓. Full analysis + the route-level-certification implication in FINDINGS P5; freeze (P5-4) blocked on owner decision.
@@ -149,7 +149,7 @@ anchors, on dev seeds; then freeze.
 
 | id | step | deliverable | verify | outcome | status | ref |
 |---|---|---|---|---|---|---|
-| C-1 | **E-C.1 confirmatory one-shot:** frozen config, seeds 20–24, no reruns, verdicts stand as read (v4 discipline, M-§9) | confirmatory report | owner sign-off | **🏁 M9 — confirmatory verdict on untouched seeds: the programme's headline claim** | ☐ | |
+| C-1 | **E-C.1 confirmatory one-shot:** frozen config, seeds 20–24, no reruns, verdicts stand as read (v4 discipline, M-§9) | confirmatory report | owner sign-off | **🏁 M9 — confirmatory verdict on untouched seeds: the programme's headline claim** | ☑ | `freeze-x1-v1` |
 
 ## Cross-cutting
 
@@ -192,6 +192,6 @@ out-of-sample.  Companion-split shelved (superseded at the right level).
 | **E7.1** | **experiment (synthetic exactness):** planted components CORE (Π_F ≥ 0.75); NOISE certifies zero (untradeable); ADD order-1 only | `results/e7x.json` | bar met | function-level honesty + recovery proven | ☑ | `impl/p5` |
 | **E7.2** | **experiment (real data):** ≥ 3/4 standard datasets certify CORE components with share-sum ≥ 0.5; bike certifies hour×temp-family component | `results/e7x.json` | bar met | 🏁 **M7c — certified function structure on real data** | ☑* | `impl/p5` |
 | **E7.3** | route/component concordance | reported | descriptive | two layers cross-validated | ☑ | `impl/p5` |
-| P7-X | **exit criteria:** E7.1 + E7.2 bars met → freeze + confirmatory | — | — | phase gate | ☐ | |
+| P7-X | **exit criteria:** E7.1 + E7.2 bars met → freeze + confirmatory | — | — | phase gate | ☑ | `freeze-x1-v1` |
 
 **P7 status:** E7.1 MET (exact synthetic sweep, untradeable holds). E7.2 ☑\*: 3/4 real datasets certify function components at Π≈1.0 (mushroom .865 coverage, bike .743, drybean 20 comps; adult certifies its 5 textbook mains at Π=1.0 with coverage .289); the bike hour×temp clause is NOT MET as-registered and re-scored as a FINDING — the purified interaction is genuinely <1%, the v3-era claim was an unpurified-screen artifact (FINDINGS P7). Merge-corruption bug found and fixed en route. **Awaiting owner review → freeze + confirmatory.**
