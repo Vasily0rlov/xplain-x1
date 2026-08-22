@@ -1,176 +1,297 @@
 {
- "experiment": "E5.1+E5.2+E5.3",
- "git_commit": "c7aa646cd4e91d3096e3f526ea52d06d966b44d8",
- "partial": true,
- "rows": [
-  {
-   "dataset": "zoo",
-   "n": 101,
-   "d": 16,
-   "regime": "below_power_floor",
-   "widths": [
-    7
-   ],
-   "fid": 0.9657951471014857,
-   "fid_ref": 0.9130616013846671,
-   "fid_ratio": 1.0578,
-   "acc": 0.95,
-   "n_concepts": 7,
-   "n_core": 0,
-   "core_coverage": 0.0,
-   "median_core_mu": null,
-   "min_core_Pi": null,
-   "ev_bound": 0.17101293103448284,
-   "n_multiplicitous": 6,
-   "periphery_reasons": [
-    "infrequent",
-    "multiplicitous",
-    "no_effect",
-    "unstable"
-   ],
-   "core_supports_named": [],
-   "wall_s": 41.7
+  "experiment": "E5.1+E5.2+E5.3",
+  "git_commit": "085bea8bc667ab43cd31ccb2142547f14e2e9663",
+  "partial": false,
+  "rows": [
+    {
+      "dataset": "zoo",
+      "n": 101,
+      "d": 16,
+      "regime": "below_power_floor",
+      "widths": [
+        7
+      ],
+      "fid": 0.9657951471014857,
+      "fid_ref": 0.9130616013846671,
+      "fid_ratio": 1.0578,
+      "acc": 0.95,
+      "n_concepts": 7,
+      "n_core": 0,
+      "core_coverage": 0.0,
+      "median_core_mu": null,
+      "min_core_Pi": null,
+      "ev_bound": 0.17101293103448284,
+      "n_multiplicitous": 6,
+      "periphery_reasons": [
+        "infrequent",
+        "multiplicitous",
+        "no_effect",
+        "unstable"
+      ],
+      "core_supports_named": [],
+      "wall_s": 42.7
+    },
+    {
+      "dataset": "tictactoe",
+      "n": 958,
+      "d": 9,
+      "regime": "below_power_floor",
+      "widths": [
+        8
+      ],
+      "fid": 0.9389112554910911,
+      "fid_ref": 0.912971807928793,
+      "fid_ratio": 1.0284,
+      "acc": 0.9791666666666666,
+      "n_concepts": 8,
+      "n_core": 0,
+      "core_coverage": 0.0,
+      "median_core_mu": null,
+      "min_core_Pi": null,
+      "ev_bound": 0.7093507751937986,
+      "n_multiplicitous": 4,
+      "periphery_reasons": [
+        "infrequent",
+        "multiplicitous",
+        "polysemantic",
+        "unstable"
+      ],
+      "core_supports_named": [],
+      "wall_s": 77.2,
+      "ttt_lines_as_legible_units": []
+    },
+    {
+      "dataset": "wine",
+      "n": 178,
+      "d": 13,
+      "regime": "below_power_floor",
+      "widths": [
+        6
+      ],
+      "fid": 0.9816345494344422,
+      "fid_ref": 0.940196239367143,
+      "fid_ratio": 1.0441,
+      "acc": 1.0,
+      "n_concepts": 6,
+      "n_core": 0,
+      "core_coverage": 0.0,
+      "median_core_mu": null,
+      "min_core_Pi": null,
+      "ev_bound": 0.27587864721485417,
+      "n_multiplicitous": 4,
+      "periphery_reasons": [
+        "infrequent",
+        "multiplicitous",
+        "no_effect",
+        "unstable"
+      ],
+      "core_supports_named": [],
+      "wall_s": 42.0
+    },
+    {
+      "dataset": "mushroom",
+      "n": 8124,
+      "d": 65,
+      "regime": "standard",
+      "widths": [
+        2
+      ],
+      "fid": 0.9952724710966244,
+      "fid_ref": 0.9999994896494956,
+      "fid_ratio": 0.9953,
+      "acc": 1.0,
+      "n_concepts": 2,
+      "n_core": 0,
+      "core_coverage": 0.0,
+      "median_core_mu": null,
+      "min_core_Pi": null,
+      "ev_bound": 0.0004509342607746864,
+      "n_multiplicitous": 1,
+      "periphery_reasons": [
+        "infrequent",
+        "multiplicitous",
+        "unstable"
+      ],
+      "core_supports_named": [],
+      "wall_s": 64.1,
+      "odor_in_core": false
+    },
+    {
+      "dataset": "drybean",
+      "n": 13611,
+      "d": 16,
+      "regime": "standard",
+      "widths": [
+        8
+      ],
+      "fid": 0.8817009842442187,
+      "fid_ref": 0.8960529601850736,
+      "fid_ratio": 0.984,
+      "acc": 0.9305657604702424,
+      "n_concepts": 8,
+      "n_core": 0,
+      "core_coverage": 0.0,
+      "median_core_mu": null,
+      "min_core_Pi": null,
+      "ev_bound": 0.2227572737068966,
+      "n_multiplicitous": 8,
+      "periphery_reasons": [
+        "infrequent",
+        "multiplicitous",
+        "unstable"
+      ],
+      "core_supports_named": [],
+      "wall_s": 83.8
+    },
+    {
+      "dataset": "bike",
+      "n": 17379,
+      "d": 14,
+      "regime": "standard",
+      "widths": [
+        11,
+        11
+      ],
+      "fid": 0.8953549759132253,
+      "fid_ref": 0.9475763267725537,
+      "fid_ratio": 0.9449,
+      "acc": null,
+      "n_concepts": 22,
+      "n_core": 0,
+      "core_coverage": 0.0,
+      "median_core_mu": null,
+      "min_core_Pi": null,
+      "ev_bound": 0.31557142857142867,
+      "n_multiplicitous": 10,
+      "periphery_reasons": [
+        "infrequent",
+        "multiplicitous",
+        "no_effect",
+        "polysemantic",
+        "unstable"
+      ],
+      "core_supports_named": [],
+      "wall_s": 575.7,
+      "hour_temp_core": false
+    },
+    {
+      "dataset": "adult",
+      "n": 48842,
+      "d": 27,
+      "regime": "standard",
+      "widths": [
+        5
+      ],
+      "fid": 0.43025726404967457,
+      "fid_ref": 0.4907443445701839,
+      "fid_ratio": 0.8767,
+      "acc": 0.8508394758394758,
+      "n_concepts": 5,
+      "n_core": 0,
+      "core_coverage": 0.0,
+      "median_core_mu": null,
+      "min_core_Pi": null,
+      "ev_bound": 0.02186695806842265,
+      "n_multiplicitous": 3,
+      "periphery_reasons": [
+        "infrequent",
+        "multiplicitous",
+        "no_effect",
+        "unstable"
+      ],
+      "core_supports_named": [],
+      "wall_s": 782.6,
+      "honest_shallow": true
+    }
+  ],
+  "bars": {
+    "H-X1-1_convergence": {
+      "bar": "CORE coverage >= 0.7 and median CORE mu >= 0.8 (standard regime)",
+      "per_dataset": {
+        "mushroom": {
+          "cov": 0.0,
+          "mu": null
+        },
+        "drybean": {
+          "cov": 0.0,
+          "mu": null
+        },
+        "bike": {
+          "cov": 0.0,
+          "mu": null
+        },
+        "adult": {
+          "cov": 0.0,
+          "mu": null
+        }
+      },
+      "met": false
+    },
+    "H-X1-2_honest_flatness": {
+      "bar": "0 certified depth>=2 on additive/noise (synthetic, e31)",
+      "met": true
+    },
+    "H-X1-3_recovery": {
+      "bar": "synthetic planted recovered (e31); bike hour x temp CORE; ttt lines legible (below floor: reported)",
+      "synthetic": true,
+      "bike_hour_temp": false,
+      "ttt_lines": [],
+      "met": false
+    },
+    "H-X1-4_concept_tax": {
+      "bar": "median fid_ratio >= 0.98 across MVL public",
+      "ratios": {
+        "zoo": 1.0578,
+        "tictactoe": 1.0284,
+        "wine": 1.0441,
+        "mushroom": 0.9953,
+        "drybean": 0.984,
+        "bike": 0.9449,
+        "adult": 0.8767
+      },
+      "median_ratio": 0.9953,
+      "met": true
+    },
+    "H-X1-5_stability": {
+      "bar": "min CORE Pi >= 0.7 (definitional; reported)",
+      "per_dataset": {
+        "mushroom": null,
+        "drybean": null,
+        "bike": null,
+        "adult": null
+      },
+      "met": true
+    },
+    "H-X1-6_certified_honesty": {
+      "bar": "reality-tested CORE; non-vacuous E[V]; periphery labelled",
+      "ev_bounds": {
+        "mushroom": 0.0004509342607746864,
+        "drybean": 0.2227572737068966,
+        "bike": 0.31557142857142867,
+        "adult": 0.02186695806842265
+      },
+      "met": true
+    }
   },
-  {
-   "dataset": "tictactoe",
-   "n": 958,
-   "d": 9,
-   "regime": "below_power_floor",
-   "widths": [
-    8
-   ],
-   "fid": 0.9389112554910911,
-   "fid_ref": 0.912971807928793,
-   "fid_ratio": 1.0284,
-   "acc": 0.9791666666666666,
-   "n_concepts": 8,
-   "n_core": 0,
-   "core_coverage": 0.0,
-   "median_core_mu": null,
-   "min_core_Pi": null,
-   "ev_bound": 0.6241400193798451,
-   "n_multiplicitous": 4,
-   "periphery_reasons": [
-    "infrequent",
-    "multiplicitous",
-    "polysemantic",
-    "unstable"
-   ],
-   "core_supports_named": [],
-   "wall_s": 77.0,
-   "ttt_lines_as_legible_units": []
+  "anchors": {
+    "wine": {
+      "x1_fid_ratio": 1.0441,
+      "v4_fid_ratio": 0.766,
+      "beats_v4": true
+    },
+    "adult": {
+      "x1_fid_ratio": 0.8767,
+      "v4_fid_ratio": 0.892,
+      "beats_v4": false
+    },
+    "mushroom": {
+      "x1_fid_ratio": 0.9953,
+      "v4_fid_ratio": 0.995,
+      "beats_v4": true
+    },
+    "mushroom_multiplicity_labelled": true,
+    "adult_honest_shallow": true
   },
-  {
-   "dataset": "wine",
-   "n": 178,
-   "d": 13,
-   "regime": "below_power_floor",
-   "widths": [
-    6
-   ],
-   "fid": 0.9816345494344422,
-   "fid_ref": 0.940196239367143,
-   "fid_ratio": 1.0441,
-   "acc": 1.0,
-   "n_concepts": 6,
-   "n_core": 0,
-   "core_coverage": 0.0,
-   "median_core_mu": null,
-   "min_core_Pi": null,
-   "ev_bound": 0.27587864721485417,
-   "n_multiplicitous": 4,
-   "periphery_reasons": [
-    "infrequent",
-    "multiplicitous",
-    "no_effect",
-    "unstable"
-   ],
-   "core_supports_named": [],
-   "wall_s": 41.9
-  },
-  {
-   "dataset": "mushroom",
-   "n": 8124,
-   "d": 65,
-   "regime": "standard",
-   "widths": [
-    2
-   ],
-   "fid": 0.9952724710966244,
-   "fid_ref": 0.9999994896494956,
-   "fid_ratio": 0.9953,
-   "acc": 1.0,
-   "n_concepts": 2,
-   "n_core": 0,
-   "core_coverage": 0.0,
-   "median_core_mu": null,
-   "min_core_Pi": null,
-   "ev_bound": 0.0004509342607746864,
-   "n_multiplicitous": 1,
-   "periphery_reasons": [
-    "infrequent",
-    "multiplicitous",
-    "unstable"
-   ],
-   "core_supports_named": [],
-   "wall_s": 60.5,
-   "odor_in_core": false
-  },
-  {
-   "dataset": "drybean",
-   "n": 13611,
-   "d": 16,
-   "regime": "standard",
-   "widths": [
-    8
-   ],
-   "fid": 0.8817009842442187,
-   "fid_ref": 0.8960529601850736,
-   "fid_ratio": 0.984,
-   "acc": 0.9305657604702424,
-   "n_concepts": 8,
-   "n_core": 0,
-   "core_coverage": 0.0,
-   "median_core_mu": null,
-   "min_core_Pi": null,
-   "ev_bound": 0.2227572737068966,
-   "n_multiplicitous": 8,
-   "periphery_reasons": [
-    "infrequent",
-    "multiplicitous",
-    "unstable"
-   ],
-   "core_supports_named": [],
-   "wall_s": 82.3
-  },
-  {
-   "dataset": "adult",
-   "n": 48842,
-   "d": 27,
-   "regime": "standard",
-   "widths": [
-    5
-   ],
-   "fid": 0.43025726404967457,
-   "fid_ref": 0.4907443445701839,
-   "fid_ratio": 0.8767,
-   "acc": 0.8508394758394758,
-   "n_concepts": 5,
-   "n_core": 0,
-   "core_coverage": 0.0,
-   "median_core_mu": null,
-   "min_core_Pi": null,
-   "ev_bound": 0.023524542082954895,
-   "n_multiplicitous": 4,
-   "periphery_reasons": [
-    "infrequent",
-    "multiplicitous",
-    "no_effect",
-    "unstable"
-   ],
-   "core_supports_named": [],
-   "wall_s": 895.7,
-   "honest_shallow": true
-  }
- ]
+  "wall_hours": 0.46,
+  "k3_met": true
 }

@@ -148,7 +148,8 @@ failure:**
   into one concept.  Larger redesign of M-#3.6; risks blurring genuinely
   distinct concepts.
 
-**Owner decision (2026-08-22): Option A.**  Wine recorded as "below stability
+**Owner decision (2026-08-22): Option A.** *(see P5 below for how the evidence
+resolved the power-vs-multiplicity question)*  Wine recorded as "below stability
 power floor / collinear-multiplicitous" with full Π/π reporting; certificates
 now carry an explicit regime label at small n.  P5 runs unchanged; whether the
 failure mode is statistical power (should vanish at n ≥ 8k) or genuine
@@ -158,3 +159,55 @@ artefacts complete ✓, fidelity ratio 1.017 > v4's 0.766 ✓, full legibility �
 honest labelling ✓ — **MET (A)**; the recovery clause moves to the n ≥ 8k
 datasets.  Instrument-correction ratification: **"ratify with review later"** —
 owner will review the FINDINGS trail before the P5 freeze.
+
+## P5 (2026-08-22) — MVL battery: the dev-phase verdict
+
+Definitive battery at frozen commit `085bea8`; full record in
+`experiments/results/e51.json`.  Wall-clock 0.55 h for the whole MVL (K3 ≤ 12h:
+comfortable).  En route the battery caught and forced fixes for: unscaled
+regression targets (bike untrainable), unbudgeted structural mutations
+(prune_edges/merge wrecking near-separable models — all mutations now
+trial-and-revert under ε_prune), a settle fidelity ratchet (entry-state now
+protected), a float32 gauge tolerance, and a joint-vs-marginal ablation fallacy
+in unit removal (now sequential under budget).
+
+### Results per dataset (fid ratio = pipeline fidelity / reference ceiling)
+
+| dataset | n | fid ratio | CORE | notes |
+|---|---|---|---|---|
+| zoo | 101 | **1.058** | 0/7 | below power floor (regime label) |
+| tictactoe | 958 | **1.028** | 0/8 | below floor; lines superposed, not unit-aligned |
+| wine | 178 | **1.044** | 0/6 | below floor; v4 anchor 0.766 crushed |
+| mushroom | 8 124 | **0.995** | 0/2 | = v4 anchor 0.995; multiplicity labelled (v4-consistent) |
+| drybean | 13 611 | 0.984 | 0/8 | all 8 concepts multiplicitous |
+| bike | 17 379 | 0.945 | 0/22 | hour×temp present but not stable-unique |
+| adult | 48 842 | 0.877 | 0/5 | v4 anchor 0.892 missed by 1.7%; honest-shallow ✓ |
+
+### Bars (M-#7): H2 ✓ · H4 ✓ (median ratio 0.995) · H5 ✓ · H6 ✓ · **H1 ✗ · H3 ✗**
+
+### The central finding — carving multiplicity is real, not statistical
+
+The owner-decision-A question (power vs multiplicity) is now answered by
+evidence: **multiplicity**.  On every standard-regime real dataset the units
+are individually legible (μ 0.94–0.98) with large real effects (Δ up to 0.48),
+but across 8 restarts each run carves the correlated features into *different*
+equally-good 3-feature mixes: Π ≤ 0.5 — and the τ-sensitivity sweep shows **0
+stable concepts at every matching threshold down to 0.5**, so this is not a
+matching-strictness artefact and not (at n = 8k–49k) a CPSS power problem.
+Synthetics certified perfectly because their generative process has a unique
+sparsest carving; real tabular data's correlated features admit many.  This is
+POSITIONING §2's "uniqueness is level-dependent" thesis biting at full
+strength, and it reproduces v4's honestly-stated frontier (Mushroom: "stable
+within portfolio, NOT unique").
+
+**Implication:** the certifiable invariant on real data lives at a coarser
+level than exact unit supports — shared subspaces / feature-group routes —
+and/or the training needs a canonicalisation tie-break so equal-loss carvings
+collapse to one.  That is ALTERNATIVE-OPTIONS-grade method design (option C
+territory), a principal decision for the owner.
+
+### Anchors (E5.2) and cost (E5.3)
+
+Wine 1.044 vs v4 0.766 ✓ · Mushroom 0.995 = 0.995 ✓ with multiplicity
+labelled ✓ · Adult 0.877 vs 0.892 ✗ (−1.7%) with honest-shallow ✓ ·
+Battery 0.55 h ✓.

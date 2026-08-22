@@ -1,2 +1,14 @@
-[box] load 4.09 < 8.0 — proceeding
-resuming with 6 completed rows
+[box] load 51.15 >= 8.0 — waiting 60s
+[box] load 25.49 >= 8.0 — waiting 60s
+[box] load 9.36 >= 8.0 — waiting 60s
+[box] load 3.44 < 8.0 — proceeding
+zoo: fid_ratio 1.0578 core 0/7 cov 0.0 regime below_power_floor (42.7s)
+tictactoe: fid_ratio 1.0284 core 0/8 cov 0.0 regime below_power_floor (77.2s)
+wine: fid_ratio 1.0441 core 0/6 cov 0.0 regime below_power_floor (42.0s)
+mushroom: fid_ratio 0.9953 core 0/2 cov 0.0 regime standard (64.1s)
+drybean: fid_ratio 0.984 core 0/8 cov 0.0 regime standard (83.8s)
+bike: fid_ratio 0.9449 core 0/22 cov 0.0 regime standard (575.7s)
+adult: fid_ratio 0.8767 core 0/5 cov 0.0 regime standard (782.6s)
+bars: {'H-X1-1_convergence': False, 'H-X1-2_honest_flatness': True, 'H-X1-3_recovery': False, 'H-X1-4_concept_tax': True, 'H-X1-5_stability': True, 'H-X1-6_certified_honesty': True}
+anchors: {'wine': {'x1_fid_ratio': 1.0441, 'v4_fid_ratio': 0.766, 'beats_v4': True}, 'adult': {'x1_fid_ratio': 0.8767, 'v4_fid_ratio': 0.892, 'beats_v4': False}, 'mushroom': {'x1_fid_ratio': 0.9953, 'v4_fid_ratio': 0.995, 'beats_v4': True}, 'mushroom_multiplicity_labelled': True, 'adult_honest_shallow': True}
+E5 battery wall 0.46h (K3 <= 12h: True)

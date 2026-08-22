@@ -134,14 +134,16 @@ anchors, on dev seeds; then freeze.
 
 | id | step | deliverable | verify | outcome | status | ref |
 |---|---|---|---|---|---|---|
-| P5-1 | remaining MVL loaders + encodings: `tictactoe`, `mushroom`, `adult`, `bike`, `drybean` | registry entries | loader tests | full MVL loadable | ☐ | |
-| P5-2 | battery runners: `experiments/ladder.py` (MVL default, `--extended` flag), `experiments/v4_anchors.py`; box gate + full-box parallelism | scripts | dry-run on synthetics | one-command batteries | ☐ | |
-| **E5.1** | **experiment (MVL dev battery):** all 7 public + 6 synthetic, R=8, dev seeds. **Bar:** M-§7 bars H-X1-1..6 evaluated per dataset; failures analysed, not retuned silently | `results/e51.json` + bars table | table filled | **🏁 M7 — MVL verdict on dev seeds** (all bars, all 13 targets) | ☐ | |
-| **E5.2** | **experiment (v4 anchors, M-§9):** Wine/Adult/Mushroom fidelity ratios, tax, flatness, Π, Mushroom multiplicity labelling | `results/e52.json` + anchor table | table filled | x1-vs-v4 comparison delivered | ☐ | |
-| **E5.3** | **experiment (cost, K3):** full-MVL wall-clock on the 64-thread box. **Bar:** ≤ 12 h | timing report | bar met | practical auditability proven (K3) | ☐ | |
-| P5-3 | findings document: verdict per hypothesis, kill-criteria check (K1–K3), honest open problems | `docs/FINDINGS.md` | owner review | **🏁 M8 (part 1) — reviewable findings: the go/no-go basis** | ☐ | |
+| P5-1 | remaining MVL loaders + encodings: `tictactoe`, `mushroom`, `adult`, `bike`, `drybean` | registry entries | loader tests | full MVL loadable | ☑ | `impl/p5` |
+| P5-2 | battery runners: `experiments/ladder.py` (MVL default, `--extended` flag), `experiments/v4_anchors.py`; box gate + full-box parallelism | scripts | dry-run on synthetics | one-command batteries | ☑ | `impl/p5` |
+| **E5.1** | **experiment (MVL dev battery):** all 7 public + 6 synthetic, R=8, dev seeds. **Bar:** M-§7 bars H-X1-1..6 evaluated per dataset; failures analysed, not retuned silently | `results/e51.json` + bars table | table filled | **🏁 M7 — MVL verdict on dev seeds** (all bars, all 13 targets) | ◐ | `impl/p5` |
+| **E5.2** | **experiment (v4 anchors, M-§9):** Wine/Adult/Mushroom fidelity ratios, tax, flatness, Π, Mushroom multiplicity labelling | `results/e52.json` + anchor table | table filled | x1-vs-v4 comparison delivered | ◐ | `impl/p5` |
+| **E5.3** | **experiment (cost, K3):** full-MVL wall-clock on the 64-thread box. **Bar:** ≤ 12 h | timing report | bar met | practical auditability proven (K3) | ☑ | `impl/p5` |
+| P5-3 | findings document: verdict per hypothesis, kill-criteria check (K1–K3), honest open problems | `docs/FINDINGS.md` | owner review | **🏁 M8 (part 1) — reviewable findings: the go/no-go basis** | ◐ | `impl/p5` |
 | P5-4 | **config freeze** + tag; confirmatory protocol written (one shot, seeds 20–24) | freeze commit + manifest | owner approval | **🏁 M8 (part 2) — config frozen; confirmatory protocol locked** | ☐ | |
 | P5-X | **exit criteria:** E5.1–E5.3 done; findings reviewed; freeze approved | — | — | phase gate | ☐ | |
+
+**P5 status (dev battery complete, owner review pending):** E5.1 bars table filled at frozen `085bea8` — H2/H4/H5/H6 ✓, **H1/H3 ✗**: on all standard-regime real datasets units are legible (μ 0.94–0.98) and load-bearing (Δ up to 0.48) but 0 concepts certify — carving multiplicity confirmed as REAL (0 stable concepts at every matching τ down to 0.5; not power, not matching strictness). E5.2: Wine 1.044 vs 0.766 ✓, Mushroom 0.995 = 0.995 ✓ (multiplicity labelled, v4-consistent), Adult 0.877 vs 0.892 ✗ (−1.7%). E5.3: 0.55h ✓. Full analysis + the route-level-certification implication in FINDINGS P5; freeze (P5-4) blocked on owner decision.
 
 ## Post-P5 gate — Confirmatory run (separate decision)
 
