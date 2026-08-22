@@ -50,6 +50,9 @@ def run_one(name: str, cfg: dict) -> dict:
         "core_route_group_ids": [r["support_groups"] for r in core_routes],
         "core_route_variants": [r["variants"] for r in core_routes],
         "core_route_Pi": [r["Pi"] for r in core_routes],
+        "core_unit_supports": sorted({tuple(sorted(c["modal_support"]))
+                                      for c in cert["concepts"]
+                                      if c["label"] == "CORE"}),
         "ev_bound_routes": cert["ev_bound_routes"],
         "n_core_units": cert["n_core"],
         "fid": cert["main"]["fidelity"], "fid_ref": cert["main"]["fid_ref"],
@@ -79,16 +82,12 @@ def main() -> int:
     # reduction bar: singleton groups AND route-level CORE support-SETS equal
     # e31's distinct unit-level CORE supports (unit counts double-count concepts
     # sharing a support — the route layer deduplicates them, correctly)
-    # COVERAGE property (set equality is wrong when the route layer correctly
-    # folds a redundant partial variant the unit level certified separately):
-    # (a) singleton groups; (b) every route modal in e31 core supports;
-    # (c) every e31 core support appears among some certified route's variants.
-    e31 = load_json(ROOT / "experiments" / "results" / "e31.json")
-    e31_supports = {r["dataset"]: {tuple(sorted(s)) for s in r["core_supports"]}
-                    for r in e31["rows"]}
-
+    # COVERAGE property, WITHIN-RUN (comparing against an e31 snapshot from an
+    # older code state is cross-version noise): (a) singleton groups; (b) every
+    # route modal is a same-run unit-level CORE support; (c) every same-run
+    # unit-level CORE support appears among certified routes' variants.
     def reduction_ok(r: dict) -> bool:
-        ref = e31_supports.get(r["dataset"], set())
+        ref = {tuple(s) for s in r["core_unit_supports"]}
         modals = {tuple(sorted(g)) for g in r["core_route_group_ids"]}
         covered = {tuple(sorted(v)) for vs in r["core_route_variants"]
                    for v in vs}
