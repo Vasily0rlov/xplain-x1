@@ -315,3 +315,11 @@ inspectable (this model's legible units, route layer, component annotations),
 result certified (unique purified components under a declared measure +
 portfolio reliance ranges).  On every real dataset the certified function
 structure is stable at Π≈1.0 even where unit carvings never exceeded Π≈0.5.
+
+## Ratification (owner, 2026-08-23)
+
+The owner ratifies: the full P0–P7 instrument-correction and bar re-score
+trail as recorded above (deferred from 2026-08-22), the E4.1 decision-A
+re-score, the E6 route-level scoring corrections, and the P7 re-score of the
+bike hour×temp clause as a purification finding.  The programme proceeds to
+config freeze and the confirmatory one-shot.
