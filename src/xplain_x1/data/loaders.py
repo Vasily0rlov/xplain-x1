@@ -183,10 +183,13 @@ def load_bike() -> Dataset:
             elif vals.str.match(r"^-?\d+(\.\d+)?$").all():
                 ordmaps[c] = {v: float(v) for v in vals.unique()}
     X, cols, cont = _encode_frame(df, ordinal=ordmaps)
-    y = raw.target.to_numpy().astype(np.float32)
+    # log1p: heavy-tailed COUNT target; raw counts destabilise MSE training
+    # (restarts reach fid -56 with correct shape but exploded amplitude)
+    y = np.log1p(raw.target.to_numpy().astype(np.float32))
     return Dataset(name="bike", X=X, y=y, feature_names=cols,
                    task="regression", continuous_mask=cont,
                    meta={"source": "openml:Bike_Sharing_Demand:v2",
+                         "target_transform": "log1p(count)",
                          "expected_depth": 2, "known_rung": "hour x temp"})
 
 

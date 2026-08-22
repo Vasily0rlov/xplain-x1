@@ -272,9 +272,30 @@ def grow(ds: Dataset, splits: Splits, cfg: dict, seed: int,
                                   "gap": round(gap, 5)})
             break
 
-    # final: settle -> gauge -> audit -> prune
+    # final: settle -> gauge -> recalibrate -> audit -> prune
     settle(model, ds, splits, cfg, seed=seed, pressures=pressures)
     gauge_pass(model, _probe_tensor(ds, splits))
+    if ds.task == "regression":
+        # Closed-form linear head recalibration on val: regression runs can
+        # walk into calibration-broken territory (near-perfect correlation,
+        # exploded amplitude, fid -14) because accept/revert compares RELATIVE
+        # improvements.  a*f+b is a gauge-legal readout scaling - structure,
+        # units, and legibility are untouched; it folds into the head exactly.
+        from ..train.settle import _tensors
+        with torch.no_grad():
+            Xv, yv = _tensors(ds, splits, splits.val)
+            pred = model(Xv).squeeze(1)
+            yv = yv.squeeze(1)
+            vp = float(pred.var())
+            if vp > 1e-12:
+                a = float(((pred - pred.mean()) * (yv - yv.mean())).mean() / vp)
+                b = float(yv.mean() - a * pred.mean())
+                if abs(a - 1.0) > 1e-3 or abs(b) > 1e-3:
+                    model.head.weight.mul_(a)
+                    model.head.bias.mul_(a)
+                    model.head.bias.add_(b)
+                    trace.actions.append({"action": "recalibrate_head",
+                                          "a": round(a, 4), "b": round(b, 4)})
     audit = run_audit(model, ds, splits, cfg)
     model = _prune_step(model, audit, ds, splits, cfg, trace.actions)
     trace.audits.append(run_audit(model, ds, splits, cfg))

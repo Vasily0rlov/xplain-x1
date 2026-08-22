@@ -130,14 +130,21 @@ def remove_units(model: MaskedMLP, uids: set[str]) -> MaskedMLP:
 
 
 def merge_units(model: MaskedMLP, keep_uid: str, drop_uid: str) -> MaskedMLP:
-    """Sum outgoing weights into keep, then drop (S-#6): exact when activations equal."""
+    """Sum outgoing weights into keep, then drop (S-#6): exact when activations
+    equal.  MUST NOT mutate the input model — merge is used as a trial by the
+    budgeted prune, and an in-place add corrupted the base model on every
+    REJECTED merge (bike: dozens of rejected trials drove fid 0.93 -> -14)."""
     li = next(j for j, ids in enumerate(model.unit_ids) if keep_uid in ids)
     assert drop_uid in model.unit_ids[li], "merge partners must share a layer"
-    ki, di = model.unit_ids[li].index(keep_uid), model.unit_ids[li].index(drop_uid)
-    out = model.layers[li + 1] if li + 1 < len(model.layers) else model.head
+    di = model.unit_ids[li].index(drop_uid)
+    out_old = model.layers[li + 1] if li + 1 < len(model.layers) else model.head
+    drop_col = out_old.weight[:, di].detach().clone()
+    new = remove_units(model, {drop_uid})
+    ki_new = new.unit_ids[li].index(keep_uid)
+    out_new = new.layers[li + 1] if li + 1 < len(new.layers) else new.head
     with torch.no_grad():
-        out.weight[:, ki].add_(out.weight[:, di])
-    return remove_units(model, {drop_uid})
+        out_new.weight[:, ki_new].add_(drop_col)
+    return new
 
 
 def prune_edges(model: MaskedMLP, edge_contribs: list, eps_edge: float) -> int:

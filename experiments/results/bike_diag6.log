@@ -1,0 +1,6 @@
+fid -14.223098280534185
+pred: min -1.2 max 8.2 q01 -0.36 q99 7.68 std 1.94
+y: min -2.75 max 1.60 std 1.03
+corr -0.3243
+rows |pred|>5: 646 of 3476
+R2 raw -14.22  R2 clipped -9.395

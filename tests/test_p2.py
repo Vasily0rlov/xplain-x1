@@ -67,6 +67,9 @@ def test_merge_identical_units_is_exact():
     assert m2.widths == [5, 5]
     assert torch.allclose(m2(x), y0, atol=1e-6)
     assert m.unit_ids[0][1] not in m2.unit_ids[0]
+    # the INPUT model must be untouched (merge is used as a trial: an in-place
+    # mutation corrupted the base on every rejected merge)
+    assert torch.allclose(m(x), y0, atol=1e-7)
 
 
 def test_remove_units_registry_integrity():
