@@ -135,9 +135,78 @@ def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
             row.update({"label": "PERIPHERY", "reasons": ["absent_in_main"]})
         concept_rows.append(row)
 
+    # ---- route level (P6): certify at the Rashomon-invariant layer --------
+    from .groups import discover_groups, group_index, group_names, group_support
+    from .routes import (build_routes, route_q_mean, route_selection,
+                         route_universe_size)
+
+    groups = discover_groups(ds, splits)
+    gi = group_index(groups, ds.d)
+
+    def gs_map_of(supports: dict, mus: dict) -> dict:
+        out: dict[frozenset[int], float] = {}
+        for u_id, sup in supports.items():
+            gs = group_support(sup, gi)
+            if not gs:
+                continue
+            m = float(mus.get(u_id, 0.0))
+            if gs not in out or m > out[gs]:
+                out[gs] = m
+        return out
+
+    run_gs = {ri: gs_map_of(r["supports"], r["mu"])
+              for ri, r in enumerate(restarts)}
+    main_members: dict[frozenset[int], list[str]] = {}
+    for u_id, sup in main["supports"].items():
+        main_members.setdefault(group_support(sup, gi), []).append(u_id)
+    routes = build_routes(run_gs, main_members, run_gs[0], R, mu_min)
+    half_gs = [gs_map_of(hr["supports"], hr["mu"]) for hr in half_results]
+    pi_routes = route_selection(half_gs, routes, mu_min)
+    p_routes = route_universe_size(len(groups), int(cfg["audit"]["f_max"]))
+    ev_routes = ev_bound(route_q_mean(half_gs, mu_min), p_routes, pi_thr)
+    gnames = group_names(groups, ds.feature_names)
+
+    route_rows = []
+    for rt in routes:
+        row = {"rid": rt.rid,
+               "support_groups": sorted(rt.certified_support),
+               "support_names": [gnames[g] for g in sorted(rt.certified_support)],
+               "variants": rt.variants,
+               "Pi": rt.Pi, "pi": pi_routes[rt.rid],
+               "members_main": rt.members_main, "mu": rt.best_mu_main,
+               "multiplicitous": rt.multiplicitous}
+        if rt.members_main:
+            rtst = reality_test(model, rt.members_main, ds, splits,
+                                int(ccfg["bootstrap"]),
+                                seed=int(cfg["data"]["split_seed"]))
+            row.update({"delta": rtst["delta"], "ci_low": rtst["ci_low"],
+                        "ci_high": rtst["ci_high"]})
+            reasons = []
+            if (rt.best_mu_main or 0) < mu_min:
+                reasons.append("polysemantic")
+            if rt.Pi < float(ccfg["Pi_min"]):
+                reasons.append("unstable")
+            if row["pi"] < pi_thr:
+                reasons.append("infrequent")
+            if not (rtst["delta"] >= float(ccfg["delta_min"])
+                    and rtst["ci_low"] > 0):
+                reasons.append("no_effect")
+            if rt.multiplicitous:
+                reasons.append("multiplicitous")
+            row["label"] = "CORE" if not reasons else "PERIPHERY"
+            row["reasons"] = reasons
+        else:
+            row.update({"label": "PERIPHERY", "reasons": ["absent_in_main"]})
+        route_rows.append(row)
+
     return {
         "dataset": dataset, "R": R, "B": B,
         "concepts": concept_rows,
+        "routes": route_rows,
+        "n_core_routes": sum(1 for r in route_rows if r["label"] == "CORE"),
+        "groups": [[ds.feature_names[j] for j in g] for g in groups],
+        "n_groups": len(groups),
+        "ev_bound_routes": ev_routes, "p_routes_universe": p_routes,
         "n_core": sum(1 for c in concept_rows if c["label"] == "CORE"),
         "ev_bound": ev, "q_mean": q_mean, "p_universe": p_universe,
         "ev_bound_raw_universe": ev_raw, "p_raw_universe": p_raw,

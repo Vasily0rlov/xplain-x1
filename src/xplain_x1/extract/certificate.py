@@ -88,6 +88,15 @@ def build_certificate(cert: dict, ds: Dataset, splits: Splits, cfg: dict,
             ],
         },
         "concepts": cert["concepts"],        # full rows incl. periphery labels
+        "routes": {                          # P6: the Rashomon-invariant layer
+            "feature_groups": cert.get("groups", []),
+            "rows": cert.get("routes", []),
+            "n_core_routes": cert.get("n_core_routes", 0),
+            "ev_bound_routes": cert.get("ev_bound_routes"),
+            "note": ("Routes are certified at the collinearity-group level "
+                     "(the level stable across retrainings); unit members are "
+                     "one carving from an explicit equivalence class."),
+        },
         "non_claims": [
             "CORE concepts are stable, real structures - not proven causal "
             "mechanisms of the world (M-C7).",
@@ -139,6 +148,29 @@ def render_markdown(cert_doc: dict) -> str:
             f"{c['form']}({', '.join(c['support_names'])}) | {c['mu']:.2f} | "
             f"{c['Pi']:.2f} | {c['pi']:.2f} | {c['delta']:.4f} "
             f"[{c['ci_low']:.4f}, {c['ci_high']:.4f}] | {c['coverage_share']} |")
+    rts = cert_doc.get("routes", {})
+    if rts.get("rows"):
+        lines += ["", "## Certified routes (group level — stable across retrainings)",
+                  f"feature groups: {len(rts['feature_groups'])} · "
+                  f"E[V] <= {rts['ev_bound_routes']:.3g} at route universe",
+                  "| route | groups | Pi | pi | delta [95% CI] | members (this model) | variants |",
+                  "|---|---|---|---|---|---|---|"]
+        for r in rts["rows"]:
+            if r["label"] != "CORE":
+                continue
+            lines.append(
+                f"| {r['rid']} | {', '.join(r['support_names'])} | "
+                f"{r['Pi']:.2f} | {r['pi']:.2f} | {r['delta']:.4f} "
+                f"[{r['ci_low']:.4f}, {r['ci_high']:.4f}] | "
+                f"{', '.join(r['members_main'])} | {len(r['variants'])} |")
+        lines += ["", "### Route periphery (labelled)",
+                  "| route | groups | Pi | pi | reasons |", "|---|---|---|---|---|"]
+        for r in rts["rows"]:
+            if r["label"] == "CORE":
+                continue
+            lines.append(f"| {r['rid']} | {', '.join(r['support_names'])} | "
+                         f"{r['Pi']:.2f} | {r.get('pi', 0):.2f} | "
+                         f"{', '.join(r['reasons'])} |")
     lines += ["", "## Periphery (labelled, not certified)",
               "| unit | layer | mu | Pi | pi | reasons |", "|---|---|---|---|---|---|"]
     for c in cert_doc["concepts"]:
