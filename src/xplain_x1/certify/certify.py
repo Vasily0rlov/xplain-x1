@@ -24,11 +24,18 @@ def _one_restart(dataset: str, cfg: dict, seed: int, n_workers: int) -> dict:
     sigs = unit_signatures(r["model"], ds, r["splits"])
     units_by_id = {u["uid"]: u for u in r["final_audit"]["units"]}
     supports = {s.uid: input_support(s.uid, units_by_id) for s in sigs}
-    from .fanova import component_shares
+    from .fanova import V_MIN, component_shares
     fdec = component_shares(r["model"], ds, r["splits"])
+    # Shares are re-based to TASK variance: raw shares are relative to var(f),
+    # and a near-useless model's internal wiggle can decompose "stably" because
+    # restarts share training data (the NOISE x5 lesson).  share_task =
+    # share_f x max(fid, 0): fraction of target variance the component carries.
+    scale = max(0.0, float(r["final_audit"]["fidelity"]))
+    comps = {u: round(s * scale, 4) for u, s in fdec["components"].items()
+             if s * scale >= V_MIN}
     return {"seed": seed, "result": r, "sigs": sigs, "supports": supports,
             "mu": {u["uid"]: u["mu"] for u in r["final_audit"]["units"]},
-            "components": fdec["components"], "fanova_r2": fdec["recon_r2"]}
+            "components": comps, "fanova_r2": fdec["recon_r2"]}
 
 
 def _one_half(dataset: str, cfg: dict, seed: int, half, fid_ref: float,
@@ -38,12 +45,15 @@ def _one_half(dataset: str, cfg: dict, seed: int, half, fid_ref: float,
     ds = get_dataset(dataset)
     sigs = unit_signatures(r["model"], ds, r["splits"])
     units_by_id = {u["uid"]: u for u in r["final_audit"]["units"]}
-    from .fanova import component_shares
+    from .fanova import V_MIN, component_shares
     fdec = component_shares(r["model"], ds, r["splits"])
+    scale = max(0.0, float(r["final_audit"]["fidelity"]))
+    comps = {u: round(s * scale, 4) for u, s in fdec["components"].items()
+             if s * scale >= V_MIN}
     return {"sigs": sigs,
             "mu": {u["uid"]: u["mu"] for u in r["final_audit"]["units"]},
             "supports": {s.uid: input_support(s.uid, units_by_id) for s in sigs},
-            "components": fdec["components"]}
+            "components": comps}
 
 
 def certify(dataset: str, cfg: dict, n_workers: int | None = None) -> dict:
