@@ -8,3 +8,4 @@ experiments/results/*.tmp
 .pytest_cache/
 uv.lock
 papers/
+experiments/results/*.log

@@ -1,0 +1,3424 @@
+{
+  "dag": {
+    "dataset": "drybean",
+    "nodes": [
+      {
+        "id": "Area",
+        "kind": "input",
+        "label": "Area"
+      },
+      {
+        "id": "Perimeter",
+        "kind": "input",
+        "label": "Perimeter"
+      },
+      {
+        "id": "MajorAxisLength",
+        "kind": "input",
+        "label": "MajorAxisLength"
+      },
+      {
+        "id": "MinorAxisLength",
+        "kind": "input",
+        "label": "MinorAxisLength"
+      },
+      {
+        "id": "AspectRation",
+        "kind": "input",
+        "label": "AspectRation"
+      },
+      {
+        "id": "Eccentricity",
+        "kind": "input",
+        "label": "Eccentricity"
+      },
+      {
+        "id": "ConvexArea",
+        "kind": "input",
+        "label": "ConvexArea"
+      },
+      {
+        "id": "Extent",
+        "kind": "input",
+        "label": "Extent"
+      },
+      {
+        "id": "Solidity",
+        "kind": "input",
+        "label": "Solidity"
+      },
+      {
+        "id": "roundness",
+        "kind": "input",
+        "label": "roundness"
+      },
+      {
+        "id": "Compactness",
+        "kind": "input",
+        "label": "Compactness"
+      },
+      {
+        "id": "ShapeFactor1",
+        "kind": "input",
+        "label": "ShapeFactor1"
+      },
+      {
+        "id": "ShapeFactor2",
+        "kind": "input",
+        "label": "ShapeFactor2"
+      },
+      {
+        "id": "ShapeFactor3",
+        "kind": "input",
+        "label": "ShapeFactor3"
+      },
+      {
+        "id": "ShapeFactor4",
+        "kind": "input",
+        "label": "ShapeFactor4"
+      },
+      {
+        "id": "L1U6",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(ConvexArea, AspectRation, Perimeter)",
+        "mu": 0.970244824886322,
+        "Pi": 0.5,
+        "pi": 0.25,
+        "delta": 0.4841518474067429,
+        "coverage": 0.49038244565642364,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "ConvexArea",
+          "AspectRation",
+          "Perimeter"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U2",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(roundness, Solidity, ShapeFactor1)",
+        "mu": 0.9813281297683716,
+        "Pi": 0.25,
+        "pi": 0.125,
+        "delta": 0.13021514098277542,
+        "coverage": 0.12842609529563997,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "roundness",
+          "Solidity",
+          "ShapeFactor1"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U4",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(MinorAxisLength, Compactness, ShapeFactor4)",
+        "mu": 0.9387583136558533,
+        "Pi": 0.5,
+        "pi": 0.25,
+        "delta": 0.17051018157038844,
+        "coverage": 0.1712435209675105,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "MinorAxisLength",
+          "Compactness",
+          "ShapeFactor4"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U3",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(Area, ShapeFactor4, ShapeFactor3)",
+        "mu": 0.9713094234466553,
+        "Pi": 0.5,
+        "pi": 0.375,
+        "delta": 0.022885776750356968,
+        "coverage": 0.023204523830309687,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "Area",
+          "ShapeFactor4",
+          "ShapeFactor3"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U0",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(Area, ShapeFactor1, roundness)",
+        "mu": 0.9684984683990479,
+        "Pi": 0.5,
+        "pi": 0.575,
+        "delta": 0.2503143637981543,
+        "coverage": 0.25121409037789766,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "Area",
+          "ShapeFactor1",
+          "roundness"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U1",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(ShapeFactor4, MajorAxisLength, ShapeFactor2)",
+        "mu": 0.9674776196479797,
+        "Pi": 0.375,
+        "pi": 0.225,
+        "delta": 0.12751398910891798,
+        "coverage": 0.12864485558490435,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "ShapeFactor4",
+          "MajorAxisLength",
+          "ShapeFactor2"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U7",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(Eccentricity, MajorAxisLength, ShapeFactor4)",
+        "mu": 0.9680287837982178,
+        "Pi": 0.375,
+        "pi": 0.075,
+        "delta": 0.17101773521391594,
+        "coverage": 0.15710412532556683,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "Eccentricity",
+          "MajorAxisLength",
+          "ShapeFactor4"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U5",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(ShapeFactor1, AspectRation, Solidity)",
+        "mu": 0.9700246453285217,
+        "Pi": 0.375,
+        "pi": 0.65,
+        "delta": 0.16346302444109395,
+        "coverage": 0.15188852206107684,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "ShapeFactor1",
+          "AspectRation",
+          "Solidity"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "class_0",
+        "kind": "output",
+        "label": "class_0"
+      },
+      {
+        "id": "class_1",
+        "kind": "output",
+        "label": "class_1"
+      },
+      {
+        "id": "class_2",
+        "kind": "output",
+        "label": "class_2"
+      },
+      {
+        "id": "class_3",
+        "kind": "output",
+        "label": "class_3"
+      },
+      {
+        "id": "class_4",
+        "kind": "output",
+        "label": "class_4"
+      },
+      {
+        "id": "class_5",
+        "kind": "output",
+        "label": "class_5"
+      },
+      {
+        "id": "class_6",
+        "kind": "output",
+        "label": "class_6"
+      }
+    ],
+    "edges": [
+      {
+        "src": "Perimeter",
+        "dst": "L1U6",
+        "share": 0.0401
+      },
+      {
+        "src": "AspectRation",
+        "dst": "L1U6",
+        "share": 0.2608
+      },
+      {
+        "src": "ConvexArea",
+        "dst": "L1U6",
+        "share": 0.4671
+      },
+      {
+        "src": "Extent",
+        "dst": "L1U6",
+        "share": 0.022
+      },
+      {
+        "src": "roundness",
+        "dst": "L1U6",
+        "share": 0.1097
+      },
+      {
+        "src": "ShapeFactor4",
+        "dst": "L1U6",
+        "share": 0.0858
+      },
+      {
+        "src": "MinorAxisLength",
+        "dst": "L1U2",
+        "share": 0.4866
+      },
+      {
+        "src": "Solidity",
+        "dst": "L1U2",
+        "share": 0.1235
+      },
+      {
+        "src": "roundness",
+        "dst": "L1U2",
+        "share": 0.3867
+      },
+      {
+        "src": "MinorAxisLength",
+        "dst": "L1U4",
+        "share": 0.5165
+      },
+      {
+        "src": "Solidity",
+        "dst": "L1U4",
+        "share": 0.0321
+      },
+      {
+        "src": "roundness",
+        "dst": "L1U4",
+        "share": 0.125
+      },
+      {
+        "src": "Compactness",
+        "dst": "L1U4",
+        "share": 0.0925
+      },
+      {
+        "src": "ShapeFactor3",
+        "dst": "L1U4",
+        "share": 0.143
+      },
+      {
+        "src": "ShapeFactor4",
+        "dst": "L1U4",
+        "share": 0.0871
+      },
+      {
+        "src": "Area",
+        "dst": "L1U3",
+        "share": 0.5258
+      },
+      {
+        "src": "ShapeFactor3",
+        "dst": "L1U3",
+        "share": 0.17
+      },
+      {
+        "src": "ShapeFactor4",
+        "dst": "L1U3",
+        "share": 0.3012
+      },
+      {
+        "src": "Area",
+        "dst": "L1U0",
+        "share": 0.3277
+      },
+      {
+        "src": "roundness",
+        "dst": "L1U0",
+        "share": 0.1191
+      },
+      {
+        "src": "ShapeFactor1",
+        "dst": "L1U0",
+        "share": 0.2351
+      },
+      {
+        "src": "ShapeFactor2",
+        "dst": "L1U0",
+        "share": 0.2918
+      },
+      {
+        "src": "Eccentricity",
+        "dst": "L1U1",
+        "share": 0.0389
+      },
+      {
+        "src": "ConvexArea",
+        "dst": "L1U1",
+        "share": 0.807
+      },
+      {
+        "src": "ShapeFactor4",
+        "dst": "L1U1",
+        "share": 0.1456
+      },
+      {
+        "src": "Area",
+        "dst": "L1U7",
+        "share": 0.3132
+      },
+      {
+        "src": "MajorAxisLength",
+        "dst": "L1U7",
+        "share": 0.2685
+      },
+      {
+        "src": "Eccentricity",
+        "dst": "L1U7",
+        "share": 0.2925
+      },
+      {
+        "src": "Solidity",
+        "dst": "L1U7",
+        "share": 0.0287
+      },
+      {
+        "src": "ShapeFactor4",
+        "dst": "L1U7",
+        "share": 0.0955
+      },
+      {
+        "src": "AspectRation",
+        "dst": "L1U5",
+        "share": 0.1437
+      },
+      {
+        "src": "Solidity",
+        "dst": "L1U5",
+        "share": 0.0969
+      },
+      {
+        "src": "ShapeFactor1",
+        "dst": "L1U5",
+        "share": 0.741
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_0",
+        "share": 0.2412
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_0",
+        "share": 0.1542
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_0",
+        "share": 0.1741
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_0",
+        "share": 0.084
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_0",
+        "share": 0.0855
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_0",
+        "share": 0.079
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_0",
+        "share": 0.1158
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_0",
+        "share": 0.0662
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_1",
+        "share": 0.1863
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_1",
+        "share": 0.0636
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_1",
+        "share": 0.1632
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_1",
+        "share": 0.0343
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_1",
+        "share": 0.2231
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_1",
+        "share": 0.147
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_1",
+        "share": 0.0933
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_1",
+        "share": 0.0891
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_2",
+        "share": 0.3007
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_2",
+        "share": 0.088
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_2",
+        "share": 0.1217
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_2",
+        "share": 0.112
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_2",
+        "share": 0.0217
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_2",
+        "share": 0.1179
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_2",
+        "share": 0.0832
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_2",
+        "share": 0.1549
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_3",
+        "share": 0.4164
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_3",
+        "share": 0.0484
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_3",
+        "share": 0.1748
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_3",
+        "share": 0.1183
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_3",
+        "share": 0.0597
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_3",
+        "share": 0.0836
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_3",
+        "share": 0.0873
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_4",
+        "share": 0.1
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_4",
+        "share": 0.116
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_4",
+        "share": 0.248
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_4",
+        "share": 0.1572
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_4",
+        "share": 0.1207
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_4",
+        "share": 0.0835
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_4",
+        "share": 0.158
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_5",
+        "share": 0.2463
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_5",
+        "share": 0.0386
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_5",
+        "share": 0.2195
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_5",
+        "share": 0.0883
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_5",
+        "share": 0.0395
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_5",
+        "share": 0.1367
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_5",
+        "share": 0.1303
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_5",
+        "share": 0.1008
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_6",
+        "share": 0.2222
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_6",
+        "share": 0.2927
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_6",
+        "share": 0.0204
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_6",
+        "share": 0.1489
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_6",
+        "share": 0.1128
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_6",
+        "share": 0.1151
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_6",
+        "share": 0.0771
+      }
+    ]
+  },
+  "cert": {
+    "identification": {
+      "system": "XPLAIN-x1",
+      "dataset": "drybean",
+      "task": "classification",
+      "n": 13611,
+      "d": 16,
+      "git_commit": "37579b51d1a602325dd0665d13d4e73b3b86ee3b",
+      "config_hash": "c9e5554685f05c4ec9c450d45c96538be894ce5fd3d6d1ebbf6f31c98f973c77",
+      "data_hash": "3205762c4072cadd-2227d67f25e818b7",
+      "seeds": {
+        "main": 0,
+        "restarts": 8,
+        "cpss_runs": 40
+      }
+    },
+    "performance_and_limits": {
+      "fidelity_val": 0.8817009842442187,
+      "fidelity_ceiling": 0.8960529601850736,
+      "fidelity_ratio": 0.984,
+      "accuracy_test": 0.9239809034153507,
+      "concept_tax_note": "vs best(unconstrained MLP, HGB) on val",
+      "restart_fidelities": [
+        0.8817009842442187,
+        0.8846439265096825,
+        0.883438349258868,
+        0.8786571075502426,
+        0.8866402014486886,
+        0.8842749867702228,
+        0.876478616285952,
+        0.8842617740970239
+      ]
+    },
+    "interpretability_structure": {
+      "widths": [
+        8
+      ],
+      "honest_depth": {
+        "depth": 1,
+        "eps_depth": 0.005,
+        "pairwise_dissolutions": [],
+        "all_earned": true
+      },
+      "n_concepts": 45,
+      "n_core": 0,
+      "n_periphery": 45,
+      "core_coverage_share": 0,
+      "periphery_reasons": [
+        "absent_in_main",
+        "infrequent",
+        "multiplicitous",
+        "unstable"
+      ]
+    },
+    "statistical_certification": {
+      "regime": "standard",
+      "restarts_R": 8,
+      "cpss_pairs_B": 20,
+      "tau_match": 0.7,
+      "pi_thr": 0.7,
+      "mu_min": 0.8,
+      "ev_bound": 0.22134518678160925,
+      "q_mean": 7.85,
+      "p_universe": 696,
+      "assumptions": [
+        "CPSS exchangeability (Meinshausen-Buhlmann) over an adaptive learned pipeline is a modelling idealisation; the reality test provides an independent assumption-light check.",
+        "The universe is structure-level: supports of arity <= F_max per layer interface of the delivered topology."
+      ]
+    },
+    "concepts": [
+      {
+        "cid": "c0",
+        "Pi": 0.5,
+        "members": {
+          "0": "L1U6",
+          "2": "L1U7",
+          "3": "L1U7",
+          "5": "L1U4"
+        },
+        "modal_support": [
+          1,
+          4,
+          6
+        ],
+        "support_variants": [
+          [
+            1,
+            4,
+            6
+          ],
+          [
+            6,
+            9,
+            10
+          ],
+          [
+            6,
+            10,
+            13
+          ],
+          [
+            7
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U6",
+        "mu": 0.970244824886322,
+        "form": "poly(2)",
+        "support_names": [
+          "ConvexArea",
+          "AspectRation",
+          "Perimeter"
+        ],
+        "layer": 1,
+        "contribution": 0.49038244565642364,
+        "pi": 0.25,
+        "delta": 0.4841518474067429,
+        "ci_low": 0.44518057015987855,
+        "ci_high": 0.5231553637393919,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.3185
+      },
+      {
+        "cid": "c1",
+        "Pi": 0.25,
+        "members": {
+          "0": "L1U2",
+          "3": "L1U0"
+        },
+        "modal_support": [
+          9,
+          10,
+          12
+        ],
+        "support_variants": [
+          [
+            9,
+            10,
+            12
+          ],
+          [
+            7,
+            9,
+            12
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U2",
+        "mu": 0.9813281297683716,
+        "form": "poly(2)",
+        "support_names": [
+          "roundness",
+          "Solidity",
+          "ShapeFactor1"
+        ],
+        "layer": 1,
+        "contribution": 0.12842609529563997,
+        "pi": 0.125,
+        "delta": 0.13021514098277542,
+        "ci_low": 0.11290044035302826,
+        "ci_high": 0.1488384579472182,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0857
+      },
+      {
+        "cid": "c2",
+        "Pi": 0.5,
+        "members": {
+          "0": "L1U4",
+          "3": "L1U6",
+          "5": "L1U0",
+          "7": "L1U5"
+        },
+        "modal_support": [
+          3,
+          11,
+          15
+        ],
+        "support_variants": [
+          [
+            3,
+            11,
+            15
+          ],
+          [
+            3,
+            14,
+            15
+          ],
+          [
+            4,
+            6,
+            7
+          ],
+          [
+            3,
+            13,
+            15
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U4",
+        "mu": 0.9387583136558533,
+        "form": "poly(2)",
+        "support_names": [
+          "MinorAxisLength",
+          "Compactness",
+          "ShapeFactor4"
+        ],
+        "layer": 1,
+        "contribution": 0.1712435209675105,
+        "pi": 0.25,
+        "delta": 0.17051018157038844,
+        "ci_low": 0.14735239429773134,
+        "ci_high": 0.19318897519264128,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1122
+      },
+      {
+        "cid": "c3",
+        "Pi": 0.5,
+        "members": {
+          "0": "L1U3",
+          "1": "L1U3",
+          "3": "L1U3",
+          "7": "L1U4"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0,
+            14,
+            15
+          ],
+          [
+            0
+          ],
+          [
+            0,
+            1,
+            4
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U3",
+        "mu": 0.9713094234466553,
+        "form": "poly(2)",
+        "support_names": [
+          "Area",
+          "ShapeFactor4",
+          "ShapeFactor3"
+        ],
+        "layer": 1,
+        "contribution": 0.023204523830309687,
+        "pi": 0.375,
+        "delta": 0.022885776750356968,
+        "ci_low": 0.01758324657068091,
+        "ci_high": 0.028550887523128985,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0151
+      },
+      {
+        "cid": "c4",
+        "Pi": 0.5,
+        "members": {
+          "0": "L1U0",
+          "4": "L1U3",
+          "5": "L1U3",
+          "6": "L1U0"
+        },
+        "modal_support": [
+          13
+        ],
+        "support_variants": [
+          [
+            0,
+            10,
+            12
+          ],
+          [
+            13
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U0",
+        "mu": 0.9684984683990479,
+        "form": "poly(2)",
+        "support_names": [
+          "Area",
+          "ShapeFactor1",
+          "roundness"
+        ],
+        "layer": 1,
+        "contribution": 0.25121409037789766,
+        "pi": 0.575,
+        "delta": 0.2503143637981543,
+        "ci_low": 0.23304887824501347,
+        "ci_high": 0.26820629687288766,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1647
+      },
+      {
+        "cid": "c5",
+        "Pi": 0.375,
+        "members": {
+          "0": "L1U1",
+          "4": "L1U2",
+          "6": "L1U1"
+        },
+        "modal_support": [
+          2,
+          13,
+          15
+        ],
+        "support_variants": [
+          [
+            2,
+            13,
+            15
+          ],
+          [
+            5,
+            6,
+            15
+          ],
+          [
+            6,
+            7,
+            11
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U1",
+        "mu": 0.9674776196479797,
+        "form": "poly(2)",
+        "support_names": [
+          "ShapeFactor4",
+          "MajorAxisLength",
+          "ShapeFactor2"
+        ],
+        "layer": 1,
+        "contribution": 0.12864485558490435,
+        "pi": 0.225,
+        "delta": 0.12751398910891798,
+        "ci_low": 0.1159353827868563,
+        "ci_high": 0.13980777519879659,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0839
+      },
+      {
+        "cid": "c6",
+        "Pi": 0.375,
+        "members": {
+          "0": "L1U7",
+          "2": "L1U0",
+          "6": "L1U5"
+        },
+        "modal_support": [
+          2,
+          5,
+          15
+        ],
+        "support_variants": [
+          [
+            2,
+            5,
+            15
+          ],
+          [
+            0,
+            5,
+            15
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U7",
+        "mu": 0.9680287837982178,
+        "form": "poly(2)",
+        "support_names": [
+          "Eccentricity",
+          "MajorAxisLength",
+          "ShapeFactor4"
+        ],
+        "layer": 1,
+        "contribution": 0.15710412532556683,
+        "pi": 0.075,
+        "delta": 0.17101773521391594,
+        "ci_low": 0.15441415913513573,
+        "ci_high": 0.18854421555522688,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1125
+      },
+      {
+        "cid": "c7",
+        "Pi": 0.375,
+        "members": {
+          "0": "L1U5",
+          "1": "L1U6",
+          "6": "L1U2"
+        },
+        "modal_support": [
+          4,
+          9,
+          12
+        ],
+        "support_variants": [
+          [
+            4,
+            9,
+            12
+          ],
+          [
+            12
+          ],
+          [
+            6,
+            10,
+            12
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U5",
+        "mu": 0.9700246453285217,
+        "form": "poly(2)",
+        "support_names": [
+          "ShapeFactor1",
+          "AspectRation",
+          "Solidity"
+        ],
+        "layer": 1,
+        "contribution": 0.15188852206107684,
+        "pi": 0.65,
+        "delta": 0.16346302444109395,
+        "ci_low": 0.14721625144291947,
+        "ci_high": 0.1803930326459471,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1075
+      },
+      {
+        "cid": "e0",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U7"
+        },
+        "modal_support": [
+          6,
+          13,
+          15
+        ],
+        "support_variants": [
+          [
+            6,
+            13,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e1",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U4"
+        },
+        "modal_support": [
+          0,
+          5
+        ],
+        "support_variants": [
+          [
+            0,
+            5
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e2",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U2"
+        },
+        "modal_support": [
+          4
+        ],
+        "support_variants": [
+          [
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e3",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U0"
+        },
+        "modal_support": [
+          10,
+          11,
+          15
+        ],
+        "support_variants": [
+          [
+            10,
+            11,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e4",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U1"
+        },
+        "modal_support": [
+          10,
+          15
+        ],
+        "support_variants": [
+          [
+            10,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e5",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U5"
+        },
+        "modal_support": [
+          5,
+          10,
+          12
+        ],
+        "support_variants": [
+          [
+            5,
+            10,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e6",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U5"
+        },
+        "modal_support": [
+          2,
+          13,
+          15
+        ],
+        "support_variants": [
+          [
+            2,
+            13,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e7",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U6"
+        },
+        "modal_support": [
+          6,
+          10,
+          12
+        ],
+        "support_variants": [
+          [
+            6,
+            10,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e8",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U3"
+        },
+        "modal_support": [
+          2
+        ],
+        "support_variants": [
+          [
+            2
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e9",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U4"
+        },
+        "modal_support": [
+          10
+        ],
+        "support_variants": [
+          [
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e10",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U2"
+        },
+        "modal_support": [
+          2,
+          5,
+          15
+        ],
+        "support_variants": [
+          [
+            2,
+            5,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e11",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U1"
+        },
+        "modal_support": [
+          15
+        ],
+        "support_variants": [
+          [
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e12",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U4"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e13",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U5"
+        },
+        "modal_support": [
+          5,
+          12,
+          15
+        ],
+        "support_variants": [
+          [
+            5,
+            12,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e14",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U1"
+        },
+        "modal_support": [
+          6,
+          12,
+          15
+        ],
+        "support_variants": [
+          [
+            6,
+            12,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e15",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U2"
+        },
+        "modal_support": [
+          0,
+          4,
+          12
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e16",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U5"
+        },
+        "modal_support": [
+          3
+        ],
+        "support_variants": [
+          [
+            3
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e17",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U7"
+        },
+        "modal_support": [
+          4,
+          12,
+          15
+        ],
+        "support_variants": [
+          [
+            4,
+            12,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e18",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U1"
+        },
+        "modal_support": [
+          10,
+          13,
+          15
+        ],
+        "support_variants": [
+          [
+            10,
+            13,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e19",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U0"
+        },
+        "modal_support": [
+          4,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            4,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e20",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U6"
+        },
+        "modal_support": [
+          1,
+          10,
+          12
+        ],
+        "support_variants": [
+          [
+            1,
+            10,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e21",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U4"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e22",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U7"
+        },
+        "modal_support": [
+          1,
+          12,
+          13
+        ],
+        "support_variants": [
+          [
+            1,
+            12,
+            13
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e23",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U2"
+        },
+        "modal_support": [
+          10,
+          12,
+          14
+        ],
+        "support_variants": [
+          [
+            10,
+            12,
+            14
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e24",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U1"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e25",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U6"
+        },
+        "modal_support": [
+          9
+        ],
+        "support_variants": [
+          [
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e26",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U5"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e27",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U7"
+        },
+        "modal_support": [
+          3
+        ],
+        "support_variants": [
+          [
+            3
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e28",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U6"
+        },
+        "modal_support": [
+          2,
+          4,
+          11
+        ],
+        "support_variants": [
+          [
+            2,
+            4,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e29",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U3"
+        },
+        "modal_support": [
+          10,
+          13,
+          15
+        ],
+        "support_variants": [
+          [
+            10,
+            13,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e30",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U4"
+        },
+        "modal_support": [
+          11,
+          13,
+          15
+        ],
+        "support_variants": [
+          [
+            11,
+            13,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e31",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U0"
+        },
+        "modal_support": [
+          5,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            5,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e32",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U7"
+        },
+        "modal_support": [
+          3,
+          7,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            7,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e33",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U2"
+        },
+        "modal_support": [
+          10,
+          14,
+          15
+        ],
+        "support_variants": [
+          [
+            10,
+            14,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e34",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U3"
+        },
+        "modal_support": [
+          8,
+          10,
+          12
+        ],
+        "support_variants": [
+          [
+            8,
+            10,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e35",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U1"
+        },
+        "modal_support": [
+          3,
+          5,
+          9
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e36",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U6"
+        },
+        "modal_support": [
+          5,
+          10
+        ],
+        "support_variants": [
+          [
+            5,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      }
+    ],
+    "routes": {
+      "feature_groups": [
+        [
+          "Area",
+          "Perimeter",
+          "MajorAxisLength",
+          "ConvexArea",
+          "EquivDiameter",
+          "ShapeFactor2"
+        ],
+        [
+          "MinorAxisLength",
+          "ShapeFactor1"
+        ],
+        [
+          "AspectRation",
+          "Eccentricity",
+          "roundness",
+          "Compactness",
+          "ShapeFactor3"
+        ],
+        [
+          "Extent"
+        ],
+        [
+          "Solidity"
+        ],
+        [
+          "ShapeFactor4"
+        ]
+      ],
+      "rows": [
+        {
+          "rid": "r0",
+          "support_groups": [
+            0
+          ],
+          "support_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "common_core": [
+            0
+          ],
+          "common_core_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "variants": [
+            [
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              1,
+              4
+            ],
+            [
+              0,
+              1,
+              5
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              2,
+              4
+            ],
+            [
+              0,
+              2,
+              5
+            ],
+            [
+              0,
+              5
+            ]
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "members_main": [
+            "L1U0",
+            "L1U1",
+            "L1U3",
+            "L1U6",
+            "L1U7"
+          ],
+          "mu": 0.9713094234466553,
+          "multiplicitous": false,
+          "delta": 0.9339468742398833,
+          "ci_low": 0.8970479655032698,
+          "ci_high": 0.9684211910243562,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "rid": "r1",
+          "support_groups": [
+            1,
+            2
+          ],
+          "support_names": [
+            "G1{MinorAxisLength, ShapeFactor1}",
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "common_core": [
+            1
+          ],
+          "common_core_names": [
+            "G1{MinorAxisLength, ShapeFactor1}"
+          ],
+          "variants": [
+            [
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              2,
+              4
+            ],
+            [
+              1,
+              2,
+              5
+            ]
+          ],
+          "Pi": 0.875,
+          "pi": 0.9,
+          "members_main": [
+            "L1U2",
+            "L1U4",
+            "L1U5"
+          ],
+          "mu": 0.9813281297683716,
+          "multiplicitous": false,
+          "delta": 0.7686345921702273,
+          "ci_low": 0.7147259322509402,
+          "ci_high": 0.8261533986916354,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "rid": "r2",
+          "support_groups": [
+            2
+          ],
+          "support_names": [
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "common_core": [
+            2
+          ],
+          "common_core_names": [
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "variants": [
+            [
+              2
+            ],
+            [
+              2,
+              5
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.525,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r3",
+          "support_groups": [
+            4
+          ],
+          "support_names": [
+            "Solidity"
+          ],
+          "common_core": [
+            4
+          ],
+          "common_core_names": [
+            "Solidity"
+          ],
+          "variants": [
+            [
+              4
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.1,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r4",
+          "support_groups": [
+            5
+          ],
+          "support_names": [
+            "ShapeFactor4"
+          ],
+          "common_core": [
+            5
+          ],
+          "common_core_names": [
+            "ShapeFactor4"
+          ],
+          "variants": [
+            [
+              5
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.15,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        }
+      ],
+      "n_core_routes": 2,
+      "ev_bound_routes": 2.596074695121952,
+      "note": "Routes are certified at the collinearity-group level (the level stable across retrainings); unit members are one carving from an explicit equivalence class."
+    },
+    "function_decomposition": {
+      "note": "Purified weighted-fANOVA components of the learned function under the DECLARED empirical training measure (unique given the measure; carving-invariant).  Shares are out-of-sample covariances on validation.",
+      "components": [
+        {
+          "support": [
+            0
+          ],
+          "support_names": [
+            "Area"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "share_main": 0.4315,
+          "shares_all": [
+            0.4315,
+            0.3152,
+            0.4271,
+            0.4367,
+            0.4556,
+            0.4074,
+            0.4099,
+            0.3487
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            1
+          ],
+          "support_names": [
+            "Perimeter"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "share_main": 0.0985,
+          "shares_all": [
+            0.0985,
+            0.1262,
+            0.1384,
+            0.1134,
+            0.1444,
+            0.1344,
+            0.1472,
+            0.1316
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            2
+          ],
+          "support_names": [
+            "MajorAxisLength"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "share_main": 0.1062,
+          "shares_all": [
+            0.1062,
+            0.1497,
+            0.1667,
+            0.1134,
+            0.0927,
+            0.1545,
+            0.1173,
+            0.1477
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            3
+          ],
+          "support_names": [
+            "MinorAxisLength"
+          ],
+          "group_support": [
+            1
+          ],
+          "group_names": [
+            "G1{MinorAxisLength, ShapeFactor1}"
+          ],
+          "share_main": 0.2903,
+          "shares_all": [
+            0.2903,
+            0.2615,
+            0.2493,
+            0.2705,
+            0.2109,
+            0.2038,
+            0.1905,
+            0.2594
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            4
+          ],
+          "support_names": [
+            "AspectRation"
+          ],
+          "group_support": [
+            2
+          ],
+          "group_names": [
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "share_main": 0.2648,
+          "shares_all": [
+            0.2648,
+            0.2585,
+            0.2326,
+            0.3087,
+            0.272,
+            0.3082,
+            0.274,
+            0.2345
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            6
+          ],
+          "support_names": [
+            "ConvexArea"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "share_main": 0.0626,
+          "shares_all": [
+            0.0626,
+            0.0419,
+            0.0497,
+            0.0555,
+            0.0526,
+            0.0534,
+            0.055,
+            0.0442
+          ],
+          "Pi": 1.0,
+          "pi": 0.825,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            7
+          ],
+          "support_names": [
+            "EquivDiameter"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0129
+          ],
+          "Pi": 0.125,
+          "pi": 0.675,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            9
+          ],
+          "support_names": [
+            "Solidity"
+          ],
+          "group_support": [
+            4
+          ],
+          "group_names": [
+            "Solidity"
+          ],
+          "share_main": 0.0146,
+          "shares_all": [
+            0.0146,
+            0.0295,
+            0.0342,
+            0.0301,
+            0.0191,
+            0.0553,
+            0.0127,
+            0.0264
+          ],
+          "Pi": 1.0,
+          "pi": 0.95,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            10
+          ],
+          "support_names": [
+            "roundness"
+          ],
+          "group_support": [
+            2
+          ],
+          "group_names": [
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "share_main": 0.0449,
+          "shares_all": [
+            0.0449,
+            0.1062,
+            0.0534,
+            0.0697,
+            0.1049,
+            0.059,
+            0.0518,
+            0.1659
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            11
+          ],
+          "support_names": [
+            "Compactness"
+          ],
+          "group_support": [
+            2
+          ],
+          "group_names": [
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "share_main": 0.1099,
+          "shares_all": [
+            0.1099,
+            0.0708,
+            0.0985,
+            0.0967,
+            0.0876,
+            0.078,
+            0.1154,
+            0.1007
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            12
+          ],
+          "support_names": [
+            "ShapeFactor1"
+          ],
+          "group_support": [
+            1
+          ],
+          "group_names": [
+            "G1{MinorAxisLength, ShapeFactor1}"
+          ],
+          "share_main": 0.0972,
+          "shares_all": [
+            0.0972,
+            0.0581,
+            0.0979,
+            0.06,
+            0.1051,
+            0.0756,
+            0.0983,
+            0.0661
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            13
+          ],
+          "support_names": [
+            "ShapeFactor2"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "share_main": 0.2,
+          "shares_all": [
+            0.2,
+            0.2452,
+            0.1809,
+            0.2468,
+            0.2485,
+            0.2643,
+            0.204,
+            0.2227
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            15
+          ],
+          "support_names": [
+            "ShapeFactor4"
+          ],
+          "group_support": [
+            5
+          ],
+          "group_names": [
+            "ShapeFactor4"
+          ],
+          "share_main": 0.1181,
+          "shares_all": [
+            0.1181,
+            0.1206,
+            0.2226,
+            0.1049,
+            0.0984,
+            0.0757,
+            0.1733,
+            0.1506
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            0,
+            1
+          ],
+          "support_names": [
+            "Area",
+            "Perimeter"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0109,
+            0.0107,
+            0.0,
+            0.0118
+          ],
+          "Pi": 0.375,
+          "pi": 0.125,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            2
+          ],
+          "support_names": [
+            "Area",
+            "MajorAxisLength"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "share_main": 0.0108,
+          "shares_all": [
+            0.0108,
+            0.018,
+            0.0174,
+            0.0141,
+            0.013,
+            0.0111,
+            0.0144,
+            0.0164
+          ],
+          "Pi": 1.0,
+          "pi": 0.875,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            0,
+            3
+          ],
+          "support_names": [
+            "Area",
+            "MinorAxisLength"
+          ],
+          "group_support": [
+            0,
+            1
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "G1{MinorAxisLength, ShapeFactor1}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0129,
+            0.0128,
+            0.0101,
+            0.0,
+            0.0103,
+            0.0109,
+            0.0115
+          ],
+          "Pi": 0.75,
+          "pi": 0.8,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "support": [
+            0,
+            4
+          ],
+          "support_names": [
+            "Area",
+            "AspectRation"
+          ],
+          "group_support": [
+            0,
+            2
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "share_main": 0.0307,
+          "shares_all": [
+            0.0307,
+            0.0282,
+            0.0219,
+            0.0295,
+            0.0365,
+            0.0164,
+            0.0301,
+            0.0264
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            0,
+            9
+          ],
+          "support_names": [
+            "Area",
+            "Solidity"
+          ],
+          "group_support": [
+            0,
+            4
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "Solidity"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0163,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.125,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            10
+          ],
+          "support_names": [
+            "Area",
+            "roundness"
+          ],
+          "group_support": [
+            0,
+            2
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "share_main": 0.0119,
+          "shares_all": [
+            0.0119,
+            0.0121,
+            0.0191,
+            0.015,
+            0.0141,
+            0.0131,
+            0.0142,
+            0.0141
+          ],
+          "Pi": 1.0,
+          "pi": 0.7,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            0,
+            13
+          ],
+          "support_names": [
+            "Area",
+            "ShapeFactor2"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "share_main": 0.0273,
+          "shares_all": [
+            0.0273,
+            0.0373,
+            0.0307,
+            0.0361,
+            0.0235,
+            0.0231,
+            0.0322,
+            0.0281
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            0,
+            14
+          ],
+          "support_names": [
+            "Area",
+            "ShapeFactor3"
+          ],
+          "group_support": [
+            0,
+            2
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0114,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.15,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            15
+          ],
+          "support_names": [
+            "Area",
+            "ShapeFactor4"
+          ],
+          "group_support": [
+            0,
+            5
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "ShapeFactor4"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.012,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.1,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            1,
+            13
+          ],
+          "support_names": [
+            "Perimeter",
+            "ShapeFactor2"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}"
+          ],
+          "share_main": 0.0174,
+          "shares_all": [
+            0.0174,
+            0.0191,
+            0.017,
+            0.0152,
+            0.0,
+            0.0149,
+            0.0112,
+            0.013
+          ],
+          "Pi": 0.875,
+          "pi": 0.8,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            2,
+            4
+          ],
+          "support_names": [
+            "MajorAxisLength",
+            "AspectRation"
+          ],
+          "group_support": [
+            0,
+            2
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "share_main": 0.0188,
+          "shares_all": [
+            0.0188,
+            0.0192,
+            0.0145,
+            0.0135,
+            0.0199,
+            0.0114,
+            0.0209,
+            0.0147
+          ],
+          "Pi": 1.0,
+          "pi": 0.025,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            3,
+            12
+          ],
+          "support_names": [
+            "MinorAxisLength",
+            "ShapeFactor1"
+          ],
+          "group_support": [
+            1
+          ],
+          "group_names": [
+            "G1{MinorAxisLength, ShapeFactor1}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0156,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.1,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            3,
+            13
+          ],
+          "support_names": [
+            "MinorAxisLength",
+            "ShapeFactor2"
+          ],
+          "group_support": [
+            0,
+            1
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "G1{MinorAxisLength, ShapeFactor1}"
+          ],
+          "share_main": 0.0123,
+          "shares_all": [
+            0.0123,
+            0.0132,
+            0.0179,
+            0.0176,
+            0.0,
+            0.0,
+            0.0141,
+            0.012
+          ],
+          "Pi": 0.75,
+          "pi": 0.95,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            4,
+            13
+          ],
+          "support_names": [
+            "AspectRation",
+            "ShapeFactor2"
+          ],
+          "group_support": [
+            0,
+            2
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "share_main": 0.0519,
+          "shares_all": [
+            0.0519,
+            0.0611,
+            0.0527,
+            0.0484,
+            0.047,
+            0.0372,
+            0.0581,
+            0.0447
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            5,
+            13
+          ],
+          "support_names": [
+            "Eccentricity",
+            "ShapeFactor2"
+          ],
+          "group_support": [
+            0,
+            2
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0264,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.2,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            11,
+            13
+          ],
+          "support_names": [
+            "Compactness",
+            "ShapeFactor2"
+          ],
+          "group_support": [
+            0,
+            2
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "G2{AspectRation, Eccentricity, roundness, +2}"
+          ],
+          "share_main": 0.0139,
+          "shares_all": [
+            0.0139,
+            0.0104,
+            0.0147,
+            0.0141,
+            0.0,
+            0.0144,
+            0.0,
+            0.0132
+          ],
+          "Pi": 0.75,
+          "pi": 0.75,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            12,
+            13
+          ],
+          "support_names": [
+            "ShapeFactor1",
+            "ShapeFactor2"
+          ],
+          "group_support": [
+            0,
+            1
+          ],
+          "group_names": [
+            "G0{Area, Perimeter, MajorAxisLength, +3}",
+            "G1{MinorAxisLength, ShapeFactor1}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0128
+          ],
+          "Pi": 0.125,
+          "pi": 0.2,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        }
+      ],
+      "n_core": 20,
+      "group_shares": {
+        "0": 0.9543,
+        "1": 0.3875,
+        "2": 0.4196,
+        "4": 0.0146,
+        "5": 0.1181,
+        "0,2": 0.1084,
+        "0,1": 0.0123
+      },
+      "ev_bound": 1.8184267241379315,
+      "recon_r2": 0.9548
+    },
+    "portfolio_reliance": [
+      {
+        "group": "G0{Area, Perimeter, MajorAxisLength, +3}",
+        "min_reliance": 0.8105,
+        "max_reliance": 2.9396
+      },
+      {
+        "group": "G1{MinorAxisLength, ShapeFactor1}",
+        "min_reliance": 0.5126,
+        "max_reliance": 1.4719
+      },
+      {
+        "group": "G2{AspectRation, Eccentricity, roundness, +2}",
+        "min_reliance": 0.461,
+        "max_reliance": 1.0556
+      },
+      {
+        "group": "Extent",
+        "min_reliance": 0.0,
+        "max_reliance": 0.0032
+      },
+      {
+        "group": "Solidity",
+        "min_reliance": 0.0043,
+        "max_reliance": 0.0448
+      },
+      {
+        "group": "ShapeFactor4",
+        "min_reliance": 0.0966,
+        "max_reliance": 0.1738
+      }
+    ],
+    "non_claims": [
+      "CORE concepts are stable, real structures - not proven causal mechanisms of the world (M-C7).",
+      "The periphery is labelled, not certified.",
+      "Unit semantics require expert review (the soft target)."
+    ]
+  },
+  "core_share_sum": 2.0148,
+  "bars": [
+    {
+      "id": "fidelity \u2265 ceiling",
+      "pass": true,
+      "detail": "ratio 0.984 vs unconstrained MLP/HGB"
+    },
+    {
+      "id": "core coverage \u2265 0.5",
+      "pass": true,
+      "detail": "certified components cover 2.01 of function variance"
+    },
+    {
+      "id": "E[V] non-vacuous",
+      "pass": false,
+      "detail": "E[V] \u2264 1.818 over the structure-level universe"
+    },
+    {
+      "id": "honest depth",
+      "pass": true,
+      "detail": "depth 1; widths 8"
+    }
+  ]
+}

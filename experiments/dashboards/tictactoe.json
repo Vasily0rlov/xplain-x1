@@ -1,0 +1,3633 @@
+{
+  "dag": {
+    "dataset": "tictactoe",
+    "nodes": [
+      {
+        "id": "top-left-square",
+        "kind": "input",
+        "label": "top-left-square"
+      },
+      {
+        "id": "top-middle-square",
+        "kind": "input",
+        "label": "top-middle-square"
+      },
+      {
+        "id": "top-right-square",
+        "kind": "input",
+        "label": "top-right-square"
+      },
+      {
+        "id": "middle-left-square",
+        "kind": "input",
+        "label": "middle-left-square"
+      },
+      {
+        "id": "middle-middle-square",
+        "kind": "input",
+        "label": "middle-middle-square"
+      },
+      {
+        "id": "middle-right-square",
+        "kind": "input",
+        "label": "middle-right-square"
+      },
+      {
+        "id": "bottom-left-square",
+        "kind": "input",
+        "label": "bottom-left-square"
+      },
+      {
+        "id": "bottom-middle-square",
+        "kind": "input",
+        "label": "bottom-middle-square"
+      },
+      {
+        "id": "bottom-right-square",
+        "kind": "input",
+        "label": "bottom-right-square"
+      },
+      {
+        "id": "L1U5",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(top-middle-square, middle-left-square, middle-right-square)",
+        "mu": 0.481469988822937,
+        "Pi": 0.5,
+        "pi": 0.025,
+        "delta": 1.3332804912748888,
+        "coverage": 1.303239228047167,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "top-middle-square",
+          "middle-left-square",
+          "middle-right-square"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U4",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(bottom-left-square, top-left-square, top-right-square)",
+        "mu": 0.6710745692253113,
+        "Pi": 0.625,
+        "pi": 0.05,
+        "delta": 0.17907930492290647,
+        "coverage": 0.1440201588273079,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "bottom-left-square",
+          "top-left-square",
+          "top-right-square"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U1",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(middle-middle-square, bottom-left-square, bottom-right-square)",
+        "mu": 0.6114284992218018,
+        "Pi": 0.125,
+        "pi": 0.05,
+        "delta": 0.4852556291642909,
+        "coverage": 0.3027618116024241,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "middle-middle-square",
+          "bottom-left-square",
+          "bottom-right-square"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U6",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(middle-middle-square, middle-right-square, middle-left-square)",
+        "mu": 0.636207103729248,
+        "Pi": 0.25,
+        "pi": 0.0,
+        "delta": 0.15884027399403378,
+        "coverage": 0.1990531611919052,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "middle-middle-square",
+          "middle-right-square",
+          "middle-left-square"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U0",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(middle-middle-square, top-right-square, bottom-right-square)",
+        "mu": 0.6683877110481262,
+        "Pi": 0.25,
+        "pi": 0.05,
+        "delta": 0.3013949484715599,
+        "coverage": 0.2239620601754696,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "middle-middle-square",
+          "top-right-square",
+          "bottom-right-square"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U3",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(top-left-square, top-right-square, bottom-middle-square)",
+        "mu": 0.8448009796938387,
+        "Pi": 0.125,
+        "pi": 0.075,
+        "delta": 0.028139224812896213,
+        "coverage": 0.16569603424767532,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "top-left-square",
+          "top-right-square",
+          "bottom-middle-square"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U7",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(top-left-square, top-middle-square, middle-middle-square)",
+        "mu": 0.8882324588035004,
+        "Pi": 0.125,
+        "pi": 0.075,
+        "delta": 0.11604487102112193,
+        "coverage": 0.07596835907684751,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "top-left-square",
+          "top-middle-square",
+          "middle-middle-square"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U2",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(middle-middle-square, bottom-middle-square, middle-right-square)",
+        "mu": 0.8905225396156311,
+        "Pi": 0.125,
+        "pi": 0.025,
+        "delta": 0.08016125776705407,
+        "coverage": 0.013201770139593894,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "middle-middle-square",
+          "bottom-middle-square",
+          "middle-right-square"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "class_0",
+        "kind": "output",
+        "label": "class_0"
+      },
+      {
+        "id": "class_1",
+        "kind": "output",
+        "label": "class_1"
+      }
+    ],
+    "edges": [
+      {
+        "src": "top-left-square",
+        "dst": "L1U5",
+        "share": 0.0688
+      },
+      {
+        "src": "top-middle-square",
+        "dst": "L1U5",
+        "share": 0.1547
+      },
+      {
+        "src": "top-right-square",
+        "dst": "L1U5",
+        "share": 0.0872
+      },
+      {
+        "src": "middle-left-square",
+        "dst": "L1U5",
+        "share": 0.1451
+      },
+      {
+        "src": "middle-middle-square",
+        "dst": "L1U5",
+        "share": 0.0798
+      },
+      {
+        "src": "middle-right-square",
+        "dst": "L1U5",
+        "share": 0.1246
+      },
+      {
+        "src": "bottom-left-square",
+        "dst": "L1U5",
+        "share": 0.1025
+      },
+      {
+        "src": "bottom-middle-square",
+        "dst": "L1U5",
+        "share": 0.1205
+      },
+      {
+        "src": "bottom-right-square",
+        "dst": "L1U5",
+        "share": 0.1168
+      },
+      {
+        "src": "top-left-square",
+        "dst": "L1U4",
+        "share": 0.2488
+      },
+      {
+        "src": "top-right-square",
+        "dst": "L1U4",
+        "share": 0.223
+      },
+      {
+        "src": "bottom-left-square",
+        "dst": "L1U4",
+        "share": 0.3057
+      },
+      {
+        "src": "bottom-right-square",
+        "dst": "L1U4",
+        "share": 0.2225
+      },
+      {
+        "src": "top-left-square",
+        "dst": "L1U1",
+        "share": 0.0909
+      },
+      {
+        "src": "top-middle-square",
+        "dst": "L1U1",
+        "share": 0.0918
+      },
+      {
+        "src": "top-right-square",
+        "dst": "L1U1",
+        "share": 0.0954
+      },
+      {
+        "src": "middle-left-square",
+        "dst": "L1U1",
+        "share": 0.1115
+      },
+      {
+        "src": "middle-middle-square",
+        "dst": "L1U1",
+        "share": 0.1404
+      },
+      {
+        "src": "middle-right-square",
+        "dst": "L1U1",
+        "share": 0.1095
+      },
+      {
+        "src": "bottom-left-square",
+        "dst": "L1U1",
+        "share": 0.1247
+      },
+      {
+        "src": "bottom-middle-square",
+        "dst": "L1U1",
+        "share": 0.1117
+      },
+      {
+        "src": "bottom-right-square",
+        "dst": "L1U1",
+        "share": 0.1241
+      },
+      {
+        "src": "top-left-square",
+        "dst": "L1U6",
+        "share": 0.1829
+      },
+      {
+        "src": "middle-left-square",
+        "dst": "L1U6",
+        "share": 0.1964
+      },
+      {
+        "src": "middle-middle-square",
+        "dst": "L1U6",
+        "share": 0.2589
+      },
+      {
+        "src": "middle-right-square",
+        "dst": "L1U6",
+        "share": 0.198
+      },
+      {
+        "src": "bottom-left-square",
+        "dst": "L1U6",
+        "share": 0.1639
+      },
+      {
+        "src": "top-left-square",
+        "dst": "L1U0",
+        "share": 0.0428
+      },
+      {
+        "src": "top-middle-square",
+        "dst": "L1U0",
+        "share": 0.0611
+      },
+      {
+        "src": "top-right-square",
+        "dst": "L1U0",
+        "share": 0.197
+      },
+      {
+        "src": "middle-left-square",
+        "dst": "L1U0",
+        "share": 0.1787
+      },
+      {
+        "src": "middle-middle-square",
+        "dst": "L1U0",
+        "share": 0.2134
+      },
+      {
+        "src": "bottom-left-square",
+        "dst": "L1U0",
+        "share": 0.0357
+      },
+      {
+        "src": "bottom-middle-square",
+        "dst": "L1U0",
+        "share": 0.1103
+      },
+      {
+        "src": "bottom-right-square",
+        "dst": "L1U0",
+        "share": 0.1611
+      },
+      {
+        "src": "top-left-square",
+        "dst": "L1U3",
+        "share": 0.367
+      },
+      {
+        "src": "top-middle-square",
+        "dst": "L1U3",
+        "share": 0.0725
+      },
+      {
+        "src": "top-right-square",
+        "dst": "L1U3",
+        "share": 0.1826
+      },
+      {
+        "src": "middle-left-square",
+        "dst": "L1U3",
+        "share": 0.0723
+      },
+      {
+        "src": "middle-right-square",
+        "dst": "L1U3",
+        "share": 0.0955
+      },
+      {
+        "src": "bottom-left-square",
+        "dst": "L1U3",
+        "share": 0.0525
+      },
+      {
+        "src": "bottom-middle-square",
+        "dst": "L1U3",
+        "share": 0.1576
+      },
+      {
+        "src": "top-left-square",
+        "dst": "L1U7",
+        "share": 0.4583
+      },
+      {
+        "src": "top-middle-square",
+        "dst": "L1U7",
+        "share": 0.2948
+      },
+      {
+        "src": "top-right-square",
+        "dst": "L1U7",
+        "share": 0.1139
+      },
+      {
+        "src": "middle-left-square",
+        "dst": "L1U7",
+        "share": 0.0775
+      },
+      {
+        "src": "middle-middle-square",
+        "dst": "L1U7",
+        "share": 0.0556
+      },
+      {
+        "src": "middle-middle-square",
+        "dst": "L1U2",
+        "share": 0.4207
+      },
+      {
+        "src": "middle-right-square",
+        "dst": "L1U2",
+        "share": 0.2577
+      },
+      {
+        "src": "bottom-middle-square",
+        "dst": "L1U2",
+        "share": 0.3217
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_0",
+        "share": 0.1977
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_0",
+        "share": 0.114
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_0",
+        "share": 0.1484
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_0",
+        "share": 0.1255
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_0",
+        "share": 0.134
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_0",
+        "share": 0.091
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_0",
+        "share": 0.1001
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_0",
+        "share": 0.0894
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_1",
+        "share": 0.1666
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_1",
+        "share": 0.1735
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_1",
+        "share": 0.1307
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_1",
+        "share": 0.1389
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_1",
+        "share": 0.12
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_1",
+        "share": 0.1064
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_1",
+        "share": 0.0958
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_1",
+        "share": 0.0681
+      }
+    ]
+  },
+  "cert": {
+    "identification": {
+      "system": "XPLAIN-x1",
+      "dataset": "tictactoe",
+      "task": "classification",
+      "n": 958,
+      "d": 9,
+      "git_commit": "37579b51d1a602325dd0665d13d4e73b3b86ee3b",
+      "config_hash": "c9e5554685f05c4ec9c450d45c96538be894ce5fd3d6d1ebbf6f31c98f973c77",
+      "data_hash": "5103cb6c23bf3ece-1f3e9bd872ea14d6",
+      "seeds": {
+        "main": 0,
+        "restarts": 8,
+        "cpss_runs": 40
+      }
+    },
+    "performance_and_limits": {
+      "fidelity_val": 0.9389112554910911,
+      "fidelity_ceiling": 0.912971807928793,
+      "fidelity_ratio": 1.0284,
+      "accuracy_test": 0.9895833333333334,
+      "concept_tax_note": "vs best(unconstrained MLP, HGB) on val",
+      "restart_fidelities": [
+        0.9389112554910911,
+        0.9070430276461464,
+        0.9126916843547679,
+        0.9436732410600215,
+        0.9000440620794505,
+        0.9231640048475516,
+        0.9322801706153768,
+        0.899168875332436
+      ]
+    },
+    "interpretability_structure": {
+      "widths": [
+        8
+      ],
+      "honest_depth": {
+        "depth": 1,
+        "eps_depth": 0.005,
+        "pairwise_dissolutions": [],
+        "all_earned": true
+      },
+      "n_concepts": 55,
+      "n_core": 0,
+      "n_periphery": 55,
+      "core_coverage_share": 0,
+      "periphery_reasons": [
+        "absent_in_main",
+        "infrequent",
+        "multiplicitous",
+        "polysemantic",
+        "unstable"
+      ]
+    },
+    "statistical_certification": {
+      "regime": "below stability power floor (n < 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A)",
+      "restarts_R": 8,
+      "cpss_pairs_B": 20,
+      "tau_match": 0.7,
+      "pi_thr": 0.7,
+      "mu_min": 0.8,
+      "ev_bound": 0.6463299418604653,
+      "q_mean": 5.775,
+      "p_universe": 129,
+      "assumptions": [
+        "CPSS exchangeability (Meinshausen-Buhlmann) over an adaptive learned pipeline is a modelling idealisation; the reality test provides an independent assumption-light check.",
+        "The universe is structure-level: supports of arity <= F_max per layer interface of the delivered topology."
+      ]
+    },
+    "concepts": [
+      {
+        "cid": "c0",
+        "Pi": 0.5,
+        "members": {
+          "0": "L1U5",
+          "1": "L1U7",
+          "4": "L1U2",
+          "7": "L1U5"
+        },
+        "modal_support": [
+          1,
+          3,
+          5
+        ],
+        "support_variants": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            1,
+            5,
+            8
+          ],
+          [
+            1,
+            3,
+            8
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U5",
+        "mu": 0.481469988822937,
+        "form": "poly(2)",
+        "support_names": [
+          "top-middle-square",
+          "middle-left-square",
+          "middle-right-square"
+        ],
+        "layer": 1,
+        "contribution": 1.303239228047167,
+        "pi": 0.025,
+        "delta": 1.3332804912748888,
+        "ci_low": 0.9458211908032257,
+        "ci_high": 1.7854014626223702,
+        "label": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.4971
+      },
+      {
+        "cid": "c1",
+        "Pi": 0.625,
+        "members": {
+          "0": "L1U4",
+          "1": "L1U4",
+          "2": "L1U1",
+          "4": "L1U6",
+          "6": "L1U9"
+        },
+        "modal_support": [
+          0,
+          2,
+          6
+        ],
+        "support_variants": [
+          [
+            0,
+            2,
+            6
+          ],
+          [
+            0,
+            6,
+            8
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U4",
+        "mu": 0.6710745692253113,
+        "form": "poly(2)",
+        "support_names": [
+          "bottom-left-square",
+          "top-left-square",
+          "top-right-square"
+        ],
+        "layer": 1,
+        "contribution": 0.1440201588273079,
+        "pi": 0.05,
+        "delta": 0.17907930492290647,
+        "ci_low": 0.05897276980681563,
+        "ci_high": 0.2991829072699287,
+        "label": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0668
+      },
+      {
+        "cid": "c2",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U1"
+        },
+        "modal_support": [
+          4,
+          6,
+          8
+        ],
+        "support_variants": [
+          [
+            4,
+            6,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U1",
+        "mu": 0.6114284992218018,
+        "form": "poly(2)",
+        "support_names": [
+          "middle-middle-square",
+          "bottom-left-square",
+          "bottom-right-square"
+        ],
+        "layer": 1,
+        "contribution": 0.3027618116024241,
+        "pi": 0.05,
+        "delta": 0.4852556291642909,
+        "ci_low": 0.33351565008248163,
+        "ci_high": 0.650403034383961,
+        "label": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.1809
+      },
+      {
+        "cid": "c3",
+        "Pi": 0.25,
+        "members": {
+          "0": "L1U6",
+          "6": "L1U3"
+        },
+        "modal_support": [
+          3,
+          4,
+          5
+        ],
+        "support_variants": [
+          [
+            3,
+            4,
+            5
+          ],
+          [
+            0,
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U6",
+        "mu": 0.636207103729248,
+        "form": "poly(2)",
+        "support_names": [
+          "middle-middle-square",
+          "middle-right-square",
+          "middle-left-square"
+        ],
+        "layer": 1,
+        "contribution": 0.1990531611919052,
+        "pi": 0.0,
+        "delta": 0.15884027399403378,
+        "ci_low": 0.04988145705101789,
+        "ci_high": 0.3450992104920036,
+        "label": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0592
+      },
+      {
+        "cid": "c4",
+        "Pi": 0.25,
+        "members": {
+          "0": "L1U0",
+          "1": "L1U3"
+        },
+        "modal_support": [
+          2,
+          4,
+          8
+        ],
+        "support_variants": [
+          [
+            2,
+            4,
+            8
+          ],
+          [
+            2,
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U0",
+        "mu": 0.6683877110481262,
+        "form": "poly(2)",
+        "support_names": [
+          "middle-middle-square",
+          "top-right-square",
+          "bottom-right-square"
+        ],
+        "layer": 1,
+        "contribution": 0.2239620601754696,
+        "pi": 0.05,
+        "delta": 0.3013949484715599,
+        "ci_low": 0.14981721499951003,
+        "ci_high": 0.49124498733805116,
+        "label": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1124
+      },
+      {
+        "cid": "c5",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U3"
+        },
+        "modal_support": [
+          0,
+          2,
+          7
+        ],
+        "support_variants": [
+          [
+            0,
+            2,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U3",
+        "mu": 0.8448009796938387,
+        "form": "tree(d3)",
+        "support_names": [
+          "top-left-square",
+          "top-right-square",
+          "bottom-middle-square"
+        ],
+        "layer": 1,
+        "contribution": 0.16569603424767532,
+        "pi": 0.075,
+        "delta": 0.028139224812896213,
+        "ci_low": 0.008181223054916305,
+        "ci_high": 0.051253848927726206,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.0105
+      },
+      {
+        "cid": "c6",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U7"
+        },
+        "modal_support": [
+          0,
+          1,
+          4
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U7",
+        "mu": 0.8882324588035004,
+        "form": "tree(d3)",
+        "support_names": [
+          "top-left-square",
+          "top-middle-square",
+          "middle-middle-square"
+        ],
+        "layer": 1,
+        "contribution": 0.07596835907684751,
+        "pi": 0.075,
+        "delta": 0.11604487102112193,
+        "ci_low": 0.026236536046031704,
+        "ci_high": 0.22074399907322023,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.0433
+      },
+      {
+        "cid": "c7",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U2"
+        },
+        "modal_support": [
+          4,
+          5,
+          7
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U2",
+        "mu": 0.8905225396156311,
+        "form": "poly(2)",
+        "support_names": [
+          "middle-middle-square",
+          "bottom-middle-square",
+          "middle-right-square"
+        ],
+        "layer": 1,
+        "contribution": 0.013201770139593894,
+        "pi": 0.025,
+        "delta": 0.08016125776705407,
+        "ci_low": 0.02112027155397935,
+        "ci_high": 0.1592930214021806,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.0299
+      },
+      {
+        "cid": "e0",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U5"
+        },
+        "modal_support": [
+          0,
+          5,
+          7
+        ],
+        "support_variants": [
+          [
+            0,
+            5,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e1",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U2"
+        },
+        "modal_support": [
+          0,
+          4,
+          6
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e2",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U1"
+        },
+        "modal_support": [
+          2,
+          4,
+          6
+        ],
+        "support_variants": [
+          [
+            2,
+            4,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e3",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U6"
+        },
+        "modal_support": [
+          2,
+          5,
+          8
+        ],
+        "support_variants": [
+          [
+            2,
+            5,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e4",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U0"
+        },
+        "modal_support": [
+          1,
+          5,
+          8
+        ],
+        "support_variants": [
+          [
+            1,
+            5,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e5",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U7"
+        },
+        "modal_support": [
+          0,
+          4,
+          5
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            5
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e6",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U2"
+        },
+        "modal_support": [
+          2,
+          3,
+          7
+        ],
+        "support_variants": [
+          [
+            2,
+            3,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e7",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U0"
+        },
+        "modal_support": [
+          1,
+          3,
+          4
+        ],
+        "support_variants": [
+          [
+            1,
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e8",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U6"
+        },
+        "modal_support": [
+          5,
+          7,
+          8
+        ],
+        "support_variants": [
+          [
+            5,
+            7,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e9",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U5"
+        },
+        "modal_support": [
+          1,
+          4,
+          6
+        ],
+        "support_variants": [
+          [
+            1,
+            4,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e10",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U3"
+        },
+        "modal_support": [
+          8
+        ],
+        "support_variants": [
+          [
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e11",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U2"
+        },
+        "modal_support": [
+          0,
+          4,
+          5
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            5
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e12",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U6"
+        },
+        "modal_support": [
+          2,
+          4,
+          7
+        ],
+        "support_variants": [
+          [
+            2,
+            4,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e13",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U4"
+        },
+        "modal_support": [
+          0,
+          2,
+          8
+        ],
+        "support_variants": [
+          [
+            0,
+            2,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e14",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U3"
+        },
+        "modal_support": [
+          4,
+          6,
+          8
+        ],
+        "support_variants": [
+          [
+            4,
+            6,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e15",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U0"
+        },
+        "modal_support": [
+          4,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e16",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U1"
+        },
+        "modal_support": [
+          1,
+          4,
+          5
+        ],
+        "support_variants": [
+          [
+            1,
+            4,
+            5
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e17",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U5"
+        },
+        "modal_support": [
+          1,
+          3,
+          4
+        ],
+        "support_variants": [
+          [
+            1,
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e18",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U7"
+        },
+        "modal_support": [
+          7
+        ],
+        "support_variants": [
+          [
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e19",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U7"
+        },
+        "modal_support": [
+          0,
+          4,
+          5
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            5
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e20",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U4"
+        },
+        "modal_support": [
+          2,
+          4,
+          7
+        ],
+        "support_variants": [
+          [
+            2,
+            4,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e21",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U1"
+        },
+        "modal_support": [
+          0,
+          4,
+          8
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e22",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U0"
+        },
+        "modal_support": [
+          1,
+          4,
+          7
+        ],
+        "support_variants": [
+          [
+            1,
+            4,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e23",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U3"
+        },
+        "modal_support": [
+          4,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e24",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U10"
+        },
+        "modal_support": [
+          1,
+          3,
+          8
+        ],
+        "support_variants": [
+          [
+            1,
+            3,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e25",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U5"
+        },
+        "modal_support": [
+          2
+        ],
+        "support_variants": [
+          [
+            2
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e26",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U4"
+        },
+        "modal_support": [
+          4,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e27",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U6"
+        },
+        "modal_support": [
+          2,
+          4,
+          7
+        ],
+        "support_variants": [
+          [
+            2,
+            4,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e28",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U3"
+        },
+        "modal_support": [
+          1,
+          2,
+          6
+        ],
+        "support_variants": [
+          [
+            1,
+            2,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e29",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U7"
+        },
+        "modal_support": [
+          0,
+          7,
+          8
+        ],
+        "support_variants": [
+          [
+            0,
+            7,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e30",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U5"
+        },
+        "modal_support": [
+          2,
+          3,
+          8
+        ],
+        "support_variants": [
+          [
+            2,
+            3,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e31",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U0"
+        },
+        "modal_support": [
+          0,
+          4,
+          6
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e32",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U1"
+        },
+        "modal_support": [
+          2,
+          4,
+          5
+        ],
+        "support_variants": [
+          [
+            2,
+            4,
+            5
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e33",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U2"
+        },
+        "modal_support": [
+          1,
+          3,
+          8
+        ],
+        "support_variants": [
+          [
+            1,
+            3,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e34",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U5"
+        },
+        "modal_support": [
+          0,
+          4,
+          7
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e35",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U10"
+        },
+        "modal_support": [
+          1,
+          4,
+          8
+        ],
+        "support_variants": [
+          [
+            1,
+            4,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e36",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U0"
+        },
+        "modal_support": [
+          3,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e37",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U7"
+        },
+        "modal_support": [
+          2,
+          3,
+          7
+        ],
+        "support_variants": [
+          [
+            2,
+            3,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e38",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U1"
+        },
+        "modal_support": [
+          0,
+          1,
+          7
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e39",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U6"
+        },
+        "modal_support": [
+          2,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            2,
+            5,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e40",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U4"
+        },
+        "modal_support": [
+          0,
+          1,
+          4
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e41",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U2"
+        },
+        "modal_support": [
+          5
+        ],
+        "support_variants": [
+          [
+            5
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e42",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U9"
+        },
+        "modal_support": [
+          0,
+          4,
+          7
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e43",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U0"
+        },
+        "modal_support": [
+          4,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e44",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U6"
+        },
+        "modal_support": [
+          0,
+          2,
+          8
+        ],
+        "support_variants": [
+          [
+            0,
+            2,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e45",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U7"
+        },
+        "modal_support": [
+          1,
+          2,
+          3
+        ],
+        "support_variants": [
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e46",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U3"
+        },
+        "modal_support": [
+          1,
+          3,
+          6
+        ],
+        "support_variants": [
+          [
+            1,
+            3,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      }
+    ],
+    "routes": {
+      "feature_groups": [
+        [
+          "top-left-square"
+        ],
+        [
+          "top-middle-square"
+        ],
+        [
+          "top-right-square"
+        ],
+        [
+          "middle-left-square"
+        ],
+        [
+          "middle-middle-square"
+        ],
+        [
+          "middle-right-square"
+        ],
+        [
+          "bottom-left-square"
+        ],
+        [
+          "bottom-middle-square"
+        ],
+        [
+          "bottom-right-square"
+        ]
+      ],
+      "rows": [
+        {
+          "rid": "r0",
+          "support_groups": [
+            2
+          ],
+          "support_names": [
+            "top-right-square"
+          ],
+          "common_core": [
+            2
+          ],
+          "common_core_names": [
+            "top-right-square"
+          ],
+          "variants": [
+            [
+              1,
+              2,
+              6
+            ],
+            [
+              2
+            ],
+            [
+              2,
+              4,
+              6
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.25,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r1",
+          "support_groups": [
+            4,
+            5,
+            6
+          ],
+          "support_names": [
+            "middle-middle-square",
+            "middle-right-square",
+            "bottom-left-square"
+          ],
+          "common_core": [
+            5
+          ],
+          "common_core_names": [
+            "middle-right-square"
+          ],
+          "variants": [
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              5
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.125,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r2",
+          "support_groups": [
+            7
+          ],
+          "support_names": [
+            "bottom-middle-square"
+          ],
+          "common_core": [
+            7
+          ],
+          "common_core_names": [
+            "bottom-middle-square"
+          ],
+          "variants": [
+            [
+              0,
+              2,
+              7
+            ],
+            [
+              0,
+              5,
+              7
+            ],
+            [
+              4,
+              5,
+              7
+            ],
+            [
+              7
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.15,
+          "members_main": [
+            "L1U2",
+            "L1U3"
+          ],
+          "mu": 0.8905225396156311,
+          "multiplicitous": false,
+          "delta": 0.10838947125749798,
+          "ci_low": 0.048575408267193365,
+          "ci_high": 0.18073968121635467,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r3",
+          "support_groups": [
+            0,
+            2,
+            8
+          ],
+          "support_names": [
+            "top-left-square",
+            "top-right-square",
+            "bottom-right-square"
+          ],
+          "common_core": [
+            8
+          ],
+          "common_core_names": [
+            "bottom-right-square"
+          ],
+          "variants": [
+            [
+              0,
+              2,
+              8
+            ],
+            [
+              0,
+              4,
+              8
+            ],
+            [
+              0,
+              6,
+              8
+            ],
+            [
+              1,
+              3,
+              8
+            ],
+            [
+              2,
+              5,
+              8
+            ],
+            [
+              5,
+              7,
+              8
+            ],
+            [
+              8
+            ]
+          ],
+          "Pi": 0.5,
+          "pi": 0.35,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r4",
+          "support_groups": [
+            0,
+            1,
+            4
+          ],
+          "support_names": [
+            "top-left-square",
+            "top-middle-square",
+            "middle-middle-square"
+          ],
+          "common_core": [
+            0,
+            1,
+            4
+          ],
+          "common_core_names": [
+            "top-left-square",
+            "top-middle-square",
+            "middle-middle-square"
+          ],
+          "variants": [
+            [
+              0,
+              1,
+              4
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.05,
+          "members_main": [
+            "L1U7"
+          ],
+          "mu": 0.8882324588035004,
+          "multiplicitous": false,
+          "delta": 0.11604487102112193,
+          "ci_low": 0.026236536046031704,
+          "ci_high": 0.22074399907322023,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r5",
+          "support_groups": [
+            0,
+            3,
+            4
+          ],
+          "support_names": [
+            "top-left-square",
+            "middle-left-square",
+            "middle-middle-square"
+          ],
+          "common_core": [
+            0,
+            3,
+            4
+          ],
+          "common_core_names": [
+            "top-left-square",
+            "middle-left-square",
+            "middle-middle-square"
+          ],
+          "variants": [
+            [
+              0,
+              3,
+              4
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r6",
+          "support_groups": [
+            0,
+            4,
+            6
+          ],
+          "support_names": [
+            "top-left-square",
+            "middle-middle-square",
+            "bottom-left-square"
+          ],
+          "common_core": [
+            0,
+            4,
+            6
+          ],
+          "common_core_names": [
+            "top-left-square",
+            "middle-middle-square",
+            "bottom-left-square"
+          ],
+          "variants": [
+            [
+              0,
+              4,
+              6
+            ]
+          ],
+          "Pi": 0.25,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r7",
+          "support_groups": [
+            1,
+            4,
+            6
+          ],
+          "support_names": [
+            "top-middle-square",
+            "middle-middle-square",
+            "bottom-left-square"
+          ],
+          "common_core": [
+            1,
+            4,
+            6
+          ],
+          "common_core_names": [
+            "top-middle-square",
+            "middle-middle-square",
+            "bottom-left-square"
+          ],
+          "variants": [
+            [
+              1,
+              4,
+              6
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        }
+      ],
+      "n_core_routes": 0,
+      "ev_bound_routes": 0.6463299418604653,
+      "note": "Routes are certified at the collinearity-group level (the level stable across retrainings); unit members are one carving from an explicit equivalence class."
+    },
+    "function_decomposition": {
+      "note": "Purified weighted-fANOVA components of the learned function under the DECLARED empirical training measure (unique given the measure; carving-invariant).  Shares are out-of-sample covariances on validation.",
+      "components": [
+        {
+          "support": [
+            0
+          ],
+          "support_names": [
+            "top-left-square"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "top-left-square"
+          ],
+          "share_main": 0.1793,
+          "shares_all": [
+            0.1793,
+            0.101,
+            0.1239,
+            0.1218,
+            0.0941,
+            0.0791,
+            0.1094,
+            0.1466
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            1
+          ],
+          "support_names": [
+            "top-middle-square"
+          ],
+          "group_support": [
+            1
+          ],
+          "group_names": [
+            "top-middle-square"
+          ],
+          "share_main": 0.0222,
+          "shares_all": [
+            0.0222,
+            0.0,
+            0.0145,
+            0.02,
+            0.0131,
+            0.017,
+            0.0,
+            0.0391
+          ],
+          "Pi": 0.75,
+          "pi": 0.425,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            2
+          ],
+          "support_names": [
+            "top-right-square"
+          ],
+          "group_support": [
+            2
+          ],
+          "group_names": [
+            "top-right-square"
+          ],
+          "share_main": 0.1419,
+          "shares_all": [
+            0.1419,
+            0.1576,
+            0.1339,
+            0.1011,
+            0.0977,
+            0.0948,
+            0.1246,
+            0.1151
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            4
+          ],
+          "support_names": [
+            "middle-middle-square"
+          ],
+          "group_support": [
+            4
+          ],
+          "group_names": [
+            "middle-middle-square"
+          ],
+          "share_main": 0.3551,
+          "shares_all": [
+            0.3551,
+            0.3136,
+            0.3002,
+            0.3033,
+            0.2971,
+            0.2818,
+            0.3663,
+            0.2722
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            8
+          ],
+          "support_names": [
+            "bottom-right-square"
+          ],
+          "group_support": [
+            8
+          ],
+          "group_names": [
+            "bottom-right-square"
+          ],
+          "share_main": 0.1135,
+          "shares_all": [
+            0.1135,
+            0.1128,
+            0.0776,
+            0.0817,
+            0.0979,
+            0.144,
+            0.15,
+            0.1209
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            0,
+            1
+          ],
+          "support_names": [
+            "top-left-square",
+            "top-middle-square"
+          ],
+          "group_support": [
+            0,
+            1
+          ],
+          "group_names": [
+            "top-left-square",
+            "top-middle-square"
+          ],
+          "share_main": 0.0173,
+          "shares_all": [
+            0.0173,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.125,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            4
+          ],
+          "support_names": [
+            "top-left-square",
+            "middle-middle-square"
+          ],
+          "group_support": [
+            0,
+            4
+          ],
+          "group_names": [
+            "top-left-square",
+            "middle-middle-square"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0134,
+            0.0102
+          ],
+          "Pi": 0.25,
+          "pi": 0.1,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            5
+          ],
+          "support_names": [
+            "top-left-square",
+            "middle-right-square"
+          ],
+          "group_support": [
+            0,
+            5
+          ],
+          "group_names": [
+            "top-left-square",
+            "middle-right-square"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0132,
+            0.0,
+            0.0122,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.25,
+          "pi": 0.525,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            7
+          ],
+          "support_names": [
+            "top-left-square",
+            "bottom-middle-square"
+          ],
+          "group_support": [
+            0,
+            7
+          ],
+          "group_names": [
+            "top-left-square",
+            "bottom-middle-square"
+          ],
+          "share_main": 0.0137,
+          "shares_all": [
+            0.0137,
+            0.019,
+            0.0139,
+            0.0175,
+            0.0127,
+            0.0183,
+            0.0118,
+            0.0216
+          ],
+          "Pi": 1.0,
+          "pi": 0.6,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            8
+          ],
+          "support_names": [
+            "top-left-square",
+            "bottom-right-square"
+          ],
+          "group_support": [
+            0,
+            8
+          ],
+          "group_names": [
+            "top-left-square",
+            "bottom-right-square"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0148,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            1,
+            2
+          ],
+          "support_names": [
+            "top-middle-square",
+            "top-right-square"
+          ],
+          "group_support": [
+            1,
+            2
+          ],
+          "group_names": [
+            "top-middle-square",
+            "top-right-square"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0109,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.15,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            1,
+            6
+          ],
+          "support_names": [
+            "top-middle-square",
+            "bottom-left-square"
+          ],
+          "group_support": [
+            1,
+            6
+          ],
+          "group_names": [
+            "top-middle-square",
+            "bottom-left-square"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0109,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.2,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            2,
+            4
+          ],
+          "support_names": [
+            "top-right-square",
+            "middle-middle-square"
+          ],
+          "group_support": [
+            2,
+            4
+          ],
+          "group_names": [
+            "top-right-square",
+            "middle-middle-square"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0166,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.1,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            2,
+            7
+          ],
+          "support_names": [
+            "top-right-square",
+            "bottom-middle-square"
+          ],
+          "group_support": [
+            2,
+            7
+          ],
+          "group_names": [
+            "top-right-square",
+            "bottom-middle-square"
+          ],
+          "share_main": 0.0112,
+          "shares_all": [
+            0.0112,
+            0.0107,
+            0.0107,
+            0.0,
+            0.0,
+            0.0,
+            0.0158,
+            0.0129
+          ],
+          "Pi": 0.625,
+          "pi": 0.275,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            3,
+            5
+          ],
+          "support_names": [
+            "middle-left-square",
+            "middle-right-square"
+          ],
+          "group_support": [
+            3,
+            5
+          ],
+          "group_names": [
+            "middle-left-square",
+            "middle-right-square"
+          ],
+          "share_main": 0.0111,
+          "shares_all": [
+            0.0111,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.3,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            3,
+            8
+          ],
+          "support_names": [
+            "middle-left-square",
+            "bottom-right-square"
+          ],
+          "group_support": [
+            3,
+            8
+          ],
+          "group_names": [
+            "middle-left-square",
+            "bottom-right-square"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0127,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.15,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            4,
+            8
+          ],
+          "support_names": [
+            "middle-middle-square",
+            "bottom-right-square"
+          ],
+          "group_support": [
+            4,
+            8
+          ],
+          "group_names": [
+            "middle-middle-square",
+            "bottom-right-square"
+          ],
+          "share_main": 0.0141,
+          "shares_all": [
+            0.0141,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0206,
+            0.0
+          ],
+          "Pi": 0.25,
+          "pi": 0.35,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            5,
+            8
+          ],
+          "support_names": [
+            "middle-right-square",
+            "bottom-right-square"
+          ],
+          "group_support": [
+            5,
+            8
+          ],
+          "group_names": [
+            "middle-right-square",
+            "bottom-right-square"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0112,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.15,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            1,
+            2
+          ],
+          "support_names": [
+            "top-left-square",
+            "top-middle-square",
+            "top-right-square"
+          ],
+          "group_support": [
+            0,
+            1,
+            2
+          ],
+          "group_names": [
+            "top-left-square",
+            "top-middle-square",
+            "top-right-square"
+          ],
+          "share_main": 0.0686,
+          "shares_all": [
+            0.0686,
+            0.059,
+            0.0866,
+            0.0636,
+            0.0798,
+            0.0509,
+            0.0764,
+            0.0756
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            0,
+            3,
+            6
+          ],
+          "support_names": [
+            "top-left-square",
+            "middle-left-square",
+            "bottom-left-square"
+          ],
+          "group_support": [
+            0,
+            3,
+            6
+          ],
+          "group_names": [
+            "top-left-square",
+            "middle-left-square",
+            "bottom-left-square"
+          ],
+          "share_main": 0.0456,
+          "shares_all": [
+            0.0456,
+            0.0505,
+            0.0508,
+            0.0531,
+            0.0457,
+            0.0572,
+            0.0562,
+            0.0471
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            0,
+            4,
+            8
+          ],
+          "support_names": [
+            "top-left-square",
+            "middle-middle-square",
+            "bottom-right-square"
+          ],
+          "group_support": [
+            0,
+            4,
+            8
+          ],
+          "group_names": [
+            "top-left-square",
+            "middle-middle-square",
+            "bottom-right-square"
+          ],
+          "share_main": 0.0681,
+          "shares_all": [
+            0.0681,
+            0.057,
+            0.0507,
+            0.0785,
+            0.0544,
+            0.0568,
+            0.0762,
+            0.0511
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            1,
+            4,
+            7
+          ],
+          "support_names": [
+            "top-middle-square",
+            "middle-middle-square",
+            "bottom-middle-square"
+          ],
+          "group_support": [
+            1,
+            4,
+            7
+          ],
+          "group_names": [
+            "top-middle-square",
+            "middle-middle-square",
+            "bottom-middle-square"
+          ],
+          "share_main": 0.0438,
+          "shares_all": [
+            0.0438,
+            0.0561,
+            0.0514,
+            0.0515,
+            0.0523,
+            0.0556,
+            0.0514,
+            0.059
+          ],
+          "Pi": 1.0,
+          "pi": 0.8,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            2,
+            4,
+            6
+          ],
+          "support_names": [
+            "top-right-square",
+            "middle-middle-square",
+            "bottom-left-square"
+          ],
+          "group_support": [
+            2,
+            4,
+            6
+          ],
+          "group_names": [
+            "top-right-square",
+            "middle-middle-square",
+            "bottom-left-square"
+          ],
+          "share_main": 0.0597,
+          "shares_all": [
+            0.0597,
+            0.0611,
+            0.0535,
+            0.0645,
+            0.0682,
+            0.0913,
+            0.0542,
+            0.0579
+          ],
+          "Pi": 1.0,
+          "pi": 0.925,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            2,
+            5,
+            8
+          ],
+          "support_names": [
+            "top-right-square",
+            "middle-right-square",
+            "bottom-right-square"
+          ],
+          "group_support": [
+            2,
+            5,
+            8
+          ],
+          "group_names": [
+            "top-right-square",
+            "middle-right-square",
+            "bottom-right-square"
+          ],
+          "share_main": 0.0676,
+          "shares_all": [
+            0.0676,
+            0.0994,
+            0.0603,
+            0.0672,
+            0.0699,
+            0.0631,
+            0.0597,
+            0.0619
+          ],
+          "Pi": 1.0,
+          "pi": 0.925,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            3,
+            4,
+            5
+          ],
+          "support_names": [
+            "middle-left-square",
+            "middle-middle-square",
+            "middle-right-square"
+          ],
+          "group_support": [
+            3,
+            4,
+            5
+          ],
+          "group_names": [
+            "middle-left-square",
+            "middle-middle-square",
+            "middle-right-square"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0581,
+            0.0,
+            0.0552,
+            0.0634,
+            0.0508,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.5,
+          "pi": 0.4,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            6,
+            7,
+            8
+          ],
+          "support_names": [
+            "bottom-left-square",
+            "bottom-middle-square",
+            "bottom-right-square"
+          ],
+          "group_support": [
+            6,
+            7,
+            8
+          ],
+          "group_names": [
+            "bottom-left-square",
+            "bottom-middle-square",
+            "bottom-right-square"
+          ],
+          "share_main": 0.033,
+          "shares_all": [
+            0.033,
+            0.0275,
+            0.0274,
+            0.036,
+            0.024,
+            0.0369,
+            0.0295,
+            0.0338
+          ],
+          "Pi": 1.0,
+          "pi": 0.8,
+          "label": "CORE",
+          "reasons": []
+        }
+      ],
+      "n_core": 11,
+      "group_shares": {
+        "0": 0.1793,
+        "2": 0.1419,
+        "4": 0.3551,
+        "8": 0.1135,
+        "0,1,2": 0.0686,
+        "0,3,6": 0.0456,
+        "0,4,8": 0.0681,
+        "1,4,7": 0.0438,
+        "2,4,6": 0.0597,
+        "2,5,8": 0.0676,
+        "6,7,8": 0.033
+      },
+      "ev_bound": 5.421039244186049,
+      "recon_r2": 0.9349
+    },
+    "portfolio_reliance": [
+      {
+        "group": "top-left-square",
+        "min_reliance": 4.0783,
+        "max_reliance": 5.4575
+      },
+      {
+        "group": "top-middle-square",
+        "min_reliance": 3.8581,
+        "max_reliance": 4.5453
+      },
+      {
+        "group": "top-right-square",
+        "min_reliance": 4.8191,
+        "max_reliance": 6.6143
+      },
+      {
+        "group": "middle-left-square",
+        "min_reliance": 2.9852,
+        "max_reliance": 3.9034
+      },
+      {
+        "group": "middle-middle-square",
+        "min_reliance": 6.825,
+        "max_reliance": 8.762
+      },
+      {
+        "group": "middle-right-square",
+        "min_reliance": 3.4253,
+        "max_reliance": 4.7459
+      },
+      {
+        "group": "bottom-left-square",
+        "min_reliance": 4.2954,
+        "max_reliance": 5.6244
+      },
+      {
+        "group": "bottom-middle-square",
+        "min_reliance": 2.7515,
+        "max_reliance": 3.77
+      },
+      {
+        "group": "bottom-right-square",
+        "min_reliance": 4.4033,
+        "max_reliance": 5.7299
+      }
+    ],
+    "non_claims": [
+      "CORE concepts are stable, real structures - not proven causal mechanisms of the world (M-C7).",
+      "The periphery is labelled, not certified.",
+      "Unit semantics require expert review (the soft target)."
+    ]
+  },
+  "core_share_sum": 1.1762,
+  "bars": [
+    {
+      "id": "fidelity \u2265 ceiling",
+      "pass": true,
+      "detail": "ratio 1.028 vs unconstrained MLP/HGB"
+    },
+    {
+      "id": "core coverage \u2265 0.5",
+      "pass": true,
+      "detail": "certified components cover 1.18 of function variance"
+    },
+    {
+      "id": "E[V] non-vacuous",
+      "pass": false,
+      "detail": "E[V] \u2264 5.421 over the structure-level universe"
+    },
+    {
+      "id": "honest depth",
+      "pass": true,
+      "detail": "depth 1; widths 8"
+    }
+  ]
+}
