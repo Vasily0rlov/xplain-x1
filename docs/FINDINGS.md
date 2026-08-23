@@ -349,3 +349,81 @@ stands: a legible model whose DAG is inspectable carving-by-carving, an
 explicit equivalence-class account of multiplicity, and certified claims
 anchored at the level where uniqueness exists — the purified function
 decomposition under a declared measure.
+
+## POSITIONING ASSESSMENT (2026-08-23)
+
+Critical scorecard of the completed beachhead build against
+`docs/00-POSITIONING.md` (owner-requested).  POSITIONING carries matching
+inline **AMENDMENT (2026-08-23)** blocks recording where the refined position
+differs from the original.
+
+### Hypothesis drivers (POSITIONING §3)
+
+| driver | verdict | evidence |
+|---|---|---|
+| Monosemantic | **Achieved** | pressures ~free (impurity −86% at neutral fid, E1.1b); every real dataset's live units legible, μ 0.94–0.98 |
+| Minimal | **Achieved** | growth/prune converges small; redundant units die while fidelity *rises*; C4 ordering encoded as discovery-gating |
+| Depth-honest | **Achieved, twice-confirmed** | honest flatness 8/8; earned depth on COMP2/3; adult honest-shallow at unit and function level, dev + confirmatory |
+| Stable | **Not at unit level — achieved one level up** | unit carvings multiplicitous (Π ≤ 0.5 at every τ, E5.1); function components unanimous (Π ≈ 1.0) everywhere |
+| A-priori explainable + certified | **Achieved, re-based** | full Π/π/E[V] machinery, non-vacuous bound (E[V] ≤ 0.124), perfect honesty record; certified object moved units → purified components |
+| Polysemantic periphery | **Achieved — but not as predicted** | the real-data residual is *monosemantic-but-multiplicitous*, not polysemantic; refinement amended into POSITIONING §3 |
+
+### The four differentiators (POSITIONING §4)
+
+(a) **Statistical certification — delivered; the strongest asset** (one-shot
+confirmatory discipline held, M9).  (b) **Honest depth — delivered**, incl.
+dissolution and negative validation (adult refuses depth).  (c) **Constructive
+growth to minimal — delivered** at beachhead scale (caps L≤4, Σm≤96).
+(d) **Small-n expert-auditable — half-delivered**: above-ceiling fidelity +
+legibility + honest regime labels at n < 2k, but no certificates (CPSS
+powerless at n=178; the m-out-of-n design was never built).
+
+### Accuracy-neutrality ("no concept tax")
+
+Confirmed 5/7 (wine 1.044, zoo 1.058, tictactoe 1.028, mushroom 0.995, drybean
+0.984 vs ceiling).  **Bike 0.945 and adult 0.877 are a real tax** (adult also
+−1.7% under the v4 anchor).  "~Free" is true on the beachhead core, overstated
+at the diffuse-structure frontier.
+
+### The defensible corner (POSITIONING §7)
+
+Occupied, and arguably strengthened: the multiplicity crisis produced a
+positioning weapon (the field's "contradictory interpretations" failure
+demonstrated on our own historical anchor — bike hour×temp; canonicalisation
+shown null *and* epistemically suspect).  Two exposures the story must answer
+(now amended into POSITIONING §7): **coverage honesty** (certified components
+cover ~0.74–0.87 of function variance on strong datasets, 0.198 on adult —
+"certified where certifiable, labelled elsewhere") and **the EBM question**
+(the NN meets/beats reference ceilings where GAMs can't; the decomposition is
+exact on our own model's f; the DAG gives mechanism-level inspection).
+
+### Outstanding, ranked
+
+1. **Expert validation of the soft target never happened** — M6 (owner DAG
+   nameability review) still open; POSITIONING §3 makes it the test of the
+   interpretability claim.  Cheapest highest-value item.
+2. **Small-n certification** (m-out-of-n CPSS variant) — undelivered
+   differentiator.
+3. **Adult-class (diffuse-structure) data**: fidelity tax + 0.198 coverage is
+   the measured frontier; no designed next step.
+4. **Stability across model families** — restarts + resamples done; a second
+   architecture/family never tested (POSITIONING §2 lists it).
+5. **Docs drift** — resolved this date: specs/plan harmonised to the
+   three-layer as-built state (M-§10, S-§16 addenda).
+6. **External validation of the certificate format** — SR 11-7 / EU-AI-Act
+   keying is our reading; no model-risk practitioner has reviewed it.
+7. **Mushroom at route level** (0 routes; parallel alternative rules) honestly
+   priced but unexplained to a domain expert; function level covers it.
+8. **Stages 2–3 of sequencing** (regulated-decision product; SLM/Transformer)
+   untouched, correctly per beachhead-first.
+
+### One-line verdict
+
+The programme proved the hypothesis with one honest amendment: a minimal,
+monosemantic, depth-honest, ~accuracy-neutral network can be grown and
+certified — but on real data the certifiable invariant lives one level above
+the units (POSITIONING's own "uniqueness is level-dependent" thesis, confirmed
+harder than anticipated).  The honesty layer never broke once, including on
+quarantined seeds.  What stands between this and the §7 moat being real is not
+more method — it is the expert nameability review, small-n power, and a
+practitioner's eyes on the certificate.
