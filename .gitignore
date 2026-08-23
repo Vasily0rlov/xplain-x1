@@ -9,3 +9,4 @@ experiments/results/*.tmp
 uv.lock
 papers/
 experiments/results/*.log
+baselines/standard_nn/compare.log
