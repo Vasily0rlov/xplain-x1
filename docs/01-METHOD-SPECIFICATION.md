@@ -1,7 +1,8 @@
 # XPLAIN-x1 — Method Specification
 
-**Status:** draft for review · **Audience:** researchers · **Basis:** `docs/00-POSITIONING.md`
-(2026-08) · **Scope:** the beachhead — supervised learning on tabular/structured data with
+**Status:** as-built v1 — beachhead complete (M1–M9); ratified deltas recorded in the §10
+addendum · **Audience:** researchers · **Basis:** `docs/00-POSITIONING.md`
+(2026-08, amended 2026-08-23) · **Scope:** the beachhead — supervised learning on tabular/structured data with
 monosemantic columns (`data/DATASETS.md`), realised on standard deep MLPs. The Transformer/SLM
 track is out of scope here (POSITIONING §7, stage 3).
 
@@ -174,6 +175,9 @@ fidelity-preserving states the smaller one wins. Minimality is never traded agai
   by *different* supports in different runs (mutually exclusive alternatives) is
   **multiplicitous** — the Rashomon signature of the periphery (C6). Uniqueness is asserted
   only where the same support re-emerges.
+
+*(As built: on real data the unit level proved systematically multiplicitous; the certified
+objects moved to the route and function levels — see the §10.1 addendum.)*
 
 ### 3.7 Core and periphery
 
@@ -348,6 +352,10 @@ method as positioned is dead. K2 — any certified expansion on noise/additive c
 (untradeable): the honesty layer is broken. K3 — full-ladder certification battery
 wall-clock > 12 h on the reference 64-thread box: the method is not practically auditable.
 
+*(As evaluated: H2/H4/H5/H6 met as registered; H1/H3 as registered failed at the unit level
+on real data and were re-earned at the function level under owner ratification — see §10.2.
+No kill criterion triggered.)*
+
 ## 8. Threats to validity
 
 - **The gauge argument's scope** is stated precisely in §3.3; claims of "free" removal of
@@ -389,6 +397,89 @@ v4's design:
 v4's honestly-stated frontier — under-recovery of hard-geometry flat classes on fresh seeds —
 is inherited as a known open risk for any recovery-type hypothesis (H-X1-3): dev-phase
 recovery rates must be confirmed on untouched seeds before being claimed.
+
+## 10. As-built addendum (2026-08-23, owner-ratified)
+
+The beachhead build completed (P0–P7 + confirmatory C-1, `docs/03-BUILD-PLAN.md`; evidence
+trail `docs/FINDINGS.md`; frozen at tag `freeze-x1-v1`). Sections 1–9 stand as registered;
+this addendum is the authoritative record of the ratified deltas.
+
+### 10.1 Certification architecture: three layers (extends §3.6–§3.7, §4.4)
+
+E5.1 measured the unit level as systematically multiplicitous on real data: units are
+individually monosemantic (μ 0.94–0.98) but their carvings are non-unique across restarts
+(Π ≤ 0.5 at every `τ_match` down to 0.5 — genuine Rashomon multiplicity under collinearity,
+not power, not matching strictness; a canonicalisation tie-break probe was null and is
+rejected in principle, FINDINGS E6.3). The certified architecture as built:
+
+- **Layer S — routes (inspectable structure).** Features are grouped by train-data
+  |Spearman| ≥ 0.8 complete-linkage clustering (model-independent, auditable); concepts are
+  re-keyed by *group-support*. A **route** is the cross-run equivalence class of carvings
+  sharing a group-support chain; certified support = the **modal** variant (a minimal-variant
+  rule mis-certifies under under-detection); the run-invariant **common core** is reported
+  separately; `multiplicitous` = empty common core (rival explanations), not companion
+  variation around a shared anchor. Routes carry route-level Π/π/E[V].
+- **Layer F — function components (the certified claims).** The learned function `f` is
+  decomposed per restart into purified weighted-fANOVA components under the *declared
+  empirical measure* (8-quantile binning → cyclic backfit of mains + pairs + screened
+  triples → exact mass-moving purification, so every component has zero weighted mean over
+  each variable's slices). Shares are out-of-sample covariance shares re-based by task
+  variance (× max(fidelity, 0)). Components are matched across restarts by their support and
+  certified with the *same* Π/π/E[V] machinery over the component universe
+  `p = Σ_{a≤F_max} C(d, a)`. This is the unique, carving-invariant object: Π ≈ 1.0 on every
+  real dataset where units gave Π ≤ 0.5.
+- **Layer R — portfolio reliance (bounds).** Min-over-restarts group-permutation reliance:
+  "every retraining relies on group g by ≥ r" — MCR-flavoured statements robust to
+  multiplicity.
+
+CORE/PERIPHERY labelling (§3.7) applies per layer; the certificate states the declared
+measure and the coverage (share-sum) of certified components explicitly.
+
+### 10.2 Bars as evaluated (§7)
+
+H-X1-2/-4/-5/-6 **met as registered** (median fid ratio 0.995; honest flatness 8/8; E[V] ≤
+0.124 non-vacuous; NOISE zero-certification held everywhere incl. confirmatory). H-X1-1 and
+H-X1-3 **as registered (unit level) NOT MET on real data** — the carving-multiplicity
+finding — and **re-earned at the function level** (E7.1/E7.2/E-C.1): planted components
+recovered exactly on synthetics; 3/4 standard real datasets certify unanimous (Π = 1.0)
+domain-canonical components with majority coverage. The H-X1-3 "Bike `hour×temp` certified"
+clause is **retracted as registered**: the purified interaction is < 1% of target variance;
+the historical claim was an unpurified-screen artifact (the certified bike structure is
+hour + temp + hour×weekday + year). Adult certifies exactly its five textbook mains at
+Π = 1.0 with coverage below the 0.5 bar (0.198 confirmatory) — reported as the measured
+frontier on diffuse-structure data. **No kill criterion triggered** (K3: full battery
+0.48–0.55 h ≪ 12 h).
+
+### 10.3 Instrument corrections (ratified trail; details in FINDINGS)
+
+- Fan-in pressure: group-lasso (L2,1) measured as a unit-killer → **Hoyer ratio** per
+  incoming row (the S-§14 pre-registered alternative). Calibrated λ_act 1e-2, λ_fanin 0.1.
+- Pressures are **discovery-gated** (×0.3 below the fidelity ceiling, full strength near
+  it) — the direct encoding of C4; `δ_stop` = 0.02, aligned to the C8 neutrality budget.
+- Settle plateaus on cumulative **total train loss** (structural shaping happens in the
+  fidelity-flat phase); final weights kept, best-val restore as safety guard only.
+- Depth convention corrected: compositional order 2–3 ⇒ **one composition layer = 1 hidden
+  layer** (hidden units take 2–3 parents; the readout sums). §3.4's mapping reads
+  accordingly.
+- `multiplicitous` sharpened: nested support variants are boundary jitter of one concept
+  (certified support = invariant core / modal per §10.1); the flag is reserved for
+  incomparable rivals.
+- E[V]'s `q` counts **distinct supports** per subsample (the universe's elements), not
+  units.
+
+### 10.4 Periphery refinement (C6)
+
+The measured real-data residual is **monosemantic-but-multiplicitous** — clean, legible
+units with non-unique carvings — rather than polysemantic. C6's "labelled periphery" stands
+with that reading; POSITIONING §3 carries the matching amendment.
+
+### 10.5 Confirmatory verdict (M9)
+
+One shot, untouched seeds 20–24, frozen config: **primary endpoints MET** — synthetic
+exactness incl. NOISE zero; mushroom 4 CORE components (coverage 0.761), drybean 17, bike 4
+(coverage 0.747), adult its 5 textbook mains (coverage 0.198, below bar, reported as
+frontier). Full verdict: FINDINGS §E-C.1; critical scorecard vs POSITIONING: FINDINGS
+§"POSITIONING ASSESSMENT (2026-08-23)".
 
 ---
 
