@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XPLAIN-x1 — bike@grow-batch-8</title>
+<style>
+:root {
+  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#8b8983;
+  --grid:#e3e2db; --ring:rgba(11,11,11,.10); --wash:rgba(42,120,214,.08);
+  --core:#1baf7a; --coreink:#0d7a54; --corewash:rgba(27,175,122,.12);
+  --peri:#9a988f; --periwash:rgba(154,152,143,.12);
+  --accent:#2a78d6; --warn:#eb6834; --good:#0ca30c;
+  --edge:#b9b8ae;
+}
+@media (prefers-color-scheme: dark) { :root:where(:not([data-theme="light"])) {
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c8c7bd; --muted:#8b8983;
+  --grid:#2c2c2a; --ring:rgba(255,255,255,.11); --wash:rgba(57,135,229,.14);
+  --core:#199e70; --coreink:#5fd3a6; --corewash:rgba(25,158,112,.16);
+  --peri:#6f6e67; --periwash:rgba(120,118,110,.16);
+  --accent:#3987e5; --warn:#d95926; --good:#3fb23f; --edge:#55554e; } }
+:root[data-theme="dark"] {
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c8c7bd; --muted:#8b8983;
+  --grid:#2c2c2a; --ring:rgba(255,255,255,.11); --wash:rgba(57,135,229,.14);
+  --core:#199e70; --coreink:#5fd3a6; --corewash:rgba(25,158,112,.16);
+  --peri:#6f6e67; --periwash:rgba(120,118,110,.16);
+  --accent:#3987e5; --warn:#d95926; --good:#3fb23f; --edge:#55554e; }
+* { box-sizing:border-box; }
+body { background:var(--page); color:var(--ink); margin:0;
+  font:14px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; }
+a { color:var(--accent); }
+.wrap { max-width:1180px; margin:0 auto; padding:20px 20px 64px; }
+.top { display:flex; align-items:flex-start; gap:16px; flex-wrap:wrap;
+  border-bottom:1px solid var(--ring); padding-bottom:14px; margin-bottom:18px; }
+.top h1 { font-size:20px; margin:0 0 3px; }
+.top .sub { font-size:12.5px; color:var(--muted); }
+.back { font-size:12.5px; }
+.stats { display:flex; gap:22px; margin-left:auto; flex-wrap:wrap; }
+.stat { text-align:right; }
+.stat .v { font-size:19px; font-weight:650; font-variant-numeric:tabular-nums; }
+.stat .l { font-size:10.5px; color:var(--muted); text-transform:uppercase;
+  letter-spacing:.04em; }
+.pill { display:inline-block; font-size:11px; font-weight:700; padding:2px 9px;
+  border-radius:11px; letter-spacing:.03em; }
+.pill.core { background:var(--corewash); color:var(--coreink); }
+.pill.peri { background:var(--periwash); color:var(--ink2); }
+.pill.warn { background:color-mix(in srgb,var(--warn) 15%,transparent); color:var(--warn); }
+.pill.ok   { background:color-mix(in srgb,var(--good) 14%,transparent); color:var(--good); }
+.card { background:var(--surface); border:1px solid var(--ring); border-radius:10px;
+  padding:15px 17px; margin:16px 0; }
+.card h2 { font-size:14px; margin:0 0 3px; display:flex; gap:9px; align-items:center;
+  flex-wrap:wrap; }
+.card .note { font-size:12px; color:var(--muted); margin:2px 0 12px; line-height:1.5; }
+.layerbar { display:flex; gap:0; height:5px; border-radius:3px; overflow:hidden;
+  margin:4px 0 2px; background:var(--grid); }
+.dagcard { padding:0; overflow:hidden; }
+.daghdr { display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:12px 15px 10px; border-bottom:1px solid var(--ring); }
+.daghdr h2 { margin:0; }
+.seg { display:inline-flex; border:1px solid var(--grid); border-radius:7px; overflow:hidden; }
+.seg button { border:none; border-radius:0; padding:4px 11px; background:var(--surface);
+  color:var(--ink2); font-size:12px; cursor:pointer; }
+.seg button.on { background:var(--accent); color:#fff; }
+.ctrls { display:flex; gap:7px; align-items:center; flex-wrap:wrap; margin-left:auto; }
+.ctrls button, .ctrls label { font-size:12px; background:var(--surface); color:var(--ink);
+  border:1px solid var(--grid); border-radius:6px; padding:3px 9px; cursor:pointer; }
+.ctrls label { display:inline-flex; align-items:center; gap:5px; }
+.dagbody { display:grid; grid-template-columns:1fr 300px; }
+@media (max-width:820px){ .dagbody { grid-template-columns:1fr; } }
+.dagwrap { position:relative; height:540px; background:var(--page);
+  border-right:1px solid var(--ring); overflow:hidden; }
+.dagwrap svg { width:100%; height:100%; display:block; cursor:grab; }
+.dagwrap svg:active { cursor:grabbing; }
+.legend { position:absolute; left:12px; bottom:10px; display:flex; gap:13px;
+  flex-wrap:wrap; font-size:11px; color:var(--ink2);
+  background:color-mix(in srgb,var(--surface) 84%,transparent);
+  padding:4px 9px; border-radius:6px; }
+.legend i { width:11px; height:11px; border-radius:3px; display:inline-block;
+  vertical-align:-1px; margin-right:4px; }
+.detail { padding:14px 15px; min-height:0; overflow-y:auto; max-height:540px; }
+.detail .empty { color:var(--muted); font-size:12.5px; line-height:1.6; }
+.detail h3 { margin:0 0 2px; font-size:14px; word-break:break-word; }
+.detail .did { font-size:11px; color:var(--muted); font-family:ui-monospace,monospace; }
+.detail dl { display:grid; grid-template-columns:92px 1fr; gap:3px 10px;
+  margin:11px 0 4px; font-size:12.5px; font-variant-numeric:tabular-nums; }
+.detail dt { color:var(--muted); } .detail dd { margin:0; }
+.detail .chips { margin-top:9px; }
+.chip { display:inline-block; font-size:10.5px; border:1px solid var(--grid);
+  border-radius:10px; padding:1px 8px; margin:2px 3px 0 0; color:var(--ink2); }
+.chip.r { border-color:color-mix(in srgb,var(--warn) 45%,var(--grid));
+  color:var(--warn); }
+table.t { border-collapse:collapse; width:100%; font-size:12.5px;
+  font-variant-numeric:tabular-nums; }
+table.t th, table.t td { text-align:left; padding:5px 12px 5px 0;
+  border-top:1px solid var(--grid); vertical-align:top; }
+table.t th { color:var(--muted); font-weight:600; border-top:none;
+  font-size:11px; text-transform:uppercase; letter-spacing:.03em; }
+table.t td.num, table.t th.num { text-align:right; }
+.sharebar { display:inline-block; height:9px; border-radius:2px;
+  background:var(--accent); vertical-align:0; min-width:1px; }
+.grp { font-size:12px; color:var(--ink2); margin:2px 0; }
+.grp b { color:var(--ink); font-weight:600; }
+.bars { display:grid; gap:5px; margin-top:4px; }
+.bars .row { display:flex; gap:9px; align-items:baseline; font-size:12.5px; }
+.bars .row .u { min-width:150px; color:var(--ink2); }
+.bars .row.pass .u::before { content:"\2713 "; color:var(--good); }
+.bars .row.fail .u::before { content:"\2717 "; color:var(--warn); }
+#tip { position:fixed; pointer-events:none; background:var(--surface); color:var(--ink);
+  border:1px solid var(--ring); border-radius:8px; padding:8px 11px; font-size:12px;
+  box-shadow:0 4px 18px rgba(0,0,0,.18); opacity:0; z-index:30; max-width:300px;
+  transition:opacity .08s; }
+#tip h4 { margin:0 0 3px; font-size:12.5px; }
+#tip .m { font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.foot { font-size:11.5px; color:var(--muted); margin-top:26px; line-height:1.6;
+  border-top:1px solid var(--ring); padding-top:12px; }
+</style>
+</head>
+<body>
+<div id="tip"></div>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="back"><a href="index.html">← all dashboards</a></div>
+      <h1>bike@grow-batch-8</h1>
+      <div class="sub">regression · n=17,379 · d=14
+        · <span class="pill ok">standard regime</span></div>
+    </div>
+    <div class="stats"><div class="stat"><div class="v">0.940</div><div class="l">fidelity</div></div><div class="stat"><div class="v">0.9925</div><div class="l">vs ceiling</div></div><div class="stat"><div class="v">6</div><div class="l">core components</div></div><div class="stat"><div class="v">0.78</div><div class="l">core coverage</div></div></div>
+  </div>
+
+  <div class="card dagcard">
+    <div class="daghdr">
+      <h2>Concept DAG</h2>
+      <div class="seg">
+        <button id="m_hier" class="on">Layer F DAG</button>
+        <button id="m_units">Model units</button>
+      </div>
+      <div class="ctrls">
+        <span id="hierctrls" class="ctrls" style="border:none;padding:0">
+          <button id="b_expand">expand all members</button>
+        </span>
+        <span id="unitctrls" class="ctrls" style="border:none;padding:0;display:none">
+          <label><input type="checkbox" id="t_peri" checked> periphery</label>
+          <label><input type="checkbox" id="t_in" checked> inputs</label>
+        </span>
+        <button id="b_fit">reset view</button>
+      </div>
+    </div>
+    <div class="dagbody">
+      <div class="dagwrap">
+        <svg id="dag" preserveAspectRatio="xMidYMid meet"><g id="dagg"></g></svg>
+        <div class="legend">
+          <span><i style="background:var(--corewash);border:1.5px solid var(--core)"></i>CORE</span>
+          <span><i style="background:var(--periwash);border:1.5px solid var(--peri)"></i>periphery</span>
+          <span><i style="background:var(--surface);border:1.5px solid var(--accent)"></i>output</span>
+          <span><i style="background:var(--wash);border:1px solid var(--grid)"></i>feature</span>
+          <span>double-click: component → member units → features · edge = real share</span>
+        </div>
+      </div>
+      <div class="detail" id="detail"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Layer F — certified function components <span class="pill core">the certified claims</span></h2>
+    <div class="note">Purified weighted-fANOVA components of the learned function under the DECLARED empirical training measure (unique given the measure; carving-invariant).  Shares are out-of-sample covariances on validation. Reconstruction R² 0.88;
+      E[V] ≤ 0.234 over 938-support universe.</div>
+    <table class="t"><thead><tr><th>component (support)</th><th class="num">share</th><th></th><th class="num">Π</th><th class="num">π</th><th>label</th></tr></thead><tbody><tr><td>hour</td><td class="num">0.587</td><td><span class="sharebar" style="width:150px"></span></td><td class="num">1.00</td><td class="num">1.00</td><td><span class="pill core">CORE</span></td></tr><tr><td>hour, weekday</td><td class="num">0.071</td><td><span class="sharebar" style="width:18px"></span></td><td class="num">1.00</td><td class="num">1.00</td><td><span class="pill core">CORE</span></td></tr><tr><td>temp</td><td class="num">0.066</td><td><span class="sharebar" style="width:17px"></span></td><td class="num">1.00</td><td class="num">1.00</td><td><span class="pill core">CORE</span></td></tr><tr><td>year</td><td class="num">0.024</td><td><span class="sharebar" style="width:6px"></span></td><td class="num">1.00</td><td class="num">1.00</td><td><span class="pill core">CORE</span></td></tr><tr><td>season</td><td class="num">0.023</td><td><span class="sharebar" style="width:6px"></span></td><td class="num">0.88</td><td class="num">0.88</td><td><span class="pill core">CORE</span></td></tr><tr><td>humidity</td><td class="num">0.013</td><td><span class="sharebar" style="width:3px"></span></td><td class="num">1.00</td><td class="num">0.85</td><td><span class="pill core">CORE</span></td></tr><tr><td>weather=rain</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.12</td><td class="num">0.40</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>feel_temp</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.38</td><td class="num">0.33</td><td><span class="pill peri">PERIPHERY</span></td></tr></tbody></table>
+  </div>
+
+  <div class="card">
+    <h2>Layer S — routes <span class="pill peri">inspectable equivalence classes</span></h2>
+    <div class="note">Collinearity groups (|Spearman| ≥ 0.8): <b>{weather=clear, weather=misty}</b>; <b>{temp, feel_temp}</b>. Singletons omitted.</div><table class="t"><thead><tr><th>route (modal support)</th><th class="num">Π</th><th class="num">π</th><th class="num">variants</th><th>common core</th><th>multiplic.</th><th>label</th></tr></thead><tbody><tr><td>hour, workingday</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">38</td><td>hour</td><td>no</td><td><span class="pill core">CORE</span></td></tr><tr><td>G9{temp, feel_temp}</td><td class="num">1.00</td><td class="num">0.62</td><td class="num">4</td><td>G9{temp, feel_temp}</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>humidity</td><td class="num">0.75</td><td class="num">0.40</td><td class="num">3</td><td>humidity</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>season, month, workingday</td><td class="num">0.38</td><td class="num">0.07</td><td class="num">3</td><td>season, month</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>year, month</td><td class="num">0.62</td><td class="num">0.57</td><td class="num">3</td><td>year, month</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>season, year, workingday</td><td class="num">0.12</td><td class="num">0.00</td><td class="num">1</td><td>season, year, workingday</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>year, workingday, G7{weather=clear, weather=misty}</td><td class="num">0.12</td><td class="num">0.00</td><td class="num">1</td><td>year, workingday, G7{weather=clear, weather=misty}</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>month, weekday, G7{weather=clear, weather=misty}</td><td class="num">0.12</td><td class="num">0.00</td><td class="num">1</td><td>month, weekday, G7{weather=clear, weather=misty}</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr></tbody></table>
+  </div>
+
+  <div class="card">
+    <h2>Layer R — portfolio reliance</h2>
+    <div class="note">Every retraining relies on each group by at least the min (a portfolio guarantee robust to which carving a run picked).</div><table class="t"><thead><tr><th>feature group</th><th class="num">min</th><th class="num">max</th><th>range</th></tr></thead><tbody><tr><td>hour</td><td class="num">1.474</td><td class="num">1.577</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="140" x2="150" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>workingday</td><td class="num">0.164</td><td class="num">0.209</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="16" x2="20" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>G9{temp, feel_temp}</td><td class="num">0.066</td><td class="num">0.134</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="6" x2="13" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>year</td><td class="num">0.038</td><td class="num">0.051</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="4" x2="5" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>humidity</td><td class="num">0.002</td><td class="num">0.015</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="0" x2="1" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>weekday</td><td class="num">0.002</td><td class="num">0.011</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="0" x2="1" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>windspeed</td><td class="num">0.001</td><td class="num">0.004</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="0" x2="0" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>holiday</td><td class="num">0.001</td><td class="num">0.005</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="0" x2="0" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>season</td><td class="num">0.000</td><td class="num">0.063</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="0" x2="6" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>month</td><td class="num">0.000</td><td class="num">0.097</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="0" x2="9" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>G7{weather=clear, weather=misty}</td><td class="num">0.000</td><td class="num">0.571</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="0" x2="54" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>weather=rain</td><td class="num">0.000</td><td class="num">0.356</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="0" x2="34" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr></tbody></table>
+  </div>
+
+  <div class="card">
+    <h2>Certificate summary</h2>
+    <div class="note">honest depth <b>2</b> (widths 14×14) · core coverage 0.01
+      · periphery reasons: absent_in_main, infrequent, multiplicitous, no_effect, unstable.
+      Regime: standard.</div>
+    <div class="bars"><div class="row pass"><span class="u">fidelity ≥ ceiling</span><span>ratio 0.993 vs unconstrained MLP/HGB</span></div><div class="row pass"><span class="u">core coverage ≥ 0.5</span><span>certified components cover 0.78 of function variance</span></div><div class="row pass"><span class="u">E[V] non-vacuous</span><span>E[V] ≤ 0.234 over the structure-level universe</span></div><div class="row pass"><span class="u">honest depth</span><span>depth 2; widths 14×14</span></div></div>
+    <div class="note" style="margin-top:10px"><b>Non-claims.</b>
+      CORE concepts are stable, real structures - not proven causal mechanisms of the world (M-C7). The periphery is labelled, not certified. Unit semantics require expert review (the soft target).</div>
+  </div>
+
+  <div class="foot">
+    XPLAIN-x1 audit dashboard · git a9cb40e547
+    · config f303a8e1b5
+    · data 7c3597a0c1
+    · R=8 restarts, 40 CPSS runs.
+    Certified claims are the Layer F components; the DAG is inspectable, the periphery labelled.
+  </div>
+</div>
+<script id="dash-data" type="application/json">{"units": {"nodes": [{"id": "season", "kind": "input", "label": "season"}, {"id": "year", "kind": "input", "label": "year"}, {"id": "month", "kind": "input", "label": "month"}, {"id": "hour", "kind": "input", "label": "hour"}, {"id": "weekday", "kind": "input", "label": "weekday"}, {"id": "workingday", "kind": "input", "label": "workingday"}, {"id": "weather=clear", "kind": "input", "label": "weather=clear"}, {"id": "weather=misty", "kind": "input", "label": "weather=misty"}, {"id": "weather=rain", "kind": "input", "label": "weather=rain"}, {"id": "temp", "kind": "input", "label": "temp"}, {"id": "humidity", "kind": "input", "label": "humidity"}, {"id": "windspeed", "kind": "input", "label": "windspeed"}, {"id": "L1U7", "kind": "unit", "layer": 1, "label": "poly(2)(hour, weekday, workingday)", "mu": 0.9971588253974915, "Pi": 0.25, "pi": 0.175, "delta": 11.420850038528442, "coverage": 10.964317382123877, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "weekday", "workingday"], "form": "poly(2)"}, {"id": "L1U19", "kind": "unit", "layer": 1, "label": "tree(d3)(weekday, humidity)", "mu": 0.9999843692493751, "Pi": 0.125, "pi": 0.125, "delta": 0.0888742208480835, "coverage": 0.09226480582950514, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["weekday", "humidity"], "form": "tree(d3)"}, {"id": "L1U2", "kind": "unit", "layer": 1, "label": "poly(2)(temp, hour, humidity)", "mu": 0.9849034547805786, "Pi": 0.25, "pi": 0.125, "delta": 0.16273164749145508, "coverage": 0.1625427814833893, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["temp", "hour", "humidity"], "form": "poly(2)"}, {"id": "L1U3", "kind": "unit", "layer": 1, "label": "monotone-(hour)", "mu": 0.9993633031845093, "Pi": 0.875, "pi": 0.875, "delta": 0.5712859034538269, "coverage": 0.567115026312519, "tag": "CORE", "reasons": [], "support_names": ["hour"], "form": "monotone-"}, {"id": "L1U15", "kind": "unit", "layer": 1, "label": "poly(2)(month, year, season)", "mu": 0.9950777888298035, "Pi": 0.25, "pi": 0.05, "delta": 0.06936836242675781, "coverage": 0.06859618900750442, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["month", "year", "season"], "form": "poly(2)"}, {"id": "L1U20", "kind": "unit", "layer": 1, "label": "poly(2)(hour, workingday, humidity)", "mu": 0.9884453415870667, "Pi": 0.25, "pi": 0.45, "delta": 2.9163854122161865, "coverage": 2.6301821627485698, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "workingday", "humidity"], "form": "poly(2)"}, {"id": "L1U4", "kind": "unit", "layer": 1, "label": "poly(2)(hour, weather=clear, weather=misty)", "mu": 0.9411630034446716, "Pi": 0.5, "pi": 0.225, "delta": 2.138874053955078, "coverage": 2.0559028245263207, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "weather=clear", "weather=misty"], "form": "poly(2)"}, {"id": "L1U16", "kind": "unit", "layer": 1, "label": "poly(2)(hour, humidity, temp)", "mu": 0.976875364780426, "Pi": 0.625, "pi": 0.75, "delta": 0.0022497177124023438, "coverage": 0.002439141183426141, "tag": "PERIPHERY", "reasons": ["unstable", "no_effect", "multiplicitous"], "support_names": ["hour", "humidity", "temp"], "form": "poly(2)"}, {"id": "L1U5", "kind": "unit", "layer": 1, "label": "monotone-(hour)", "mu": 0.9909052848815918, "Pi": 1.0, "pi": 0.8, "delta": 12.298880815505981, "coverage": 11.507104100099243, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["hour"], "form": "monotone-"}, {"id": "L1U13", "kind": "unit", "layer": 1, "label": "tree(d3)(season, temp)", "mu": 0.9950184082176164, "Pi": 0.125, "pi": 0.225, "delta": 0.05826479196548462, "coverage": 0.0531249971857064, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["season", "temp"], "form": "tree(d3)"}, {"id": "L1U23", "kind": "unit", "layer": 1, "label": "poly(2)(workingday, hour, weekday)", "mu": 0.9969326853752136, "Pi": 0.25, "pi": 0.0, "delta": 0.1897786259651184, "coverage": 0.202748524916179, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["workingday", "hour", "weekday"], "form": "poly(2)"}, {"id": "L1U9", "kind": "unit", "layer": 1, "label": "tree(d3)(weekday, month, weather=clear)", "mu": 0.9999947904395964, "Pi": 0.125, "pi": 0.175, "delta": 0.007985472679138184, "coverage": 0.00770765349382152, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["weekday", "month", "weather=clear"], "form": "tree(d3)"}, {"id": "L1U6", "kind": "unit", "layer": 1, "label": "tree(d3)(hour, workingday)", "mu": 0.964804795978088, "Pi": 1.0, "pi": 0.85, "delta": 2.0997440814971924, "coverage": 1.8469338736139043, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["hour", "workingday"], "form": "tree(d3)"}, {"id": "L1U11", "kind": "unit", "layer": 1, "label": "tree(d3)(humidity, windspeed)", "mu": 0.9011472277468258, "Pi": 0.625, "pi": 0.325, "delta": 0.0029482245445251465, "coverage": 0.0019178847679626188, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "no_effect"], "support_names": ["humidity", "windspeed"], "form": "tree(d3)"}, {"id": "L2U30", "kind": "unit", "layer": 2, "label": "poly(2)(L1U5, L1U20, L1U23)", "mu": 0.9988738894462585, "Pi": 0.875, "pi": 0.725, "delta": 10.693602800369263, "coverage": 10.054028054735532, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["L1U5", "L1U20", "L1U23"], "form": "poly(2)"}, {"id": "L2U33", "kind": "unit", "layer": 2, "label": "poly(2)(L1U7, L1U20, L1U15)", "mu": 0.9999958276748657, "Pi": 0.375, "pi": 0.325, "delta": 6.2244713306427, "coverage": 6.013352732352578, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U7", "L1U20", "L1U15"], "form": "poly(2)"}, {"id": "L2U32", "kind": "unit", "layer": 2, "label": "poly(2)(L1U23, L1U5, L1U3)", "mu": 0.9798566102981567, "Pi": 0.75, "pi": 0.825, "delta": 2.5932509899139404, "coverage": 2.323700642075445, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["L1U23", "L1U5", "L1U3"], "form": "poly(2)"}, {"id": "L2U31", "kind": "unit", "layer": 2, "label": "monotone+(L1U3)", "mu": 0.9996733665466309, "Pi": 0.75, "pi": 0.825, "delta": 2.8766305446624756, "coverage": 2.803221590776052, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["L1U3"], "form": "monotone+"}, {"id": "L2U34", "kind": "unit", "layer": 2, "label": "poly(2)(L1U4, L1U16, L1U19)", "mu": 0.9999772906303406, "Pi": 0.25, "pi": 0.225, "delta": 2.3252246379852295, "coverage": 2.237375001744862, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U4", "L1U16", "L1U19"], "form": "poly(2)"}, {"id": "L2U35", "kind": "unit", "layer": 2, "label": "monotone+(L1U20)", "mu": 0.9999950528144836, "Pi": 0.5, "pi": 0.675, "delta": 0.2359851598739624, "coverage": 0.20574833669622639, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U20"], "form": "monotone+"}, {"id": "L2U36", "kind": "unit", "layer": 2, "label": "monotone+(L1U2)", "mu": 0.9999952912330627, "Pi": 0.625, "pi": 0.3, "delta": 0.18541359901428223, "coverage": 0.18996817062138693, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["L1U2"], "form": "monotone+"}, {"id": "L2U38", "kind": "unit", "layer": 2, "label": "monotone+(L1U13)", "mu": 0.9999860525131226, "Pi": 0.375, "pi": 0.475, "delta": 0.06440925598144531, "coverage": 0.05905559316077136, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U13"], "form": "monotone+"}, {"id": "L2U42", "kind": "unit", "layer": 2, "label": "poly(2)(L1U23, L1U2, L1U19)", "mu": 0.9953485727310181, "Pi": 0.125, "pi": 0.0, "delta": 0.050225019454956055, "coverage": 0.05113936533627872, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["L1U23", "L1U2", "L1U19"], "form": "poly(2)"}, {"id": "L2U37", "kind": "unit", "layer": 2, "label": "monotone+(L1U15)", "mu": 0.9999995231628418, "Pi": 0.25, "pi": 0.025, "delta": 0.07627999782562256, "coverage": 0.07586474938603371, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U15"], "form": "monotone+"}, {"id": "L2U39", "kind": "unit", "layer": 2, "label": "monotone+(L1U19)", "mu": 0.9999984502792358, "Pi": 0.125, "pi": 0.025, "delta": 0.0566326379776001, "coverage": 0.05762882372435951, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["L1U19"], "form": "monotone+"}, {"id": "L2U41", "kind": "unit", "layer": 2, "label": "poly(2)(L1U9, L1U3, L1U15)", "mu": 0.9999874234199524, "Pi": 0.125, "pi": 0.025, "delta": 0.01313638687133789, "coverage": 0.013248322061899964, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["L1U9", "L1U3", "L1U15"], "form": "poly(2)"}, {"id": "L2U44", "kind": "unit", "layer": 2, "label": "monotone+(L1U11)", "mu": 0.9999753832817078, "Pi": 0.375, "pi": 0.15, "delta": 0.006145954132080078, "coverage": 0.004832120916910321, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U11"], "form": "monotone+"}, {"id": "L2U40", "kind": "unit", "layer": 2, "label": "monotone+(L1U16)", "mu": 0.9999985694885254, "Pi": 0.25, "pi": 0.45, "delta": 0.0027430057525634766, "coverage": 0.0024329778805531888, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "no_effect"], "support_names": ["L1U16"], "form": "monotone+"}, {"id": "output", "kind": "output", "label": "output"}], "edges": [{"src": "hour", "dst": "L1U7", "share": 0.7756}, {"src": "weekday", "dst": "L1U7", "share": 0.0893}, {"src": "workingday", "dst": "L1U7", "share": 0.0829}, {"src": "weather=rain", "dst": "L1U7", "share": 0.0276}, {"src": "weekday", "dst": "L1U19", "share": 0.9937}, {"src": "hour", "dst": "L1U2", "share": 0.1355}, {"src": "temp", "dst": "L1U2", "share": 0.8087}, {"src": "humidity", "dst": "L1U2", "share": 0.0296}, {"src": "windspeed", "dst": "L1U2", "share": 0.0208}, {"src": "hour", "dst": "L1U3", "share": 0.9601}, {"src": "temp", "dst": "L1U3", "share": 0.022}, {"src": "year", "dst": "L1U15", "share": 0.194}, {"src": "month", "dst": "L1U15", "share": 0.8028}, {"src": "hour", "dst": "L1U20", "share": 0.8595}, {"src": "workingday", "dst": "L1U20", "share": 0.1012}, {"src": "season", "dst": "L1U4", "share": 0.0541}, {"src": "year", "dst": "L1U4", "share": 0.0849}, {"src": "month", "dst": "L1U4", "share": 0.0678}, {"src": "hour", "dst": "L1U4", "share": 0.3801}, {"src": "weather=clear", "dst": "L1U4", "share": 0.1901}, {"src": "weather=misty", "dst": "L1U4", "share": 0.1636}, {"src": "temp", "dst": "L1U4", "share": 0.0551}, {"src": "hour", "dst": "L1U16", "share": 0.6902}, {"src": "humidity", "dst": "L1U16", "share": 0.3071}, {"src": "hour", "dst": "L1U5", "share": 0.9239}, {"src": "workingday", "dst": "L1U5", "share": 0.0497}, {"src": "season", "dst": "L1U13", "share": 0.8484}, {"src": "year", "dst": "L1U13", "share": 0.0267}, {"src": "month", "dst": "L1U13", "share": 0.0247}, {"src": "temp", "dst": "L1U13", "share": 0.0946}, {"src": "hour", "dst": "L1U23", "share": 0.0294}, {"src": "workingday", "dst": "L1U23", "share": 0.9331}, {"src": "weekday", "dst": "L1U9", "share": 0.9966}, {"src": "hour", "dst": "L1U6", "share": 0.7799}, {"src": "workingday", "dst": "L1U6", "share": 0.1565}, {"src": "humidity", "dst": "L1U11", "share": 0.8201}, {"src": "windspeed", "dst": "L1U11", "share": 0.1764}, {"src": "L1U20", "dst": "L2U30", "share": 0.3088}, {"src": "L1U5", "dst": "L2U30", "share": 0.5074}, {"src": "L1U23", "dst": "L2U30", "share": 0.1533}, {"src": "L1U7", "dst": "L2U33", "share": 0.9773}, {"src": "L1U20", "dst": "L2U33", "share": 0.0212}, {"src": "L1U7", "dst": "L2U32", "share": 0.115}, {"src": "L1U3", "dst": "L2U32", "share": 0.1263}, {"src": "L1U16", "dst": "L2U32", "share": 0.0321}, {"src": "L1U5", "dst": "L2U32", "share": 0.1749}, {"src": "L1U23", "dst": "L2U32", "share": 0.1773}, {"src": "L1U6", "dst": "L2U32", "share": 0.322}, {"src": "L1U3", "dst": "L2U31", "share": 0.842}, {"src": "L1U20", "dst": "L2U31", "share": 0.1569}, {"src": "L1U4", "dst": "L2U34", "share": 0.9806}, {"src": "L1U20", "dst": "L2U35", "share": 0.9902}, {"src": "L1U2", "dst": "L2U36", "share": 0.9958}, {"src": "L1U13", "dst": "L2U38", "share": 0.9837}, {"src": "L1U19", "dst": "L2U42", "share": 0.0579}, {"src": "L1U2", "dst": "L2U42", "share": 0.1065}, {"src": "L1U23", "dst": "L2U42", "share": 0.816}, {"src": "L1U15", "dst": "L2U37", "share": 0.997}, {"src": "L1U19", "dst": "L2U39", "share": 0.9969}, {"src": "L1U9", "dst": "L2U41", "share": 0.9764}, {"src": "L1U11", "dst": "L2U44", "share": 0.9694}, {"src": "L1U16", "dst": "L2U40", "share": 0.9954}, {"src": "L2U30", "dst": "output", "share": 0.2893}, {"src": "L2U33", "dst": "output", "share": 0.1552}, {"src": "L2U32", "dst": "output", "share": 0.1532}, {"src": "L2U31", "dst": "output", "share": 0.1249}, {"src": "L2U34", "dst": "output", "share": 0.0859}, {"src": "L2U35", "dst": "output", "share": 0.0404}, {"src": "L2U36", "dst": "output", "share": 0.0379}, {"src": "L2U38", "dst": "output", "share": 0.0238}, {"src": "L2U42", "dst": "output", "share": 0.0229}, {"src": "L2U37", "dst": "output", "share": 0.0224}], "outCol": 4}, "hier": {"nodes": [{"id": "OUT", "kind": "output", "lvl": 0, "start": true, "label": "output", "sub": "regression · bike@grow-batch-8", "drill": ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7"]}, {"id": "C0", "kind": "component", "lvl": 1, "support_names": ["hour"], "share": 0.5871, "Pi": 1.0, "pi": 1.0, "n_members": 19, "tag": "CORE", "drill": ["L1U7", "L1U2", "L1U3", "L1U20", "L1U4", "L1U16", "L1U5", "L1U23", "L1U6", "L2U30", "L2U33", "L2U32", "L2U31", "L2U34", "L2U35", "L2U36", "L2U42", "L2U41", "L2U40"]}, {"id": "C1", "kind": "component", "lvl": 1, "support_names": ["hour", "weekday"], "share": 0.0714, "Pi": 1.0, "pi": 1.0, "n_members": 8, "tag": "CORE", "drill": ["L1U7", "L1U23", "L2U30", "L2U33", "L2U32", "L2U34", "L2U42", "L2U41"]}, {"id": "C2", "kind": "component", "lvl": 1, "support_names": ["temp"], "share": 0.0656, "Pi": 1.0, "pi": 1.0, "n_members": 8, "tag": "CORE", "drill": ["L1U2", "L1U16", "L1U13", "L2U34", "L2U36", "L2U38", "L2U42", "L2U40"]}, {"id": "C3", "kind": "component", "lvl": 1, "support_names": ["year"], "share": 0.0241, "Pi": 1.0, "pi": 1.0, "n_members": 4, "tag": "CORE", "drill": ["L1U15", "L2U33", "L2U37", "L2U41"]}, {"id": "C4", "kind": "component", "lvl": 1, "support_names": ["season"], "share": 0.0228, "Pi": 0.875, "pi": 0.875, "n_members": 6, "tag": "CORE", "drill": ["L1U15", "L1U13", "L2U33", "L2U38", "L2U37", "L2U41"]}, {"id": "C5", "kind": "component", "lvl": 1, "support_names": ["humidity"], "share": 0.0134, "Pi": 1.0, "pi": 0.85, "n_members": 14, "tag": "CORE", "drill": ["L1U19", "L1U2", "L1U20", "L1U16", "L1U11", "L2U30", "L2U33", "L2U34", "L2U35", "L2U36", "L2U42", "L2U39", "L2U44", "L2U40"]}, {"id": "C6", "kind": "component", "lvl": 1, "support_names": ["weather=rain"], "share": 0, "Pi": 0.125, "pi": 0.4, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::weather=rain"]}, {"id": "C7", "kind": "component", "lvl": 1, "support_names": ["feel_temp"], "share": 0, "Pi": 0.375, "pi": 0.325, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::feel_temp"]}, {"id": "L1U7", "kind": "unit", "layer": 1, "label": "poly(2)(hour, weekday, workingday)", "mu": 0.9971588253974915, "Pi": 0.25, "pi": 0.175, "delta": 11.420850038528442, "coverage": 10.964317382123877, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "weekday", "workingday"], "form": "poly(2)", "lvl": 3, "drill": ["F::hour", "F::weekday", "F::workingday"]}, {"id": "L1U2", "kind": "unit", "layer": 1, "label": "poly(2)(temp, hour, humidity)", "mu": 0.9849034547805786, "Pi": 0.25, "pi": 0.125, "delta": 0.16273164749145508, "coverage": 0.1625427814833893, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["temp", "hour", "humidity"], "form": "poly(2)", "lvl": 3, "drill": ["F::temp", "F::hour", "F::humidity"]}, {"id": "L1U3", "kind": "unit", "layer": 1, "label": "monotone-(hour)", "mu": 0.9993633031845093, "Pi": 0.875, "pi": 0.875, "delta": 0.5712859034538269, "coverage": 0.567115026312519, "tag": "CORE", "reasons": [], "support_names": ["hour"], "form": "monotone-", "lvl": 3, "drill": ["F::hour"]}, {"id": "L1U20", "kind": "unit", "layer": 1, "label": "poly(2)(hour, workingday, humidity)", "mu": 0.9884453415870667, "Pi": 0.25, "pi": 0.45, "delta": 2.9163854122161865, "coverage": 2.6301821627485698, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "workingday", "humidity"], "form": "poly(2)", "lvl": 3, "drill": ["F::hour", "F::workingday", "F::humidity"]}, {"id": "L1U4", "kind": "unit", "layer": 1, "label": "poly(2)(hour, weather=clear, weather=misty)", "mu": 0.9411630034446716, "Pi": 0.5, "pi": 0.225, "delta": 2.138874053955078, "coverage": 2.0559028245263207, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "weather=clear", "weather=misty"], "form": "poly(2)", "lvl": 3, "drill": ["F::hour", "F::weather=clear", "F::weather=misty"]}, {"id": "L1U16", "kind": "unit", "layer": 1, "label": "poly(2)(hour, humidity, temp)", "mu": 0.976875364780426, "Pi": 0.625, "pi": 0.75, "delta": 0.0022497177124023438, "coverage": 0.002439141183426141, "tag": "PERIPHERY", "reasons": ["unstable", "no_effect", "multiplicitous"], "support_names": ["hour", "humidity", "temp"], "form": "poly(2)", "lvl": 3, "drill": ["F::hour", "F::humidity", "F::temp"]}, {"id": "L1U5", "kind": "unit", "layer": 1, "label": "monotone-(hour)", "mu": 0.9909052848815918, "Pi": 1.0, "pi": 0.8, "delta": 12.298880815505981, "coverage": 11.507104100099243, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["hour"], "form": "monotone-", "lvl": 3, "drill": ["F::hour"]}, {"id": "L1U23", "kind": "unit", "layer": 1, "label": "poly(2)(workingday, hour, weekday)", "mu": 0.9969326853752136, "Pi": 0.25, "pi": 0.0, "delta": 0.1897786259651184, "coverage": 0.202748524916179, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["workingday", "hour", "weekday"], "form": "poly(2)", "lvl": 3, "drill": ["F::workingday", "F::hour", "F::weekday"]}, {"id": "L1U6", "kind": "unit", "layer": 1, "label": "tree(d3)(hour, workingday)", "mu": 0.964804795978088, "Pi": 1.0, "pi": 0.85, "delta": 2.0997440814971924, "coverage": 1.8469338736139043, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["hour", "workingday"], "form": "tree(d3)", "lvl": 3, "drill": ["F::hour", "F::workingday"]}, {"id": "L2U30", "kind": "unit", "layer": 2, "label": "poly(2)(L1U5, L1U20, L1U23)", "mu": 0.9988738894462585, "Pi": 0.875, "pi": 0.725, "delta": 10.693602800369263, "coverage": 10.054028054735532, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["L1U5", "L1U20", "L1U23"], "form": "poly(2)", "lvl": 2, "drill": ["L1U5", "L1U20", "L1U23"]}, {"id": "L2U33", "kind": "unit", "layer": 2, "label": "poly(2)(L1U7, L1U20, L1U15)", "mu": 0.9999958276748657, "Pi": 0.375, "pi": 0.325, "delta": 6.2244713306427, "coverage": 6.013352732352578, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U7", "L1U20", "L1U15"], "form": "poly(2)", "lvl": 2, "drill": ["L1U7", "L1U20", "L1U15"]}, {"id": "L1U15", "kind": "unit", "layer": 1, "label": "poly(2)(month, year, season)", "mu": 0.9950777888298035, "Pi": 0.25, "pi": 0.05, "delta": 0.06936836242675781, "coverage": 0.06859618900750442, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["month", "year", "season"], "form": "poly(2)", "lvl": 3, "drill": ["F::month", "F::year", "F::season"]}, {"id": "L2U32", "kind": "unit", "layer": 2, "label": "poly(2)(L1U23, L1U5, L1U3)", "mu": 0.9798566102981567, "Pi": 0.75, "pi": 0.825, "delta": 2.5932509899139404, "coverage": 2.323700642075445, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["L1U23", "L1U5", "L1U3"], "form": "poly(2)", "lvl": 2, "drill": ["L1U23", "L1U5", "L1U3"]}, {"id": "L2U31", "kind": "unit", "layer": 2, "label": "monotone+(L1U3)", "mu": 0.9996733665466309, "Pi": 0.75, "pi": 0.825, "delta": 2.8766305446624756, "coverage": 2.803221590776052, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["L1U3"], "form": "monotone+", "lvl": 2, "drill": ["L1U3"]}, {"id": "L2U34", "kind": "unit", "layer": 2, "label": "poly(2)(L1U4, L1U16, L1U19)", "mu": 0.9999772906303406, "Pi": 0.25, "pi": 0.225, "delta": 2.3252246379852295, "coverage": 2.237375001744862, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U4", "L1U16", "L1U19"], "form": "poly(2)", "lvl": 2, "drill": ["L1U4", "L1U16", "L1U19"]}, {"id": "L1U19", "kind": "unit", "layer": 1, "label": "tree(d3)(weekday, humidity)", "mu": 0.9999843692493751, "Pi": 0.125, "pi": 0.125, "delta": 0.0888742208480835, "coverage": 0.09226480582950514, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["weekday", "humidity"], "form": "tree(d3)", "lvl": 3, "drill": ["F::weekday", "F::humidity"]}, {"id": "L2U35", "kind": "unit", "layer": 2, "label": "monotone+(L1U20)", "mu": 0.9999950528144836, "Pi": 0.5, "pi": 0.675, "delta": 0.2359851598739624, "coverage": 0.20574833669622639, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U20"], "form": "monotone+", "lvl": 2, "drill": ["L1U20"]}, {"id": "L2U36", "kind": "unit", "layer": 2, "label": "monotone+(L1U2)", "mu": 0.9999952912330627, "Pi": 0.625, "pi": 0.3, "delta": 0.18541359901428223, "coverage": 0.18996817062138693, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["L1U2"], "form": "monotone+", "lvl": 2, "drill": ["L1U2"]}, {"id": "L2U42", "kind": "unit", "layer": 2, "label": "poly(2)(L1U23, L1U2, L1U19)", "mu": 0.9953485727310181, "Pi": 0.125, "pi": 0.0, "delta": 0.050225019454956055, "coverage": 0.05113936533627872, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["L1U23", "L1U2", "L1U19"], "form": "poly(2)", "lvl": 2, "drill": ["L1U23", "L1U2", "L1U19"]}, {"id": "L2U41", "kind": "unit", "layer": 2, "label": "poly(2)(L1U9, L1U3, L1U15)", "mu": 0.9999874234199524, "Pi": 0.125, "pi": 0.025, "delta": 0.01313638687133789, "coverage": 0.013248322061899964, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["L1U9", "L1U3", "L1U15"], "form": "poly(2)", "lvl": 2, "drill": ["L1U9", "L1U3", "L1U15"]}, {"id": "L1U9", "kind": "unit", "layer": 1, "label": "tree(d3)(weekday, month, weather=clear)", "mu": 0.9999947904395964, "Pi": 0.125, "pi": 0.175, "delta": 0.007985472679138184, "coverage": 0.00770765349382152, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["weekday", "month", "weather=clear"], "form": "tree(d3)", "lvl": 3, "drill": ["F::weekday", "F::month", "F::weather=clear"]}, {"id": "L2U40", "kind": "unit", "layer": 2, "label": "monotone+(L1U16)", "mu": 0.9999985694885254, "Pi": 0.25, "pi": 0.45, "delta": 0.0027430057525634766, "coverage": 0.0024329778805531888, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "no_effect"], "support_names": ["L1U16"], "form": "monotone+", "lvl": 2, "drill": ["L1U16"]}, {"id": "L1U13", "kind": "unit", "layer": 1, "label": "tree(d3)(season, temp)", "mu": 0.9950184082176164, "Pi": 0.125, "pi": 0.225, "delta": 0.05826479196548462, "coverage": 0.0531249971857064, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["season", "temp"], "form": "tree(d3)", "lvl": 3, "drill": ["F::season", "F::temp"]}, {"id": "L2U38", "kind": "unit", "layer": 2, "label": "monotone+(L1U13)", "mu": 0.9999860525131226, "Pi": 0.375, "pi": 0.475, "delta": 0.06440925598144531, "coverage": 0.05905559316077136, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U13"], "form": "monotone+", "lvl": 2, "drill": ["L1U13"]}, {"id": "L2U37", "kind": "unit", "layer": 2, "label": "monotone+(L1U15)", "mu": 0.9999995231628418, "Pi": 0.25, "pi": 0.025, "delta": 0.07627999782562256, "coverage": 0.07586474938603371, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U15"], "form": "monotone+", "lvl": 2, "drill": ["L1U15"]}, {"id": "L1U11", "kind": "unit", "layer": 1, "label": "tree(d3)(humidity, windspeed)", "mu": 0.9011472277468258, "Pi": 0.625, "pi": 0.325, "delta": 0.0029482245445251465, "coverage": 0.0019178847679626188, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "no_effect"], "support_names": ["humidity", "windspeed"], "form": "tree(d3)", "lvl": 3, "drill": ["F::humidity", "F::windspeed"]}, {"id": "L2U39", "kind": "unit", "layer": 2, "label": "monotone+(L1U19)", "mu": 0.9999984502792358, "Pi": 0.125, "pi": 0.025, "delta": 0.0566326379776001, "coverage": 0.05762882372435951, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["L1U19"], "form": "monotone+", "lvl": 2, "drill": ["L1U19"]}, {"id": "L2U44", "kind": "unit", "layer": 2, "label": "monotone+(L1U11)", "mu": 0.9999753832817078, "Pi": 0.375, "pi": 0.15, "delta": 0.006145954132080078, "coverage": 0.004832120916910321, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["L1U11"], "form": "monotone+", "lvl": 2, "drill": ["L1U11"]}, {"id": "F::hour", "kind": "feature", "label": "hour", "lvl": 4}, {"id": "F::weekday", "kind": "feature", "label": "weekday", "lvl": 4}, {"id": "F::workingday", "kind": "feature", "label": "workingday", "lvl": 4}, {"id": "F::temp", "kind": "feature", "label": "temp", "lvl": 4}, {"id": "F::humidity", "kind": "feature", "label": "humidity", "lvl": 4}, {"id": "F::weather=clear", "kind": "feature", "label": "weather=clear", "lvl": 4}, {"id": "F::weather=misty", "kind": "feature", "label": "weather=misty", "lvl": 4}, {"id": "F::month", "kind": "feature", "label": "month", "lvl": 4}, {"id": "F::year", "kind": "feature", "label": "year", "lvl": 4}, {"id": "F::season", "kind": "feature", "label": "season", "lvl": 4}, {"id": "F::windspeed", "kind": "feature", "label": "windspeed", "lvl": 4}, {"id": "F::weather=rain", "kind": "feature", "label": "weather=rain", "lvl": 4}, {"id": "F::feel_temp", "kind": "feature", "label": "feel_temp", "lvl": 4}], "edges": [{"src": "L1U7", "dst": "F::hour", "share": 0.7756}, {"src": "L1U7", "dst": "F::weekday", "share": 0.0893}, {"src": "L1U7", "dst": "F::workingday", "share": 0.0829}, {"src": "L1U2", "dst": "F::temp", "share": 0.8087}, {"src": "L1U2", "dst": "F::hour", "share": 0.1355}, {"src": "L1U2", "dst": "F::humidity", "share": 0.0296}, {"src": "L1U3", "dst": "F::hour", "share": 0.9601}, {"src": "L1U20", "dst": "F::hour", "share": 0.8595}, {"src": "L1U20", "dst": "F::workingday", "share": 0.1012}, {"src": "L1U20", "dst": "F::humidity", "share": 0.05}, {"src": "L1U4", "dst": "F::hour", "share": 0.3801}, {"src": "L1U4", "dst": "F::weather=clear", "share": 0.1901}, {"src": "L1U4", "dst": "F::weather=misty", "share": 0.1636}, {"src": "L1U16", "dst": "F::hour", "share": 0.6902}, {"src": "L1U16", "dst": "F::humidity", "share": 0.3071}, {"src": "L1U16", "dst": "F::temp", "share": 0.05}, {"src": "L1U5", "dst": "F::hour", "share": 0.9239}, {"src": "L1U23", "dst": "F::workingday", "share": 0.9331}, {"src": "L1U23", "dst": "F::hour", "share": 0.0294}, {"src": "L1U23", "dst": "F::weekday", "share": 0.05}, {"src": "L1U6", "dst": "F::hour", "share": 0.7799}, {"src": "L1U6", "dst": "F::workingday", "share": 0.1565}, {"src": "L2U30", "dst": "L1U5", "share": 0.5074}, {"src": "L2U30", "dst": "L1U20", "share": 0.3088}, {"src": "L2U30", "dst": "L1U23", "share": 0.1533}, {"src": "L2U33", "dst": "L1U7", "share": 0.9773}, {"src": "L2U33", "dst": "L1U20", "share": 0.0212}, {"src": "L1U15", "dst": "F::month", "share": 0.8028}, {"src": "L1U15", "dst": "F::year", "share": 0.194}, {"src": "L1U15", "dst": "F::season", "share": 0.05}, {"src": "L2U33", "dst": "L1U15", "share": 0.05}, {"src": "L2U32", "dst": "L1U23", "share": 0.1773}, {"src": "L2U32", "dst": "L1U5", "share": 0.1749}, {"src": "L2U32", "dst": "L1U3", "share": 0.1263}, {"src": "L2U31", "dst": "L1U3", "share": 0.842}, {"src": "L2U34", "dst": "L1U4", "share": 0.9806}, {"src": "L2U34", "dst": "L1U16", "share": 0.05}, {"src": "L1U19", "dst": "F::weekday", "share": 0.9937}, {"src": "L1U19", "dst": "F::humidity", "share": 0.05}, {"src": "L2U34", "dst": "L1U19", "share": 0.05}, {"src": "L2U35", "dst": "L1U20", "share": 0.9902}, {"src": "L2U36", "dst": "L1U2", "share": 0.9958}, {"src": "L2U42", "dst": "L1U23", "share": 0.816}, {"src": "L2U42", "dst": "L1U2", "share": 0.1065}, {"src": "L2U42", "dst": "L1U19", "share": 0.0579}, {"src": "L1U9", "dst": "F::weekday", "share": 0.9966}, {"src": "L1U9", "dst": "F::month", "share": 0.05}, {"src": "L1U9", "dst": "F::weather=clear", "share": 0.05}, {"src": "L2U41", "dst": "L1U9", "share": 0.9764}, {"src": "L2U41", "dst": "L1U3", "share": 0.05}, {"src": "L2U41", "dst": "L1U15", "share": 0.05}, {"src": "L2U40", "dst": "L1U16", "share": 0.9954}, {"src": "C0", "dst": "L1U7", "share": 10.964317382123877}, {"src": "C0", "dst": "L1U2", "share": 0.1625427814833893}, {"src": "C0", "dst": "L1U3", "share": 0.567115026312519}, {"src": "C0", "dst": "L1U20", "share": 2.6301821627485698}, {"src": "C0", "dst": "L1U4", "share": 2.0559028245263207}, {"src": "C0", "dst": "L1U16", "share": 0.002439141183426141}, {"src": "C0", "dst": "L1U5", "share": 11.507104100099243}, {"src": "C0", "dst": "L1U23", "share": 0.202748524916179}, {"src": "C0", "dst": "L1U6", "share": 1.8469338736139043}, {"src": "C0", "dst": "L2U30", "share": 10.054028054735532}, {"src": "C0", "dst": "L2U33", "share": 6.013352732352578}, {"src": "C0", "dst": "L2U32", "share": 2.323700642075445}, {"src": "C0", "dst": "L2U31", "share": 2.803221590776052}, {"src": "C0", "dst": "L2U34", "share": 2.237375001744862}, {"src": "C0", "dst": "L2U35", "share": 0.20574833669622639}, {"src": "C0", "dst": "L2U36", "share": 0.18996817062138693}, {"src": "C0", "dst": "L2U42", "share": 0.05113936533627872}, {"src": "C0", "dst": "L2U41", "share": 0.013248322061899964}, {"src": "C0", "dst": "L2U40", "share": 0.0024329778805531888}, {"src": "C1", "dst": "L1U7", "share": 10.964317382123877}, {"src": "C1", "dst": "L1U23", "share": 0.202748524916179}, {"src": "C1", "dst": "L2U30", "share": 10.054028054735532}, {"src": "C1", "dst": "L2U33", "share": 6.013352732352578}, {"src": "C1", "dst": "L2U32", "share": 2.323700642075445}, {"src": "C1", "dst": "L2U34", "share": 2.237375001744862}, {"src": "C1", "dst": "L2U42", "share": 0.05113936533627872}, {"src": "C1", "dst": "L2U41", "share": 0.013248322061899964}, {"src": "L1U13", "dst": "F::season", "share": 0.8484}, {"src": "L1U13", "dst": "F::temp", "share": 0.0946}, {"src": "L2U38", "dst": "L1U13", "share": 0.9837}, {"src": "C2", "dst": "L1U2", "share": 0.1625427814833893}, {"src": "C2", "dst": "L1U16", "share": 0.002439141183426141}, {"src": "C2", "dst": "L1U13", "share": 0.0531249971857064}, {"src": "C2", "dst": "L2U34", "share": 2.237375001744862}, {"src": "C2", "dst": "L2U36", "share": 0.18996817062138693}, {"src": "C2", "dst": "L2U38", "share": 0.05905559316077136}, {"src": "C2", "dst": "L2U42", "share": 0.05113936533627872}, {"src": "C2", "dst": "L2U40", "share": 0.0024329778805531888}, {"src": "L2U37", "dst": "L1U15", "share": 0.997}, {"src": "C3", "dst": "L1U15", "share": 0.06859618900750442}, {"src": "C3", "dst": "L2U33", "share": 6.013352732352578}, {"src": "C3", "dst": "L2U37", "share": 0.07586474938603371}, {"src": "C3", "dst": "L2U41", "share": 0.013248322061899964}, {"src": "C4", "dst": "L1U15", "share": 0.06859618900750442}, {"src": "C4", "dst": "L1U13", "share": 0.0531249971857064}, {"src": "C4", "dst": "L2U33", "share": 6.013352732352578}, {"src": "C4", "dst": "L2U38", "share": 0.05905559316077136}, {"src": "C4", "dst": "L2U37", "share": 0.07586474938603371}, {"src": "C4", "dst": "L2U41", "share": 0.013248322061899964}, {"src": "L1U11", "dst": "F::humidity", "share": 0.8201}, {"src": "L1U11", "dst": "F::windspeed", "share": 0.1764}, {"src": "L2U39", "dst": "L1U19", "share": 0.9969}, {"src": "L2U44", "dst": "L1U11", "share": 0.9694}, {"src": "C5", "dst": "L1U19", "share": 0.09226480582950514}, {"src": "C5", "dst": "L1U2", "share": 0.1625427814833893}, {"src": "C5", "dst": "L1U20", "share": 2.6301821627485698}, {"src": "C5", "dst": "L1U16", "share": 0.002439141183426141}, {"src": "C5", "dst": "L1U11", "share": 0.0019178847679626188}, {"src": "C5", "dst": "L2U30", "share": 10.054028054735532}, {"src": "C5", "dst": "L2U33", "share": 6.013352732352578}, {"src": "C5", "dst": "L2U34", "share": 2.237375001744862}, {"src": "C5", "dst": "L2U35", "share": 0.20574833669622639}, {"src": "C5", "dst": "L2U36", "share": 0.18996817062138693}, {"src": "C5", "dst": "L2U42", "share": 0.05113936533627872}, {"src": "C5", "dst": "L2U39", "share": 0.05762882372435951}, {"src": "C5", "dst": "L2U44", "share": 0.004832120916910321}, {"src": "C5", "dst": "L2U40", "share": 0.0024329778805531888}, {"src": "C6", "dst": "F::weather=rain", "share": 0.03}, {"src": "C7", "dst": "F::feel_temp", "share": 0.03}, {"src": "OUT", "dst": "C0", "share": 0.5871}, {"src": "OUT", "dst": "C1", "share": 0.0714}, {"src": "OUT", "dst": "C2", "share": 0.0656}, {"src": "OUT", "dst": "C3", "share": 0.0241}, {"src": "OUT", "dst": "C4", "share": 0.0228}, {"src": "OUT", "dst": "C5", "share": 0.0134}, {"src": "OUT", "dst": "C6", "share": 0}, {"src": "OUT", "dst": "C7", "share": 0}]}}</script>
+<script>
+"use strict";
+const $ = s => document.getElementById(s);
+const NS = "http://www.w3.org/2000/svg";
+const D = JSON.parse($("dash-data").textContent);
+const tip = $("tip");
+function el(t,a,p){ const e=document.createElementNS(NS,t);
+  for(const k in a) e.setAttribute(k,a[k]); if(p) p.appendChild(e); return e; }
+function fmt(v,d){ return (v==null||isNaN(v))?"—":Number(v).toFixed(d==null?2:d); }
+function abbr(s,m){ m=m||13; return s.length>m ? s.slice(0,m-1)+"…" : s; }
+
+// Two models over the same run: HIER (drill-down concept hierarchy) and UNITS
+// (the raw model graph). MODE switches between them.
+const HIER = D.hier, UNITS = D.units;
+let MODE = "hier", SEL=null, EXP={}, SHOW_PERI=true, SHOW_IN=true;
+let VZ={k:1,x:0,y:0}, drag=null, W=900, H=560;
+const svg=$("dag"), g=$("dagg");
+
+function M(){ return MODE==="hier" ? HIER : UNITS; }
+function byId(){ const m={}; M().nodes.forEach(n=>m[n.id]=n); return m; }
+
+// ---------- visibility: expansion-set + reachability ------------------------
+// A node is visible iff reachable from a root through EXPANDED ancestors.
+// Member units are SHARED between components, so visibility is recomputed by
+// BFS rather than per-node flags (collapsing one parent keeps a shared child
+// visible while another expanded parent still declares it).
+let VIS = new Set();
+function recomputeVis(){
+  VIS = new Set(); const B=byId();
+  const queue = M().nodes.filter(n=>n.start).map(n=>n.id);
+  queue.forEach(id=>VIS.add(id));
+  while(queue.length){
+    const id = queue.shift(), n = B[id];
+    if(!n || !EXP[id]) continue;
+    (n.drill||[]).forEach(cid=>{
+      if(!VIS.has(cid)){ VIS.add(cid); queue.push(cid); } });
+  }
+}
+function visible(n){
+  if(MODE==="units"){
+    if(n.kind==="input" && !SHOW_IN) return false;
+    if(n.kind==="unit" && n.tag!=="CORE" && !SHOW_PERI) return false;
+    return true;
+  }
+  return VIS.has(n.id);
+}
+function hasChildren(n){ return n.drill && n.drill.length; }
+function isExpanded(n){ return !!EXP[n.id]; }
+function toggleDrill(n){
+  if(!hasChildren(n)) return;
+  EXP[n.id] = !EXP[n.id];
+  layout(); draw();
+}
+
+// ---------- layout: columns by level, spread visible nodes vertically -------
+let POS={};
+function level(n){
+  if(MODE==="hier") return n.lvl;
+  return n.kind==="input"?0 : n.kind==="output"?UNITS.outCol : (n.layer||1);
+}
+function layout(){
+  if(MODE==="hier") recomputeVis();
+  const vis=M().nodes.filter(visible);
+  const cols={}; vis.forEach(n=>{ const c=level(n); (cols[c]=cols[c]||[]).push(n); });
+  const keys=Object.keys(cols).map(Number).sort((a,b)=>a-b);
+  const COLW=232, VGAP=60, TOP=46;
+  let maxRows=1; keys.forEach(k=>maxRows=Math.max(maxRows,cols[k].length));
+  H=TOP*2 + (maxRows-1)*VGAP + 30;
+  W=(keys.length? (Math.max(...keys)+1):1)*COLW;
+  POS={};
+  keys.forEach(k=>{ const arr=cols[k], x=k*COLW+COLW/2;
+    const span=(arr.length-1)*VGAP, y0=(H-span)/2;
+    arr.forEach((n,i)=>POS[n.id]={x,y:y0+i*VGAP}); });
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+}
+
+const R=17;
+function nodeFill(n){
+  if(n.kind==="feature"||n.kind==="input") return "var(--wash)";
+  if(n.kind==="output") return "var(--surface)";
+  return (n.tag==="CORE") ? "var(--corewash)" : "var(--periwash)";
+}
+function nodeStroke(n){
+  if(n.kind==="component"||n.kind==="unit") return n.tag==="CORE"?"var(--core)":"var(--peri)";
+  if(n.kind==="output") return "var(--accent)";
+  return "var(--grid)";
+}
+function nlabel(n){
+  if(n.kind==="component") return n.support_names.map(s=>abbr(s,10)).join("·");
+  if(n.kind==="unit") return (n.support_names&&n.support_names.length)
+      ? n.support_names.map(s=>abbr(s,9)).join("·") : n.id;
+  return abbr(n.label,16);
+}
+
+function draw(){
+  g.textContent="";
+  const B=byId();
+  M().edges.forEach(e=>{
+    const a=B[e.src], b=B[e.dst]; if(!a||!b||!visible(a)||!visible(b)) return;
+    const p=POS[e.src], q=POS[e.dst]; if(!p||!q) return;
+    const mx=(p.x+q.x)/2, w=0.8+5*Math.min(1,(e.share||0)*3);
+    el("path",{d:`M${p.x+R} ${p.y} C ${mx} ${p.y}, ${mx} ${q.y}, ${q.x-R} ${q.y}`,
+      fill:"none",stroke:"var(--edge)","stroke-width":w.toFixed(2),
+      "stroke-opacity":(SEL&&SEL!==e.src&&SEL!==e.dst)?0.14:0.5},g);
+  });
+  M().nodes.forEach(n=>{
+    if(!visible(n)) return; const p=POS[n.id]; if(!p) return;
+    const dim=SEL&&SEL!==n.id&&!adjacent(n.id,SEL,B);
+    const grp=el("g",{transform:`translate(${p.x},${p.y})`,
+      style:`cursor:pointer;opacity:${dim?0.3:1}`},g);
+    if(n.kind==="output"){
+      el("rect",{x:-R-18,y:-14,width:2*R+36,height:28,rx:7,fill:nodeFill(n),
+        stroke:nodeStroke(n),"stroke-width":1.5},grp);
+    } else if(n.kind==="feature"||n.kind==="input"){
+      el("rect",{x:-R-12,y:-12,width:2*R+24,height:24,rx:12,fill:nodeFill(n),
+        stroke:nodeStroke(n),"stroke-width":1.2},grp);
+    } else {
+      el("circle",{r:R,fill:nodeFill(n),stroke:nodeStroke(n),
+        "stroke-width":(n.id===SEL)?3:1.8},grp);
+    }
+    const t=el("text",{"text-anchor":"middle",y:4,
+      style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},grp);
+    t.textContent=nlabel(n);
+    // sub-label: μ for units, share for components
+    let sub=null;
+    if(n.kind==="unit"&&n.mu!=null) sub="μ "+fmt(n.mu,2);
+    else if(n.kind==="component"&&n.share!=null) sub=(100*n.share).toFixed(0)+"%";
+    if(sub){ const st=el("text",{"text-anchor":"middle",y:R+12,
+      style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},grp);
+      st.textContent=sub; }
+    // drill affordance: a small +/- badge when the node has children
+    if(MODE==="hier"&&hasChildren(n)){
+      const open=isExpanded(n);
+      el("circle",{cx:R-2,cy:-R+2,r:6.5,fill:"var(--surface)",
+        stroke:nodeStroke(n),"stroke-width":1.2},grp);
+      const bt=el("text",{x:R-2,y:-R+5.4,"text-anchor":"middle",
+        style:"font:11px system-ui;font-weight:700;fill:var(--ink2);pointer-events:none"},grp);
+      bt.textContent=open?"–":"+";
+    }
+    grp.addEventListener("mouseenter",ev=>hover(n,ev));
+    grp.addEventListener("mousemove",moveTip);
+    grp.addEventListener("mouseleave",()=>tip.style.opacity=0);
+    grp.addEventListener("click",ev=>{ev.stopPropagation(); select(n.id);});
+    grp.addEventListener("dblclick",ev=>{ev.stopPropagation();
+      if(MODE==="hier") toggleDrill(n);});
+  });
+  applyZoom();
+}
+function adjacent(a,b,B){ return M().edges.some(e=>(e.src===a&&e.dst===b)||(e.src===b&&e.dst===a)); }
+
+// ---------- hover + detail --------------------------------------------------
+function hover(n,ev){
+  let h=`<h4>${nlabel(n)}</h4>`;
+  if(n.kind==="unit")
+    h+=`<div class="m">${n.tag} · layer ${n.layer} · ${n.form||"?"}</div>`+
+       `<div class="m">μ ${fmt(n.mu)} · Π ${fmt(n.Pi)} · π ${fmt(n.pi)} · Δ ${fmt(n.delta)}</div>`;
+  else if(n.kind==="component")
+    h+=`<div class="m">${n.tag} function component · share ${fmt(100*n.share,1)}%</div>`+
+       `<div class="m">Π ${fmt(n.Pi)} · π ${fmt(n.pi)} · ${n.n_members||0} member unit${n.n_members===1?"":"s"}`+
+       `${hasChildren(n)?" · double-click to drill":""}</div>`;
+  else if(n.kind==="output")
+    h+=`<div class="m">${n.sub||"output"}${hasChildren(n)?" · double-click to drill into its components":""}</div>`;
+  else h+=`<div class="m">input feature</div>`;
+  tip.innerHTML=h; tip.style.opacity=1; moveTip(ev);
+}
+function moveTip(ev){
+  tip.style.left=Math.min(ev.clientX+14, innerWidth-tip.offsetWidth-8)+"px";
+  tip.style.top=Math.min(ev.clientY+14, innerHeight-tip.offsetHeight-8)+"px";
+}
+function select(id){ SEL=(SEL===id)?null:id; draw(); renderDetail(); }
+
+function renderDetail(){
+  const box=$("detail"), B=byId();
+  if(!SEL || !B[SEL]){ box.innerHTML=emptyHelp(); return; }
+  const n=B[SEL];
+  if(n.kind==="unit"){
+    let h=`<h3>${nlabel(n)}</h3><div class="did">${n.id}</div>`+
+      `<div style="margin-top:7px"><span class="pill ${n.tag==="CORE"?"core":"peri"}">${n.tag}</span></div>`+
+      `<dl><dt>support</dt><dd>${(n.support_names||[]).join(", ")||"—"}</dd>`+
+      `<dt>form</dt><dd>${n.form||"—"}</dd><dt>layer</dt><dd>${n.layer}</dd>`+
+      `<dt>μ mono</dt><dd>${fmt(n.mu)}</dd><dt>Π stab</dt><dd>${fmt(n.Pi)}</dd>`+
+      `<dt>π cpss</dt><dd>${fmt(n.pi)}</dd><dt>Δ real</dt><dd>${fmt(n.delta,3)}</dd></dl>`;
+    h+=(n.reasons&&n.reasons.length)
+      ? `<div class="chips">`+n.reasons.map(r=>`<span class="chip r">${r}</span>`).join("")+`</div>`
+      : `<div class="chips"><span class="chip">certified: stable, frequent, real</span></div>`;
+    box.innerHTML=h; return;
+  }
+  if(n.kind==="component"){
+    box.innerHTML=`<h3>${nlabel(n)}</h3><div class="did">function component</div>`+
+      `<div style="margin-top:7px"><span class="pill ${n.tag==="CORE"?"core":"peri"}">${n.tag}</span></div>`+
+      `<dl><dt>support</dt><dd>${n.support_names.join(", ")}</dd>`+
+      `<dt>share</dt><dd>${fmt(100*n.share,1)}% of function variance</dd>`+
+      `<dt>Π stab</dt><dd>${fmt(n.Pi)}</dd><dt>π cpss</dt><dd>${fmt(n.pi)}</dd>`+
+      `<dt>members</dt><dd>${n.n_members||0} unit(s) carry this claim</dd></dl>`+
+      `<div class="chips"><span class="chip">${hasChildren(n)
+        ? (n.n_members ? "double-click: expand member units" : "double-click: features (no localised carrier)")
+        : "leaf"}</span></div>`;
+    return;
+  }
+  box.innerHTML=`<h3>${n.label}</h3><div class="did">${n.kind}</div>`+
+    `<div class="empty" style="margin-top:10px">${n.kind==="output"
+      ? "Model output. Double-click to drill into the certified components that drive it."
+      : "Input feature (one monosemantic column)."}</div>`;
+}
+function emptyHelp(){
+  if(MODE==="hier") return `<div class="empty"><b>Layer F DAG.</b> The certified function
+    components (the “laws”) are shown by default. <b>Double-click</b> a component to expand
+    its <b>member units</b> — the model units its mass physically flows through — then
+    double-click a unit to expand its parents down to input features: the end-to-end
+    parameter flow, with edge width = real contribution share. A <b>+</b> badge marks an
+    expandable node; <b>–</b> collapses it.<br><br><b>Green</b> = CORE (certified);
+    <b>grey</b> = periphery. Single-click any node for its numbers. Drag to pan, scroll to zoom.</div>`;
+  return `<div class="empty"><b>Model units.</b> Circles are the network's hidden units,
+    labelled by their support and μ (monosemanticity). <b>Green</b> = CORE, <b>grey</b> =
+    periphery (labelled with why it failed to certify). This is the raw graph for judging
+    node nameability. Click a unit for detail; toggle inputs/periphery above.</div>`;
+}
+
+// ---------- pan / zoom ------------------------------------------------------
+function applyZoom(){ g.setAttribute("transform",`translate(${VZ.x},${VZ.y}) scale(${VZ.k})`); }
+svg.addEventListener("mousedown",e=>{drag={x:e.clientX,y:e.clientY,ox:VZ.x,oy:VZ.y};});
+addEventListener("mousemove",e=>{ if(!drag)return;
+  VZ.x=drag.ox+(e.clientX-drag.x); VZ.y=drag.oy+(e.clientY-drag.y); applyZoom(); });
+addEventListener("mouseup",()=>drag=null);
+svg.addEventListener("click",()=>{ if(SEL){SEL=null; draw(); renderDetail();} });
+svg.addEventListener("wheel",e=>{ e.preventDefault();
+  const r=svg.getBoundingClientRect(), sx=(e.clientX-r.left)/r.width*W, sy=(e.clientY-r.top)/r.height*H;
+  const f=e.deltaY<0?1.12:1/1.12, nk=Math.max(0.3,Math.min(3.2,VZ.k*f));
+  VZ.x=sx-(sx-VZ.x)*(nk/VZ.k); VZ.y=sy-(sy-VZ.y)*(nk/VZ.k); VZ.k=nk; applyZoom();
+},{passive:false});
+function fit(){ VZ={k:1,x:0,y:0}; applyZoom(); }
+
+// ---------- mode + controls -------------------------------------------------
+function setMode(m){
+  MODE=m; SEL=null;
+  $("m_hier").classList.toggle("on",m==="hier");
+  $("m_units").classList.toggle("on",m==="units");
+  $("unitctrls").style.display = m==="units" ? "" : "none";
+  $("hierctrls").style.display = m==="hier" ? "" : "none";
+  layout(); draw(); renderDetail();
+}
+$("m_hier").addEventListener("click",()=>setMode("hier"));
+$("m_units").addEventListener("click",()=>setMode("units"));
+$("b_fit").addEventListener("click",()=>{ // reset: back to the Layer F view
+  EXP={}; HIER.nodes.filter(n=>n.start).forEach(n=>EXP[n.id]=true);
+  layout(); draw(); fit(); });
+$("b_expand").addEventListener("click",()=>{ // expand every component's members
+  HIER.nodes.forEach(n=>{ if(n.start||n.kind==="component") EXP[n.id]=true; });
+  layout(); draw(); });
+$("t_peri").addEventListener("change",e=>{SHOW_PERI=e.target.checked; layout(); draw();});
+$("t_in").addEventListener("change",e=>{SHOW_IN=e.target.checked; layout(); draw();});
+// default view: the Layer F DAG (root expanded -> components visible)
+HIER.nodes.filter(n=>n.start).forEach(n=>EXP[n.id]=true);
+setMode("hier"); fit();
+</script>
+</body>
+</html>

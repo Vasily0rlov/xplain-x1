@@ -141,32 +141,43 @@ function abbr(s,m){ m=m||13; return s.length>m ? s.slice(0,m-1)+"…" : s; }
 // Two models over the same run: HIER (drill-down concept hierarchy) and UNITS
 // (the raw model graph). MODE switches between them.
 const HIER = D.hier, UNITS = D.units;
-let MODE = "hier", SEL=null, DRILL={}, SHOW_PERI=true, SHOW_IN=true;
+let MODE = "hier", SEL=null, EXP={}, SHOW_PERI=true, SHOW_IN=true;
 let VZ={k:1,x:0,y:0}, drag=null, W=900, H=560;
 const svg=$("dag"), g=$("dagg");
 
 function M(){ return MODE==="hier" ? HIER : UNITS; }
 function byId(){ const m={}; M().nodes.forEach(n=>m[n.id]=n); return m; }
 
-// ---------- visibility ------------------------------------------------------
+// ---------- visibility: expansion-set + reachability ------------------------
+// A node is visible iff reachable from a root through EXPANDED ancestors.
+// Member units are SHARED between components, so visibility is recomputed by
+// BFS rather than per-node flags (collapsing one parent keeps a shared child
+// visible while another expanded parent still declares it).
+let VIS = new Set();
+function recomputeVis(){
+  VIS = new Set(); const B=byId();
+  const queue = M().nodes.filter(n=>n.start).map(n=>n.id);
+  queue.forEach(id=>VIS.add(id));
+  while(queue.length){
+    const id = queue.shift(), n = B[id];
+    if(!n || !EXP[id]) continue;
+    (n.drill||[]).forEach(cid=>{
+      if(!VIS.has(cid)){ VIS.add(cid); queue.push(cid); } });
+  }
+}
 function visible(n){
   if(MODE==="units"){
     if(n.kind==="input" && !SHOW_IN) return false;
     if(n.kind==="unit" && n.tag!=="CORE" && !SHOW_PERI) return false;
     return true;
   }
-  // hier: roots always shown; others only when drilled-into
-  return n.start || !!DRILL[n.id];
+  return VIS.has(n.id);
 }
 function hasChildren(n){ return n.drill && n.drill.length; }
-function isExpanded(n){ return hasChildren(n) && n.drill.every(id=>DRILL[id]); }
+function isExpanded(n){ return !!EXP[n.id]; }
 function toggleDrill(n){
   if(!hasChildren(n)) return;
-  if(isExpanded(n)){                       // collapse this node's subtree
-    const stack=[...n.drill], B=byId();
-    while(stack.length){ const id=stack.pop(); if(!DRILL[id]) continue;
-      DRILL[id]=false; const c=B[id]; if(c&&c.drill) stack.push(...c.drill); }
-  } else n.drill.forEach(id=>DRILL[id]=true);
+  EXP[n.id] = !EXP[n.id];
   layout(); draw();
 }
 
@@ -177,6 +188,7 @@ function level(n){
   return n.kind==="input"?0 : n.kind==="output"?UNITS.outCol : (n.layer||1);
 }
 function layout(){
+  if(MODE==="hier") recomputeVis();
   const vis=M().nodes.filter(visible);
   const cols={}; vis.forEach(n=>{ const c=level(n); (cols[c]=cols[c]||[]).push(n); });
   const keys=Object.keys(cols).map(Number).sort((a,b)=>a-b);
@@ -273,7 +285,8 @@ function hover(n,ev){
        `<div class="m">μ ${fmt(n.mu)} · Π ${fmt(n.Pi)} · π ${fmt(n.pi)} · Δ ${fmt(n.delta)}</div>`;
   else if(n.kind==="component")
     h+=`<div class="m">${n.tag} function component · share ${fmt(100*n.share,1)}%</div>`+
-       `<div class="m">Π ${fmt(n.Pi)} · π ${fmt(n.pi)}${hasChildren(n)?" · double-click to drill":""}</div>`;
+       `<div class="m">Π ${fmt(n.Pi)} · π ${fmt(n.pi)} · ${n.n_members||0} member unit${n.n_members===1?"":"s"}`+
+       `${hasChildren(n)?" · double-click to drill":""}</div>`;
   else if(n.kind==="output")
     h+=`<div class="m">${n.sub||"output"}${hasChildren(n)?" · double-click to drill into its components":""}</div>`;
   else h+=`<div class="m">input feature</div>`;
@@ -306,8 +319,11 @@ function renderDetail(){
       `<div style="margin-top:7px"><span class="pill ${n.tag==="CORE"?"core":"peri"}">${n.tag}</span></div>`+
       `<dl><dt>support</dt><dd>${n.support_names.join(", ")}</dd>`+
       `<dt>share</dt><dd>${fmt(100*n.share,1)}% of function variance</dd>`+
-      `<dt>Π stab</dt><dd>${fmt(n.Pi)}</dd><dt>π cpss</dt><dd>${fmt(n.pi)}</dd></dl>`+
-      `<div class="chips"><span class="chip">${hasChildren(n)?"double-click to drill to features":"leaf"}</span></div>`;
+      `<dt>Π stab</dt><dd>${fmt(n.Pi)}</dd><dt>π cpss</dt><dd>${fmt(n.pi)}</dd>`+
+      `<dt>members</dt><dd>${n.n_members||0} unit(s) carry this claim</dd></dl>`+
+      `<div class="chips"><span class="chip">${hasChildren(n)
+        ? (n.n_members ? "double-click: expand member units" : "double-click: features (no localised carrier)")
+        : "leaf"}</span></div>`;
     return;
   }
   box.innerHTML=`<h3>${n.label}</h3><div class="did">${n.kind}</div>`+
@@ -316,10 +332,12 @@ function renderDetail(){
       : "Input feature (one monosemantic column)."}</div>`;
 }
 function emptyHelp(){
-  if(MODE==="hier") return `<div class="empty"><b>Drill-down.</b> The rectangle is the model
-    output; <b>double-click</b> it to reveal the certified function components (the “laws”),
-    then double-click a component to reveal the input features it uses. A <b>+</b> badge marks
-    a node you can drill; <b>–</b> collapses it.<br><br><b>Green</b> = CORE (certified);
+  if(MODE==="hier") return `<div class="empty"><b>Layer F DAG.</b> The certified function
+    components (the “laws”) are shown by default. <b>Double-click</b> a component to expand
+    its <b>member units</b> — the model units its mass physically flows through — then
+    double-click a unit to expand its parents down to input features: the end-to-end
+    parameter flow, with edge width = real contribution share. A <b>+</b> badge marks an
+    expandable node; <b>–</b> collapses it.<br><br><b>Green</b> = CORE (certified);
     <b>grey</b> = periphery. Single-click any node for its numbers. Drag to pan, scroll to zoom.</div>`;
   return `<div class="empty"><b>Model units.</b> Circles are the network's hidden units,
     labelled by their support and μ (monosemanticity). <b>Green</b> = CORE, <b>grey</b> =
@@ -352,14 +370,16 @@ function setMode(m){
 }
 $("m_hier").addEventListener("click",()=>setMode("hier"));
 $("m_units").addEventListener("click",()=>setMode("units"));
-$("b_fit").addEventListener("click",fit);
-$("b_expand").addEventListener("click",()=>{ // expand all one level from roots
-  HIER.nodes.filter(n=>n.start).forEach(n=>(n.drill||[]).forEach(id=>DRILL[id]=true));
+$("b_fit").addEventListener("click",()=>{ // reset: back to the Layer F view
+  EXP={}; HIER.nodes.filter(n=>n.start).forEach(n=>EXP[n.id]=true);
+  layout(); draw(); fit(); });
+$("b_expand").addEventListener("click",()=>{ // expand every component's members
+  HIER.nodes.forEach(n=>{ if(n.start||n.kind==="component") EXP[n.id]=true; });
   layout(); draw(); });
 $("t_peri").addEventListener("change",e=>{SHOW_PERI=e.target.checked; layout(); draw();});
 $("t_in").addEventListener("change",e=>{SHOW_IN=e.target.checked; layout(); draw();});
-// start with the first drill level open so the concept structure is visible at load
-HIER.nodes.filter(n=>n.start).forEach(n=>(n.drill||[]).forEach(id=>DRILL[id]=true));
+// default view: the Layer F DAG (root expanded -> components visible)
+HIER.nodes.filter(n=>n.start).forEach(n=>EXP[n.id]=true);
 setMode("hier"); fit();
 """
 
@@ -481,14 +501,41 @@ def _build_units(dag: dict) -> dict:
     return {"nodes": dag["nodes"], "edges": dag["edges"], "outCol": out_col}
 
 
-def _build_hier(cert: dict, is_multiclass: bool, n_classes: int) -> dict:
-    """Drill-down concept hierarchy: output -> certified components -> features.
+def _transitive_feature_supports(dag: dict) -> dict:
+    """Resolve each unit's support_names to INPUT features, recursively.
 
-    The output root drills into the Layer-F components (the certified "laws"),
-    each of which drills into its input-feature support.  Faithful to the
-    as-built artefacts: components are of the model's function (over class
-    logits for classification), so a single output root avoids implying a
-    per-class attribution the decomposition does not certify.
+    Layer-1 units name features directly; deeper units name parent unit ids —
+    resolvable inside the DAG itself, so saved artefacts re-render with no new
+    producer data."""
+    unit_nodes = {n["id"]: n for n in dag["nodes"] if n["kind"] == "unit"}
+    memo: dict = {}
+
+    def resolve(uid, seen=frozenset()):
+        if uid in memo:
+            return memo[uid]
+        out = set()
+        for name in (unit_nodes[uid].get("support_names") or []):
+            if name in unit_nodes and name not in seen:
+                out |= resolve(name, seen | {uid})
+            elif name not in unit_nodes:
+                out.add(name)
+        memo[uid] = out
+        return out
+
+    return {uid: resolve(uid) for uid in unit_nodes}
+
+
+def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
+                n_classes: int) -> dict:
+    """The Layer F DAG with drill-down into the physical model.
+
+    Levels: output (0) -> certified components (1) -> member units (2..) ->
+    input features.  A unit is a MEMBER of a component iff the component's
+    feature support is contained in the unit's transitive input support — the
+    units through which that certified claim's mass physically flows.  A unit
+    drills into its physical parents (deeper units, then features) with edge
+    widths taken from the real masked-weight contribution shares, so the fully
+    expanded view is the end-to-end parameter flow.
     """
     fdec = cert["function_decomposition"]
     ident = cert["identification"]
@@ -497,25 +544,64 @@ def _build_hier(cert: dict, is_multiclass: bool, n_classes: int) -> dict:
     peri = [c for c in comps if c.get("label") != "CORE"][:6]
     chosen = core + peri
 
+    unit_nodes = {n["id"]: n for n in dag["nodes"] if n["kind"] == "unit"}
+    trans = _transitive_feature_supports(dag)
+    n_layers = max([1] + [n.get("layer", 1) for n in unit_nodes.values()])
+    feat_lvl = 2 + n_layers
+    edge_share = {(e["src"], e["dst"]): e.get("share", 0)
+                  for e in dag.get("edges", [])}
+
     nodes, edges = [], []
-    feats: dict[str, dict] = {}
-    comp_ids: list[str] = []
+    feats: dict = {}
+    used_units: dict = {}
+
+    def feat_node(name: str) -> str:
+        fid = "F::" + name
+        if fid not in feats:
+            feats[fid] = {"id": fid, "kind": "feature", "label": name,
+                          "lvl": feat_lvl}
+        return fid
+
+    def unit_node(uid: str) -> str:
+        if uid in used_units:
+            return uid
+        u = unit_nodes[uid]
+        lvl = 2 + (n_layers - u.get("layer", 1))
+        used_units[uid] = {**u, "lvl": lvl, "drill": []}   # placeholder first
+        drill = []
+        for pname in (u.get("support_names") or []):
+            if pname in unit_nodes:
+                drill.append(unit_node(pname))
+                edges.append({"src": uid, "dst": pname,
+                              "share": edge_share.get((pname, uid), 0.05)})
+            else:
+                drill.append(feat_node(pname))
+                edges.append({"src": uid, "dst": "F::" + pname,
+                              "share": edge_share.get((pname, uid), 0.05)})
+        used_units[uid]["drill"] = drill
+        return uid
+
+    comp_ids: list = []
     for i, c in enumerate(chosen):
         cid = f"C{i}"
         comp_ids.append(cid)
         supp = c.get("support_names", c.get("names", []))
-        fids = []
-        for f in supp:
-            fid = "F::" + f
-            if fid not in feats:
-                feats[fid] = {"id": fid, "kind": "feature", "label": f, "lvl": 2}
-            fids.append(fid)
-            edges.append({"src": cid, "dst": fid})
+        sset = set(supp)
+        members = [uid for uid, tf in trans.items() if sset and sset <= tf]
+        drill = [unit_node(uid) for uid in members]
+        for uid in members:
+            edges.append({"src": cid, "dst": uid,
+                          "share": unit_nodes[uid].get("coverage") or 0.02})
+        if not members:   # unlocalised claim: drill straight to its features
+            drill = [feat_node(f) for f in supp]
+            for f in supp:
+                edges.append({"src": cid, "dst": "F::" + f, "share": 0.03})
         nodes.append({
             "id": cid, "kind": "component", "lvl": 1,
             "support_names": supp, "share": _comp_share(c),
             "Pi": c.get("Pi", 0), "pi": c.get("pi", 0),
-            "tag": c.get("label", "PERIPHERY"), "drill": fids})
+            "n_members": len(members),
+            "tag": c.get("label", "PERIPHERY"), "drill": drill})
 
     root_label = (f"{n_classes}-class output" if is_multiclass
                   else ("class decision" if ident["task"] == "classification"
@@ -525,8 +611,13 @@ def _build_hier(cert: dict, is_multiclass: bool, n_classes: int) -> dict:
             "drill": comp_ids}
     for cid, c in zip(comp_ids, chosen):
         edges.append({"src": "OUT", "dst": cid, "share": _comp_share(c)})
-    nodes = [root] + nodes + list(feats.values())
-    return {"nodes": nodes, "edges": edges}
+    nodes = [root] + nodes + list(used_units.values()) + list(feats.values())
+    dedup: dict = {}
+    for e in edges:
+        k = (e["src"], e["dst"])
+        if k not in dedup or e.get("share", 0) > dedup[k].get("share", 0):
+            dedup[k] = e
+    return {"nodes": nodes, "edges": list(dedup.values())}
 
 
 def render_dashboard(data: dict) -> str:
@@ -581,7 +672,7 @@ def render_dashboard(data: dict) -> str:
 
     payload = {
         "units": _build_units(data["dag"]),
-        "hier": _build_hier(cert, is_multiclass, n_classes),
+        "hier": _build_hier(cert, data["dag"], is_multiclass, n_classes),
     }
     data_json = json.dumps(payload, ensure_ascii=False, default=str)
 
@@ -611,12 +702,12 @@ def render_dashboard(data: dict) -> str:
     <div class="daghdr">
       <h2>Concept DAG</h2>
       <div class="seg">
-        <button id="m_hier" class="on">Drill-down</button>
+        <button id="m_hier" class="on">Layer F DAG</button>
         <button id="m_units">Model units</button>
       </div>
       <div class="ctrls">
         <span id="hierctrls" class="ctrls" style="border:none;padding:0">
-          <button id="b_expand">expand components</button>
+          <button id="b_expand">expand all members</button>
         </span>
         <span id="unitctrls" class="ctrls" style="border:none;padding:0;display:none">
           <label><input type="checkbox" id="t_peri" checked> periphery</label>
@@ -633,7 +724,7 @@ def render_dashboard(data: dict) -> str:
           <span><i style="background:var(--periwash);border:1.5px solid var(--peri)"></i>periphery</span>
           <span><i style="background:var(--surface);border:1.5px solid var(--accent)"></i>output</span>
           <span><i style="background:var(--wash);border:1px solid var(--grid)"></i>feature</span>
-          <span>double-click to drill · edge width = share</span>
+          <span>double-click: component → member units → features · edge = real share</span>
         </div>
       </div>
       <div class="detail" id="detail"></div>

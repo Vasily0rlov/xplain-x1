@@ -80,7 +80,7 @@ def _bars(cert_doc: dict, core_share_sum: float) -> list[dict]:
     return rows
 
 
-def build_one(name: str, cfg: dict) -> dict:
+def build_one(name: str, cfg: dict, suffix: str = "") -> dict:
     t0 = time.time()
     print(f"[{time.strftime('%H:%M:%S')}] certifying {name} ...", flush=True)
     cert = certify(name, cfg)
@@ -98,12 +98,14 @@ def build_one(name: str, cfg: dict) -> dict:
         "core_share_sum": core_share_sum,
         "bars": _bars(cert_doc, core_share_sum),
     }
-    safe = name.replace(":", "_")
+    safe = name.replace(":", "_") + suffix
+    if suffix:   # variant runs carry their tag into the page identity
+        cert_doc["identification"]["dataset"] = name + suffix
     save_json(OUT / f"{safe}.json", data)
     (OUT / f"{safe}.html").write_text(render_dashboard(data), encoding="utf-8")
     perf = cert_doc["performance_and_limits"]
     meta = {
-        "dataset": name, "task": ds.task, "n": ds.n, "d": ds.d,
+        "dataset": name + suffix, "task": ds.task, "n": ds.n, "d": ds.d,
         "fidelity": perf.get("fidelity_val", 0),
         "ratio": perf.get("fidelity_ratio"),
         "n_core": cert_doc["function_decomposition"].get("n_core", 0),
@@ -156,15 +158,26 @@ def main() -> None:
         rerender_from_json()
         return
     cfg = yaml.safe_load((ROOT / "configs" / "default.yaml").read_text())
-    targets = sys.argv[1:] or REVIEW
-    single = bool(sys.argv[1:])
+    args = sys.argv[1:]
+    suffix = ""
+    if "--suffix" in args:
+        i = args.index("--suffix")
+        suffix = args[i + 1]
+        del args[i:i + 2]
+    if "--grow-batch" in args:
+        i = args.index("--grow-batch")
+        cfg["controller"]["grow_batch"] = int(args[i + 1])
+        del args[i:i + 2]
+        print(f"grow_batch override: {cfg['controller']['grow_batch']}", flush=True)
+    targets = args or REVIEW
+    single = bool(args)
     if not single:
         print("Box-capacity gate (CLAUDE.md §3): waiting until free ...", flush=True)
         wait_until_free()
     metas = []
     for name in targets:
         try:
-            metas.append(build_one(name, cfg))
+            metas.append(build_one(name, cfg, suffix))
         except Exception as e:  # keep going; one dataset failing must not sink the run
             print(f"!! {name} FAILED: {type(e).__name__}: {e}", flush=True)
     if metas:

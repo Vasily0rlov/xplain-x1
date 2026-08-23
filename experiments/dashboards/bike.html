@@ -132,12 +132,12 @@ table.t td.num, table.t th.num { text-align:right; }
     <div class="daghdr">
       <h2>Concept DAG</h2>
       <div class="seg">
-        <button id="m_hier" class="on">Drill-down</button>
+        <button id="m_hier" class="on">Layer F DAG</button>
         <button id="m_units">Model units</button>
       </div>
       <div class="ctrls">
         <span id="hierctrls" class="ctrls" style="border:none;padding:0">
-          <button id="b_expand">expand components</button>
+          <button id="b_expand">expand all members</button>
         </span>
         <span id="unitctrls" class="ctrls" style="border:none;padding:0;display:none">
           <label><input type="checkbox" id="t_peri" checked> periphery</label>
@@ -154,7 +154,7 @@ table.t td.num, table.t th.num { text-align:right; }
           <span><i style="background:var(--periwash);border:1.5px solid var(--peri)"></i>periphery</span>
           <span><i style="background:var(--surface);border:1.5px solid var(--accent)"></i>output</span>
           <span><i style="background:var(--wash);border:1px solid var(--grid)"></i>feature</span>
-          <span>double-click to drill · edge width = share</span>
+          <span>double-click: component → member units → features · edge = real share</span>
         </div>
       </div>
       <div class="detail" id="detail"></div>
@@ -196,7 +196,7 @@ table.t td.num, table.t th.num { text-align:right; }
     Certified claims are the Layer F components; the DAG is inspectable, the periphery labelled.
   </div>
 </div>
-<script id="dash-data" type="application/json">{"units": {"nodes": [{"id": "year", "kind": "input", "label": "year"}, {"id": "month", "kind": "input", "label": "month"}, {"id": "hour", "kind": "input", "label": "hour"}, {"id": "weekday", "kind": "input", "label": "weekday"}, {"id": "workingday", "kind": "input", "label": "workingday"}, {"id": "weather=clear", "kind": "input", "label": "weather=clear"}, {"id": "weather=misty", "kind": "input", "label": "weather=misty"}, {"id": "weather=rain", "kind": "input", "label": "weather=rain"}, {"id": "temp", "kind": "input", "label": "temp"}, {"id": "windspeed", "kind": "input", "label": "windspeed"}, {"id": "L1U5", "kind": "unit", "layer": 1, "label": "tree(d3)(hour, workingday)", "mu": 0.9694533367559598, "Pi": 1.0, "pi": 1.0, "delta": 4.786236763000488, "coverage": 4.520296579541391, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["hour", "workingday"], "form": "tree(d3)"}, {"id": "L1U6", "kind": "unit", "layer": 1, "label": "tree(d3)(hour, workingday)", "mu": 0.9614898982725184, "Pi": 0.875, "pi": 0.975, "delta": 2.4351723194122314, "coverage": 2.2074142296197867, "tag": "CORE", "reasons": [], "support_names": ["hour", "workingday"], "form": "tree(d3)"}, {"id": "L1U3", "kind": "unit", "layer": 1, "label": "poly(2)(hour, workingday, temp)", "mu": 0.9908788800239563, "Pi": 1.0, "pi": 0.95, "delta": 4.3512067794799805, "coverage": 4.212023817310021, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["hour", "workingday", "temp"], "form": "poly(2)"}, {"id": "L1U7", "kind": "unit", "layer": 1, "label": "poly(2)(hour, workingday, weekday)", "mu": 0.9996815919876099, "Pi": 0.25, "pi": 0.45, "delta": 2.00215220451355, "coverage": 1.917003901117432, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "workingday", "weekday"], "form": "poly(2)"}, {"id": "L1U4", "kind": "unit", "layer": 1, "label": "poly(2)(hour, weather=clear, year)", "mu": 0.9462037682533264, "Pi": 0.375, "pi": 0.25, "delta": 1.8779535293579102, "coverage": 1.8092081278711423, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "weather=clear", "year"], "form": "poly(2)"}, {"id": "L1U2", "kind": "unit", "layer": 1, "label": "poly(2)(temp, hour, windspeed)", "mu": 0.9690898656845093, "Pi": 0.75, "pi": 0.35, "delta": 0.13981997966766357, "coverage": 0.13864485602299337, "tag": "PERIPHERY", "reasons": ["infrequent", "multiplicitous"], "support_names": ["temp", "hour", "windspeed"], "form": "poly(2)"}, {"id": "output", "kind": "output", "label": "output"}], "edges": [{"src": "hour", "dst": "L1U5", "share": 0.8583}, {"src": "workingday", "dst": "L1U5", "share": 0.1007}, {"src": "hour", "dst": "L1U6", "share": 0.715}, {"src": "workingday", "dst": "L1U6", "share": 0.0921}, {"src": "weather=clear", "dst": "L1U6", "share": 0.0671}, {"src": "weather=misty", "dst": "L1U6", "share": 0.0598}, {"src": "weather=rain", "dst": "L1U6", "share": 0.035}, {"src": "hour", "dst": "L1U3", "share": 0.8452}, {"src": "workingday", "dst": "L1U3", "share": 0.067}, {"src": "temp", "dst": "L1U3", "share": 0.0434}, {"src": "hour", "dst": "L1U7", "share": 0.8914}, {"src": "weekday", "dst": "L1U7", "share": 0.0376}, {"src": "workingday", "dst": "L1U7", "share": 0.0645}, {"src": "year", "dst": "L1U4", "share": 0.0999}, {"src": "month", "dst": "L1U4", "share": 0.0223}, {"src": "hour", "dst": "L1U4", "share": 0.448}, {"src": "weekday", "dst": "L1U4", "share": 0.0576}, {"src": "weather=clear", "dst": "L1U4", "share": 0.2083}, {"src": "weather=misty", "dst": "L1U4", "share": 0.1588}, {"src": "year", "dst": "L1U2", "share": 0.0539}, {"src": "hour", "dst": "L1U2", "share": 0.11}, {"src": "workingday", "dst": "L1U2", "share": 0.0662}, {"src": "temp", "dst": "L1U2", "share": 0.6925}, {"src": "windspeed", "dst": "L1U2", "share": 0.0714}, {"src": "L1U5", "dst": "output", "share": 0.3007}, {"src": "L1U6", "dst": "output", "share": 0.2267}, {"src": "L1U3", "dst": "output", "share": 0.2117}, {"src": "L1U7", "dst": "output", "share": 0.1179}, {"src": "L1U4", "dst": "output", "share": 0.0965}, {"src": "L1U2", "dst": "output", "share": 0.0464}], "outCol": 3}, "hier": {"nodes": [{"id": "OUT", "kind": "output", "lvl": 0, "start": true, "label": "output", "sub": "regression · bike", "drill": ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"]}, {"id": "C0", "kind": "component", "lvl": 1, "support_names": ["hour"], "share": 0.589, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "drill": ["F::hour"]}, {"id": "C1", "kind": "component", "lvl": 1, "support_names": ["temp"], "share": 0.0804, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "drill": ["F::temp"]}, {"id": "C2", "kind": "component", "lvl": 1, "support_names": ["hour", "weekday"], "share": 0.0511, "Pi": 1.0, "pi": 0.975, "tag": "CORE", "drill": ["F::hour", "F::weekday"]}, {"id": "C3", "kind": "component", "lvl": 1, "support_names": ["year"], "share": 0.0222, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "drill": ["F::year"]}, {"id": "C4", "kind": "component", "lvl": 1, "support_names": ["feel_temp"], "share": 0.0125, "Pi": 0.75, "pi": 0.45, "tag": "PERIPHERY", "drill": ["F::feel_temp"]}, {"id": "C5", "kind": "component", "lvl": 1, "support_names": ["weather=rain"], "share": 0.0104, "Pi": 0.5, "pi": 0.4, "tag": "PERIPHERY", "drill": ["F::weather=rain"]}, {"id": "C6", "kind": "component", "lvl": 1, "support_names": ["season"], "share": 0, "Pi": 0.375, "pi": 0.425, "tag": "PERIPHERY", "drill": ["F::season"]}, {"id": "C7", "kind": "component", "lvl": 1, "support_names": ["month"], "share": 0, "Pi": 0.125, "pi": 0.275, "tag": "PERIPHERY", "drill": ["F::month"]}, {"id": "C8", "kind": "component", "lvl": 1, "support_names": ["humidity"], "share": 0, "Pi": 0.875, "pi": 0.65, "tag": "PERIPHERY", "drill": ["F::humidity"]}, {"id": "F::hour", "kind": "feature", "label": "hour", "lvl": 2}, {"id": "F::temp", "kind": "feature", "label": "temp", "lvl": 2}, {"id": "F::weekday", "kind": "feature", "label": "weekday", "lvl": 2}, {"id": "F::year", "kind": "feature", "label": "year", "lvl": 2}, {"id": "F::feel_temp", "kind": "feature", "label": "feel_temp", "lvl": 2}, {"id": "F::weather=rain", "kind": "feature", "label": "weather=rain", "lvl": 2}, {"id": "F::season", "kind": "feature", "label": "season", "lvl": 2}, {"id": "F::month", "kind": "feature", "label": "month", "lvl": 2}, {"id": "F::humidity", "kind": "feature", "label": "humidity", "lvl": 2}], "edges": [{"src": "C0", "dst": "F::hour"}, {"src": "C1", "dst": "F::temp"}, {"src": "C2", "dst": "F::hour"}, {"src": "C2", "dst": "F::weekday"}, {"src": "C3", "dst": "F::year"}, {"src": "C4", "dst": "F::feel_temp"}, {"src": "C5", "dst": "F::weather=rain"}, {"src": "C6", "dst": "F::season"}, {"src": "C7", "dst": "F::month"}, {"src": "C8", "dst": "F::humidity"}, {"src": "OUT", "dst": "C0", "share": 0.589}, {"src": "OUT", "dst": "C1", "share": 0.0804}, {"src": "OUT", "dst": "C2", "share": 0.0511}, {"src": "OUT", "dst": "C3", "share": 0.0222}, {"src": "OUT", "dst": "C4", "share": 0.0125}, {"src": "OUT", "dst": "C5", "share": 0.0104}, {"src": "OUT", "dst": "C6", "share": 0}, {"src": "OUT", "dst": "C7", "share": 0}, {"src": "OUT", "dst": "C8", "share": 0}]}}</script>
+<script id="dash-data" type="application/json">{"units": {"nodes": [{"id": "year", "kind": "input", "label": "year"}, {"id": "month", "kind": "input", "label": "month"}, {"id": "hour", "kind": "input", "label": "hour"}, {"id": "weekday", "kind": "input", "label": "weekday"}, {"id": "workingday", "kind": "input", "label": "workingday"}, {"id": "weather=clear", "kind": "input", "label": "weather=clear"}, {"id": "weather=misty", "kind": "input", "label": "weather=misty"}, {"id": "weather=rain", "kind": "input", "label": "weather=rain"}, {"id": "temp", "kind": "input", "label": "temp"}, {"id": "windspeed", "kind": "input", "label": "windspeed"}, {"id": "L1U5", "kind": "unit", "layer": 1, "label": "tree(d3)(hour, workingday)", "mu": 0.9694533367559598, "Pi": 1.0, "pi": 1.0, "delta": 4.786236763000488, "coverage": 4.520296579541391, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["hour", "workingday"], "form": "tree(d3)"}, {"id": "L1U6", "kind": "unit", "layer": 1, "label": "tree(d3)(hour, workingday)", "mu": 0.9614898982725184, "Pi": 0.875, "pi": 0.975, "delta": 2.4351723194122314, "coverage": 2.2074142296197867, "tag": "CORE", "reasons": [], "support_names": ["hour", "workingday"], "form": "tree(d3)"}, {"id": "L1U3", "kind": "unit", "layer": 1, "label": "poly(2)(hour, workingday, temp)", "mu": 0.9908788800239563, "Pi": 1.0, "pi": 0.95, "delta": 4.3512067794799805, "coverage": 4.212023817310021, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["hour", "workingday", "temp"], "form": "poly(2)"}, {"id": "L1U7", "kind": "unit", "layer": 1, "label": "poly(2)(hour, workingday, weekday)", "mu": 0.9996815919876099, "Pi": 0.25, "pi": 0.45, "delta": 2.00215220451355, "coverage": 1.917003901117432, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "workingday", "weekday"], "form": "poly(2)"}, {"id": "L1U4", "kind": "unit", "layer": 1, "label": "poly(2)(hour, weather=clear, year)", "mu": 0.9462037682533264, "Pi": 0.375, "pi": 0.25, "delta": 1.8779535293579102, "coverage": 1.8092081278711423, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "weather=clear", "year"], "form": "poly(2)"}, {"id": "L1U2", "kind": "unit", "layer": 1, "label": "poly(2)(temp, hour, windspeed)", "mu": 0.9690898656845093, "Pi": 0.75, "pi": 0.35, "delta": 0.13981997966766357, "coverage": 0.13864485602299337, "tag": "PERIPHERY", "reasons": ["infrequent", "multiplicitous"], "support_names": ["temp", "hour", "windspeed"], "form": "poly(2)"}, {"id": "output", "kind": "output", "label": "output"}], "edges": [{"src": "hour", "dst": "L1U5", "share": 0.8583}, {"src": "workingday", "dst": "L1U5", "share": 0.1007}, {"src": "hour", "dst": "L1U6", "share": 0.715}, {"src": "workingday", "dst": "L1U6", "share": 0.0921}, {"src": "weather=clear", "dst": "L1U6", "share": 0.0671}, {"src": "weather=misty", "dst": "L1U6", "share": 0.0598}, {"src": "weather=rain", "dst": "L1U6", "share": 0.035}, {"src": "hour", "dst": "L1U3", "share": 0.8452}, {"src": "workingday", "dst": "L1U3", "share": 0.067}, {"src": "temp", "dst": "L1U3", "share": 0.0434}, {"src": "hour", "dst": "L1U7", "share": 0.8914}, {"src": "weekday", "dst": "L1U7", "share": 0.0376}, {"src": "workingday", "dst": "L1U7", "share": 0.0645}, {"src": "year", "dst": "L1U4", "share": 0.0999}, {"src": "month", "dst": "L1U4", "share": 0.0223}, {"src": "hour", "dst": "L1U4", "share": 0.448}, {"src": "weekday", "dst": "L1U4", "share": 0.0576}, {"src": "weather=clear", "dst": "L1U4", "share": 0.2083}, {"src": "weather=misty", "dst": "L1U4", "share": 0.1588}, {"src": "year", "dst": "L1U2", "share": 0.0539}, {"src": "hour", "dst": "L1U2", "share": 0.11}, {"src": "workingday", "dst": "L1U2", "share": 0.0662}, {"src": "temp", "dst": "L1U2", "share": 0.6925}, {"src": "windspeed", "dst": "L1U2", "share": 0.0714}, {"src": "L1U5", "dst": "output", "share": 0.3007}, {"src": "L1U6", "dst": "output", "share": 0.2267}, {"src": "L1U3", "dst": "output", "share": 0.2117}, {"src": "L1U7", "dst": "output", "share": 0.1179}, {"src": "L1U4", "dst": "output", "share": 0.0965}, {"src": "L1U2", "dst": "output", "share": 0.0464}], "outCol": 3}, "hier": {"nodes": [{"id": "OUT", "kind": "output", "lvl": 0, "start": true, "label": "output", "sub": "regression · bike", "drill": ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"]}, {"id": "C0", "kind": "component", "lvl": 1, "support_names": ["hour"], "share": 0.589, "Pi": 1.0, "pi": 1.0, "n_members": 6, "tag": "CORE", "drill": ["L1U5", "L1U6", "L1U3", "L1U7", "L1U4", "L1U2"]}, {"id": "C1", "kind": "component", "lvl": 1, "support_names": ["temp"], "share": 0.0804, "Pi": 1.0, "pi": 1.0, "n_members": 2, "tag": "CORE", "drill": ["L1U3", "L1U2"]}, {"id": "C2", "kind": "component", "lvl": 1, "support_names": ["hour", "weekday"], "share": 0.0511, "Pi": 1.0, "pi": 0.975, "n_members": 1, "tag": "CORE", "drill": ["L1U7"]}, {"id": "C3", "kind": "component", "lvl": 1, "support_names": ["year"], "share": 0.0222, "Pi": 1.0, "pi": 1.0, "n_members": 1, "tag": "CORE", "drill": ["L1U4"]}, {"id": "C4", "kind": "component", "lvl": 1, "support_names": ["feel_temp"], "share": 0.0125, "Pi": 0.75, "pi": 0.45, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::feel_temp"]}, {"id": "C5", "kind": "component", "lvl": 1, "support_names": ["weather=rain"], "share": 0.0104, "Pi": 0.5, "pi": 0.4, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::weather=rain"]}, {"id": "C6", "kind": "component", "lvl": 1, "support_names": ["season"], "share": 0, "Pi": 0.375, "pi": 0.425, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::season"]}, {"id": "C7", "kind": "component", "lvl": 1, "support_names": ["month"], "share": 0, "Pi": 0.125, "pi": 0.275, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::month"]}, {"id": "C8", "kind": "component", "lvl": 1, "support_names": ["humidity"], "share": 0, "Pi": 0.875, "pi": 0.65, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::humidity"]}, {"id": "L1U5", "kind": "unit", "layer": 1, "label": "tree(d3)(hour, workingday)", "mu": 0.9694533367559598, "Pi": 1.0, "pi": 1.0, "delta": 4.786236763000488, "coverage": 4.520296579541391, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["hour", "workingday"], "form": "tree(d3)", "lvl": 2, "drill": ["F::hour", "F::workingday"]}, {"id": "L1U6", "kind": "unit", "layer": 1, "label": "tree(d3)(hour, workingday)", "mu": 0.9614898982725184, "Pi": 0.875, "pi": 0.975, "delta": 2.4351723194122314, "coverage": 2.2074142296197867, "tag": "CORE", "reasons": [], "support_names": ["hour", "workingday"], "form": "tree(d3)", "lvl": 2, "drill": ["F::hour", "F::workingday"]}, {"id": "L1U3", "kind": "unit", "layer": 1, "label": "poly(2)(hour, workingday, temp)", "mu": 0.9908788800239563, "Pi": 1.0, "pi": 0.95, "delta": 4.3512067794799805, "coverage": 4.212023817310021, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["hour", "workingday", "temp"], "form": "poly(2)", "lvl": 2, "drill": ["F::hour", "F::workingday", "F::temp"]}, {"id": "L1U7", "kind": "unit", "layer": 1, "label": "poly(2)(hour, workingday, weekday)", "mu": 0.9996815919876099, "Pi": 0.25, "pi": 0.45, "delta": 2.00215220451355, "coverage": 1.917003901117432, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "workingday", "weekday"], "form": "poly(2)", "lvl": 2, "drill": ["F::hour", "F::workingday", "F::weekday"]}, {"id": "L1U4", "kind": "unit", "layer": 1, "label": "poly(2)(hour, weather=clear, year)", "mu": 0.9462037682533264, "Pi": 0.375, "pi": 0.25, "delta": 1.8779535293579102, "coverage": 1.8092081278711423, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["hour", "weather=clear", "year"], "form": "poly(2)", "lvl": 2, "drill": ["F::hour", "F::weather=clear", "F::year"]}, {"id": "L1U2", "kind": "unit", "layer": 1, "label": "poly(2)(temp, hour, windspeed)", "mu": 0.9690898656845093, "Pi": 0.75, "pi": 0.35, "delta": 0.13981997966766357, "coverage": 0.13864485602299337, "tag": "PERIPHERY", "reasons": ["infrequent", "multiplicitous"], "support_names": ["temp", "hour", "windspeed"], "form": "poly(2)", "lvl": 2, "drill": ["F::temp", "F::hour", "F::windspeed"]}, {"id": "F::hour", "kind": "feature", "label": "hour", "lvl": 3}, {"id": "F::workingday", "kind": "feature", "label": "workingday", "lvl": 3}, {"id": "F::temp", "kind": "feature", "label": "temp", "lvl": 3}, {"id": "F::weekday", "kind": "feature", "label": "weekday", "lvl": 3}, {"id": "F::weather=clear", "kind": "feature", "label": "weather=clear", "lvl": 3}, {"id": "F::year", "kind": "feature", "label": "year", "lvl": 3}, {"id": "F::windspeed", "kind": "feature", "label": "windspeed", "lvl": 3}, {"id": "F::feel_temp", "kind": "feature", "label": "feel_temp", "lvl": 3}, {"id": "F::weather=rain", "kind": "feature", "label": "weather=rain", "lvl": 3}, {"id": "F::season", "kind": "feature", "label": "season", "lvl": 3}, {"id": "F::month", "kind": "feature", "label": "month", "lvl": 3}, {"id": "F::humidity", "kind": "feature", "label": "humidity", "lvl": 3}], "edges": [{"src": "L1U5", "dst": "F::hour", "share": 0.8583}, {"src": "L1U5", "dst": "F::workingday", "share": 0.1007}, {"src": "L1U6", "dst": "F::hour", "share": 0.715}, {"src": "L1U6", "dst": "F::workingday", "share": 0.0921}, {"src": "L1U3", "dst": "F::hour", "share": 0.8452}, {"src": "L1U3", "dst": "F::workingday", "share": 0.067}, {"src": "L1U3", "dst": "F::temp", "share": 0.0434}, {"src": "L1U7", "dst": "F::hour", "share": 0.8914}, {"src": "L1U7", "dst": "F::workingday", "share": 0.0645}, {"src": "L1U7", "dst": "F::weekday", "share": 0.0376}, {"src": "L1U4", "dst": "F::hour", "share": 0.448}, {"src": "L1U4", "dst": "F::weather=clear", "share": 0.2083}, {"src": "L1U4", "dst": "F::year", "share": 0.0999}, {"src": "L1U2", "dst": "F::temp", "share": 0.6925}, {"src": "L1U2", "dst": "F::hour", "share": 0.11}, {"src": "L1U2", "dst": "F::windspeed", "share": 0.0714}, {"src": "C0", "dst": "L1U5", "share": 4.520296579541391}, {"src": "C0", "dst": "L1U6", "share": 2.2074142296197867}, {"src": "C0", "dst": "L1U3", "share": 4.212023817310021}, {"src": "C0", "dst": "L1U7", "share": 1.917003901117432}, {"src": "C0", "dst": "L1U4", "share": 1.8092081278711423}, {"src": "C0", "dst": "L1U2", "share": 0.13864485602299337}, {"src": "C1", "dst": "L1U3", "share": 4.212023817310021}, {"src": "C1", "dst": "L1U2", "share": 0.13864485602299337}, {"src": "C2", "dst": "L1U7", "share": 1.917003901117432}, {"src": "C3", "dst": "L1U4", "share": 1.8092081278711423}, {"src": "C4", "dst": "F::feel_temp", "share": 0.03}, {"src": "C5", "dst": "F::weather=rain", "share": 0.03}, {"src": "C6", "dst": "F::season", "share": 0.03}, {"src": "C7", "dst": "F::month", "share": 0.03}, {"src": "C8", "dst": "F::humidity", "share": 0.03}, {"src": "OUT", "dst": "C0", "share": 0.589}, {"src": "OUT", "dst": "C1", "share": 0.0804}, {"src": "OUT", "dst": "C2", "share": 0.0511}, {"src": "OUT", "dst": "C3", "share": 0.0222}, {"src": "OUT", "dst": "C4", "share": 0.0125}, {"src": "OUT", "dst": "C5", "share": 0.0104}, {"src": "OUT", "dst": "C6", "share": 0}, {"src": "OUT", "dst": "C7", "share": 0}, {"src": "OUT", "dst": "C8", "share": 0}]}}</script>
 <script>
 "use strict";
 const $ = s => document.getElementById(s);
@@ -211,32 +211,43 @@ function abbr(s,m){ m=m||13; return s.length>m ? s.slice(0,m-1)+"…" : s; }
 // Two models over the same run: HIER (drill-down concept hierarchy) and UNITS
 // (the raw model graph). MODE switches between them.
 const HIER = D.hier, UNITS = D.units;
-let MODE = "hier", SEL=null, DRILL={}, SHOW_PERI=true, SHOW_IN=true;
+let MODE = "hier", SEL=null, EXP={}, SHOW_PERI=true, SHOW_IN=true;
 let VZ={k:1,x:0,y:0}, drag=null, W=900, H=560;
 const svg=$("dag"), g=$("dagg");
 
 function M(){ return MODE==="hier" ? HIER : UNITS; }
 function byId(){ const m={}; M().nodes.forEach(n=>m[n.id]=n); return m; }
 
-// ---------- visibility ------------------------------------------------------
+// ---------- visibility: expansion-set + reachability ------------------------
+// A node is visible iff reachable from a root through EXPANDED ancestors.
+// Member units are SHARED between components, so visibility is recomputed by
+// BFS rather than per-node flags (collapsing one parent keeps a shared child
+// visible while another expanded parent still declares it).
+let VIS = new Set();
+function recomputeVis(){
+  VIS = new Set(); const B=byId();
+  const queue = M().nodes.filter(n=>n.start).map(n=>n.id);
+  queue.forEach(id=>VIS.add(id));
+  while(queue.length){
+    const id = queue.shift(), n = B[id];
+    if(!n || !EXP[id]) continue;
+    (n.drill||[]).forEach(cid=>{
+      if(!VIS.has(cid)){ VIS.add(cid); queue.push(cid); } });
+  }
+}
 function visible(n){
   if(MODE==="units"){
     if(n.kind==="input" && !SHOW_IN) return false;
     if(n.kind==="unit" && n.tag!=="CORE" && !SHOW_PERI) return false;
     return true;
   }
-  // hier: roots always shown; others only when drilled-into
-  return n.start || !!DRILL[n.id];
+  return VIS.has(n.id);
 }
 function hasChildren(n){ return n.drill && n.drill.length; }
-function isExpanded(n){ return hasChildren(n) && n.drill.every(id=>DRILL[id]); }
+function isExpanded(n){ return !!EXP[n.id]; }
 function toggleDrill(n){
   if(!hasChildren(n)) return;
-  if(isExpanded(n)){                       // collapse this node's subtree
-    const stack=[...n.drill], B=byId();
-    while(stack.length){ const id=stack.pop(); if(!DRILL[id]) continue;
-      DRILL[id]=false; const c=B[id]; if(c&&c.drill) stack.push(...c.drill); }
-  } else n.drill.forEach(id=>DRILL[id]=true);
+  EXP[n.id] = !EXP[n.id];
   layout(); draw();
 }
 
@@ -247,6 +258,7 @@ function level(n){
   return n.kind==="input"?0 : n.kind==="output"?UNITS.outCol : (n.layer||1);
 }
 function layout(){
+  if(MODE==="hier") recomputeVis();
   const vis=M().nodes.filter(visible);
   const cols={}; vis.forEach(n=>{ const c=level(n); (cols[c]=cols[c]||[]).push(n); });
   const keys=Object.keys(cols).map(Number).sort((a,b)=>a-b);
@@ -343,7 +355,8 @@ function hover(n,ev){
        `<div class="m">μ ${fmt(n.mu)} · Π ${fmt(n.Pi)} · π ${fmt(n.pi)} · Δ ${fmt(n.delta)}</div>`;
   else if(n.kind==="component")
     h+=`<div class="m">${n.tag} function component · share ${fmt(100*n.share,1)}%</div>`+
-       `<div class="m">Π ${fmt(n.Pi)} · π ${fmt(n.pi)}${hasChildren(n)?" · double-click to drill":""}</div>`;
+       `<div class="m">Π ${fmt(n.Pi)} · π ${fmt(n.pi)} · ${n.n_members||0} member unit${n.n_members===1?"":"s"}`+
+       `${hasChildren(n)?" · double-click to drill":""}</div>`;
   else if(n.kind==="output")
     h+=`<div class="m">${n.sub||"output"}${hasChildren(n)?" · double-click to drill into its components":""}</div>`;
   else h+=`<div class="m">input feature</div>`;
@@ -376,8 +389,11 @@ function renderDetail(){
       `<div style="margin-top:7px"><span class="pill ${n.tag==="CORE"?"core":"peri"}">${n.tag}</span></div>`+
       `<dl><dt>support</dt><dd>${n.support_names.join(", ")}</dd>`+
       `<dt>share</dt><dd>${fmt(100*n.share,1)}% of function variance</dd>`+
-      `<dt>Π stab</dt><dd>${fmt(n.Pi)}</dd><dt>π cpss</dt><dd>${fmt(n.pi)}</dd></dl>`+
-      `<div class="chips"><span class="chip">${hasChildren(n)?"double-click to drill to features":"leaf"}</span></div>`;
+      `<dt>Π stab</dt><dd>${fmt(n.Pi)}</dd><dt>π cpss</dt><dd>${fmt(n.pi)}</dd>`+
+      `<dt>members</dt><dd>${n.n_members||0} unit(s) carry this claim</dd></dl>`+
+      `<div class="chips"><span class="chip">${hasChildren(n)
+        ? (n.n_members ? "double-click: expand member units" : "double-click: features (no localised carrier)")
+        : "leaf"}</span></div>`;
     return;
   }
   box.innerHTML=`<h3>${n.label}</h3><div class="did">${n.kind}</div>`+
@@ -386,10 +402,12 @@ function renderDetail(){
       : "Input feature (one monosemantic column)."}</div>`;
 }
 function emptyHelp(){
-  if(MODE==="hier") return `<div class="empty"><b>Drill-down.</b> The rectangle is the model
-    output; <b>double-click</b> it to reveal the certified function components (the “laws”),
-    then double-click a component to reveal the input features it uses. A <b>+</b> badge marks
-    a node you can drill; <b>–</b> collapses it.<br><br><b>Green</b> = CORE (certified);
+  if(MODE==="hier") return `<div class="empty"><b>Layer F DAG.</b> The certified function
+    components (the “laws”) are shown by default. <b>Double-click</b> a component to expand
+    its <b>member units</b> — the model units its mass physically flows through — then
+    double-click a unit to expand its parents down to input features: the end-to-end
+    parameter flow, with edge width = real contribution share. A <b>+</b> badge marks an
+    expandable node; <b>–</b> collapses it.<br><br><b>Green</b> = CORE (certified);
     <b>grey</b> = periphery. Single-click any node for its numbers. Drag to pan, scroll to zoom.</div>`;
   return `<div class="empty"><b>Model units.</b> Circles are the network's hidden units,
     labelled by their support and μ (monosemanticity). <b>Green</b> = CORE, <b>grey</b> =
@@ -422,14 +440,16 @@ function setMode(m){
 }
 $("m_hier").addEventListener("click",()=>setMode("hier"));
 $("m_units").addEventListener("click",()=>setMode("units"));
-$("b_fit").addEventListener("click",fit);
-$("b_expand").addEventListener("click",()=>{ // expand all one level from roots
-  HIER.nodes.filter(n=>n.start).forEach(n=>(n.drill||[]).forEach(id=>DRILL[id]=true));
+$("b_fit").addEventListener("click",()=>{ // reset: back to the Layer F view
+  EXP={}; HIER.nodes.filter(n=>n.start).forEach(n=>EXP[n.id]=true);
+  layout(); draw(); fit(); });
+$("b_expand").addEventListener("click",()=>{ // expand every component's members
+  HIER.nodes.forEach(n=>{ if(n.start||n.kind==="component") EXP[n.id]=true; });
   layout(); draw(); });
 $("t_peri").addEventListener("change",e=>{SHOW_PERI=e.target.checked; layout(); draw();});
 $("t_in").addEventListener("change",e=>{SHOW_IN=e.target.checked; layout(); draw();});
-// start with the first drill level open so the concept structure is visible at load
-HIER.nodes.filter(n=>n.start).forEach(n=>(n.drill||[]).forEach(id=>DRILL[id]=true));
+// default view: the Layer F DAG (root expanded -> components visible)
+HIER.nodes.filter(n=>n.start).forEach(n=>EXP[n.id]=true);
 setMode("hier"); fit();
 </script>
 </body>

@@ -1,0 +1,4501 @@
+{
+  "dag": {
+    "dataset": "bike",
+    "nodes": [
+      {
+        "id": "season",
+        "kind": "input",
+        "label": "season"
+      },
+      {
+        "id": "year",
+        "kind": "input",
+        "label": "year"
+      },
+      {
+        "id": "month",
+        "kind": "input",
+        "label": "month"
+      },
+      {
+        "id": "hour",
+        "kind": "input",
+        "label": "hour"
+      },
+      {
+        "id": "weekday",
+        "kind": "input",
+        "label": "weekday"
+      },
+      {
+        "id": "workingday",
+        "kind": "input",
+        "label": "workingday"
+      },
+      {
+        "id": "weather=clear",
+        "kind": "input",
+        "label": "weather=clear"
+      },
+      {
+        "id": "weather=misty",
+        "kind": "input",
+        "label": "weather=misty"
+      },
+      {
+        "id": "weather=rain",
+        "kind": "input",
+        "label": "weather=rain"
+      },
+      {
+        "id": "temp",
+        "kind": "input",
+        "label": "temp"
+      },
+      {
+        "id": "humidity",
+        "kind": "input",
+        "label": "humidity"
+      },
+      {
+        "id": "windspeed",
+        "kind": "input",
+        "label": "windspeed"
+      },
+      {
+        "id": "L1U7",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(hour, weekday, workingday)",
+        "mu": 0.9971588253974915,
+        "Pi": 0.25,
+        "pi": 0.175,
+        "delta": 11.420850038528442,
+        "coverage": 10.964317382123877,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "hour",
+          "weekday",
+          "workingday"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U19",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(weekday, humidity)",
+        "mu": 0.9999843692493751,
+        "Pi": 0.125,
+        "pi": 0.125,
+        "delta": 0.0888742208480835,
+        "coverage": 0.09226480582950514,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "weekday",
+          "humidity"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U2",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(temp, hour, humidity)",
+        "mu": 0.9849034547805786,
+        "Pi": 0.25,
+        "pi": 0.125,
+        "delta": 0.16273164749145508,
+        "coverage": 0.1625427814833893,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "temp",
+          "hour",
+          "humidity"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U3",
+        "kind": "unit",
+        "layer": 1,
+        "label": "monotone-(hour)",
+        "mu": 0.9993633031845093,
+        "Pi": 0.875,
+        "pi": 0.875,
+        "delta": 0.5712859034538269,
+        "coverage": 0.567115026312519,
+        "tag": "CORE",
+        "reasons": [],
+        "support_names": [
+          "hour"
+        ],
+        "form": "monotone-"
+      },
+      {
+        "id": "L1U15",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(month, year, season)",
+        "mu": 0.9950777888298035,
+        "Pi": 0.25,
+        "pi": 0.05,
+        "delta": 0.06936836242675781,
+        "coverage": 0.06859618900750442,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "month",
+          "year",
+          "season"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U20",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(hour, workingday, humidity)",
+        "mu": 0.9884453415870667,
+        "Pi": 0.25,
+        "pi": 0.45,
+        "delta": 2.9163854122161865,
+        "coverage": 2.6301821627485698,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "hour",
+          "workingday",
+          "humidity"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U4",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(hour, weather=clear, weather=misty)",
+        "mu": 0.9411630034446716,
+        "Pi": 0.5,
+        "pi": 0.225,
+        "delta": 2.138874053955078,
+        "coverage": 2.0559028245263207,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "hour",
+          "weather=clear",
+          "weather=misty"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U16",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(hour, humidity, temp)",
+        "mu": 0.976875364780426,
+        "Pi": 0.625,
+        "pi": 0.75,
+        "delta": 0.0022497177124023438,
+        "coverage": 0.002439141183426141,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "hour",
+          "humidity",
+          "temp"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U5",
+        "kind": "unit",
+        "layer": 1,
+        "label": "monotone-(hour)",
+        "mu": 0.9909052848815918,
+        "Pi": 1.0,
+        "pi": 0.8,
+        "delta": 12.298880815505981,
+        "coverage": 11.507104100099243,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "support_names": [
+          "hour"
+        ],
+        "form": "monotone-"
+      },
+      {
+        "id": "L1U13",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(season, temp)",
+        "mu": 0.9950184082176164,
+        "Pi": 0.125,
+        "pi": 0.225,
+        "delta": 0.05826479196548462,
+        "coverage": 0.0531249971857064,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "season",
+          "temp"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U23",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(workingday, hour, weekday)",
+        "mu": 0.9969326853752136,
+        "Pi": 0.25,
+        "pi": 0.0,
+        "delta": 0.1897786259651184,
+        "coverage": 0.202748524916179,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "workingday",
+          "hour",
+          "weekday"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U9",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(weekday, month, weather=clear)",
+        "mu": 0.9999947904395964,
+        "Pi": 0.125,
+        "pi": 0.175,
+        "delta": 0.007985472679138184,
+        "coverage": 0.00770765349382152,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "weekday",
+          "month",
+          "weather=clear"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U6",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(hour, workingday)",
+        "mu": 0.964804795978088,
+        "Pi": 1.0,
+        "pi": 0.85,
+        "delta": 2.0997440814971924,
+        "coverage": 1.8469338736139043,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "support_names": [
+          "hour",
+          "workingday"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U11",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(humidity, windspeed)",
+        "mu": 0.9011472277468258,
+        "Pi": 0.625,
+        "pi": 0.325,
+        "delta": 0.0029482245445251465,
+        "coverage": 0.0019178847679626188,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "humidity",
+          "windspeed"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L2U30",
+        "kind": "unit",
+        "layer": 2,
+        "label": "poly(2)(L1U5, L1U20, L1U23)",
+        "mu": 0.9988738894462585,
+        "Pi": 0.875,
+        "pi": 0.725,
+        "delta": 10.693602800369263,
+        "coverage": 10.054028054735532,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "support_names": [
+          "L1U5",
+          "L1U20",
+          "L1U23"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L2U33",
+        "kind": "unit",
+        "layer": 2,
+        "label": "poly(2)(L1U7, L1U20, L1U15)",
+        "mu": 0.9999958276748657,
+        "Pi": 0.375,
+        "pi": 0.325,
+        "delta": 6.2244713306427,
+        "coverage": 6.013352732352578,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "L1U7",
+          "L1U20",
+          "L1U15"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L2U32",
+        "kind": "unit",
+        "layer": 2,
+        "label": "poly(2)(L1U23, L1U5, L1U3)",
+        "mu": 0.9798566102981567,
+        "Pi": 0.75,
+        "pi": 0.825,
+        "delta": 2.5932509899139404,
+        "coverage": 2.323700642075445,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "support_names": [
+          "L1U23",
+          "L1U5",
+          "L1U3"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L2U31",
+        "kind": "unit",
+        "layer": 2,
+        "label": "monotone+(L1U3)",
+        "mu": 0.9996733665466309,
+        "Pi": 0.75,
+        "pi": 0.825,
+        "delta": 2.8766305446624756,
+        "coverage": 2.803221590776052,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "support_names": [
+          "L1U3"
+        ],
+        "form": "monotone+"
+      },
+      {
+        "id": "L2U34",
+        "kind": "unit",
+        "layer": 2,
+        "label": "poly(2)(L1U4, L1U16, L1U19)",
+        "mu": 0.9999772906303406,
+        "Pi": 0.25,
+        "pi": 0.225,
+        "delta": 2.3252246379852295,
+        "coverage": 2.237375001744862,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "L1U4",
+          "L1U16",
+          "L1U19"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L2U35",
+        "kind": "unit",
+        "layer": 2,
+        "label": "monotone+(L1U20)",
+        "mu": 0.9999950528144836,
+        "Pi": 0.5,
+        "pi": 0.675,
+        "delta": 0.2359851598739624,
+        "coverage": 0.20574833669622639,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "L1U20"
+        ],
+        "form": "monotone+"
+      },
+      {
+        "id": "L2U36",
+        "kind": "unit",
+        "layer": 2,
+        "label": "monotone+(L1U2)",
+        "mu": 0.9999952912330627,
+        "Pi": 0.625,
+        "pi": 0.3,
+        "delta": 0.18541359901428223,
+        "coverage": 0.18996817062138693,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "L1U2"
+        ],
+        "form": "monotone+"
+      },
+      {
+        "id": "L2U38",
+        "kind": "unit",
+        "layer": 2,
+        "label": "monotone+(L1U13)",
+        "mu": 0.9999860525131226,
+        "Pi": 0.375,
+        "pi": 0.475,
+        "delta": 0.06440925598144531,
+        "coverage": 0.05905559316077136,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "L1U13"
+        ],
+        "form": "monotone+"
+      },
+      {
+        "id": "L2U42",
+        "kind": "unit",
+        "layer": 2,
+        "label": "poly(2)(L1U23, L1U2, L1U19)",
+        "mu": 0.9953485727310181,
+        "Pi": 0.125,
+        "pi": 0.0,
+        "delta": 0.050225019454956055,
+        "coverage": 0.05113936533627872,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "L1U23",
+          "L1U2",
+          "L1U19"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L2U37",
+        "kind": "unit",
+        "layer": 2,
+        "label": "monotone+(L1U15)",
+        "mu": 0.9999995231628418,
+        "Pi": 0.25,
+        "pi": 0.025,
+        "delta": 0.07627999782562256,
+        "coverage": 0.07586474938603371,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "L1U15"
+        ],
+        "form": "monotone+"
+      },
+      {
+        "id": "L2U39",
+        "kind": "unit",
+        "layer": 2,
+        "label": "monotone+(L1U19)",
+        "mu": 0.9999984502792358,
+        "Pi": 0.125,
+        "pi": 0.025,
+        "delta": 0.0566326379776001,
+        "coverage": 0.05762882372435951,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "L1U19"
+        ],
+        "form": "monotone+"
+      },
+      {
+        "id": "L2U41",
+        "kind": "unit",
+        "layer": 2,
+        "label": "poly(2)(L1U9, L1U3, L1U15)",
+        "mu": 0.9999874234199524,
+        "Pi": 0.125,
+        "pi": 0.025,
+        "delta": 0.01313638687133789,
+        "coverage": 0.013248322061899964,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "L1U9",
+          "L1U3",
+          "L1U15"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L2U44",
+        "kind": "unit",
+        "layer": 2,
+        "label": "monotone+(L1U11)",
+        "mu": 0.9999753832817078,
+        "Pi": 0.375,
+        "pi": 0.15,
+        "delta": 0.006145954132080078,
+        "coverage": 0.004832120916910321,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "L1U11"
+        ],
+        "form": "monotone+"
+      },
+      {
+        "id": "L2U40",
+        "kind": "unit",
+        "layer": 2,
+        "label": "monotone+(L1U16)",
+        "mu": 0.9999985694885254,
+        "Pi": 0.25,
+        "pi": 0.45,
+        "delta": 0.0027430057525634766,
+        "coverage": 0.0024329778805531888,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "L1U16"
+        ],
+        "form": "monotone+"
+      },
+      {
+        "id": "output",
+        "kind": "output",
+        "label": "output"
+      }
+    ],
+    "edges": [
+      {
+        "src": "hour",
+        "dst": "L1U7",
+        "share": 0.7756
+      },
+      {
+        "src": "weekday",
+        "dst": "L1U7",
+        "share": 0.0893
+      },
+      {
+        "src": "workingday",
+        "dst": "L1U7",
+        "share": 0.0829
+      },
+      {
+        "src": "weather=rain",
+        "dst": "L1U7",
+        "share": 0.0276
+      },
+      {
+        "src": "weekday",
+        "dst": "L1U19",
+        "share": 0.9937
+      },
+      {
+        "src": "hour",
+        "dst": "L1U2",
+        "share": 0.1355
+      },
+      {
+        "src": "temp",
+        "dst": "L1U2",
+        "share": 0.8087
+      },
+      {
+        "src": "humidity",
+        "dst": "L1U2",
+        "share": 0.0296
+      },
+      {
+        "src": "windspeed",
+        "dst": "L1U2",
+        "share": 0.0208
+      },
+      {
+        "src": "hour",
+        "dst": "L1U3",
+        "share": 0.9601
+      },
+      {
+        "src": "temp",
+        "dst": "L1U3",
+        "share": 0.022
+      },
+      {
+        "src": "year",
+        "dst": "L1U15",
+        "share": 0.194
+      },
+      {
+        "src": "month",
+        "dst": "L1U15",
+        "share": 0.8028
+      },
+      {
+        "src": "hour",
+        "dst": "L1U20",
+        "share": 0.8595
+      },
+      {
+        "src": "workingday",
+        "dst": "L1U20",
+        "share": 0.1012
+      },
+      {
+        "src": "season",
+        "dst": "L1U4",
+        "share": 0.0541
+      },
+      {
+        "src": "year",
+        "dst": "L1U4",
+        "share": 0.0849
+      },
+      {
+        "src": "month",
+        "dst": "L1U4",
+        "share": 0.0678
+      },
+      {
+        "src": "hour",
+        "dst": "L1U4",
+        "share": 0.3801
+      },
+      {
+        "src": "weather=clear",
+        "dst": "L1U4",
+        "share": 0.1901
+      },
+      {
+        "src": "weather=misty",
+        "dst": "L1U4",
+        "share": 0.1636
+      },
+      {
+        "src": "temp",
+        "dst": "L1U4",
+        "share": 0.0551
+      },
+      {
+        "src": "hour",
+        "dst": "L1U16",
+        "share": 0.6902
+      },
+      {
+        "src": "humidity",
+        "dst": "L1U16",
+        "share": 0.3071
+      },
+      {
+        "src": "hour",
+        "dst": "L1U5",
+        "share": 0.9239
+      },
+      {
+        "src": "workingday",
+        "dst": "L1U5",
+        "share": 0.0497
+      },
+      {
+        "src": "season",
+        "dst": "L1U13",
+        "share": 0.8484
+      },
+      {
+        "src": "year",
+        "dst": "L1U13",
+        "share": 0.0267
+      },
+      {
+        "src": "month",
+        "dst": "L1U13",
+        "share": 0.0247
+      },
+      {
+        "src": "temp",
+        "dst": "L1U13",
+        "share": 0.0946
+      },
+      {
+        "src": "hour",
+        "dst": "L1U23",
+        "share": 0.0294
+      },
+      {
+        "src": "workingday",
+        "dst": "L1U23",
+        "share": 0.9331
+      },
+      {
+        "src": "weekday",
+        "dst": "L1U9",
+        "share": 0.9966
+      },
+      {
+        "src": "hour",
+        "dst": "L1U6",
+        "share": 0.7799
+      },
+      {
+        "src": "workingday",
+        "dst": "L1U6",
+        "share": 0.1565
+      },
+      {
+        "src": "humidity",
+        "dst": "L1U11",
+        "share": 0.8201
+      },
+      {
+        "src": "windspeed",
+        "dst": "L1U11",
+        "share": 0.1764
+      },
+      {
+        "src": "L1U20",
+        "dst": "L2U30",
+        "share": 0.3088
+      },
+      {
+        "src": "L1U5",
+        "dst": "L2U30",
+        "share": 0.5074
+      },
+      {
+        "src": "L1U23",
+        "dst": "L2U30",
+        "share": 0.1533
+      },
+      {
+        "src": "L1U7",
+        "dst": "L2U33",
+        "share": 0.9773
+      },
+      {
+        "src": "L1U20",
+        "dst": "L2U33",
+        "share": 0.0212
+      },
+      {
+        "src": "L1U7",
+        "dst": "L2U32",
+        "share": 0.115
+      },
+      {
+        "src": "L1U3",
+        "dst": "L2U32",
+        "share": 0.1263
+      },
+      {
+        "src": "L1U16",
+        "dst": "L2U32",
+        "share": 0.0321
+      },
+      {
+        "src": "L1U5",
+        "dst": "L2U32",
+        "share": 0.1749
+      },
+      {
+        "src": "L1U23",
+        "dst": "L2U32",
+        "share": 0.1773
+      },
+      {
+        "src": "L1U6",
+        "dst": "L2U32",
+        "share": 0.322
+      },
+      {
+        "src": "L1U3",
+        "dst": "L2U31",
+        "share": 0.842
+      },
+      {
+        "src": "L1U20",
+        "dst": "L2U31",
+        "share": 0.1569
+      },
+      {
+        "src": "L1U4",
+        "dst": "L2U34",
+        "share": 0.9806
+      },
+      {
+        "src": "L1U20",
+        "dst": "L2U35",
+        "share": 0.9902
+      },
+      {
+        "src": "L1U2",
+        "dst": "L2U36",
+        "share": 0.9958
+      },
+      {
+        "src": "L1U13",
+        "dst": "L2U38",
+        "share": 0.9837
+      },
+      {
+        "src": "L1U19",
+        "dst": "L2U42",
+        "share": 0.0579
+      },
+      {
+        "src": "L1U2",
+        "dst": "L2U42",
+        "share": 0.1065
+      },
+      {
+        "src": "L1U23",
+        "dst": "L2U42",
+        "share": 0.816
+      },
+      {
+        "src": "L1U15",
+        "dst": "L2U37",
+        "share": 0.997
+      },
+      {
+        "src": "L1U19",
+        "dst": "L2U39",
+        "share": 0.9969
+      },
+      {
+        "src": "L1U9",
+        "dst": "L2U41",
+        "share": 0.9764
+      },
+      {
+        "src": "L1U11",
+        "dst": "L2U44",
+        "share": 0.9694
+      },
+      {
+        "src": "L1U16",
+        "dst": "L2U40",
+        "share": 0.9954
+      },
+      {
+        "src": "L2U30",
+        "dst": "output",
+        "share": 0.2893
+      },
+      {
+        "src": "L2U33",
+        "dst": "output",
+        "share": 0.1552
+      },
+      {
+        "src": "L2U32",
+        "dst": "output",
+        "share": 0.1532
+      },
+      {
+        "src": "L2U31",
+        "dst": "output",
+        "share": 0.1249
+      },
+      {
+        "src": "L2U34",
+        "dst": "output",
+        "share": 0.0859
+      },
+      {
+        "src": "L2U35",
+        "dst": "output",
+        "share": 0.0404
+      },
+      {
+        "src": "L2U36",
+        "dst": "output",
+        "share": 0.0379
+      },
+      {
+        "src": "L2U38",
+        "dst": "output",
+        "share": 0.0238
+      },
+      {
+        "src": "L2U42",
+        "dst": "output",
+        "share": 0.0229
+      },
+      {
+        "src": "L2U37",
+        "dst": "output",
+        "share": 0.0224
+      }
+    ]
+  },
+  "cert": {
+    "identification": {
+      "system": "XPLAIN-x1",
+      "dataset": "bike@grow-batch-8",
+      "task": "regression",
+      "n": 17379,
+      "d": 14,
+      "git_commit": "a9cb40e54776daeca8e7fcdeb15ad5983e4962a8",
+      "config_hash": "f303a8e1b5803ce9db5e589c78c17f44cc3e4ec07a6030b17b450eb7b7d6ddb7",
+      "data_hash": "7c3597a0c136b2db-d91e81b17509dfb8",
+      "seeds": {
+        "main": 0,
+        "restarts": 8,
+        "cpss_runs": 40
+      }
+    },
+    "performance_and_limits": {
+      "fidelity_val": 0.9404665820089643,
+      "fidelity_ceiling": 0.9475763267725537,
+      "fidelity_ratio": 0.9925,
+      "accuracy_test": null,
+      "concept_tax_note": "vs best(unconstrained MLP, HGB) on val",
+      "restart_fidelities": [
+        0.9404665820089643,
+        0.9388212123211123,
+        0.9216178861413379,
+        0.9330058827740919,
+        0.9366313612602812,
+        0.939817528523428,
+        0.9397248468011163,
+        0.9012499220440687
+      ]
+    },
+    "interpretability_structure": {
+      "widths": [
+        14,
+        14
+      ],
+      "honest_depth": {
+        "depth": 2,
+        "eps_depth": 0.005,
+        "pairwise_dissolutions": [
+          {
+            "layer": 1,
+            "dissolution_cost": 0.15253,
+            "earned": true
+          }
+        ],
+        "all_earned": true
+      },
+      "n_concepts": 70,
+      "n_core": 1,
+      "n_periphery": 69,
+      "core_coverage_share": 0.0099,
+      "periphery_reasons": [
+        "absent_in_main",
+        "infrequent",
+        "multiplicitous",
+        "no_effect",
+        "unstable"
+      ]
+    },
+    "statistical_certification": {
+      "regime": "standard",
+      "restarts_R": 8,
+      "cpss_pairs_B": 20,
+      "tau_match": 0.7,
+      "pi_thr": 0.7,
+      "mu_min": 0.8,
+      "ev_bound": 0.4469682835820896,
+      "q_mean": 12.95,
+      "p_universe": 938,
+      "assumptions": [
+        "CPSS exchangeability (Meinshausen-Buhlmann) over an adaptive learned pipeline is a modelling idealisation; the reality test provides an independent assumption-light check.",
+        "The universe is structure-level: supports of arity <= F_max per layer interface of the delivered topology."
+      ]
+    },
+    "concepts": [
+      {
+        "cid": "c0",
+        "Pi": 0.25,
+        "members": {
+          "0": "L1U7",
+          "1": "L1U6"
+        },
+        "modal_support": [
+          3,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6
+          ],
+          [
+            3,
+            6,
+            10
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U7",
+        "mu": 0.9971588253974915,
+        "form": "poly(2)",
+        "support_names": [
+          "hour",
+          "weekday",
+          "workingday"
+        ],
+        "layer": 1,
+        "contribution": 10.964317382123877,
+        "pi": 0.175,
+        "delta": 11.420850038528442,
+        "ci_low": 10.837393419444561,
+        "ci_high": 11.981358513236046,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1989
+      },
+      {
+        "cid": "c1",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U19"
+        },
+        "modal_support": [
+          5,
+          12
+        ],
+        "support_variants": [
+          [
+            5,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U19",
+        "mu": 0.9999843692493751,
+        "form": "tree(d3)",
+        "support_names": [
+          "weekday",
+          "humidity"
+        ],
+        "layer": 1,
+        "contribution": 0.09226480582950514,
+        "pi": 0.125,
+        "delta": 0.0888742208480835,
+        "ci_low": 0.08244186043739318,
+        "ci_high": 0.09616690427064896,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.0015
+      },
+      {
+        "cid": "c2",
+        "Pi": 0.25,
+        "members": {
+          "0": "L1U2",
+          "4": "L1U2"
+        },
+        "modal_support": [
+          10
+        ],
+        "support_variants": [
+          [
+            3,
+            10,
+            12
+          ],
+          [
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U2",
+        "mu": 0.9849034547805786,
+        "form": "poly(2)",
+        "support_names": [
+          "temp",
+          "hour",
+          "humidity"
+        ],
+        "layer": 1,
+        "contribution": 0.1625427814833893,
+        "pi": 0.125,
+        "delta": 0.16273164749145508,
+        "ci_low": 0.15071584433317184,
+        "ci_high": 0.17615619748830794,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.0028
+      },
+      {
+        "cid": "c3",
+        "Pi": 0.875,
+        "members": {
+          "0": "L1U3",
+          "1": "L1U11",
+          "2": "L1U3",
+          "3": "L1U1",
+          "4": "L2U27",
+          "5": "L1U20",
+          "6": "L2U32"
+        },
+        "modal_support": [
+          3
+        ],
+        "support_variants": [
+          [
+            3
+          ],
+          [
+            0,
+            1,
+            3,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U3",
+        "mu": 0.9993633031845093,
+        "form": "monotone-",
+        "support_names": [
+          "hour"
+        ],
+        "layer": 1,
+        "contribution": 0.567115026312519,
+        "pi": 0.875,
+        "delta": 0.5712859034538269,
+        "ci_low": 0.5408481478691101,
+        "ci_high": 0.6032550364732743,
+        "label": "CORE",
+        "reasons": [],
+        "coverage_share": 0.0099
+      },
+      {
+        "cid": "c4",
+        "Pi": 0.25,
+        "members": {
+          "0": "L1U15",
+          "5": "L2U36"
+        },
+        "modal_support": [
+          0,
+          1,
+          2
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U15",
+        "mu": 0.9950777888298035,
+        "form": "poly(2)",
+        "support_names": [
+          "month",
+          "year",
+          "season"
+        ],
+        "layer": 1,
+        "contribution": 0.06859618900750442,
+        "pi": 0.05,
+        "delta": 0.06936836242675781,
+        "ci_low": 0.06317583471536636,
+        "ci_high": 0.07536966055631637,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0012
+      },
+      {
+        "cid": "c5",
+        "Pi": 0.25,
+        "members": {
+          "0": "L1U20",
+          "6": "L2U30"
+        },
+        "modal_support": [
+          3,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            6,
+            12
+          ],
+          [
+            0,
+            3,
+            6,
+            11
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U20",
+        "mu": 0.9884453415870667,
+        "form": "poly(2)",
+        "support_names": [
+          "hour",
+          "workingday",
+          "humidity"
+        ],
+        "layer": 1,
+        "contribution": 2.6301821627485698,
+        "pi": 0.45,
+        "delta": 2.9163854122161865,
+        "ci_low": 2.727534629404545,
+        "ci_high": 3.109658898413181,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0508
+      },
+      {
+        "cid": "c6",
+        "Pi": 0.5,
+        "members": {
+          "0": "L1U4",
+          "4": "L1U6",
+          "5": "L1U4",
+          "7": "L1U1"
+        },
+        "modal_support": [
+          3,
+          7,
+          8
+        ],
+        "support_variants": [
+          [
+            3,
+            7,
+            8
+          ],
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            3,
+            7,
+            12
+          ],
+          [
+            1,
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U4",
+        "mu": 0.9411630034446716,
+        "form": "poly(2)",
+        "support_names": [
+          "hour",
+          "weather=clear",
+          "weather=misty"
+        ],
+        "layer": 1,
+        "contribution": 2.0559028245263207,
+        "pi": 0.225,
+        "delta": 2.138874053955078,
+        "ci_low": 2.038984167575836,
+        "ci_high": 2.2491406813263892,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0372
+      },
+      {
+        "cid": "c7",
+        "Pi": 0.625,
+        "members": {
+          "0": "L1U16",
+          "2": "L1U1",
+          "3": "L1U5",
+          "4": "L1U3",
+          "6": "L1U5"
+        },
+        "modal_support": [
+          3,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            10,
+            12
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U16",
+        "mu": 0.976875364780426,
+        "form": "poly(2)",
+        "support_names": [
+          "hour",
+          "humidity",
+          "temp"
+        ],
+        "layer": 1,
+        "contribution": 0.002439141183426141,
+        "pi": 0.75,
+        "delta": 0.0022497177124023438,
+        "ci_low": 0.0011378005146980286,
+        "ci_high": 0.003420889377593994,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "c8",
+        "Pi": 1.0,
+        "members": {
+          "0": "L1U5",
+          "1": "L1U0",
+          "2": "L1U6",
+          "3": "L1U2",
+          "4": "L1U7",
+          "5": "L1U7",
+          "6": "L1U1",
+          "7": "L1U6"
+        },
+        "modal_support": [
+          3,
+          6
+        ],
+        "support_variants": [
+          [
+            3
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U5",
+        "mu": 0.9909052848815918,
+        "form": "monotone-",
+        "support_names": [
+          "hour"
+        ],
+        "layer": 1,
+        "contribution": 11.507104100099243,
+        "pi": 0.8,
+        "delta": 12.298880815505981,
+        "ci_low": 11.463293480873109,
+        "ci_high": 13.231014457345008,
+        "label": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "coverage_share": 0.2141
+      },
+      {
+        "cid": "c9",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U13"
+        },
+        "modal_support": [
+          0,
+          10
+        ],
+        "support_variants": [
+          [
+            0,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U13",
+        "mu": 0.9950184082176164,
+        "form": "tree(d3)",
+        "support_names": [
+          "season",
+          "temp"
+        ],
+        "layer": 1,
+        "contribution": 0.0531249971857064,
+        "pi": 0.225,
+        "delta": 0.05826479196548462,
+        "ci_low": 0.052609306573867795,
+        "ci_high": 0.0644562840461731,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.001
+      },
+      {
+        "cid": "c10",
+        "Pi": 0.25,
+        "members": {
+          "0": "L1U23",
+          "5": "L2U31"
+        },
+        "modal_support": [
+          3,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6
+          ],
+          [
+            0,
+            1,
+            6
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U23",
+        "mu": 0.9969326853752136,
+        "form": "poly(2)",
+        "support_names": [
+          "workingday",
+          "hour",
+          "weekday"
+        ],
+        "layer": 1,
+        "contribution": 0.202748524916179,
+        "pi": 0.0,
+        "delta": 0.1897786259651184,
+        "ci_low": 0.1663418009877205,
+        "ci_high": 0.21488014310598375,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0033
+      },
+      {
+        "cid": "c11",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U9"
+        },
+        "modal_support": [
+          2,
+          5,
+          7
+        ],
+        "support_variants": [
+          [
+            2,
+            5,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U9",
+        "mu": 0.9999947904395964,
+        "form": "tree(d3)",
+        "support_names": [
+          "weekday",
+          "month",
+          "weather=clear"
+        ],
+        "layer": 1,
+        "contribution": 0.00770765349382152,
+        "pi": 0.175,
+        "delta": 0.007985472679138184,
+        "ci_low": 0.006388284265995026,
+        "ci_high": 0.009543301165103912,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.0001
+      },
+      {
+        "cid": "c12",
+        "Pi": 1.0,
+        "members": {
+          "0": "L1U6",
+          "1": "L1U3",
+          "2": "L1U0",
+          "3": "L1U7",
+          "4": "L1U4",
+          "5": "L1U0",
+          "6": "L2U26",
+          "7": "L1U2"
+        },
+        "modal_support": [
+          3,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            6
+          ],
+          [
+            3,
+            6,
+            12
+          ],
+          [
+            3,
+            6,
+            10
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U6",
+        "mu": 0.964804795978088,
+        "form": "tree(d3)",
+        "support_names": [
+          "hour",
+          "workingday"
+        ],
+        "layer": 1,
+        "contribution": 1.8469338736139043,
+        "pi": 0.85,
+        "delta": 2.0997440814971924,
+        "ci_low": 1.8898801162838936,
+        "ci_high": 2.3168599531054492,
+        "label": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0366
+      },
+      {
+        "cid": "c13",
+        "Pi": 0.625,
+        "members": {
+          "0": "L1U11",
+          "1": "L1U20",
+          "2": "L1U13",
+          "4": "L2U38",
+          "6": "L1U15"
+        },
+        "modal_support": [
+          12
+        ],
+        "support_variants": [
+          [
+            12,
+            13
+          ],
+          [
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U11",
+        "mu": 0.9011472277468258,
+        "form": "tree(d3)",
+        "support_names": [
+          "humidity",
+          "windspeed"
+        ],
+        "layer": 1,
+        "contribution": 0.0019178847679626188,
+        "pi": 0.325,
+        "delta": 0.0029482245445251465,
+        "ci_low": 0.0014360502362251283,
+        "ci_high": 0.0045113205909729,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.0001
+      },
+      {
+        "cid": "c14",
+        "Pi": 0.875,
+        "members": {
+          "0": "L2U30",
+          "1": "L1U18",
+          "2": "L1U4",
+          "3": "L1U10",
+          "4": "L2U31",
+          "5": "L2U30",
+          "6": "L2U27"
+        },
+        "modal_support": [
+          3
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6,
+            12
+          ],
+          [
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            3,
+            5,
+            6,
+            11
+          ],
+          [
+            3,
+            5,
+            6
+          ],
+          [
+            0,
+            3,
+            6,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L2U30",
+        "mu": 0.9988738894462585,
+        "form": "poly(2)",
+        "support_names": [
+          "L1U5",
+          "L1U20",
+          "L1U23"
+        ],
+        "layer": 2,
+        "contribution": 10.054028054735532,
+        "pi": 0.725,
+        "delta": 10.693602800369263,
+        "ci_low": 10.111685465276242,
+        "ci_high": 11.306163361668586,
+        "label": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1862
+      },
+      {
+        "cid": "c15",
+        "Pi": 0.375,
+        "members": {
+          "0": "L2U33",
+          "1": "L1U7",
+          "4": "L2U28"
+        },
+        "modal_support": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            2,
+            3,
+            5,
+            6,
+            12
+          ],
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            1,
+            3,
+            6,
+            12,
+            13
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L2U33",
+        "mu": 0.9999958276748657,
+        "form": "poly(2)",
+        "support_names": [
+          "L1U7",
+          "L1U20",
+          "L1U15"
+        ],
+        "layer": 2,
+        "contribution": 6.013352732352578,
+        "pi": 0.325,
+        "delta": 6.2244713306427,
+        "ci_low": 5.972232188284397,
+        "ci_high": 6.523494067788124,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1084
+      },
+      {
+        "cid": "c16",
+        "Pi": 0.75,
+        "members": {
+          "0": "L2U32",
+          "2": "L1U9",
+          "4": "L2U26",
+          "5": "L2U29",
+          "6": "L1U2",
+          "7": "L1U5"
+        },
+        "modal_support": [
+          3,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            3
+          ],
+          [
+            2,
+            3,
+            6,
+            11
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L2U32",
+        "mu": 0.9798566102981567,
+        "form": "poly(2)",
+        "support_names": [
+          "L1U23",
+          "L1U5",
+          "L1U3"
+        ],
+        "layer": 2,
+        "contribution": 2.323700642075445,
+        "pi": 0.825,
+        "delta": 2.5932509899139404,
+        "ci_low": 2.373467576503754,
+        "ci_high": 2.8382281482219693,
+        "label": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0452
+      },
+      {
+        "cid": "c17",
+        "Pi": 0.75,
+        "members": {
+          "0": "L2U31",
+          "1": "L1U19",
+          "4": "L1U12",
+          "5": "L2U32",
+          "6": "L2U25",
+          "7": "L1U7"
+        },
+        "modal_support": [
+          3
+        ],
+        "support_variants": [
+          [
+            3
+          ],
+          [
+            3,
+            7,
+            12
+          ],
+          [
+            3,
+            6,
+            12
+          ],
+          [
+            3,
+            6,
+            11
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L2U31",
+        "mu": 0.9996733665466309,
+        "form": "monotone+",
+        "support_names": [
+          "L1U3"
+        ],
+        "layer": 2,
+        "contribution": 2.803221590776052,
+        "pi": 0.825,
+        "delta": 2.8766305446624756,
+        "ci_low": 2.750124680995941,
+        "ci_high": 3.0147267311811445,
+        "label": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0501
+      },
+      {
+        "cid": "c18",
+        "Pi": 0.25,
+        "members": {
+          "0": "L2U34",
+          "4": "L2U29"
+        },
+        "modal_support": [
+          3,
+          5,
+          7,
+          8,
+          10,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            7,
+            8,
+            10,
+            12
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            13
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L2U34",
+        "mu": 0.9999772906303406,
+        "form": "poly(2)",
+        "support_names": [
+          "L1U4",
+          "L1U16",
+          "L1U19"
+        ],
+        "layer": 2,
+        "contribution": 2.237375001744862,
+        "pi": 0.225,
+        "delta": 2.3252246379852295,
+        "ci_low": 2.223096859455109,
+        "ci_high": 2.444437836110592,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0405
+      },
+      {
+        "cid": "c19",
+        "Pi": 0.5,
+        "members": {
+          "0": "L2U35",
+          "4": "L1U5",
+          "5": "L2U26",
+          "6": "L1U0"
+        },
+        "modal_support": [
+          3,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            6,
+            12
+          ],
+          [
+            1,
+            3,
+            6
+          ],
+          [
+            3,
+            5,
+            6,
+            11
+          ],
+          [
+            3,
+            6
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L2U35",
+        "mu": 0.9999950528144836,
+        "form": "monotone+",
+        "support_names": [
+          "L1U20"
+        ],
+        "layer": 2,
+        "contribution": 0.20574833669622639,
+        "pi": 0.675,
+        "delta": 0.2359851598739624,
+        "ci_low": 0.21850035041570665,
+        "ci_high": 0.2551025986671448,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0041
+      },
+      {
+        "cid": "c20",
+        "Pi": 0.625,
+        "members": {
+          "0": "L2U36",
+          "1": "L1U5",
+          "2": "L1U7",
+          "3": "L1U4",
+          "4": "L2U32"
+        },
+        "modal_support": [
+          10
+        ],
+        "support_variants": [
+          [
+            3,
+            10,
+            12
+          ],
+          [
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L2U36",
+        "mu": 0.9999952912330627,
+        "form": "monotone+",
+        "support_names": [
+          "L1U2"
+        ],
+        "layer": 2,
+        "contribution": 0.18996817062138693,
+        "pi": 0.3,
+        "delta": 0.18541359901428223,
+        "ci_low": 0.17228597402572632,
+        "ci_high": 0.19965653866529465,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.0032
+      },
+      {
+        "cid": "c21",
+        "Pi": 0.375,
+        "members": {
+          "0": "L2U38",
+          "5": "L1U10",
+          "7": "L1U0"
+        },
+        "modal_support": [
+          0,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            11
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L2U38",
+        "mu": 0.9999860525131226,
+        "form": "monotone+",
+        "support_names": [
+          "L1U13"
+        ],
+        "layer": 2,
+        "contribution": 0.05905559316077136,
+        "pi": 0.475,
+        "delta": 0.06440925598144531,
+        "ci_low": 0.05826968252658844,
+        "ci_high": 0.07071923911571502,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0011
+      },
+      {
+        "cid": "c22",
+        "Pi": 0.125,
+        "members": {
+          "0": "L2U42"
+        },
+        "modal_support": [
+          3,
+          5,
+          6,
+          10,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6,
+            10,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L2U42",
+        "mu": 0.9953485727310181,
+        "form": "poly(2)",
+        "support_names": [
+          "L1U23",
+          "L1U2",
+          "L1U19"
+        ],
+        "layer": 2,
+        "contribution": 0.05113936533627872,
+        "pi": 0.0,
+        "delta": 0.050225019454956055,
+        "ci_low": 0.04460869580507278,
+        "ci_high": 0.055887602269649506,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.0009
+      },
+      {
+        "cid": "c23",
+        "Pi": 0.25,
+        "members": {
+          "0": "L2U37",
+          "5": "L1U22"
+        },
+        "modal_support": [
+          0,
+          1,
+          2
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L2U37",
+        "mu": 0.9999995231628418,
+        "form": "monotone+",
+        "support_names": [
+          "L1U15"
+        ],
+        "layer": 2,
+        "contribution": 0.07586474938603371,
+        "pi": 0.025,
+        "delta": 0.07627999782562256,
+        "ci_low": 0.07004104852676392,
+        "ci_high": 0.08302168846130371,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0013
+      },
+      {
+        "cid": "c24",
+        "Pi": 0.125,
+        "members": {
+          "0": "L2U39"
+        },
+        "modal_support": [
+          5,
+          12
+        ],
+        "support_variants": [
+          [
+            5,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L2U39",
+        "mu": 0.9999984502792358,
+        "form": "monotone+",
+        "support_names": [
+          "L1U19"
+        ],
+        "layer": 2,
+        "contribution": 0.05762882372435951,
+        "pi": 0.025,
+        "delta": 0.0566326379776001,
+        "ci_low": 0.05198237001895904,
+        "ci_high": 0.061568377912044524,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.001
+      },
+      {
+        "cid": "c25",
+        "Pi": 0.125,
+        "members": {
+          "0": "L2U41"
+        },
+        "modal_support": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          7
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            2,
+            3,
+            5,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L2U41",
+        "mu": 0.9999874234199524,
+        "form": "poly(2)",
+        "support_names": [
+          "L1U9",
+          "L1U3",
+          "L1U15"
+        ],
+        "layer": 2,
+        "contribution": 0.013248322061899964,
+        "pi": 0.025,
+        "delta": 0.01313638687133789,
+        "ci_low": 0.011062136292457581,
+        "ci_high": 0.015396438539028168,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.0002
+      },
+      {
+        "cid": "c26",
+        "Pi": 0.375,
+        "members": {
+          "0": "L2U44",
+          "4": "L1U11",
+          "6": "L2U35"
+        },
+        "modal_support": [
+          12,
+          13
+        ],
+        "support_variants": [
+          [
+            12,
+            13
+          ],
+          [
+            0,
+            3,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L2U44",
+        "mu": 0.9999753832817078,
+        "form": "monotone+",
+        "support_names": [
+          "L1U11"
+        ],
+        "layer": 2,
+        "contribution": 0.004832120916910321,
+        "pi": 0.15,
+        "delta": 0.006145954132080078,
+        "ci_low": 0.0041620776057243345,
+        "ci_high": 0.008239732682704923,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0001
+      },
+      {
+        "cid": "c27",
+        "Pi": 0.25,
+        "members": {
+          "0": "L2U40",
+          "3": "L1U11"
+        },
+        "modal_support": [
+          3
+        ],
+        "support_variants": [
+          [
+            3,
+            10,
+            12
+          ],
+          [
+            3
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L2U40",
+        "mu": 0.9999985694885254,
+        "form": "monotone+",
+        "support_names": [
+          "L1U16"
+        ],
+        "layer": 2,
+        "contribution": 0.0024329778805531888,
+        "pi": 0.45,
+        "delta": 0.0027430057525634766,
+        "ci_low": 0.0015890270471572876,
+        "ci_high": 0.003935442864894867,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e0",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U9"
+        },
+        "modal_support": [
+          3,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e1",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U4"
+        },
+        "modal_support": [
+          3,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e2",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U2"
+        },
+        "modal_support": [
+          3,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            6,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e3",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U22"
+        },
+        "modal_support": [
+          1,
+          2
+        ],
+        "support_variants": [
+          [
+            1,
+            2
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e4",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U16"
+        },
+        "modal_support": [
+          0,
+          2,
+          6
+        ],
+        "support_variants": [
+          [
+            0,
+            2,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e5",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U8"
+        },
+        "modal_support": [
+          2,
+          3,
+          9
+        ],
+        "support_variants": [
+          [
+            2,
+            3,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e6",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U5"
+        },
+        "modal_support": [
+          3,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e7",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U2"
+        },
+        "modal_support": [
+          3,
+          9
+        ],
+        "support_variants": [
+          [
+            3,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e8",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U0"
+        },
+        "modal_support": [
+          1,
+          6,
+          8
+        ],
+        "support_variants": [
+          [
+            1,
+            6,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e9",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U3"
+        },
+        "modal_support": [
+          0,
+          2
+        ],
+        "support_variants": [
+          [
+            0,
+            2
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e10",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U12"
+        },
+        "modal_support": [
+          0,
+          3,
+          13
+        ],
+        "support_variants": [
+          [
+            0,
+            3,
+            13
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e11",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U9"
+        },
+        "modal_support": [
+          1,
+          2,
+          7
+        ],
+        "support_variants": [
+          [
+            1,
+            2,
+            7
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e12",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U10"
+        },
+        "modal_support": [
+          0,
+          2,
+          13
+        ],
+        "support_variants": [
+          [
+            0,
+            2,
+            13
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e13",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U9"
+        },
+        "modal_support": [
+          3,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e14",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U1"
+        },
+        "modal_support": [
+          5,
+          6,
+          11
+        ],
+        "support_variants": [
+          [
+            5,
+            6,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e15",
+        "Pi": 0.125,
+        "members": {
+          "4": "L2U30"
+        },
+        "modal_support": [
+          3,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e16",
+        "Pi": 0.125,
+        "members": {
+          "4": "L2U33"
+        },
+        "modal_support": [
+          0,
+          2,
+          13
+        ],
+        "support_variants": [
+          [
+            0,
+            2,
+            13
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e17",
+        "Pi": 0.125,
+        "members": {
+          "4": "L2U34"
+        },
+        "modal_support": [
+          3
+        ],
+        "support_variants": [
+          [
+            3
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e18",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U15"
+        },
+        "modal_support": [
+          3,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e19",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U3"
+        },
+        "modal_support": [
+          0,
+          1,
+          6
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e20",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U11"
+        },
+        "modal_support": [
+          12
+        ],
+        "support_variants": [
+          [
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e21",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U1"
+        },
+        "modal_support": [
+          0,
+          1,
+          2
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            2
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e22",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U41"
+        },
+        "modal_support": [
+          3,
+          5,
+          6
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e23",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U45"
+        },
+        "modal_support": [
+          11
+        ],
+        "support_variants": [
+          [
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e24",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U39"
+        },
+        "modal_support": [
+          3,
+          10,
+          11
+        ],
+        "support_variants": [
+          [
+            3,
+            10,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e25",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U46"
+        },
+        "modal_support": [
+          0,
+          2,
+          6
+        ],
+        "support_variants": [
+          [
+            0,
+            2,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e26",
+        "Pi": 0.125,
+        "members": {
+          "5": "L2U34"
+        },
+        "modal_support": [
+          3,
+          5,
+          6,
+          7,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            6,
+            7,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e27",
+        "Pi": 0.125,
+        "members": {
+          "5": "L2U33"
+        },
+        "modal_support": [
+          2,
+          3,
+          5,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            2,
+            3,
+            5,
+            6,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e28",
+        "Pi": 0.125,
+        "members": {
+          "5": "L2U35"
+        },
+        "modal_support": [
+          0,
+          1,
+          2,
+          3,
+          6
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            2,
+            3,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e29",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U9"
+        },
+        "modal_support": [
+          0,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e30",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U3"
+        },
+        "modal_support": [
+          3,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            6,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e31",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U4"
+        },
+        "modal_support": [
+          3,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            6,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e32",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U12"
+        },
+        "modal_support": [
+          1,
+          2
+        ],
+        "support_variants": [
+          [
+            1,
+            2
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e33",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U13"
+        },
+        "modal_support": [
+          10
+        ],
+        "support_variants": [
+          [
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e34",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U8"
+        },
+        "modal_support": [
+          0,
+          1,
+          10
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e35",
+        "Pi": 0.125,
+        "members": {
+          "6": "L2U24"
+        },
+        "modal_support": [
+          3,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            6,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e36",
+        "Pi": 0.125,
+        "members": {
+          "6": "L2U28"
+        },
+        "modal_support": [
+          0,
+          1,
+          10,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            10,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e37",
+        "Pi": 0.125,
+        "members": {
+          "6": "L2U29"
+        },
+        "modal_support": [
+          0,
+          3,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            3,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e38",
+        "Pi": 0.125,
+        "members": {
+          "6": "L2U33"
+        },
+        "modal_support": [
+          0,
+          1,
+          2,
+          3,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            2,
+            3,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e39",
+        "Pi": 0.125,
+        "members": {
+          "6": "L2U34"
+        },
+        "modal_support": [
+          10
+        ],
+        "support_variants": [
+          [
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e40",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U4"
+        },
+        "modal_support": [
+          0,
+          3,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            3,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e41",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U3"
+        },
+        "modal_support": [
+          3,
+          4,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            4,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      }
+    ],
+    "routes": {
+      "feature_groups": [
+        [
+          "season"
+        ],
+        [
+          "year"
+        ],
+        [
+          "month"
+        ],
+        [
+          "hour"
+        ],
+        [
+          "holiday"
+        ],
+        [
+          "weekday"
+        ],
+        [
+          "workingday"
+        ],
+        [
+          "weather=clear",
+          "weather=misty"
+        ],
+        [
+          "weather=rain"
+        ],
+        [
+          "temp",
+          "feel_temp"
+        ],
+        [
+          "humidity"
+        ],
+        [
+          "windspeed"
+        ]
+      ],
+      "rows": [
+        {
+          "rid": "r0",
+          "support_groups": [
+            3,
+            6
+          ],
+          "support_names": [
+            "hour",
+            "workingday"
+          ],
+          "common_core": [
+            3
+          ],
+          "common_core_names": [
+            "hour"
+          ],
+          "variants": [
+            [
+              0,
+              1,
+              2,
+              3,
+              5,
+              6,
+              10
+            ],
+            [
+              0,
+              1,
+              2,
+              3,
+              5,
+              7
+            ],
+            [
+              0,
+              1,
+              2,
+              3,
+              6
+            ],
+            [
+              0,
+              1,
+              2,
+              3,
+              9
+            ],
+            [
+              0,
+              1,
+              2,
+              3,
+              11
+            ],
+            [
+              0,
+              1,
+              3
+            ],
+            [
+              0,
+              1,
+              3,
+              9
+            ],
+            [
+              0,
+              3,
+              6,
+              9
+            ],
+            [
+              0,
+              3,
+              6,
+              9,
+              10
+            ],
+            [
+              0,
+              3,
+              9
+            ],
+            [
+              0,
+              3,
+              9,
+              10
+            ],
+            [
+              0,
+              3,
+              11
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              3,
+              4
+            ],
+            [
+              1,
+              3,
+              5
+            ],
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              3,
+              6,
+              10,
+              11
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              3,
+              5,
+              6,
+              10
+            ],
+            [
+              2,
+              3,
+              6,
+              9
+            ],
+            [
+              2,
+              3,
+              8
+            ],
+            [
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              4,
+              10
+            ],
+            [
+              3,
+              5,
+              6
+            ],
+            [
+              3,
+              5,
+              6,
+              7,
+              10
+            ],
+            [
+              3,
+              5,
+              6,
+              9
+            ],
+            [
+              3,
+              5,
+              6,
+              9,
+              10
+            ],
+            [
+              3,
+              5,
+              6,
+              10
+            ],
+            [
+              3,
+              5,
+              7,
+              9,
+              10
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              3,
+              6,
+              9
+            ],
+            [
+              3,
+              6,
+              10
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              3,
+              7,
+              10
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              3,
+              9
+            ],
+            [
+              3,
+              9,
+              10
+            ]
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "members_main": [
+            "L1U16",
+            "L1U2",
+            "L1U20",
+            "L1U23",
+            "L1U3",
+            "L1U4",
+            "L1U5",
+            "L1U6",
+            "L1U7",
+            "L2U30",
+            "L2U31",
+            "L2U32",
+            "L2U33",
+            "L2U34",
+            "L2U35",
+            "L2U36",
+            "L2U40",
+            "L2U41",
+            "L2U42"
+          ],
+          "mu": 0.9999985694885254,
+          "multiplicitous": false,
+          "delta": 1.7082606554031372,
+          "ci_low": 1.6262207686901093,
+          "ci_high": 1.7952776983380319,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "rid": "r1",
+          "support_groups": [
+            9
+          ],
+          "support_names": [
+            "G9{temp, feel_temp}"
+          ],
+          "common_core": [
+            9
+          ],
+          "common_core_names": [
+            "G9{temp, feel_temp}"
+          ],
+          "variants": [
+            [
+              0,
+              1,
+              9,
+              10
+            ],
+            [
+              0,
+              9
+            ],
+            [
+              5,
+              6,
+              9
+            ],
+            [
+              9
+            ]
+          ],
+          "Pi": 1.0,
+          "pi": 0.625,
+          "members_main": [
+            "L1U13",
+            "L2U38"
+          ],
+          "mu": 0.9999860525131226,
+          "multiplicitous": false,
+          "delta": 0.05826479196548462,
+          "ci_low": 0.0522665485739708,
+          "ci_high": 0.06409992277622223,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r2",
+          "support_groups": [
+            10
+          ],
+          "support_names": [
+            "humidity"
+          ],
+          "common_core": [
+            10
+          ],
+          "common_core_names": [
+            "humidity"
+          ],
+          "variants": [
+            [
+              5,
+              10
+            ],
+            [
+              10
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "Pi": 0.75,
+          "pi": 0.4,
+          "members_main": [
+            "L1U11",
+            "L1U19",
+            "L2U39",
+            "L2U44"
+          ],
+          "mu": 0.9999984502792358,
+          "multiplicitous": false,
+          "delta": 0.09801048040390015,
+          "ci_low": 0.09060409367084503,
+          "ci_high": 0.10551991611719132,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r3",
+          "support_groups": [
+            0,
+            2,
+            6
+          ],
+          "support_names": [
+            "season",
+            "month",
+            "workingday"
+          ],
+          "common_core": [
+            0,
+            2
+          ],
+          "common_core_names": [
+            "season",
+            "month"
+          ],
+          "variants": [
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              2,
+              6
+            ],
+            [
+              0,
+              2,
+              11
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.075,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r4",
+          "support_groups": [
+            1,
+            2
+          ],
+          "support_names": [
+            "year",
+            "month"
+          ],
+          "common_core": [
+            1,
+            2
+          ],
+          "common_core_names": [
+            "year",
+            "month"
+          ],
+          "variants": [
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              2,
+              7
+            ]
+          ],
+          "Pi": 0.625,
+          "pi": 0.575,
+          "members_main": [
+            "L1U15",
+            "L2U37"
+          ],
+          "mu": 0.9999995231628418,
+          "multiplicitous": false,
+          "delta": 0.06936836242675781,
+          "ci_low": 0.06356567144393921,
+          "ci_high": 0.0756540209054947,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r5",
+          "support_groups": [
+            0,
+            1,
+            6
+          ],
+          "support_names": [
+            "season",
+            "year",
+            "workingday"
+          ],
+          "common_core": [
+            0,
+            1,
+            6
+          ],
+          "common_core_names": [
+            "season",
+            "year",
+            "workingday"
+          ],
+          "variants": [
+            [
+              0,
+              1,
+              6
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r6",
+          "support_groups": [
+            1,
+            6,
+            7
+          ],
+          "support_names": [
+            "year",
+            "workingday",
+            "G7{weather=clear, weather=misty}"
+          ],
+          "common_core": [
+            1,
+            6,
+            7
+          ],
+          "common_core_names": [
+            "year",
+            "workingday",
+            "G7{weather=clear, weather=misty}"
+          ],
+          "variants": [
+            [
+              1,
+              6,
+              7
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r7",
+          "support_groups": [
+            2,
+            5,
+            7
+          ],
+          "support_names": [
+            "month",
+            "weekday",
+            "G7{weather=clear, weather=misty}"
+          ],
+          "common_core": [
+            2,
+            5,
+            7
+          ],
+          "common_core_names": [
+            "month",
+            "weekday",
+            "G7{weather=clear, weather=misty}"
+          ],
+          "variants": [
+            [
+              2,
+              5,
+              7
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [
+            "L1U9"
+          ],
+          "mu": 0.9999947904395964,
+          "multiplicitous": false,
+          "delta": 0.007985472679138184,
+          "ci_low": 0.006388284265995026,
+          "ci_high": 0.009543301165103912,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        }
+      ],
+      "n_core_routes": 1,
+      "ev_bound_routes": 1.3798710151006712,
+      "note": "Routes are certified at the collinearity-group level (the level stable across retrainings); unit members are one carving from an explicit equivalence class."
+    },
+    "function_decomposition": {
+      "note": "Purified weighted-fANOVA components of the learned function under the DECLARED empirical training measure (unique given the measure; carving-invariant).  Shares are out-of-sample covariances on validation.",
+      "components": [
+        {
+          "support": [
+            0
+          ],
+          "support_names": [
+            "season"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "season"
+          ],
+          "share_main": 0.0228,
+          "shares_all": [
+            0.0228,
+            0.0154,
+            0.0,
+            0.0203,
+            0.0133,
+            0.0189,
+            0.0166,
+            0.0222
+          ],
+          "Pi": 0.875,
+          "pi": 0.875,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            1
+          ],
+          "support_names": [
+            "year"
+          ],
+          "group_support": [
+            1
+          ],
+          "group_names": [
+            "year"
+          ],
+          "share_main": 0.0241,
+          "shares_all": [
+            0.0241,
+            0.0214,
+            0.0183,
+            0.0244,
+            0.0252,
+            0.0276,
+            0.0273,
+            0.0229
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            3
+          ],
+          "support_names": [
+            "hour"
+          ],
+          "group_support": [
+            3
+          ],
+          "group_names": [
+            "hour"
+          ],
+          "share_main": 0.5871,
+          "shares_all": [
+            0.5871,
+            0.5916,
+            0.5811,
+            0.5667,
+            0.5882,
+            0.5761,
+            0.5794,
+            0.5829
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            9
+          ],
+          "support_names": [
+            "weather=rain"
+          ],
+          "group_support": [
+            8
+          ],
+          "group_names": [
+            "weather=rain"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0121,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.4,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            10
+          ],
+          "support_names": [
+            "temp"
+          ],
+          "group_support": [
+            9
+          ],
+          "group_names": [
+            "G9{temp, feel_temp}"
+          ],
+          "share_main": 0.0656,
+          "shares_all": [
+            0.0656,
+            0.0585,
+            0.0792,
+            0.0685,
+            0.066,
+            0.0669,
+            0.0616,
+            0.0684
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            11
+          ],
+          "support_names": [
+            "feel_temp"
+          ],
+          "group_support": [
+            9
+          ],
+          "group_names": [
+            "G9{temp, feel_temp}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0127,
+            0.0,
+            0.0,
+            0.0107,
+            0.0,
+            0.0106
+          ],
+          "Pi": 0.375,
+          "pi": 0.325,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            12
+          ],
+          "support_names": [
+            "humidity"
+          ],
+          "group_support": [
+            10
+          ],
+          "group_names": [
+            "humidity"
+          ],
+          "share_main": 0.0134,
+          "shares_all": [
+            0.0134,
+            0.0165,
+            0.0144,
+            0.0105,
+            0.0237,
+            0.0174,
+            0.0178,
+            0.0131
+          ],
+          "Pi": 1.0,
+          "pi": 0.85,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            3,
+            5
+          ],
+          "support_names": [
+            "hour",
+            "weekday"
+          ],
+          "group_support": [
+            3,
+            5
+          ],
+          "group_names": [
+            "hour",
+            "weekday"
+          ],
+          "share_main": 0.0714,
+          "shares_all": [
+            0.0714,
+            0.0746,
+            0.078,
+            0.075,
+            0.0658,
+            0.0745,
+            0.073,
+            0.0567
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        }
+      ],
+      "n_core": 6,
+      "group_shares": {
+        "0": 0.0228,
+        "1": 0.0241,
+        "3": 0.5871,
+        "9": 0.0656,
+        "10": 0.0134,
+        "3,5": 0.0714
+      },
+      "ev_bound": 0.23395855543710026,
+      "recon_r2": 0.8759
+    },
+    "portfolio_reliance": [
+      {
+        "group": "season",
+        "min_reliance": 0.0004,
+        "max_reliance": 0.0627
+      },
+      {
+        "group": "year",
+        "min_reliance": 0.0376,
+        "max_reliance": 0.051
+      },
+      {
+        "group": "month",
+        "min_reliance": 0.0004,
+        "max_reliance": 0.0965
+      },
+      {
+        "group": "hour",
+        "min_reliance": 1.474,
+        "max_reliance": 1.5773
+      },
+      {
+        "group": "holiday",
+        "min_reliance": 0.0008,
+        "max_reliance": 0.0046
+      },
+      {
+        "group": "weekday",
+        "min_reliance": 0.0019,
+        "max_reliance": 0.011
+      },
+      {
+        "group": "workingday",
+        "min_reliance": 0.1641,
+        "max_reliance": 0.2088
+      },
+      {
+        "group": "G7{weather=clear, weather=misty}",
+        "min_reliance": 0.0002,
+        "max_reliance": 0.5713
+      },
+      {
+        "group": "weather=rain",
+        "min_reliance": 0.0001,
+        "max_reliance": 0.3557
+      },
+      {
+        "group": "G9{temp, feel_temp}",
+        "min_reliance": 0.0655,
+        "max_reliance": 0.1336
+      },
+      {
+        "group": "humidity",
+        "min_reliance": 0.0023,
+        "max_reliance": 0.0147
+      },
+      {
+        "group": "windspeed",
+        "min_reliance": 0.0012,
+        "max_reliance": 0.0036
+      }
+    ],
+    "non_claims": [
+      "CORE concepts are stable, real structures - not proven causal mechanisms of the world (M-C7).",
+      "The periphery is labelled, not certified.",
+      "Unit semantics require expert review (the soft target)."
+    ]
+  },
+  "core_share_sum": 0.7844,
+  "bars": [
+    {
+      "id": "fidelity \u2265 ceiling",
+      "pass": true,
+      "detail": "ratio 0.993 vs unconstrained MLP/HGB"
+    },
+    {
+      "id": "core coverage \u2265 0.5",
+      "pass": true,
+      "detail": "certified components cover 0.78 of function variance"
+    },
+    {
+      "id": "E[V] non-vacuous",
+      "pass": true,
+      "detail": "E[V] \u2264 0.234 over the structure-level universe"
+    },
+    {
+      "id": "honest depth",
+      "pass": true,
+      "detail": "depth 2; widths 14\u00d714"
+    }
+  ]
+}

@@ -132,12 +132,12 @@ table.t td.num, table.t th.num { text-align:right; }
     <div class="daghdr">
       <h2>Concept DAG</h2>
       <div class="seg">
-        <button id="m_hier" class="on">Drill-down</button>
+        <button id="m_hier" class="on">Layer F DAG</button>
         <button id="m_units">Model units</button>
       </div>
       <div class="ctrls">
         <span id="hierctrls" class="ctrls" style="border:none;padding:0">
-          <button id="b_expand">expand components</button>
+          <button id="b_expand">expand all members</button>
         </span>
         <span id="unitctrls" class="ctrls" style="border:none;padding:0;display:none">
           <label><input type="checkbox" id="t_peri" checked> periphery</label>
@@ -154,7 +154,7 @@ table.t td.num, table.t th.num { text-align:right; }
           <span><i style="background:var(--periwash);border:1.5px solid var(--peri)"></i>periphery</span>
           <span><i style="background:var(--surface);border:1.5px solid var(--accent)"></i>output</span>
           <span><i style="background:var(--wash);border:1px solid var(--grid)"></i>feature</span>
-          <span>double-click to drill · edge width = share</span>
+          <span>double-click: component → member units → features · edge = real share</span>
         </div>
       </div>
       <div class="detail" id="detail"></div>
@@ -196,7 +196,7 @@ table.t td.num, table.t th.num { text-align:right; }
     Certified claims are the Layer F components; the DAG is inspectable, the periphery labelled.
   </div>
 </div>
-<script id="dash-data" type="application/json">{"units": {"nodes": [{"id": "age", "kind": "input", "label": "age"}, {"id": "education-num", "kind": "input", "label": "education-num"}, {"id": "marital-status=Married-civ-spouse", "kind": "input", "label": "marital-status=Married-civ-spouse"}, {"id": "occupation=Exec-managerial", "kind": "input", "label": "occupation=Exec-managerial"}, {"id": "relationship=Husband", "kind": "input", "label": "relationship=Husband"}, {"id": "relationship=Own-child", "kind": "input", "label": "relationship=Own-child"}, {"id": "sex", "kind": "input", "label": "sex"}, {"id": "capital-gain", "kind": "input", "label": "capital-gain"}, {"id": "hours-per-week", "kind": "input", "label": "hours-per-week"}, {"id": "L1U0", "kind": "unit", "layer": 1, "label": "poly(2)(relationship=Own-child, capital-gain, education-num)", "mu": 0.9943369626998901, "Pi": 0.375, "pi": 0.15, "delta": 0.5487334974987784, "coverage": 0.5267650482536078, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["relationship=Own-child", "capital-gain", "education-num"], "form": "poly(2)"}, {"id": "L1U7", "kind": "unit", "layer": 1, "label": "tree(d3)(relationship=Own-child, sex, marital-status=Married-civ-spouse)", "mu": 0.9994197488778029, "Pi": 0.375, "pi": 0.525, "delta": 3.8955731108598557, "coverage": 3.8925400247071043, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["relationship=Own-child", "sex", "marital-status=Married-civ-spouse"], "form": "tree(d3)"}, {"id": "L1U5", "kind": "unit", "layer": 1, "label": "poly(2)(marital-status=Married-civ-spouse, hours-per-week, relationship=Husband)", "mu": 0.9764877557754517, "Pi": 0.625, "pi": 0.325, "delta": 0.10636549950233765, "coverage": 0.11444254198165082, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["marital-status=Married-civ-spouse", "hours-per-week", "relationship=Husband"], "form": "poly(2)"}, {"id": "L1U1", "kind": "unit", "layer": 1, "label": "monotone-(age)", "mu": 0.9999738335609436, "Pi": 0.75, "pi": 0.575, "delta": 0.03301000314612079, "coverage": 0.032723512352508255, "tag": "PERIPHERY", "reasons": ["infrequent"], "support_names": ["age"], "form": "monotone-"}, {"id": "L1U6", "kind": "unit", "layer": 1, "label": "monotone-(age)", "mu": 0.9997365474700928, "Pi": 0.75, "pi": 0.475, "delta": 0.003484020659025977, "coverage": 0.0020075139756301486, "tag": "PERIPHERY", "reasons": ["infrequent", "no_effect"], "support_names": ["age"], "form": "monotone-"}, {"id": "class_0", "kind": "output", "label": "class_0"}, {"id": "class_1", "kind": "output", "label": "class_1"}], "edges": [{"src": "age", "dst": "L1U0", "share": 0.0233}, {"src": "education-num", "dst": "L1U0", "share": 0.0521}, {"src": "occupation=Exec-managerial", "dst": "L1U0", "share": 0.0227}, {"src": "relationship=Own-child", "dst": "L1U0", "share": 0.5682}, {"src": "capital-gain", "dst": "L1U0", "share": 0.1903}, {"src": "education-num", "dst": "L1U7", "share": 0.0225}, {"src": "marital-status=Married-civ-spouse", "dst": "L1U7", "share": 0.0277}, {"src": "relationship=Own-child", "dst": "L1U7", "share": 0.8324}, {"src": "sex", "dst": "L1U7", "share": 0.0375}, {"src": "capital-gain", "dst": "L1U7", "share": 0.0272}, {"src": "education-num", "dst": "L1U5", "share": 0.0455}, {"src": "marital-status=Married-civ-spouse", "dst": "L1U5", "share": 0.4741}, {"src": "relationship=Husband", "dst": "L1U5", "share": 0.2335}, {"src": "hours-per-week", "dst": "L1U5", "share": 0.2352}, {"src": "age", "dst": "L1U1", "share": 0.989}, {"src": "age", "dst": "L1U6", "share": 0.986}, {"src": "L1U0", "dst": "class_0", "share": 0.3626}, {"src": "L1U7", "dst": "class_0", "share": 0.4798}, {"src": "L1U5", "dst": "class_0", "share": 0.068}, {"src": "L1U1", "dst": "class_0", "share": 0.0428}, {"src": "L1U6", "dst": "class_0", "share": 0.0467}, {"src": "L1U0", "dst": "class_1", "share": 0.4739}, {"src": "L1U7", "dst": "class_1", "share": 0.3887}, {"src": "L1U5", "dst": "class_1", "share": 0.0672}, {"src": "L1U1", "dst": "class_1", "share": 0.0364}, {"src": "L1U6", "dst": "class_1", "share": 0.0338}], "outCol": 3}, "hier": {"nodes": [{"id": "OUT", "kind": "output", "lvl": 0, "start": true, "label": "class decision", "sub": "classification · adult", "drill": ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10"]}, {"id": "C0", "kind": "component", "lvl": 1, "support_names": ["age"], "share": 0.0785, "Pi": 1.0, "pi": 0.975, "tag": "CORE", "drill": ["F::age"]}, {"id": "C1", "kind": "component", "lvl": 1, "support_names": ["marital-status=Married-civ-spouse"], "share": 0.075, "Pi": 1.0, "pi": 0.975, "tag": "CORE", "drill": ["F::marital-status=Married-civ-spouse"]}, {"id": "C2", "kind": "component", "lvl": 1, "support_names": ["capital-gain"], "share": 0.0641, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "drill": ["F::capital-gain"]}, {"id": "C3", "kind": "component", "lvl": 1, "support_names": ["education-num"], "share": 0.0529, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "drill": ["F::education-num"]}, {"id": "C4", "kind": "component", "lvl": 1, "support_names": ["hours-per-week"], "share": 0.0183, "Pi": 1.0, "pi": 0.975, "tag": "CORE", "drill": ["F::hours-per-week"]}, {"id": "C5", "kind": "component", "lvl": 1, "support_names": ["relationship=Own-child"], "share": 0.1534, "Pi": 0.5, "pi": 0.5, "tag": "PERIPHERY", "drill": ["F::relationship=Own-child"]}, {"id": "C6", "kind": "component", "lvl": 1, "support_names": ["occupation=Exec-managerial"], "share": 0.0113, "Pi": 0.375, "pi": 0.375, "tag": "PERIPHERY", "drill": ["F::occupation=Exec-managerial"]}, {"id": "C7", "kind": "component", "lvl": 1, "support_names": ["marital-status=Never-married"], "share": 0.0106, "Pi": 0.375, "pi": 0.5, "tag": "PERIPHERY", "drill": ["F::marital-status=Never-married"]}, {"id": "C8", "kind": "component", "lvl": 1, "support_names": ["sex"], "share": 0.0104, "Pi": 0.75, "pi": 0.325, "tag": "PERIPHERY", "drill": ["F::sex"]}, {"id": "C9", "kind": "component", "lvl": 1, "support_names": ["occupation=Prof-specialty"], "share": 0, "Pi": 0.125, "pi": 0.075, "tag": "PERIPHERY", "drill": ["F::occupation=Prof-specialty"]}, {"id": "C10", "kind": "component", "lvl": 1, "support_names": ["occupation=Other-service"], "share": 0, "Pi": 0.375, "pi": 0.3, "tag": "PERIPHERY", "drill": ["F::occupation=Other-service"]}, {"id": "F::age", "kind": "feature", "label": "age", "lvl": 2}, {"id": "F::marital-status=Married-civ-spouse", "kind": "feature", "label": "marital-status=Married-civ-spouse", "lvl": 2}, {"id": "F::capital-gain", "kind": "feature", "label": "capital-gain", "lvl": 2}, {"id": "F::education-num", "kind": "feature", "label": "education-num", "lvl": 2}, {"id": "F::hours-per-week", "kind": "feature", "label": "hours-per-week", "lvl": 2}, {"id": "F::relationship=Own-child", "kind": "feature", "label": "relationship=Own-child", "lvl": 2}, {"id": "F::occupation=Exec-managerial", "kind": "feature", "label": "occupation=Exec-managerial", "lvl": 2}, {"id": "F::marital-status=Never-married", "kind": "feature", "label": "marital-status=Never-married", "lvl": 2}, {"id": "F::sex", "kind": "feature", "label": "sex", "lvl": 2}, {"id": "F::occupation=Prof-specialty", "kind": "feature", "label": "occupation=Prof-specialty", "lvl": 2}, {"id": "F::occupation=Other-service", "kind": "feature", "label": "occupation=Other-service", "lvl": 2}], "edges": [{"src": "C0", "dst": "F::age"}, {"src": "C1", "dst": "F::marital-status=Married-civ-spouse"}, {"src": "C2", "dst": "F::capital-gain"}, {"src": "C3", "dst": "F::education-num"}, {"src": "C4", "dst": "F::hours-per-week"}, {"src": "C5", "dst": "F::relationship=Own-child"}, {"src": "C6", "dst": "F::occupation=Exec-managerial"}, {"src": "C7", "dst": "F::marital-status=Never-married"}, {"src": "C8", "dst": "F::sex"}, {"src": "C9", "dst": "F::occupation=Prof-specialty"}, {"src": "C10", "dst": "F::occupation=Other-service"}, {"src": "OUT", "dst": "C0", "share": 0.0785}, {"src": "OUT", "dst": "C1", "share": 0.075}, {"src": "OUT", "dst": "C2", "share": 0.0641}, {"src": "OUT", "dst": "C3", "share": 0.0529}, {"src": "OUT", "dst": "C4", "share": 0.0183}, {"src": "OUT", "dst": "C5", "share": 0.1534}, {"src": "OUT", "dst": "C6", "share": 0.0113}, {"src": "OUT", "dst": "C7", "share": 0.0106}, {"src": "OUT", "dst": "C8", "share": 0.0104}, {"src": "OUT", "dst": "C9", "share": 0}, {"src": "OUT", "dst": "C10", "share": 0}]}}</script>
+<script id="dash-data" type="application/json">{"units": {"nodes": [{"id": "age", "kind": "input", "label": "age"}, {"id": "education-num", "kind": "input", "label": "education-num"}, {"id": "marital-status=Married-civ-spouse", "kind": "input", "label": "marital-status=Married-civ-spouse"}, {"id": "occupation=Exec-managerial", "kind": "input", "label": "occupation=Exec-managerial"}, {"id": "relationship=Husband", "kind": "input", "label": "relationship=Husband"}, {"id": "relationship=Own-child", "kind": "input", "label": "relationship=Own-child"}, {"id": "sex", "kind": "input", "label": "sex"}, {"id": "capital-gain", "kind": "input", "label": "capital-gain"}, {"id": "hours-per-week", "kind": "input", "label": "hours-per-week"}, {"id": "L1U0", "kind": "unit", "layer": 1, "label": "poly(2)(relationship=Own-child, capital-gain, education-num)", "mu": 0.9943369626998901, "Pi": 0.375, "pi": 0.15, "delta": 0.5487334974987784, "coverage": 0.5267650482536078, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["relationship=Own-child", "capital-gain", "education-num"], "form": "poly(2)"}, {"id": "L1U7", "kind": "unit", "layer": 1, "label": "tree(d3)(relationship=Own-child, sex, marital-status=Married-civ-spouse)", "mu": 0.9994197488778029, "Pi": 0.375, "pi": 0.525, "delta": 3.8955731108598557, "coverage": 3.8925400247071043, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["relationship=Own-child", "sex", "marital-status=Married-civ-spouse"], "form": "tree(d3)"}, {"id": "L1U5", "kind": "unit", "layer": 1, "label": "poly(2)(marital-status=Married-civ-spouse, hours-per-week, relationship=Husband)", "mu": 0.9764877557754517, "Pi": 0.625, "pi": 0.325, "delta": 0.10636549950233765, "coverage": 0.11444254198165082, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["marital-status=Married-civ-spouse", "hours-per-week", "relationship=Husband"], "form": "poly(2)"}, {"id": "L1U1", "kind": "unit", "layer": 1, "label": "monotone-(age)", "mu": 0.9999738335609436, "Pi": 0.75, "pi": 0.575, "delta": 0.03301000314612079, "coverage": 0.032723512352508255, "tag": "PERIPHERY", "reasons": ["infrequent"], "support_names": ["age"], "form": "monotone-"}, {"id": "L1U6", "kind": "unit", "layer": 1, "label": "monotone-(age)", "mu": 0.9997365474700928, "Pi": 0.75, "pi": 0.475, "delta": 0.003484020659025977, "coverage": 0.0020075139756301486, "tag": "PERIPHERY", "reasons": ["infrequent", "no_effect"], "support_names": ["age"], "form": "monotone-"}, {"id": "class_0", "kind": "output", "label": "class_0"}, {"id": "class_1", "kind": "output", "label": "class_1"}], "edges": [{"src": "age", "dst": "L1U0", "share": 0.0233}, {"src": "education-num", "dst": "L1U0", "share": 0.0521}, {"src": "occupation=Exec-managerial", "dst": "L1U0", "share": 0.0227}, {"src": "relationship=Own-child", "dst": "L1U0", "share": 0.5682}, {"src": "capital-gain", "dst": "L1U0", "share": 0.1903}, {"src": "education-num", "dst": "L1U7", "share": 0.0225}, {"src": "marital-status=Married-civ-spouse", "dst": "L1U7", "share": 0.0277}, {"src": "relationship=Own-child", "dst": "L1U7", "share": 0.8324}, {"src": "sex", "dst": "L1U7", "share": 0.0375}, {"src": "capital-gain", "dst": "L1U7", "share": 0.0272}, {"src": "education-num", "dst": "L1U5", "share": 0.0455}, {"src": "marital-status=Married-civ-spouse", "dst": "L1U5", "share": 0.4741}, {"src": "relationship=Husband", "dst": "L1U5", "share": 0.2335}, {"src": "hours-per-week", "dst": "L1U5", "share": 0.2352}, {"src": "age", "dst": "L1U1", "share": 0.989}, {"src": "age", "dst": "L1U6", "share": 0.986}, {"src": "L1U0", "dst": "class_0", "share": 0.3626}, {"src": "L1U7", "dst": "class_0", "share": 0.4798}, {"src": "L1U5", "dst": "class_0", "share": 0.068}, {"src": "L1U1", "dst": "class_0", "share": 0.0428}, {"src": "L1U6", "dst": "class_0", "share": 0.0467}, {"src": "L1U0", "dst": "class_1", "share": 0.4739}, {"src": "L1U7", "dst": "class_1", "share": 0.3887}, {"src": "L1U5", "dst": "class_1", "share": 0.0672}, {"src": "L1U1", "dst": "class_1", "share": 0.0364}, {"src": "L1U6", "dst": "class_1", "share": 0.0338}], "outCol": 3}, "hier": {"nodes": [{"id": "OUT", "kind": "output", "lvl": 0, "start": true, "label": "class decision", "sub": "classification · adult", "drill": ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10"]}, {"id": "C0", "kind": "component", "lvl": 1, "support_names": ["age"], "share": 0.0785, "Pi": 1.0, "pi": 0.975, "n_members": 2, "tag": "CORE", "drill": ["L1U1", "L1U6"]}, {"id": "C1", "kind": "component", "lvl": 1, "support_names": ["marital-status=Married-civ-spouse"], "share": 0.075, "Pi": 1.0, "pi": 0.975, "n_members": 2, "tag": "CORE", "drill": ["L1U7", "L1U5"]}, {"id": "C2", "kind": "component", "lvl": 1, "support_names": ["capital-gain"], "share": 0.0641, "Pi": 1.0, "pi": 1.0, "n_members": 1, "tag": "CORE", "drill": ["L1U0"]}, {"id": "C3", "kind": "component", "lvl": 1, "support_names": ["education-num"], "share": 0.0529, "Pi": 1.0, "pi": 1.0, "n_members": 1, "tag": "CORE", "drill": ["L1U0"]}, {"id": "C4", "kind": "component", "lvl": 1, "support_names": ["hours-per-week"], "share": 0.0183, "Pi": 1.0, "pi": 0.975, "n_members": 1, "tag": "CORE", "drill": ["L1U5"]}, {"id": "C5", "kind": "component", "lvl": 1, "support_names": ["relationship=Own-child"], "share": 0.1534, "Pi": 0.5, "pi": 0.5, "n_members": 2, "tag": "PERIPHERY", "drill": ["L1U0", "L1U7"]}, {"id": "C6", "kind": "component", "lvl": 1, "support_names": ["occupation=Exec-managerial"], "share": 0.0113, "Pi": 0.375, "pi": 0.375, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::occupation=Exec-managerial"]}, {"id": "C7", "kind": "component", "lvl": 1, "support_names": ["marital-status=Never-married"], "share": 0.0106, "Pi": 0.375, "pi": 0.5, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::marital-status=Never-married"]}, {"id": "C8", "kind": "component", "lvl": 1, "support_names": ["sex"], "share": 0.0104, "Pi": 0.75, "pi": 0.325, "n_members": 1, "tag": "PERIPHERY", "drill": ["L1U7"]}, {"id": "C9", "kind": "component", "lvl": 1, "support_names": ["occupation=Prof-specialty"], "share": 0, "Pi": 0.125, "pi": 0.075, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::occupation=Prof-specialty"]}, {"id": "C10", "kind": "component", "lvl": 1, "support_names": ["occupation=Other-service"], "share": 0, "Pi": 0.375, "pi": 0.3, "n_members": 0, "tag": "PERIPHERY", "drill": ["F::occupation=Other-service"]}, {"id": "L1U1", "kind": "unit", "layer": 1, "label": "monotone-(age)", "mu": 0.9999738335609436, "Pi": 0.75, "pi": 0.575, "delta": 0.03301000314612079, "coverage": 0.032723512352508255, "tag": "PERIPHERY", "reasons": ["infrequent"], "support_names": ["age"], "form": "monotone-", "lvl": 2, "drill": ["F::age"]}, {"id": "L1U6", "kind": "unit", "layer": 1, "label": "monotone-(age)", "mu": 0.9997365474700928, "Pi": 0.75, "pi": 0.475, "delta": 0.003484020659025977, "coverage": 0.0020075139756301486, "tag": "PERIPHERY", "reasons": ["infrequent", "no_effect"], "support_names": ["age"], "form": "monotone-", "lvl": 2, "drill": ["F::age"]}, {"id": "L1U7", "kind": "unit", "layer": 1, "label": "tree(d3)(relationship=Own-child, sex, marital-status=Married-civ-spouse)", "mu": 0.9994197488778029, "Pi": 0.375, "pi": 0.525, "delta": 3.8955731108598557, "coverage": 3.8925400247071043, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["relationship=Own-child", "sex", "marital-status=Married-civ-spouse"], "form": "tree(d3)", "lvl": 2, "drill": ["F::relationship=Own-child", "F::sex", "F::marital-status=Married-civ-spouse"]}, {"id": "L1U5", "kind": "unit", "layer": 1, "label": "poly(2)(marital-status=Married-civ-spouse, hours-per-week, relationship=Husband)", "mu": 0.9764877557754517, "Pi": 0.625, "pi": 0.325, "delta": 0.10636549950233765, "coverage": 0.11444254198165082, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["marital-status=Married-civ-spouse", "hours-per-week", "relationship=Husband"], "form": "poly(2)", "lvl": 2, "drill": ["F::marital-status=Married-civ-spouse", "F::hours-per-week", "F::relationship=Husband"]}, {"id": "L1U0", "kind": "unit", "layer": 1, "label": "poly(2)(relationship=Own-child, capital-gain, education-num)", "mu": 0.9943369626998901, "Pi": 0.375, "pi": 0.15, "delta": 0.5487334974987784, "coverage": 0.5267650482536078, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["relationship=Own-child", "capital-gain", "education-num"], "form": "poly(2)", "lvl": 2, "drill": ["F::relationship=Own-child", "F::capital-gain", "F::education-num"]}, {"id": "F::age", "kind": "feature", "label": "age", "lvl": 3}, {"id": "F::relationship=Own-child", "kind": "feature", "label": "relationship=Own-child", "lvl": 3}, {"id": "F::sex", "kind": "feature", "label": "sex", "lvl": 3}, {"id": "F::marital-status=Married-civ-spouse", "kind": "feature", "label": "marital-status=Married-civ-spouse", "lvl": 3}, {"id": "F::hours-per-week", "kind": "feature", "label": "hours-per-week", "lvl": 3}, {"id": "F::relationship=Husband", "kind": "feature", "label": "relationship=Husband", "lvl": 3}, {"id": "F::capital-gain", "kind": "feature", "label": "capital-gain", "lvl": 3}, {"id": "F::education-num", "kind": "feature", "label": "education-num", "lvl": 3}, {"id": "F::occupation=Exec-managerial", "kind": "feature", "label": "occupation=Exec-managerial", "lvl": 3}, {"id": "F::marital-status=Never-married", "kind": "feature", "label": "marital-status=Never-married", "lvl": 3}, {"id": "F::occupation=Prof-specialty", "kind": "feature", "label": "occupation=Prof-specialty", "lvl": 3}, {"id": "F::occupation=Other-service", "kind": "feature", "label": "occupation=Other-service", "lvl": 3}], "edges": [{"src": "L1U1", "dst": "F::age", "share": 0.989}, {"src": "L1U6", "dst": "F::age", "share": 0.986}, {"src": "C0", "dst": "L1U1", "share": 0.032723512352508255}, {"src": "C0", "dst": "L1U6", "share": 0.0020075139756301486}, {"src": "L1U7", "dst": "F::relationship=Own-child", "share": 0.8324}, {"src": "L1U7", "dst": "F::sex", "share": 0.0375}, {"src": "L1U7", "dst": "F::marital-status=Married-civ-spouse", "share": 0.0277}, {"src": "L1U5", "dst": "F::marital-status=Married-civ-spouse", "share": 0.4741}, {"src": "L1U5", "dst": "F::hours-per-week", "share": 0.2352}, {"src": "L1U5", "dst": "F::relationship=Husband", "share": 0.2335}, {"src": "C1", "dst": "L1U7", "share": 3.8925400247071043}, {"src": "C1", "dst": "L1U5", "share": 0.11444254198165082}, {"src": "L1U0", "dst": "F::relationship=Own-child", "share": 0.5682}, {"src": "L1U0", "dst": "F::capital-gain", "share": 0.1903}, {"src": "L1U0", "dst": "F::education-num", "share": 0.0521}, {"src": "C2", "dst": "L1U0", "share": 0.5267650482536078}, {"src": "C3", "dst": "L1U0", "share": 0.5267650482536078}, {"src": "C4", "dst": "L1U5", "share": 0.11444254198165082}, {"src": "C5", "dst": "L1U0", "share": 0.5267650482536078}, {"src": "C5", "dst": "L1U7", "share": 3.8925400247071043}, {"src": "C6", "dst": "F::occupation=Exec-managerial", "share": 0.03}, {"src": "C7", "dst": "F::marital-status=Never-married", "share": 0.03}, {"src": "C8", "dst": "L1U7", "share": 3.8925400247071043}, {"src": "C9", "dst": "F::occupation=Prof-specialty", "share": 0.03}, {"src": "C10", "dst": "F::occupation=Other-service", "share": 0.03}, {"src": "OUT", "dst": "C0", "share": 0.0785}, {"src": "OUT", "dst": "C1", "share": 0.075}, {"src": "OUT", "dst": "C2", "share": 0.0641}, {"src": "OUT", "dst": "C3", "share": 0.0529}, {"src": "OUT", "dst": "C4", "share": 0.0183}, {"src": "OUT", "dst": "C5", "share": 0.1534}, {"src": "OUT", "dst": "C6", "share": 0.0113}, {"src": "OUT", "dst": "C7", "share": 0.0106}, {"src": "OUT", "dst": "C8", "share": 0.0104}, {"src": "OUT", "dst": "C9", "share": 0}, {"src": "OUT", "dst": "C10", "share": 0}]}}</script>
 <script>
 "use strict";
 const $ = s => document.getElementById(s);
@@ -211,32 +211,43 @@ function abbr(s,m){ m=m||13; return s.length>m ? s.slice(0,m-1)+"…" : s; }
 // Two models over the same run: HIER (drill-down concept hierarchy) and UNITS
 // (the raw model graph). MODE switches between them.
 const HIER = D.hier, UNITS = D.units;
-let MODE = "hier", SEL=null, DRILL={}, SHOW_PERI=true, SHOW_IN=true;
+let MODE = "hier", SEL=null, EXP={}, SHOW_PERI=true, SHOW_IN=true;
 let VZ={k:1,x:0,y:0}, drag=null, W=900, H=560;
 const svg=$("dag"), g=$("dagg");
 
 function M(){ return MODE==="hier" ? HIER : UNITS; }
 function byId(){ const m={}; M().nodes.forEach(n=>m[n.id]=n); return m; }
 
-// ---------- visibility ------------------------------------------------------
+// ---------- visibility: expansion-set + reachability ------------------------
+// A node is visible iff reachable from a root through EXPANDED ancestors.
+// Member units are SHARED between components, so visibility is recomputed by
+// BFS rather than per-node flags (collapsing one parent keeps a shared child
+// visible while another expanded parent still declares it).
+let VIS = new Set();
+function recomputeVis(){
+  VIS = new Set(); const B=byId();
+  const queue = M().nodes.filter(n=>n.start).map(n=>n.id);
+  queue.forEach(id=>VIS.add(id));
+  while(queue.length){
+    const id = queue.shift(), n = B[id];
+    if(!n || !EXP[id]) continue;
+    (n.drill||[]).forEach(cid=>{
+      if(!VIS.has(cid)){ VIS.add(cid); queue.push(cid); } });
+  }
+}
 function visible(n){
   if(MODE==="units"){
     if(n.kind==="input" && !SHOW_IN) return false;
     if(n.kind==="unit" && n.tag!=="CORE" && !SHOW_PERI) return false;
     return true;
   }
-  // hier: roots always shown; others only when drilled-into
-  return n.start || !!DRILL[n.id];
+  return VIS.has(n.id);
 }
 function hasChildren(n){ return n.drill && n.drill.length; }
-function isExpanded(n){ return hasChildren(n) && n.drill.every(id=>DRILL[id]); }
+function isExpanded(n){ return !!EXP[n.id]; }
 function toggleDrill(n){
   if(!hasChildren(n)) return;
-  if(isExpanded(n)){                       // collapse this node's subtree
-    const stack=[...n.drill], B=byId();
-    while(stack.length){ const id=stack.pop(); if(!DRILL[id]) continue;
-      DRILL[id]=false; const c=B[id]; if(c&&c.drill) stack.push(...c.drill); }
-  } else n.drill.forEach(id=>DRILL[id]=true);
+  EXP[n.id] = !EXP[n.id];
   layout(); draw();
 }
 
@@ -247,6 +258,7 @@ function level(n){
   return n.kind==="input"?0 : n.kind==="output"?UNITS.outCol : (n.layer||1);
 }
 function layout(){
+  if(MODE==="hier") recomputeVis();
   const vis=M().nodes.filter(visible);
   const cols={}; vis.forEach(n=>{ const c=level(n); (cols[c]=cols[c]||[]).push(n); });
   const keys=Object.keys(cols).map(Number).sort((a,b)=>a-b);
@@ -343,7 +355,8 @@ function hover(n,ev){
        `<div class="m">μ ${fmt(n.mu)} · Π ${fmt(n.Pi)} · π ${fmt(n.pi)} · Δ ${fmt(n.delta)}</div>`;
   else if(n.kind==="component")
     h+=`<div class="m">${n.tag} function component · share ${fmt(100*n.share,1)}%</div>`+
-       `<div class="m">Π ${fmt(n.Pi)} · π ${fmt(n.pi)}${hasChildren(n)?" · double-click to drill":""}</div>`;
+       `<div class="m">Π ${fmt(n.Pi)} · π ${fmt(n.pi)} · ${n.n_members||0} member unit${n.n_members===1?"":"s"}`+
+       `${hasChildren(n)?" · double-click to drill":""}</div>`;
   else if(n.kind==="output")
     h+=`<div class="m">${n.sub||"output"}${hasChildren(n)?" · double-click to drill into its components":""}</div>`;
   else h+=`<div class="m">input feature</div>`;
@@ -376,8 +389,11 @@ function renderDetail(){
       `<div style="margin-top:7px"><span class="pill ${n.tag==="CORE"?"core":"peri"}">${n.tag}</span></div>`+
       `<dl><dt>support</dt><dd>${n.support_names.join(", ")}</dd>`+
       `<dt>share</dt><dd>${fmt(100*n.share,1)}% of function variance</dd>`+
-      `<dt>Π stab</dt><dd>${fmt(n.Pi)}</dd><dt>π cpss</dt><dd>${fmt(n.pi)}</dd></dl>`+
-      `<div class="chips"><span class="chip">${hasChildren(n)?"double-click to drill to features":"leaf"}</span></div>`;
+      `<dt>Π stab</dt><dd>${fmt(n.Pi)}</dd><dt>π cpss</dt><dd>${fmt(n.pi)}</dd>`+
+      `<dt>members</dt><dd>${n.n_members||0} unit(s) carry this claim</dd></dl>`+
+      `<div class="chips"><span class="chip">${hasChildren(n)
+        ? (n.n_members ? "double-click: expand member units" : "double-click: features (no localised carrier)")
+        : "leaf"}</span></div>`;
     return;
   }
   box.innerHTML=`<h3>${n.label}</h3><div class="did">${n.kind}</div>`+
@@ -386,10 +402,12 @@ function renderDetail(){
       : "Input feature (one monosemantic column)."}</div>`;
 }
 function emptyHelp(){
-  if(MODE==="hier") return `<div class="empty"><b>Drill-down.</b> The rectangle is the model
-    output; <b>double-click</b> it to reveal the certified function components (the “laws”),
-    then double-click a component to reveal the input features it uses. A <b>+</b> badge marks
-    a node you can drill; <b>–</b> collapses it.<br><br><b>Green</b> = CORE (certified);
+  if(MODE==="hier") return `<div class="empty"><b>Layer F DAG.</b> The certified function
+    components (the “laws”) are shown by default. <b>Double-click</b> a component to expand
+    its <b>member units</b> — the model units its mass physically flows through — then
+    double-click a unit to expand its parents down to input features: the end-to-end
+    parameter flow, with edge width = real contribution share. A <b>+</b> badge marks an
+    expandable node; <b>–</b> collapses it.<br><br><b>Green</b> = CORE (certified);
     <b>grey</b> = periphery. Single-click any node for its numbers. Drag to pan, scroll to zoom.</div>`;
   return `<div class="empty"><b>Model units.</b> Circles are the network's hidden units,
     labelled by their support and μ (monosemanticity). <b>Green</b> = CORE, <b>grey</b> =
@@ -422,14 +440,16 @@ function setMode(m){
 }
 $("m_hier").addEventListener("click",()=>setMode("hier"));
 $("m_units").addEventListener("click",()=>setMode("units"));
-$("b_fit").addEventListener("click",fit);
-$("b_expand").addEventListener("click",()=>{ // expand all one level from roots
-  HIER.nodes.filter(n=>n.start).forEach(n=>(n.drill||[]).forEach(id=>DRILL[id]=true));
+$("b_fit").addEventListener("click",()=>{ // reset: back to the Layer F view
+  EXP={}; HIER.nodes.filter(n=>n.start).forEach(n=>EXP[n.id]=true);
+  layout(); draw(); fit(); });
+$("b_expand").addEventListener("click",()=>{ // expand every component's members
+  HIER.nodes.forEach(n=>{ if(n.start||n.kind==="component") EXP[n.id]=true; });
   layout(); draw(); });
 $("t_peri").addEventListener("change",e=>{SHOW_PERI=e.target.checked; layout(); draw();});
 $("t_in").addEventListener("change",e=>{SHOW_IN=e.target.checked; layout(); draw();});
-// start with the first drill level open so the concept structure is visible at load
-HIER.nodes.filter(n=>n.start).forEach(n=>(n.drill||[]).forEach(id=>DRILL[id]=true));
+// default view: the Layer F DAG (root expanded -> components visible)
+HIER.nodes.filter(n=>n.start).forEach(n=>EXP[n.id]=true);
 setMode("hier"); fit();
 </script>
 </body>
