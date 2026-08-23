@@ -247,7 +247,13 @@ def grow(ds: Dataset, splits: Splits, cfg: dict, seed: int,
         if not (stalled and gap > delta_grow):
             continue                       # pressures still working: keep settling
 
-        can_widen = (sum(model.widths) + 2 <= int(mcfg["max_total_units"])
+        # batched width trials (owner-approved 2026-08-23, E8.1): add grow_batch
+        # units per width trial so diffuse per-unit gains aggregate above the
+        # delta_grow accept bar.  grow_batch=2 reproduces the frozen behaviour
+        # exactly (1 split + 1 fresh, identical op seeds); pruning afterwards
+        # removes any batch members that do not pay their way individually.
+        batch = max(2, int(ccfg.get("grow_batch", 2)))
+        can_widen = (sum(model.widths) + batch <= int(mcfg["max_total_units"])
                      and "width" not in failed_kinds)
         can_deepen = (len(model.layers) + 1 <= int(mcfg["max_layers"])
                       and len(model.layers) >= 1 and "depth" not in failed_kinds)
@@ -258,9 +264,11 @@ def grow(ds: Dataset, splits: Splits, cfg: dict, seed: int,
             if uid is not None and uid not in model.unit_ids[li]:
                 uid = None                 # audit is pre-prune; unit may be gone
             model = add_unit(model, li, f"split:{uid}" if uid else "fresh", seed)
-            model = add_unit(model, li, "fresh", seed + 7919)
+            for j in range(1, batch):
+                model = add_unit(model, li, "fresh", seed + 7919 * j)
             pending = {"kind": "width", "snapshot": snapshot, "fid_before": fid_now}
-            trace.actions.append({"action": "grow_width", "layer": li, "round": rnd})
+            trace.actions.append({"action": "grow_width", "layer": li,
+                                  "round": rnd, "batch": batch})
         elif can_deepen:
             snapshot = copy.deepcopy(model)
             pos = max(1, li + 1)           # identity insert needs post-ReLU input

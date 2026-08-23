@@ -37,6 +37,9 @@ controller:
   eps_prune: 0.001
   eps_depth: 0.005
   delta_grow: 0.005
+  grow_batch: 2            # units added per width trial; 2 = frozen behaviour
+                           # (1 split + 1 fresh).  Larger batches aggregate
+                           # diffuse per-unit gains above delta_grow (E8.1)
   delta_stop: 0.02         # = pressure fid-neutrality budget (E1.3c, H-X1-4):
                            # the stop bar cannot be tighter than the distortion
                            # full-strength pressure is allowed to cause

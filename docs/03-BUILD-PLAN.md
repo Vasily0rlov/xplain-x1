@@ -198,3 +198,18 @@ out-of-sample.  Companion-split shelved (superseded at the right level).
 | P7-X | **exit criteria:** E7.1 + E7.2 bars met → freeze + confirmatory | — | — | phase gate | ☑ | `freeze-x1-v1` |
 
 **P7 status:** E7.1 MET (exact synthetic sweep, untradeable holds). E7.2 ☑\*: 3/4 real datasets certify function components at Π≈1.0 (mushroom .865 coverage, bike .743, drybean 20 comps; adult certifies its 5 textbook mains at Π=1.0 with coverage .289); the bike hour×temp clause is NOT MET as-registered and re-scored as a FINDING — the purified interaction is genuinely <1%, the v3-era claim was an unpurified-screen artifact (FINDINGS P7). Merge-corruption bug found and fixed en route. **Ratified 2026-08-23; frozen at `freeze-x1-v1`; confirmatory E-C.1 MET (see C-1); merged to `main`.**
+
+## P8 — Post-freeze method iteration (owner-approved 2026-08-23)
+
+**Trigger:** the bike baseline comparison (`baselines/standard_nn/`) traced bike's fidelity
+shortfall (ratio 0.945) to a single mechanism: `δ_grow` as a *per-step* width-growth bar
+under-grows on diffuse-residual data — each +2-unit trial gained ~0.003 < 0.005 and was
+reverted, though the aggregate 8→16-unit gain is ~0.04 (plain capacity curve: w6 0.8725,
+w8 0.8984, w16 0.9384, w32 0.9424 test fid; ours-at-6 0.8909, i.e. negative tax at matched
+capacity).  Depth gating worked correctly throughout (bike honestly one composition layer).
+
+| id | step | deliverable | verify | outcome | status | ref |
+|---|---|---|---|---|---|---|
+| P8-1 | `grow_batch` config knob in the controller (default 2 = frozen behaviour bit-for-bit; batch = 1 split + (K−1) fresh; same accept bar δ_grow on the batch; pruning trims non-paying members after) | `controller/growth.py` + config | P2 tests green at default | width trials can aggregate diffuse gains | ☑ | `exp/batched-growth` |
+| **E8.1** | **experiment (batched width trials, grow_batch=8, dev seeds 0–3):** bike primary; adult secondary (report-only); guards: NOISE (zero accepted growth), ADD (stays L=1, at ceiling), COMP2 (planted support recovered at μ≥0.8, ≥3/4 seeds). **Bar:** bike median val fid ratio ≥ 0.97 ∧ median live-unit μ ≥ 0.9 ∧ all guards hold | `results/e81.json` | bar met | width-sufficiency fixed without breaking honesty | ☐ | `exp/batched-growth` |
+| P8-X | **exit criteria:** E8.1 bar met → owner decides adoption (changes a pinned S-§9 default ⇒ re-freeze required before any new confirmatory claim) | — | — | phase gate | ☐ | |
