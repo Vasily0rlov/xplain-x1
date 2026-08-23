@@ -452,3 +452,26 @@ traced bike's fidelity shortfall to one mechanism, then E8.1 fixed it.
 - **Status:** P8-X awaits owner adoption decision.  Adoption changes a pinned
   S-§9 default ⇒ certification re-run on batched-growth models + re-freeze
   before any new confirmatory claim.
+
+### E8.2 — bike claims-invariance under batched growth: **MET** (2026-08-23)
+
+Full bike certification (R=8 + 40 CPSS) at grow_batch=8, 0.12 h wall:
+
+| component | frozen ref (e7x dev) | at grow_batch=8 |
+|---|---|---|
+| hour | .589, Π=1.0 | **.5871, Π=1.0** |
+| temp | .0804, Π=1.0 | **.0656, Π=1.0** |
+| hour×weekday | .0511, Π=1.0 | **.0714, Π=1.0** |
+| year | .0222, Π=1.0 | **.0241, Π=1.0** |
+
+Purified hour×temp **stays uncertified** (share 0.0) — the purification finding
+survives a 2× capacity change.  Coverage 0.743 → **0.784**; fid ratio 0.9925;
+hour-anchored CORE route retained (Π=1.0, π=1.0).  **The certified function
+structure is capacity-invariant** — the strongest evidence yet that Layer F
+captures the data's structure, not the model size's artefacts.
+
+**Two additions for owner review** (small, domain-canonical mains the 6-unit
+model truncated): `season` (.0228, Π=.875, π=.875) and `humidity` (.0134,
+Π=1.0, π=.85) — both textbook ridership drivers.  Main restart is [14,14]
+(second layer survived dissolution); unit-level n_core=1 (multiplicity remains,
+as expected — the claims live at the function level).  Restart fids 0.90–0.94.
