@@ -211,5 +211,18 @@ capacity).  Depth gating worked correctly throughout (bike honestly one composit
 | id | step | deliverable | verify | outcome | status | ref |
 |---|---|---|---|---|---|---|
 | P8-1 | `grow_batch` config knob in the controller (default 2 = frozen behaviour bit-for-bit; batch = 1 split + (K−1) fresh; same accept bar δ_grow on the batch; pruning trims non-paying members after) | `controller/growth.py` + config | P2 tests green at default | width trials can aggregate diffuse gains | ☑ | `exp/batched-growth` |
-| **E8.1** | **experiment (batched width trials, grow_batch=8, dev seeds 0–3):** bike primary; adult secondary (report-only); guards: NOISE (zero accepted growth), ADD (stays L=1, at ceiling), COMP2 (planted support recovered at μ≥0.8, ≥3/4 seeds). **Bar:** bike median val fid ratio ≥ 0.97 ∧ median live-unit μ ≥ 0.9 ∧ all guards hold | `results/e81.json` | bar met | width-sufficiency fixed without breaking honesty | ☐ | `exp/batched-growth` |
-| P8-X | **exit criteria:** E8.1 bar met → owner decides adoption (changes a pinned S-§9 default ⇒ re-freeze required before any new confirmatory claim) | — | — | phase gate | ☐ | |
+| **E8.1** | **experiment (batched width trials, grow_batch=8, dev seeds 0–3):** bike primary; adult secondary (report-only); guards: NOISE (zero accepted growth), ADD (stays L=1, at ceiling), COMP2 (planted support recovered at μ≥0.8, ≥3/4 seeds). **Bar:** bike median val fid ratio ≥ 0.97 ∧ median live-unit μ ≥ 0.9 ∧ all guards hold | `results/e81.json` | bar met | width-sufficiency fixed without breaking honesty | ☑ | `exp/batched-growth` |
+| P8-X | **exit criteria:** E8.1 bar met → owner decides adoption (changes a pinned S-§9 default ⇒ re-freeze required before any new confirmatory claim) | — | — | phase gate — **awaiting owner adoption decision** | ◐ | |
+
+**E8.1 result (2026-08-23, `results/e81.json`): MET as pre-registered.** Bike median val
+ratio **0.9877** (from 0.945; seeds 0.9925/0.9908/0.9726/0.9846), median live-unit μ
+**0.992** — the fidelity gap closes with legibility intact. Guards 3/3: NOISE zero accepted
+growth 4/4; ADD flat-at-ceiling 4/4; COMP2 planted-support recovery 4/4. Honest notes:
+(1) **adult is unmoved** (ratios 0.876/0.885, zero accepted growth even batched) — its
+frontier is a different phenomenon than bike's sub-threshold width increments;
+(2) bike models are larger (10–15 units vs 6; seed 0 also accepted a **second hidden layer**,
+[14,14], which survived the dissolution test — earned by the operational bar, worth owner
+scrutiny); (3) COMP2 seed 2 kept 13 units at ceiling — batching trades some minimality for
+fidelity; (4) bike growth runs now ~20 min/seed (more accepted rounds).  Before adoption:
+re-run route/Layer-F certification on batched-growth bike models to confirm certified
+components are unchanged, then re-freeze.

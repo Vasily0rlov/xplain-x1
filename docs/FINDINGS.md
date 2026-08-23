@@ -427,3 +427,28 @@ harder than anticipated).  The honesty layer never broke once, including on
 quarantined seeds.  What stands between this and the §7 moat being real is not
 more method — it is the expert nameability review, small-n power, and a
 practitioner's eyes on the certificate.
+
+## P8 (2026-08-23) — batched width growth: the bike gap localised and closed
+
+The standard-NN baseline comparison (`baselines/standard_nn/`, owner-requested)
+traced bike's fidelity shortfall to one mechanism, then E8.1 fixed it.
+
+- **Diagnosis** (seed-0 trace + plain capacity curve): the width-growth accept
+  bar δ_grow=0.005 is a *per-step* test; bike's residual past ~0.90 arrives as
+  ~0.003-sized diffuse increments that never individually clear it though they
+  sum to ~0.05 (plain curve w6 0.8725 → w16 0.9384 → w32 0.9424 test fid).
+  Crucially, **at matched capacity the tax is negative**: ours-at-6 0.8909 vs
+  plain-at-6 0.8725 — pressures cost nothing; the whole gap was capacity.
+  Depth gating worked correctly throughout (bike honestly 1 composition layer;
+  the depth trial was run and refused at +0.001).
+- **E8.1 (grow_batch=8, dev seeds 0–3): MET as pre-registered.**  Bike median
+  ratio 0.945 → **0.9877**, median live-unit μ **0.992**; guards 3/3 (NOISE
+  zero accepted growth, ADD flat-at-ceiling, COMP2 recovery 4/4).
+- **Honest notes:** adult unmoved (0.876/0.885, zero accepted growth even
+  batched — a different frontier than bike's); bike models larger (10–15 units
+  vs 6; seed 0 accepted a second hidden layer that survived dissolution —
+  operationally earned, flagged for owner review); COMP2 seed 2 kept 13 units
+  at ceiling (batching trades some minimality for fidelity); ~20 min/seed.
+- **Status:** P8-X awaits owner adoption decision.  Adoption changes a pinned
+  S-§9 default ⇒ certification re-run on batched-growth models + re-freeze
+  before any new confirmatory claim.

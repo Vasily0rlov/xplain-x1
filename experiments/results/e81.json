@@ -1,0 +1,376 @@
+{
+  "experiment": "E8.1 batched width growth",
+  "git_commit": "1a46385ec6b801b4a841adb2367fa9e4014a2006",
+  "grow_batch": 8,
+  "rows": [
+    {
+      "dataset": "bike",
+      "seed": 0,
+      "fid_val": 0.9405,
+      "fid_test": 0.9398,
+      "fid_ref": 0.9476,
+      "ratio": 0.9925,
+      "gap": 0.0071,
+      "widths": [
+        14,
+        14
+      ],
+      "n_layers": 2,
+      "n_live": 28,
+      "median_mu_live": 0.9991185963153839,
+      "width_accepted": 2,
+      "depth_accepted": 1,
+      "comp2_planted_hit": false,
+      "wall_s": 1227.3
+    },
+    {
+      "dataset": "bike",
+      "seed": 1,
+      "fid_val": 0.9388,
+      "fid_test": 0.9383,
+      "fid_ref": 0.9476,
+      "ratio": 0.9908,
+      "gap": 0.0088,
+      "widths": [
+        15
+      ],
+      "n_layers": 1,
+      "n_live": 15,
+      "median_mu_live": 0.9922149777412415,
+      "width_accepted": 2,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 1204.6
+    },
+    {
+      "dataset": "bike",
+      "seed": 2,
+      "fid_val": 0.9216,
+      "fid_test": 0.9166,
+      "fid_ref": 0.9476,
+      "ratio": 0.9726,
+      "gap": 0.026,
+      "widths": [
+        10
+      ],
+      "n_layers": 1,
+      "n_live": 10,
+      "median_mu_live": 0.9811738571788848,
+      "width_accepted": 1,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 1203.0
+    },
+    {
+      "dataset": "bike",
+      "seed": 3,
+      "fid_val": 0.933,
+      "fid_test": 0.9301,
+      "fid_ref": 0.9476,
+      "ratio": 0.9846,
+      "gap": 0.0146,
+      "widths": [
+        11
+      ],
+      "n_layers": 1,
+      "n_live": 11,
+      "median_mu_live": 0.99206699981149,
+      "width_accepted": 1,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 1155.4
+    },
+    {
+      "dataset": "adult",
+      "seed": 0,
+      "fid_val": 0.4298,
+      "fid_test": 0.429,
+      "fid_ref": 0.4907,
+      "ratio": 0.8758,
+      "gap": 0.0609,
+      "widths": [
+        5
+      ],
+      "n_layers": 1,
+      "n_live": 5,
+      "median_mu_live": 0.9994622461916932,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 1034.4
+    },
+    {
+      "dataset": "adult",
+      "seed": 1,
+      "fid_val": 0.4342,
+      "fid_test": 0.433,
+      "fid_ref": 0.4907,
+      "ratio": 0.8847,
+      "gap": 0.0566,
+      "widths": [
+        6
+      ],
+      "n_layers": 1,
+      "n_live": 6,
+      "median_mu_live": 0.9810387492179871,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 1015.1
+    },
+    {
+      "dataset": "synthetic:noise-8k",
+      "seed": 0,
+      "fid_val": 0.0038,
+      "fid_test": 0.0002,
+      "fid_ref": -0.0093,
+      "ratio": -0.4064,
+      "gap": -0.013,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "n_live": 8,
+      "median_mu_live": 0.9786330163478851,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 79.8
+    },
+    {
+      "dataset": "synthetic:noise-8k",
+      "seed": 1,
+      "fid_val": 0.003,
+      "fid_test": 0.0004,
+      "fid_ref": -0.0093,
+      "ratio": -0.3274,
+      "gap": -0.0123,
+      "widths": [
+        7
+      ],
+      "n_layers": 1,
+      "n_live": 7,
+      "median_mu_live": 1.0,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 108.8
+    },
+    {
+      "dataset": "synthetic:noise-8k",
+      "seed": 2,
+      "fid_val": 0.0032,
+      "fid_test": 0.0009,
+      "fid_ref": -0.0093,
+      "ratio": -0.3441,
+      "gap": -0.0125,
+      "widths": [
+        4
+      ],
+      "n_layers": 1,
+      "n_live": 4,
+      "median_mu_live": 0.972046971321106,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 110.8
+    },
+    {
+      "dataset": "synthetic:noise-8k",
+      "seed": 3,
+      "fid_val": 0.0047,
+      "fid_test": -0.0023,
+      "fid_ref": -0.0093,
+      "ratio": -0.5032,
+      "gap": -0.0139,
+      "widths": [
+        7
+      ],
+      "n_layers": 1,
+      "n_live": 7,
+      "median_mu_live": 0.9999961853027344,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 115.8
+    },
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "seed": 0,
+      "fid_val": 0.9311,
+      "fid_test": 0.9317,
+      "fid_ref": 0.927,
+      "ratio": 1.0044,
+      "gap": -0.0041,
+      "widths": [
+        7
+      ],
+      "n_layers": 1,
+      "n_live": 7,
+      "median_mu_live": 0.9988099336624146,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 126.8
+    },
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "seed": 1,
+      "fid_val": 0.9274,
+      "fid_test": 0.9288,
+      "fid_ref": 0.927,
+      "ratio": 1.0004,
+      "gap": -0.0004,
+      "widths": [
+        6
+      ],
+      "n_layers": 1,
+      "n_live": 6,
+      "median_mu_live": 0.9992557168006897,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 159.7
+    },
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "seed": 2,
+      "fid_val": 0.9292,
+      "fid_test": 0.931,
+      "fid_ref": 0.927,
+      "ratio": 1.0024,
+      "gap": -0.0022,
+      "widths": [
+        7
+      ],
+      "n_layers": 1,
+      "n_live": 7,
+      "median_mu_live": 0.9995061159133911,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 130.4
+    },
+    {
+      "dataset": "synthetic:add-noisy-8k",
+      "seed": 3,
+      "fid_val": 0.9244,
+      "fid_test": 0.9262,
+      "fid_ref": 0.927,
+      "ratio": 0.9972,
+      "gap": 0.0026,
+      "widths": [
+        6
+      ],
+      "n_layers": 1,
+      "n_live": 6,
+      "median_mu_live": 0.9999963045120239,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": false,
+      "wall_s": 110.0
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "seed": 0,
+      "fid_val": 0.9228,
+      "fid_test": 0.92,
+      "fid_ref": 0.9302,
+      "ratio": 0.992,
+      "gap": 0.0074,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "n_live": 8,
+      "median_mu_live": 0.92360919713974,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": true,
+      "wall_s": 140.8
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "seed": 1,
+      "fid_val": 0.926,
+      "fid_test": 0.9194,
+      "fid_ref": 0.9302,
+      "ratio": 0.9954,
+      "gap": 0.0043,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "n_live": 8,
+      "median_mu_live": 0.983722597360611,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": true,
+      "wall_s": 145.5
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "seed": 2,
+      "fid_val": 0.9343,
+      "fid_test": 0.9317,
+      "fid_ref": 0.9302,
+      "ratio": 1.0043,
+      "gap": -0.004,
+      "widths": [
+        13
+      ],
+      "n_layers": 1,
+      "n_live": 13,
+      "median_mu_live": 0.9751888513565063,
+      "width_accepted": 1,
+      "depth_accepted": 0,
+      "comp2_planted_hit": true,
+      "wall_s": 309.9
+    },
+    {
+      "dataset": "synthetic:comp2-noisy-8k",
+      "seed": 3,
+      "fid_val": 0.9182,
+      "fid_test": 0.9171,
+      "fid_ref": 0.9302,
+      "ratio": 0.9871,
+      "gap": 0.012,
+      "widths": [
+        8
+      ],
+      "n_layers": 1,
+      "n_live": 8,
+      "median_mu_live": 0.9785148501396179,
+      "width_accepted": 0,
+      "depth_accepted": 0,
+      "comp2_planted_hit": true,
+      "wall_s": 137.0
+    }
+  ],
+  "bike_median_ratio": 0.9877,
+  "bike_median_mu": 0.9921,
+  "guards": {
+    "noise_zero_growth": true,
+    "add_flat_at_ceiling": true,
+    "comp2_recovery": "4/4"
+  },
+  "adult_report": [
+    {
+      "seed": 0,
+      "ratio": 0.8758,
+      "widths": [
+        5
+      ],
+      "median_mu_live": 0.9994622461916932
+    },
+    {
+      "seed": 1,
+      "ratio": 0.8847,
+      "widths": [
+        6
+      ],
+      "median_mu_live": 0.9810387492179871
+    }
+  ],
+  "bar_met": true
+}
