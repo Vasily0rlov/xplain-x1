@@ -10,6 +10,13 @@ hypothesis itself, the recommended approach, the prior art with citations, the d
 > novelty assessment is deliberately conservative — where the thread found an idea
 > to be *known*, it says so.
 
+> **Amendment status (2026-08-23).** The beachhead build (XPLAIN-x1, milestones
+> M1–M9 including a one-shot confirmatory run on untouched seeds) has now tested
+> this position empirically. Blocks marked **AMENDMENT (2026-08-23)** below record
+> where the refined position differs from the original; the original text is left
+> intact so the delta is visible. Evidence trail: `docs/FINDINGS.md`; the critical
+> scorecard: FINDINGS §"POSITIONING ASSESSMENT (2026-08-23)".
+
 ---
 
 ## 1. Problem statement
@@ -88,6 +95,21 @@ largely *monosemantic* one, because **mono-semanticity is a gauge choice you are
 allowed to make, whereas disentanglement is a truth you would have to discover** —
 and making that choice costs ~no accuracy.
 
+> **AMENDMENT (2026-08-23) — "uniqueness is level-dependent" is confirmed, and it
+> bites harder than stated.** Measured on the full beachhead ladder: on every
+> standard-regime real dataset the units are individually monosemantic
+> (μ 0.94–0.98) yet their *carvings* are non-unique across restarts (stability
+> Π ≤ 0.5 at every matching threshold down to 0.5 — genuine Rashomon multiplicity
+> under collinearity; ruled out as statistical power and as matching strictness).
+> A deterministic canonicalisation tie-break was probed and is both empirically
+> null and epistemically suspect (agreement induced by a shared bias would measure
+> the bias, not discovered stability). On real tabular data the invariant core
+> therefore does **not** live at the unit level at all: it lives at the level of
+> the purified function decomposition (unanimous, Π ≈ 1.0, on every real dataset
+> measured) and partially at the feature-group / route level. The original
+> "invariant core vs multiplicitous periphery" claim survives — but "core" must be
+> read as *level-indexed*, not unit-indexed.
+
 ## 3. The hypothesis
 
 **Take a *traditional deep neural network* and enhance the architecture and the
@@ -124,6 +146,24 @@ honest depth, and a certification pass. The bet is that the
 *method*, applied to an ordinary deep NN, can do the work. Once the method is proven, we'll consider applying it to the Transformer architecture to see if we can achieve an explainable Transformer model. We'll want to be able to extract a DAG representation from the trained model, based on the largely 
 -monosemantic neurons and their connections, so that an expert can explore it and thereby assess the level of explainability/interpretability of the resulting model.
 
+> **AMENDMENT (2026-08-23) — two refinements to the hypothesis, one confirmation.**
+> **(1) The real-data periphery is *multiplicitous*, not (mainly) polysemantic.**
+> The build measured the residual as monosemantic-but-non-unique: clean, legible
+> units whose carvings differ across equal-loss restarts. "Accepting a
+> polysemantic periphery" is refined to "accepting a **labelled periphery** —
+> polysemantic and/or multiplicitous". **(2) "Stable" is level-indexed, and so is
+> the certified deliverable.** The proven form is a three-layer reading: the unit
+> DAG stays inspectable carving-by-carving with routes presented as feature-group
+> equivalence classes over carvings (Layer S); the certified claims live where
+> uniqueness exists — the purified weighted-fANOVA components of the learned
+> function under a declared empirical measure (Layer F; Π ≈ 1.0 everywhere
+> measured); portfolio reliance ranges state what every retraining agrees on
+> (Layer R). **(3) Everything else in the hypothesis — minimal, monosemantic,
+> depth-honest, ~accuracy-neutral, a-priori-explainable with certification — was
+> confirmed as written**, including on a one-shot confirmatory run on untouched
+> seeds (zero certification on noise; exact recovery of planted structure;
+> domain-canonical certified components on 3 of 4 standard real datasets).
+
 ## 4. Recommended approach
 
 - **Enhance, don't replace.** Begin with a conventional deep NN method for the task; add
@@ -143,6 +183,13 @@ honest depth, and a certification pass. The bet is that the
   handled either by **static weight-sparsification** (shown to yield interpretable
   circuits) or by a **conditional-routing** extension (the native model of
   data-dependent edges).
+
+> **AMENDMENT (2026-08-23) — differentiator (d) is half-delivered.** At n < 2k the
+> method delivers above-ceiling fidelity plus full per-neuron legibility plus
+> honest regime labels, but **no certificates**: complementary-pairs stability
+> selection has no statistical power on half-samples of ~50–100 rows. Small-n
+> *certification* (an m-out-of-n subsampling design) remains open work; until it
+> is built, small-n is an honesty story, not a certification story.
 
 ## 5. Prior art (the neighbourhood — mostly occupied)
 
@@ -261,6 +308,25 @@ by the v1–v4 findings and reaffirmed here.
   an over-fitting-prone benchmark; the periphery is intrinsically multiplicitous.
   ⇒ target "largely monosemantic" with an honestly-labelled polysemantic periphery.
 
+**Added by the x1 build (2026-08-23; basis tag [measured, x1] = the P0–P7 +
+confirmatory evidence in `docs/FINDINGS.md`):**
+
+- **Unit-level certification on collinear real data** — **disproven**
+  [measured, x1]. μ-legible units certify perfectly on synthetics (whose
+  generative process has a unique sparsest carving) but Π ≤ 0.5 at *every*
+  matching threshold on real tabular data at n = 8k–49k. ⇒ certify at the
+  function / route level; present unit carvings as labelled equivalence classes.
+- **A deterministic canonicalisation tie-break collapses equal-loss carvings** —
+  **disproven** [measured, x1] and rejected in principle: a static per-feature
+  preference has zero effect (carvings are fixed early by init/SGD and differ by
+  within-group rotations it cannot grip), and *induced* agreement would measure
+  the bias, not discovered stability.
+- **The programme's own historical "bike `hour×temp` certifies" claim** —
+  **retracted as stated** [measured, x1]. The *purified* interaction is < 1% of
+  target variance; the earlier claim was an unpurified-screen artifact whose mass
+  belongs to the `hour` and `temp` mains. ⇒ composition-unit evidence must be
+  purification-checked before being claimed as interaction structure.
+
 ## 7. The defensible corner and the moat
 
 **Not defensible** (each is prior art in §5): "minimal monosemantic nets are
@@ -291,6 +357,27 @@ are real. That certificate is what a model-risk validator or regulator actually
 needs, and it is the programme's genuine edge. The accepted polysemantic periphery
 is handled honestly here too: it is *labelled* (low-stability / multiplicitous),
 not passed off as certified.
+
+> **AMENDMENT (2026-08-23) — the moat as built, plus two exposures the pitch must
+> now answer.** The package above exists end-to-end and survived a one-shot
+> confirmatory run; the multiplicity finding *strengthened* the moat (the field's
+> "contradictory interpretations" failure was demonstrated on our own historical
+> anchor, and canonicalisation was shown to be the wrong fix). But the certified
+> objects are the purified function components + reliance ranges — the unit DAG is
+> inspectable, not itself certified — and two things must be said out loud:
+> **(1) Coverage honesty.** Certified components carry a stated coverage
+> (~0.74–0.87 of function variance on the strong datasets; ~0.2 on
+> diffuse-structure data like Adult, reported as the measured frontier). The claim
+> is "certified where certifiable, labelled everywhere else" — never "certified
+> model". **(2) The EBM question.** If the certified deliverable is an additive
+> decomposition, "why not just fit an EBM/GAM?" needs its answer stated: the
+> network meets/beats unconstrained reference ceilings where pure additive models
+> cannot; the decomposition is exact-by-construction on *our own model's* function
+> under a declared measure (not a post-hoc approximation of a black box); and the
+> unit/route DAG provides the mechanism-level view a decomposition alone cannot.
+> Accuracy-neutrality also carries one honest caveat: confirmed on 5/7 real
+> datasets (small/medium data *above* the reference ceiling), but bike (0.945) and
+> adult (0.877 vs ceiling) show a real tax at the diffuse-structure frontier.
 
 **Sequencing (the strategy, and the trap to avoid).** Form factor follows the task;
 order is load-bearing:

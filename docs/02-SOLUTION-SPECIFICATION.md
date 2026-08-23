@@ -1,6 +1,7 @@
 # XPLAIN-x1 — Solution Specification
 
-**Status:** draft for review · **Audience:** the implementing Claude Code model ·
+**Status:** as-built v1 — beachhead complete; ratified deltas recorded in the §16 addendum ·
+**Audience:** the implementing Claude Code model ·
 **Companion:** `docs/01-METHOD-SPECIFICATION.md` (cited as **M-§n**; rationale lives there, this
 document is the *how*). Scope: beachhead only — tabular/structured data, MLP realisation.
 
@@ -270,6 +271,10 @@ rounds 12), `certify` (R 8, B 20, τ_match 0.7, π_thr 0.7, μ_min 0.8, Π_min 0
 | no decorrelation loss (M-C3) | none — measured dead end, do not add |
 | post-hoc rotation of trained model | none — architecturally unsound (M-§3.3), do not add |
 
+*Invoked to date: **Hoyer sparsity** (trigger fired at E1.3 — the L2,1 term measured as a
+unit-killer; owner-ratified, see §16). All other pins stand; the decorrelation and
+post-hoc-rotation "do not add" rows were respected throughout.*
+
 ## 15. Build order
 
 | phase | contents | exit criterion |
@@ -284,3 +289,44 @@ rounds 12), `certify` (R 8, B 20, τ_match 0.7, π_thr 0.7, μ_min 0.8, Π_min 0
 Each phase lands as its own PR on a feature branch; merges to `main` only on owner approval
 (project `CLAUDE.md`). Battery runs obey the box-etiquette gate (§2) and then use all 64
 threads.
+
+## 16. As-built addendum (2026-08-23, owner-ratified)
+
+Deltas from the pinned defaults above, each with its trigger and evidence recorded in
+`docs/FINDINGS.md`; method-level rationale in M-§10. Frozen at tag `freeze-x1-v1`.
+
+- **Losses (§7):** fan-in term = **Hoyer ratio** per incoming weight row (S-§14 invoked at
+  E1.3); calibrated `λ_act 1e-2`, `λ_fanin 0.1`; pressures **discovery-gated** — scaled
+  ×0.3 while fidelity is below the ceiling, full strength within `2·δ_stop` of it (encodes
+  M-C4).
+- **Settle (§7):** plateau on cumulative **total train loss** (not val fidelity); keep final
+  weights; best-val restore only as a safety guard (margin 0.01). Regression: targets
+  standardised (bike uses `log1p(count)`), and the head gets a closed-form `(a, b)`
+  recalibration after the final settle (gauge-legal).
+- **Controller (§9):** every structural mutation is budgeted **trial-and-revert** under
+  `ε_prune` (batch marginal-ablation removal replaced by sequential budgeted removal — a
+  joint-vs-marginal fallacy on redundant units; merges are trialled on a clone:
+  `merge_units` is non-mutating by regression test); `δ_stop = 0.02` (aligned to the
+  pressure-neutrality budget).
+- **Certification (§10):** `R = 8` dev / `R = 5` confirmatory; confirmatory seed pools via
+  `certify.seed_base = 20` (restarts 20–24, CPSS halves 2100+). New modules:
+  - `certify/groups.py` — feature groups by train-data |Spearman| ≥ 0.8 complete-linkage
+    clustering (Layer S substrate);
+  - `certify/routes.py` — routes keyed by group-support: modal-variant certified support,
+    invariant-core chain rule for nested variants, anchor-based multiplicity (empty common
+    core), route-level Π/π/E[V] with `route_universe_size`;
+  - `certify/fanova.py` — Layer F: 8-quantile binning, cyclic backfit (mains + pairs +
+    residual-screened triples, `MAX_TRIPLES 20`), exact mass-moving purification, OOS
+    covariance shares × max(fidelity, 0), per-class max-merge for multiclass, `V_MIN 0.01`;
+    component universe `p = Σ_{a≤3} C(d, a)`;
+  - Layer R — min-over-restarts group-permutation reliance, reported as ranges.
+- **Certificate (§11):** adds `routes`, `function_decomposition` (declared measure stated,
+  coverage/share-sum explicit) and `portfolio_reliance` sections, plus a **small-n regime
+  label** at n < 2000 ("below stability power floor").
+- **Data (§4):** loaders for the full MVL landed with encoding recipes as pinned; bike
+  target `log1p`; adult drops `education`/`fnlwgt` and collapses native-country to a US
+  indicator.
+- **Build order (§15):** phases **P6** (route-level certification) and **P7** (function-level
+  certification) were added by owner decisions of 2026-08-22 after the P5 multiplicity
+  finding, followed by the confirmatory gate **C-1** — statuses and exit criteria in
+  `docs/03-BUILD-PLAN.md`.

@@ -1,6 +1,9 @@
 # XPLAIN-x1 — Build Plan
 
-**Status:** active · **Basis:** `docs/02-SOLUTION-SPECIFICATION.md` (S-) and
+**Status:** beachhead complete (2026-08-23) — milestones M1–M5, M7–M9 done; **M6
+(owner nameability review) carried open** (FINDINGS §"POSITIONING ASSESSMENT", item 1);
+instrument-correction trail owner-ratified 2026-08-23; confirmatory E-C.1 MET at
+`freeze-x1-v1`; merged to `main` (3a76672) · **Basis:** `docs/02-SOLUTION-SPECIFICATION.md` (S-) and
 `docs/01-METHOD-SPECIFICATION.md` (M-) · **Scope:** beachhead MVL (S-§4)
 
 ## How to use this document
@@ -28,7 +31,7 @@
 | **M3** | P2 · E2.1+E2.2 | first honest-structure models: flat where the data is flat, deep only where depth is earned |
 | **M4** | P3 · E3.1 | first certified concepts: CORE/PERIPHERY with stability + FDR evidence on known ground truth |
 | **M5** | P4 · E4.1 | first real-data end-to-end deliverable: Wine model + concept DAG + audit certificate vs v4 anchor |
-| **M6** | P4 · P4-4 | first expert (owner) review of a live DAG — soft-target validation begins |
+| **M6** | P4 · P4-4 | first expert (owner) review of a live DAG — soft-target validation begins — **OPEN** (the one unfinished milestone) |
 | **M7** | P5 · E5.1 | MVL verdict on dev seeds: every M-§7 bar evaluated across all 13 targets |
 | **M8** | P5 · P5-3/P5-4 | reviewable findings document + config freeze — the go/no-go decision point |
 | **M9** | post-P5 · C-1 | confirmatory verdict on untouched seeds — the programme's headline claim |
@@ -72,7 +75,7 @@ every audit metric of S-§8 is implemented and logged.
 | **E1.2** | **experiment:** pinned λ sanity on ADD + COMP2 — do defaults kill units or stall `μ` globally (S-§14 trigger)? **Bar:** ≥ 90% units alive; μ trend upward | `results/e12.json` | bar met, else invoke S-§14 alternative + owner sign-off | pinned defaults validated (or alternative formally invoked) | ☑* | `impl/p1` |
 | P1-X | **exit criteria:** E1.1 + E1.2 bars met; all S-§8 metrics in `audit.json` | — | — | phase gate | ☑* | `impl/p1` |
 
-**P1 result annotations (☑\* = met via corrected instrument; owner ratification pending, see `docs/FINDINGS.md`):**
+**P1 result annotations (☑\* = met via corrected instrument; ratified by owner 2026-08-23, see `docs/FINDINGS.md`):**
 E1.1 as-registered NOT MET — COMP2's intrinsic arity ≤ F_max saturates μ (OFF baseline 0.91); re-run as **E1.1b** on the ADD6 instrument fixture: impurity 0.094→0.013 (−86%), ef 8.2→3.8, fid neutral — **MET (re-scored: impurity halved at ≤2% fid cost; the +0.10 gain bar is unattainable at the 0.906 OFF ceiling)**. E1.2 as-registered NOT MET on the ≥90%-alive bar — mis-specified: units die while fidelity *rises* (0.83→0.92) and μ≈0.98, i.e. healthy minimality, not pressure pathology; **MET under the corrected bar (fid within 2% of OFF ∧ μ non-decreasing ∧ ≥25% alive)**. **E1.3/b/c** (calibration chain, added): row-group-lasso fan-in term measured ineffective-and-unit-killing → replaced by the S-§14-sanctioned **Hoyer ratio**; settle stopping/restore was fidelity-driven and cut the shaping phase → now plateaus on total train loss with best-val restore as safety guard only; calibrated **λ_act 1e-2, λ_fanin 0.03** (μ 0.991, ef 3.0, fid 0.961 = OFF's 0.958, 90% alive).
 
 ## P2 — Growth controller
@@ -90,7 +93,7 @@ warrants, and no more.
 | **E2.3** | **experiment (power floor):** COMP2 (noisy, 2k). **Bar:** no *certified-grade* depth claims beyond what fidelity supports; behaviour recorded descriptively for P3 | `results/e23.json` | recorded | power-floor behaviour characterised | ☑* | `impl/p2` |
 | P2-X | **exit criteria:** E2.1 + E2.2 bars met | — | — | phase gate | ☑* | `impl/p2` |
 
-**P2 result annotations (☑\* = met after documented instrument/mechanism corrections; owner ratification pending, `docs/FINDINGS.md`):** E2.1 MET as registered (8/8 flat, zero invented structure). E2.2 MET after two corrections: (1) the 'reaches L=2' clause mistranslated the DATASETS depth convention — order 2–3 ⇒ *one composition layer* = **1 hidden layer** here; bar re-based on outcome (at ceiling ∧ planted-support unit at μ≥0.8, ≥3/4 seeds). (2) mechanism: full-strength pressure blocked order-3 discovery (COMP3 collapse at λ_fanin 0.1) → **discovery-gated pressure** (scale 0.3 below ceiling, full near ceiling; encodes M-C4), and δ_stop aligned to the 2% pressure-neutrality budget (was inconsistently tighter). λ_fanin 0.1 adopted (separation evidence on COMP2; within E1.3c constraints). Final: COMP2 3/4, COMP3 4/4. E2.3 recorded: planted hits present in all floor seeds; certified-grade claims deferred to P3.
+**P2 result annotations (☑\* = met after documented instrument/mechanism corrections; ratified by owner 2026-08-23, `docs/FINDINGS.md`):** E2.1 MET as registered (8/8 flat, zero invented structure). E2.2 MET after two corrections: (1) the 'reaches L=2' clause mistranslated the DATASETS depth convention — order 2–3 ⇒ *one composition layer* = **1 hidden layer** here; bar re-based on outcome (at ceiling ∧ planted-support unit at μ≥0.8, ≥3/4 seeds). (2) mechanism: full-strength pressure blocked order-3 discovery (COMP3 collapse at λ_fanin 0.1) → **discovery-gated pressure** (scale 0.3 below ceiling, full near ceiling; encodes M-C4), and δ_stop aligned to the 2% pressure-neutrality budget (was inconsistently tighter). λ_fanin 0.1 adopted (separation evidence on COMP2; within E1.3c constraints). Final: COMP2 3/4, COMP3 4/4. E2.3 recorded: planted hits present in all floor seeds; certified-grade claims deferred to P3.
 
 ## P3 — Certification layer
 
@@ -122,8 +125,8 @@ S-§10) — the part of the programme the field lacks.
 | P4-2 | certificate: `certificate.json` (SR 11-7 / EU-AI-Act-Art-9 keyed sections) + `certificate.md` render incl. bars table, honest-depth statement, τ-sensitivity appendix | `extract/certificate.py` | golden-file test | regulator-facing artefact exists | ☑ | `impl/p4` |
 | P4-3 | provenance completeness: data hash, splits, seeds, config hash, git commit | `provenance.json` | test: reproduce-from-provenance | any run reproducible from its artefacts | ☑ | `impl/p4` |
 | **E4.1** | **experiment (first real-data end-to-end):** Wine full pipeline, R=8. **Bar:** complete certificate + DAG; Wine core recovered as CORE (v4 expert-alignment anchor, M-§9); Π on Wine core reported vs the v4 Π=1.0 anchor | `results/e41.json` | bar met | **🏁 M5 — first real-data end-to-end deliverable** (Wine model + DAG + certificate vs v4 anchor) | ☑* | `impl/p4` |
-| P4-4 | **owner DAG review session** (soft-target validation, M-§4.5): nameability of Wine nodes; feedback recorded as issues | review notes in `docs/` | held | **🏁 M6 — first expert review of a live DAG** | ◐ | `impl/p4` |
-| P4-X | **exit criteria:** E4.1 bar met; owner review held | — | — | phase gate | ☐ | |
+| P4-4 | **owner DAG review session** (soft-target validation, M-§4.5): nameability of Wine nodes; feedback recorded as issues | review notes in `docs/` | held | **🏁 M6 — first expert review of a live DAG** — **still open**: methodology walkthrough held, nameability review outstanding (FINDINGS §"POSITIONING ASSESSMENT" item 1) | ◐ | `impl/p4` |
+| P4-X | **exit criteria:** E4.1 bar met; owner review held | — | — | phase gate — granted under owner decision A with M6 carried open | ☑* | `impl/p4` |
 
 **P4 status:** artefact machinery complete (P4-1..3 ☑). **E4.1 re-scored MET under owner decision A (2026-08-22):** Wine = fidelity ratio 1.017 (v4 anchor 0.766) + full per-neuron legibility + honest labels; certificates now carry a 'below stability power floor' regime label at n < 2000; the recovery clause moves to the n ≥ 8k datasets, and P5 decides empirically whether small-n failure is power (vanishes at scale) or genuine collinear multiplicity (motivates the ALTERNATIVE-OPTIONS route-level certification). P4-4 partially held: certificate delivered + methodology walked through with owner; nameability walkthrough deferred to the P5 findings review.
 
@@ -136,14 +139,14 @@ anchors, on dev seeds; then freeze.
 |---|---|---|---|---|---|---|
 | P5-1 | remaining MVL loaders + encodings: `tictactoe`, `mushroom`, `adult`, `bike`, `drybean` | registry entries | loader tests | full MVL loadable | ☑ | `impl/p5` |
 | P5-2 | battery runners: `experiments/ladder.py` (MVL default, `--extended` flag), `experiments/v4_anchors.py`; box gate + full-box parallelism | scripts | dry-run on synthetics | one-command batteries | ☑ | `impl/p5` |
-| **E5.1** | **experiment (MVL dev battery):** all 7 public + 6 synthetic, R=8, dev seeds. **Bar:** M-§7 bars H-X1-1..6 evaluated per dataset; failures analysed, not retuned silently | `results/e51.json` + bars table | table filled | **🏁 M7 — MVL verdict on dev seeds** (all bars, all 13 targets) | ◐ | `impl/p5` |
-| **E5.2** | **experiment (v4 anchors, M-§9):** Wine/Adult/Mushroom fidelity ratios, tax, flatness, Π, Mushroom multiplicity labelling | `results/e52.json` + anchor table | table filled | x1-vs-v4 comparison delivered | ◐ | `impl/p5` |
+| **E5.1** | **experiment (MVL dev battery):** all 7 public + 6 synthetic, R=8, dev seeds. **Bar:** M-§7 bars H-X1-1..6 evaluated per dataset; failures analysed, not retuned silently | `results/e51.json` + bars table | table filled | **🏁 M7 — MVL verdict on dev seeds** (all bars, all 13 targets) | ☑* | `impl/p5` |
+| **E5.2** | **experiment (v4 anchors, M-§9):** Wine/Adult/Mushroom fidelity ratios, tax, flatness, Π, Mushroom multiplicity labelling | `results/e52.json` + anchor table | table filled | x1-vs-v4 comparison delivered | ☑* | `impl/p5` |
 | **E5.3** | **experiment (cost, K3):** full-MVL wall-clock on the 64-thread box. **Bar:** ≤ 12 h | timing report | bar met | practical auditability proven (K3) | ☑ | `impl/p5` |
-| P5-3 | findings document: verdict per hypothesis, kill-criteria check (K1–K3), honest open problems | `docs/FINDINGS.md` | owner review | **🏁 M8 (part 1) — reviewable findings: the go/no-go basis** | ◐ | `impl/p5` |
+| P5-3 | findings document: verdict per hypothesis, kill-criteria check (K1–K3), honest open problems | `docs/FINDINGS.md` | owner review | **🏁 M8 (part 1) — reviewable findings: the go/no-go basis** | ☑ | `impl/p5` |
 | P5-4 | **config freeze** + tag; confirmatory protocol written (one shot, seeds 20–24) | freeze commit + manifest | owner approval | **🏁 M8 (part 2) — config frozen; confirmatory protocol locked** | ☑ | `freeze-x1-v1` |
-| P5-X | **exit criteria:** E5.1–E5.3 done; findings reviewed; freeze approved | — | — | phase gate | ☐ | |
+| P5-X | **exit criteria:** E5.1–E5.3 done; findings reviewed; freeze approved | — | — | phase gate — trail ratified + freeze approved 2026-08-23 | ☑ | `freeze-x1-v1` |
 
-**P5 status (dev battery complete, owner review pending):** E5.1 bars table filled at frozen `085bea8` — H2/H4/H5/H6 ✓, **H1/H3 ✗**: on all standard-regime real datasets units are legible (μ 0.94–0.98) and load-bearing (Δ up to 0.48) but 0 concepts certify — carving multiplicity confirmed as REAL (0 stable concepts at every matching τ down to 0.5; not power, not matching strictness). E5.2: Wine 1.044 vs 0.766 ✓, Mushroom 0.995 = 0.995 ✓ (multiplicity labelled, v4-consistent), Adult 0.877 vs 0.892 ✗ (−1.7%). E5.3: 0.55h ✓. Full analysis + the route-level-certification implication in FINDINGS P5; freeze (P5-4) blocked on owner decision.
+**P5 status (complete; trail ratified 2026-08-23):** E5.1 bars table filled at frozen `085bea8` — H2/H4/H5/H6 ✓, **H1/H3 ✗**: on all standard-regime real datasets units are legible (μ 0.94–0.98) and load-bearing (Δ up to 0.48) but 0 concepts certify — carving multiplicity confirmed as REAL (0 stable concepts at every matching τ down to 0.5; not power, not matching strictness). E5.2: Wine 1.044 vs 0.766 ✓, Mushroom 0.995 = 0.995 ✓ (multiplicity labelled, v4-consistent), Adult 0.877 vs 0.892 ✗ (−1.7%). E5.3: 0.55h ✓. Full analysis + the route-level-certification implication in FINDINGS P5. The H1/H3 unit-level failures were resolved by the owner-directed P6/P7 layers (routes + function components) and re-earned there; E5.1/E5.2 marked ☑\* accordingly (bars as-registered ✗ at unit level — a ratified finding, not a retune). Freeze executed at `freeze-x1-v1`.
 
 ## Post-P5 gate — Confirmatory run (separate decision)
 
@@ -172,9 +175,9 @@ canonicalisation probe (deterministic tie-break) on the unit layer.
 | P6-2 | group-level concept identity: supports mapped to group-space; matching, Π, π, E[V] at route level (both levels reported) | `certify/` extensions | tests: group-level match of unit-level-divergent runs | certification where uniqueness lives | ☑ | `impl/p5` |
 | P6-3 | two-layer DAG + certificate: route nodes (certified) + unit members as labelled equivalence classes | `extract/` updates | golden tests | the unified honest view (owner requirement) | ☑ | `impl/p5` |
 | **E6.1** | **experiment (reduction):** full synthetic suite at route level. **Bar:** groups all singletons; results identical to e31 | `results/e61.json` | bar met | route-level provably conservative | ☑* | `impl/p5` |
-| **E6.2** | **experiment (MVL at route level):** re-run standard-regime datasets. **Bar (pre-registered):** ≥ 3 of 4 standard datasets certify route-level CORE with coverage ≥ 0.5; bike's hour×temp-group route CORE | `results/e62.json` | bar met | 🏁 **M7b — certified real-data routes** | ◐ | `impl/p5` |
+| **E6.2** | **experiment (MVL at route level):** re-run standard-regime datasets. **Bar (pre-registered):** ≥ 3 of 4 standard datasets certify route-level CORE with coverage ≥ 0.5; bike's hour×temp-group route CORE | `results/e62.json` | bar met | 🏁 **M7b — certified real-data routes** (NOT MET as pre-registered — 2/4 at coverage ≥ 0.5; first-ever certified real-data routes delivered; granularity question recorded; ratified as a finding) | ☑* | `impl/p5` |
 | **E6.3** | **experiment (canonicalisation probe):** deterministic per-feature preference decay on drybean. **Report:** unit-level Π change (no bar — probe) | `results/e63.json` | reported | tie-break potential quantified | ☑ | `impl/p5` |
-| P6-X | **exit criteria:** E6.1 + E6.2 bars met; then P5-3/P5-4 (findings + freeze) resume | — | — | phase gate | ☐ | |
+| P6-X | **exit criteria:** E6.1 + E6.2 bars met; then P5-3/P5-4 (findings + freeze) resume | — | — | phase gate — E6.2 shortfall resolved by escalation to the function level (P7, owner decision); findings + freeze resumed and completed | ☑* | `impl/p5` |
 
 ## P7 — Function-level certification: fANOVA components (owner decision 2026-08-22, post-research)
 
@@ -194,4 +197,4 @@ out-of-sample.  Companion-split shelved (superseded at the right level).
 | **E7.3** | route/component concordance | reported | descriptive | two layers cross-validated | ☑ | `impl/p5` |
 | P7-X | **exit criteria:** E7.1 + E7.2 bars met → freeze + confirmatory | — | — | phase gate | ☑ | `freeze-x1-v1` |
 
-**P7 status:** E7.1 MET (exact synthetic sweep, untradeable holds). E7.2 ☑\*: 3/4 real datasets certify function components at Π≈1.0 (mushroom .865 coverage, bike .743, drybean 20 comps; adult certifies its 5 textbook mains at Π=1.0 with coverage .289); the bike hour×temp clause is NOT MET as-registered and re-scored as a FINDING — the purified interaction is genuinely <1%, the v3-era claim was an unpurified-screen artifact (FINDINGS P7). Merge-corruption bug found and fixed en route. **Awaiting owner review → freeze + confirmatory.**
+**P7 status:** E7.1 MET (exact synthetic sweep, untradeable holds). E7.2 ☑\*: 3/4 real datasets certify function components at Π≈1.0 (mushroom .865 coverage, bike .743, drybean 20 comps; adult certifies its 5 textbook mains at Π=1.0 with coverage .289); the bike hour×temp clause is NOT MET as-registered and re-scored as a FINDING — the purified interaction is genuinely <1%, the v3-era claim was an unpurified-screen artifact (FINDINGS P7). Merge-corruption bug found and fixed en route. **Ratified 2026-08-23; frozen at `freeze-x1-v1`; confirmatory E-C.1 MET (see C-1); merged to `main`.**
