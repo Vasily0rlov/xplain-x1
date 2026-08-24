@@ -150,12 +150,32 @@ function moveTip(ev){ tip.style.left=Math.min(ev.clientX+14,innerWidth-tip.offse
 function showTip(html,ev){ tip.innerHTML=html; tip.style.opacity=1; moveTip(ev); }
 function hideTip(){ tip.style.opacity=0; }
 
+// segmented horizontal contribution bar. segs = [{share, label}] (shares need
+// not be normalised); drawn left->right into parent group at (x,y,width).
+const SEG=["#2a78d6","#1baf7a","#eb6834","#eda100","#8a63d2","#e0567f","#159e8e",
+           "#6b7bd6","#c06a2b","#3f9a3f","#a05fd0","#5a9fd6"];
+function drawBar(parent,x,y,w,h,segs){
+  const tot=segs.reduce((s,z)=>s+(z.share||0),0)||1;
+  el("rect",{x,y,width:w,height:h,rx:2,fill:"var(--grid)","fill-opacity":0.5},parent);
+  let cx=x;
+  segs.forEach((z,i)=>{ const sw=w*(z.share||0)/tot; if(sw<=0)return;
+    const r=el("rect",{x:cx,y,width:Math.max(0.5,sw),height:h,
+      fill:z.color||SEG[i%SEG.length]},parent);
+    r.style.cursor="default";
+    r.addEventListener("mousemove",ev=>{ev.stopPropagation();
+      showTip(`<h4>${z.label}</h4><div class="m">${(100*(z.share||0)/tot).toFixed(1)}% of this bar</div>`,ev);});
+    r.addEventListener("mouseleave",hideTip);
+    cx+=sw; });
+}
+
 // =================================================================== LAYER F
-const FEATCX=96, COMPX=360, COMPW=232, ROWH=24, HEADH=42, BOXGAP=20, PAD=10;
+const FEATCX=96, COMPX=360, COMPW=232, ROWH=24, HEADH=42, BARZONE=17, BOXGAP=20, PAD=10;
 const OUTCX=COMPX+COMPW+150;
 function rowCount(c){ const base=c.members.length||c.feats_direct.length;
   return base + ((c.extra_members||0)>0?1:0); }
-function compHeight(c){ return EXP[c.id] ? HEADH + Math.max(1,rowCount(c))*ROWH + PAD : HEADH; }
+function barH(c){ return c.measured ? BARZONE : 0; }   // contribution bar zone
+function compHeight(c){ return HEADH + barH(c) +
+  (EXP[c.id] ? Math.max(1,rowCount(c))*ROWH + PAD : 0); }
 function layoutHier(){
   const comps=HIER.components;
   let y=40; const cpos={};
@@ -170,7 +190,7 @@ function layoutHier(){
   POS.out={x:OUTCX,y:H/2};
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
 }
-function memberRowY(c,i){ return POS.cpos[c.id].top+HEADH+i*ROWH+ROWH/2; }
+function memberRowY(c,i){ return POS.cpos[c.id].top+HEADH+barH(c)+i*ROWH+ROWH/2; }
 function tagStroke(t){ return t==="CORE"?"var(--core)":"var(--peri)"; }
 function tagFill(t){ return t==="CORE"?"var(--corewash)":"var(--periwash)"; }
 
@@ -242,31 +262,43 @@ function drawHier(){
         style:"font:13px system-ui;font-weight:700;fill:var(--ink2);pointer-events:none"},grp);
       bt.textContent=EXP[c.id]?"–":"+";
     }
+    // measured-contribution bar (how the component's mass distributes across
+    // its member units, from per-unit ablation) — always visible on the box.
+    if(c.measured){
+      const segs=c.members.filter(m=>m.contrib>0)
+        .map(m=>({share:m.contrib,label:m.uid+" — Δshare "+fmt(m.contrib,3)}));
+      drawBar(grp,12,HEADH-3,COMPW-24,10,segs.length?segs:[{share:1,label:"no single dominant carrier"}]);
+    }
     // member rows inside the box
     if(EXP[c.id]){
+      const y0=HEADH+barH(c);
       const rows=c.members.length?c.members:c.feats_direct.map(f=>({uid:f,direct:true,feats:[f]}));
       rows.forEach((m,i)=>{
-        const ry=HEADH+i*ROWH+ROWH/2;
+        const ry=y0+i*ROWH+ROWH/2;
         const rg=el("g",{transform:`translate(0,${ry})`,style:"cursor:pointer"},grp);
         el("rect",{x:8,y:-ROWH/2+2,width:COMPW-16,height:ROWH-4,rx:5,
           fill:m.direct?"var(--wash)":tagFill(m.tag),stroke:m.direct?"var(--grid)":tagStroke(m.tag),
           "stroke-width":1,"stroke-opacity":0.7},rg);
         const mt=el("text",{x:14,y:3.5,style:"font:10.5px system-ui;fill:var(--ink);pointer-events:none"},rg);
+        // label with RESOLVED features (L2 units otherwise read as parent ids)
         mt.textContent = m.direct ? ("feature · "+abbr(m.uid,16))
-          : `${m.uid} · ${(m.immediate||[]).map(s=>abbr(s,7)).join("·")}`;
+          : `${m.uid} · ${(m.feats||[]).map(s=>abbr(s,7)).join("·")}`;
         if(!m.direct){ const mm=el("text",{x:COMPW-16,y:3.5,"text-anchor":"end",
           style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},rg);
-          mm.textContent="μ "+fmt(m.mu,2); }
+          mm.textContent = (c.measured && c.contrib_sum>0)
+            ? (fmt(100*m.contrib/c.contrib_sum,0)+"%") : ("μ "+fmt(m.mu,2)); }
         if(!m.direct){
           rg.addEventListener("mousemove",ev=>showTip(
-            `<h4>${m.uid}</h4><div class="m">${m.tag} · layer ${m.layer} · ${m.form||"?"}</div>`+
-            `<div class="m">μ ${fmt(m.mu)} · features: ${m.feats.join(", ")}</div>`,ev));
+            `<h4>${m.uid} · layer ${m.layer}</h4>`+
+            `<div class="m">${m.tag} · ${m.form||"?"} · μ ${fmt(m.mu)}</div>`+
+            `<div class="m">features: ${m.feats.join(", ")}</div>`+
+            (c.measured?`<div class="m">measured Δshare when ablated: ${fmt(m.contrib,3)}</div>`:""),ev));
           rg.addEventListener("mouseleave",hideTip);
           rg.addEventListener("click",ev=>{ev.stopPropagation(); selectMember(c,m);});
         }
       });
       if((c.extra_members||0)>0){
-        const ry=HEADH+rows.length*ROWH+ROWH/2;
+        const ry=y0+rows.length*ROWH+ROWH/2;
         const et=el("text",{x:COMPW/2,y:ry+3.5,"text-anchor":"middle",
           style:"font:9.5px system-ui;font-style:italic;fill:var(--muted);pointer-events:none"},grp);
         et.textContent=`+${c.extra_members} more member unit(s)`;
@@ -296,6 +328,7 @@ function drawHier(){
 }
 
 // =================================================================== UNITS
+const UW=158, UH=44, UVGAP=20;   // unit box size + vertical gap
 function drawUnits(){
   g.textContent="";
   const N=UNITS.nodes, E=UNITS.edges;
@@ -305,36 +338,53 @@ function drawUnits(){
     if(n.kind==="unit"&&n.tag!=="CORE"&&!SHOW_PERI)return false; return true; });
   const cols={}; vis.forEach(n=>{const c=colf(n);(cols[c]=cols[c]||[]).push(n);});
   const keys=Object.keys(cols).map(Number).sort((a,b)=>a-b);
-  const COLW=232,VGAP=60; let maxR=1; keys.forEach(k=>maxR=Math.max(maxR,cols[k].length));
-  H=92+(maxR-1)*VGAP; W=(Math.max(...keys,0)+1)*COLW;
+  const COLW=232; let maxR=1; keys.forEach(k=>maxR=Math.max(maxR,cols[k].length));
+  H=60+maxR*(UH+UVGAP); W=(Math.max(...keys,0)+1)*COLW;
   const pos={};
-  keys.forEach(k=>{const arr=cols[k],x=k*COLW+COLW/2,span=(arr.length-1)*VGAP,y0=(H-span)/2;
-    arr.forEach((n,i)=>pos[n.id]={x,y:y0+i*VGAP});});
+  keys.forEach(k=>{const arr=cols[k],x=k*COLW+COLW/2,span=(arr.length-1)*(UH+UVGAP),y0=(H-span)/2;
+    arr.forEach((n,i)=>pos[n.id]={x,y:y0+i*(UH+UVGAP)});});
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
-  const R=17, visIds=new Set(vis.map(n=>n.id));
+  const visIds=new Set(vis.map(n=>n.id));
+  const halfW=n=>n.kind==="unit"?UW/2:(n.kind==="output"?46:56);
   E.forEach(e=>{ if(!visIds.has(e.src)||!visIds.has(e.dst))return;
     const p=pos[e.src],q=pos[e.dst]; if(!p||!q)return;
-    drawEdge(p.x+R,p.y,q.x-R,q.y,e.share, SEL&&SEL!==e.src&&SEL!==e.dst); });
+    drawEdge(p.x+halfW(nById(e.src)),p.y,q.x-halfW(nById(e.dst)),q.y,e.share,
+      SEL&&SEL!==e.src&&SEL!==e.dst); });
+  function nById(id){ return N.find(n=>n.id===id); }
   vis.forEach(n=>{ const p=pos[n.id]; if(!p)return;
     const grp=el("g",{transform:`translate(${p.x},${p.y})`,style:"cursor:pointer"},g);
-    const fill=n.kind==="unit"?(n.tag==="CORE"?"var(--corewash)":"var(--periwash)"):
-      (n.kind==="output"?"var(--surface)":"var(--wash)");
-    const stroke=n.kind==="unit"?(n.tag==="CORE"?"var(--core)":"var(--peri)"):
-      (n.kind==="output"?"var(--accent)":"var(--grid)");
-    if(n.kind==="unit") el("circle",{r:R,fill,stroke,"stroke-width":n.id===SEL?3:1.8},grp);
-    else el("rect",{x:-R-12,y:-12,width:2*R+24,height:24,rx:12,fill,stroke,"stroke-width":1.2},grp);
-    const t=el("text",{"text-anchor":"middle",y:4,style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},grp);
-    t.textContent = n.kind==="unit" ? ((n.support_names&&n.support_names.length)?n.support_names.map(s=>abbr(s,9)).join("·"):n.id) : abbr(n.label,16);
-    if(n.kind==="unit"&&n.mu!=null){ const st=el("text",{"text-anchor":"middle",y:R+12,
-      style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},grp); st.textContent="μ "+fmt(n.mu,2); }
+    if(n.kind==="unit"){
+      const fill=n.tag==="CORE"?"var(--corewash)":"var(--periwash)";
+      const stroke=n.tag==="CORE"?"var(--core)":"var(--peri)";
+      el("rect",{x:-UW/2,y:-UH/2,width:UW,height:UH,rx:7,fill,stroke,
+        "stroke-width":n.id===SEL?2.6:1.4},grp);
+      // resolved-feature label (L2 units read as features, not parent ids)
+      const feats=(n.feats&&n.feats.length)?n.feats:(n.support_names||[]);
+      const lab=el("text",{x:0,y:-UH/2+15,"text-anchor":"middle",
+        style:"font:10.5px system-ui;fill:var(--ink);pointer-events:none"},grp);
+      lab.textContent=abbr(feats.map(s=>abbr(s,10)).join(", "),24);
+      const sub=el("text",{x:-UW/2+8,y:-UH/2+28,
+        style:"font:9px system-ui;fill:var(--muted);pointer-events:none"},grp);
+      sub.textContent=`${n.id} · L${n.layer} · μ ${fmt(n.mu,2)}`;
+      // per-input contribution bar (masked-weight contribution of each parent)
+      if(n.in_contrib&&n.in_contrib.length)
+        drawBar(grp,-UW/2+8,UH/2-13,UW-16,8,
+          n.in_contrib.map(z=>({share:z.share,label:z.p+" — "+fmt(100*z.share,0)+"%"})));
+    } else {
+      const fill=n.kind==="output"?"var(--surface)":"var(--wash)";
+      const stroke=n.kind==="output"?"var(--accent)":"var(--grid)";
+      el("rect",{x:-halfW(n),y:-14,width:2*halfW(n),height:28,rx:8,fill,stroke,"stroke-width":1.3},grp);
+      const t=el("text",{"text-anchor":"middle",y:4,style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},grp);
+      t.textContent=abbr(n.label,16);
+    }
     grp.addEventListener("mousemove",ev=>showTip(unitTip(n),ev));
     grp.addEventListener("mouseleave",hideTip);
     grp.addEventListener("click",ev=>{ev.stopPropagation(); select(n.id);});
   });
   applyZoom();
 }
-function unitTip(n){ if(n.kind==="unit") return `<h4>${(n.support_names||[]).join("·")||n.id}</h4>`+
-  `<div class="m">${n.tag} · layer ${n.layer} · ${n.form||"?"}</div>`+
+function unitTip(n){ if(n.kind==="unit") return `<h4>${(n.feats||n.support_names||[]).join(", ")||n.id}</h4>`+
+  `<div class="m">${n.id} · ${n.tag} · layer ${n.layer} · ${n.form||"?"}</div>`+
   `<div class="m">μ ${fmt(n.mu)} · Π ${fmt(n.Pi)} · π ${fmt(n.pi)}</div>`;
   return `<h4>${n.label}</h4><div class="m">${n.kind}</div>`; }
 
@@ -377,14 +427,16 @@ function emptyHelp(){
   if(MODE==="hier") return `<div class="empty"><b>Layer F flow (left → right).</b>
     Input features on the left feed the certified <b>function components</b> (the middle
     boxes — additive terms of the model's function, NOT classes), which sum into the
-    output on the right. <b>Double-click a component box</b> to open it: its <b>member
-    units</b> — the model units that physically carry that term — appear inside,
-    each wired back to the features it uses (edge width = real contribution share).
-    <b>Green</b> = CORE (certified); <b>grey</b> = periphery. Click a box for its numbers;
-    drag to pan, scroll to zoom.</div>`;
-  return `<div class="empty"><b>Model units.</b> The raw network graph: input features →
-    hidden units → output. Circles are units, labelled by support and μ. <b>Green</b>
-    = CORE, <b>grey</b> = periphery. Toggle inputs/periphery above.</div>`;
+    output on the right. The <b>coloured bar under each box header</b> is the
+    <b>measured</b> split of that term's mass across its carriers (from ablating each
+    unit). <b>Double-click a box</b> to open it: its <b>member units</b> appear inside,
+    labelled by resolved features, each wired back to the features it uses. <b>Green</b>
+    = CORE (certified); <b>grey</b> = periphery. Drag to pan, scroll to zoom.</div>`;
+  return `<div class="empty"><b>Model units.</b> The raw network graph: features → hidden
+    units → output. Each unit is a <b>box labelled by its resolved input features</b>
+    (layer-2 units too), and the <b>coloured bar at its base</b> shows each input's
+    measured contribution (masked-weight share). <b>Green</b> = CORE, <b>grey</b> =
+    periphery. Hover a bar segment for the feature and %. Toggle inputs/periphery above.</div>`;
 }
 
 // =================================================================== pan/zoom
@@ -529,9 +581,29 @@ def _bars_block(data: dict) -> str:
 
 
 def _build_units(dag: dict) -> dict:
-    """The raw model graph (inputs -> units -> outputs) for nameability review."""
-    units = [n for n in dag["nodes"] if n["kind"] == "unit"]
-    out_col = 2 + max([1] + [n.get("layer", 1) for n in units])
+    """The raw model graph (inputs -> units -> outputs) for nameability review.
+
+    Each unit node is enriched with its resolved input features (`feats`) and
+    the per-parent contribution shares (`in_contrib`, the incoming masked-weight
+    contributions normalised to sum 1) so the viewer can draw feature-named
+    boxes with a bottom contribution bar."""
+    unit_nodes = [n for n in dag["nodes"] if n["kind"] == "unit"]
+    out_col = 2 + max([1] + [n.get("layer", 1) for n in unit_nodes])
+    trans = _transitive_feature_supports(dag)
+    # incoming edges per unit (parent -> unit), with contribution shares
+    incoming: dict = {}
+    for e in dag["edges"]:
+        incoming.setdefault(e["dst"], []).append((e["src"], e.get("share", 0.0)))
+    id2name = {n["id"]: n.get("label", n["id"]) for n in dag["nodes"]}
+    for n in dag["nodes"]:
+        if n["kind"] != "unit":
+            continue
+        n["feats"] = sorted(trans.get(n["id"], []))
+        ins = incoming.get(n["id"], [])
+        tot = sum(s for _, s in ins) or 1.0
+        n["in_contrib"] = [
+            {"p": id2name.get(src, src), "share": round(s / tot, 4)}
+            for src, s in sorted(ins, key=lambda x: -x[1])]
     return {"nodes": dag["nodes"], "edges": dag["edges"], "outCol": out_col}
 
 
@@ -560,7 +632,7 @@ def _transitive_feature_supports(dag: dict) -> dict:
 
 
 def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
-                n_classes: int) -> dict:
+                n_classes: int, member_contrib: dict | None = None) -> dict:
     """The Layer F DAG as a left-to-right flow with expandable component boxes.
 
     Three lanes: INPUT FEATURES (left) -> CERTIFIED COMPONENT boxes (middle) ->
@@ -588,6 +660,7 @@ def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
             feat_names.append(name)
         return "F::" + name
 
+    mc = member_contrib or {}
     components = []
     for i, c in enumerate(chosen):
         supp = c.get("support_names", c.get("names", []))
@@ -595,9 +668,14 @@ def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
         for f in supp:
             feat_id(f)
         member_uids = [uid for uid, tf in trans.items() if sset and sset <= tf]
-        # strongest carriers first; cap the displayed rows so a dominant term
-        # (e.g. hour, carried by ~20 units) stays legible.
-        member_uids.sort(key=lambda uid: -(unit_nodes[uid].get("coverage") or 0))
+        # measured contribution of each unit to THIS component (ablation drop of
+        # its purified share), keyed by the component's feature-index tuple.
+        ckey = ",".join(map(str, sorted(c.get("support", []))))
+        cdrop = mc.get(ckey, {})
+        measured = bool(cdrop)
+        # order carriers by MEASURED contribution when available, else structural
+        member_uids.sort(key=lambda uid: -(cdrop.get(uid, 0.0) if measured
+                                           else (unit_nodes[uid].get("coverage") or 0)))
         MAX_ROWS = 12
         shown, extra = member_uids[:MAX_ROWS], len(member_uids) - MAX_ROWS
         members = []
@@ -611,14 +689,17 @@ def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
                 "form": u.get("form"), "layer": u.get("layer", 1),
                 "immediate": u.get("support_names") or [],
                 "feats": tfeats,                 # transitive input features
-                "coverage": u.get("coverage")})
+                "coverage": u.get("coverage"),
+                "contrib": round(float(cdrop.get(uid, 0.0)), 4)})
+        contrib_sum = round(sum(m["contrib"] for m in members), 4)
         components.append({
             "id": f"C{i}", "kind": "component",
             "support_names": supp, "share": _comp_share(c),
             "Pi": c.get("Pi", 0), "pi": c.get("pi", 0),
             "tag": c.get("label", "PERIPHERY"),
             "n_members": len(member_uids), "members": members,
-            "extra_members": max(0, extra),
+            "extra_members": max(0, extra), "measured": measured,
+            "contrib_sum": contrib_sum,
             # a component with no localised carrier wires its features directly
             "feats_direct": supp if not member_uids else []})
 
@@ -687,7 +768,8 @@ def render_dashboard(data: dict) -> str:
 
     payload = {
         "units": _build_units(data["dag"]),
-        "hier": _build_hier(cert, data["dag"], is_multiclass, n_classes),
+        "hier": _build_hier(cert, data["dag"], is_multiclass, n_classes,
+                            data.get("member_contrib")),
     }
     data_json = json.dumps(payload, ensure_ascii=False, default=str)
 
@@ -739,7 +821,7 @@ def render_dashboard(data: dict) -> str:
           <span><i style="background:var(--periwash);border:1.5px solid var(--peri)"></i>periphery</span>
           <span><i style="background:var(--surface);border:1.5px solid var(--accent)"></i>output (right)</span>
           <span><i style="background:var(--wash);border:1px solid var(--grid)"></i>input feature (left)</span>
-          <span>features → components → output · double-click a box to open its member units</span>
+          <span>features → components → output · bar = measured contribution split · double-click a box to open it</span>
         </div>
       </div>
       <div class="detail" id="detail"></div>

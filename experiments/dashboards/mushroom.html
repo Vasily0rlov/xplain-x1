@@ -154,7 +154,7 @@ table.t td.num, table.t th.num { text-align:right; }
           <span><i style="background:var(--periwash);border:1.5px solid var(--peri)"></i>periphery</span>
           <span><i style="background:var(--surface);border:1.5px solid var(--accent)"></i>output (right)</span>
           <span><i style="background:var(--wash);border:1px solid var(--grid)"></i>input feature (left)</span>
-          <span>features → components → output · double-click a box to open its member units</span>
+          <span>features → components → output · bar = measured contribution split · double-click a box to open it</span>
         </div>
       </div>
       <div class="detail" id="detail"></div>
@@ -196,7 +196,7 @@ table.t td.num, table.t th.num { text-align:right; }
     Certified claims are the Layer F components; the DAG is inspectable, the periphery labelled.
   </div>
 </div>
-<script id="dash-data" type="application/json">{"units": {"nodes": [{"id": "odor=n", "kind": "input", "label": "odor=n"}, {"id": "odor=f", "kind": "input", "label": "odor=f"}, {"id": "odor=y", "kind": "input", "label": "odor=y"}, {"id": "odor=s", "kind": "input", "label": "odor=s"}, {"id": "stalk-shape", "kind": "input", "label": "stalk-shape"}, {"id": "stalk-color-above-ring=g", "kind": "input", "label": "stalk-color-above-ring=g"}, {"id": "L1U5", "kind": "unit", "layer": 1, "label": "tree(d3)(stalk-shape, stalk-root=b, gill-size)", "mu": 0.8662465725740757, "Pi": 0.5, "pi": 0.375, "delta": 2.3105767377885034, "coverage": 2.3071966143909037, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["stalk-shape", "stalk-root=b", "gill-size"], "form": "tree(d3)"}, {"id": "L1U2", "kind": "unit", "layer": 1, "label": "tree(d3)(odor=n, stalk-root=c, bruises%3F)", "mu": 0.9640262226295725, "Pi": 0.125, "pi": 0.025, "delta": 0.034136949672203154, "coverage": 0.03338931322376415, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["odor=n", "stalk-root=c", "bruises%3F"], "form": "tree(d3)"}, {"id": "class_0", "kind": "output", "label": "class_0"}, {"id": "class_1", "kind": "output", "label": "class_1"}], "edges": [{"src": "odor=f", "dst": "L1U5", "share": 0.0358}, {"src": "odor=y", "dst": "L1U5", "share": 0.4041}, {"src": "odor=s", "dst": "L1U5", "share": 0.3963}, {"src": "stalk-shape", "dst": "L1U5", "share": 0.0281}, {"src": "odor=n", "dst": "L1U2", "share": 0.0243}, {"src": "stalk-color-above-ring=g", "dst": "L1U2", "share": 0.9298}, {"src": "L1U5", "dst": "class_0", "share": 0.8606}, {"src": "L1U2", "dst": "class_0", "share": 0.1394}, {"src": "L1U5", "dst": "class_1", "share": 0.8587}, {"src": "L1U2", "dst": "class_1", "share": 0.1413}], "outCol": 3}, "hier": {"features": [{"id": "F::odor=n", "kind": "feature", "label": "odor=n"}, {"id": "F::bruises%3F", "kind": "feature", "label": "bruises%3F"}, {"id": "F::stalk-root=c", "kind": "feature", "label": "stalk-root=c"}, {"id": "F::gill-spacing", "kind": "feature", "label": "gill-spacing"}, {"id": "F::odor=f", "kind": "feature", "label": "odor=f"}, {"id": "F::stalk-surface-above-ring=s", "kind": "feature", "label": "stalk-surface-above-ring=s"}, {"id": "F::stalk-surface-below-ring=k", "kind": "feature", "label": "stalk-surface-below-ring=k"}, {"id": "F::odor=s", "kind": "feature", "label": "odor=s"}, {"id": "F::gill-size", "kind": "feature", "label": "gill-size"}, {"id": "F::stalk-root=b", "kind": "feature", "label": "stalk-root=b"}, {"id": "F::stalk-shape", "kind": "feature", "label": "stalk-shape"}, {"id": "F::stalk-surface-above-ring=f", "kind": "feature", "label": "stalk-surface-above-ring=f"}, {"id": "F::odor=y", "kind": "feature", "label": "odor=y"}, {"id": "F::spore-print-color=k", "kind": "feature", "label": "spore-print-color=k"}, {"id": "F::spore-print-color=n", "kind": "feature", "label": "spore-print-color=n"}], "components": [{"id": "C0", "kind": "component", "support_names": ["odor=n"], "share": 0.4392, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "n_members": 1, "members": [{"uid": "L1U2", "mu": 0.9640262226295725, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["odor=n", "stalk-root=c", "bruises%3F"], "feats": ["bruises%3F", "odor=n", "stalk-root=c"], "coverage": 0.03338931322376415}], "extra_members": 0, "feats_direct": []}, {"id": "C1", "kind": "component", "support_names": ["gill-spacing"], "share": 0.1729, "Pi": 1.0, "pi": 0.95, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "feats_direct": ["gill-spacing"]}, {"id": "C2", "kind": "component", "support_names": ["odor=f"], "share": 0.0872, "Pi": 0.875, "pi": 0.775, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "feats_direct": ["odor=f"]}, {"id": "C3", "kind": "component", "support_names": ["stalk-surface-above-ring=s"], "share": 0.053, "Pi": 0.875, "pi": 0.875, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "feats_direct": ["stalk-surface-above-ring=s"]}, {"id": "C4", "kind": "component", "support_names": ["bruises%3F"], "share": 0.045, "Pi": 1.0, "pi": 0.975, "tag": "CORE", "n_members": 1, "members": [{"uid": "L1U2", "mu": 0.9640262226295725, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["odor=n", "stalk-root=c", "bruises%3F"], "feats": ["bruises%3F", "odor=n", "stalk-root=c"], "coverage": 0.03338931322376415}], "extra_members": 0, "feats_direct": []}, {"id": "C5", "kind": "component", "support_names": ["stalk-surface-below-ring=k"], "share": 0.04, "Pi": 0.75, "pi": 0.95, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "feats_direct": ["stalk-surface-below-ring=k"]}, {"id": "C6", "kind": "component", "support_names": ["odor=s"], "share": 0.0274, "Pi": 1.0, "pi": 0.775, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "feats_direct": ["odor=s"]}, {"id": "C7", "kind": "component", "support_names": ["gill-size"], "share": 0.1301, "Pi": 0.75, "pi": 0.65, "tag": "PERIPHERY", "n_members": 1, "members": [{"uid": "L1U5", "mu": 0.8662465725740757, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["stalk-shape", "stalk-root=b", "gill-size"], "feats": ["gill-size", "stalk-root=b", "stalk-shape"], "coverage": 2.3071966143909037}], "extra_members": 0, "feats_direct": []}, {"id": "C8", "kind": "component", "support_names": ["stalk-surface-above-ring=f"], "share": 0.0311, "Pi": 0.5, "pi": 0.275, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "feats_direct": ["stalk-surface-above-ring=f"]}, {"id": "C9", "kind": "component", "support_names": ["stalk-shape"], "share": 0.0304, "Pi": 0.5, "pi": 0.675, "tag": "PERIPHERY", "n_members": 1, "members": [{"uid": "L1U5", "mu": 0.8662465725740757, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["stalk-shape", "stalk-root=b", "gill-size"], "feats": ["gill-size", "stalk-root=b", "stalk-shape"], "coverage": 2.3071966143909037}], "extra_members": 0, "feats_direct": []}, {"id": "C10", "kind": "component", "support_names": ["odor=y"], "share": 0.0229, "Pi": 0.75, "pi": 0.65, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "feats_direct": ["odor=y"]}, {"id": "C11", "kind": "component", "support_names": ["spore-print-color=k"], "share": 0.0197, "Pi": 0.875, "pi": 0.45, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "feats_direct": ["spore-print-color=k"]}, {"id": "C12", "kind": "component", "support_names": ["spore-print-color=n"], "share": 0.0196, "Pi": 0.75, "pi": 0.45, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "feats_direct": ["spore-print-color=n"]}], "output": {"id": "OUT", "kind": "output", "label": "class decision", "sub": "classification · mushroom"}}}</script>
+<script id="dash-data" type="application/json">{"units": {"nodes": [{"id": "odor=n", "kind": "input", "label": "odor=n"}, {"id": "odor=f", "kind": "input", "label": "odor=f"}, {"id": "odor=y", "kind": "input", "label": "odor=y"}, {"id": "odor=s", "kind": "input", "label": "odor=s"}, {"id": "stalk-shape", "kind": "input", "label": "stalk-shape"}, {"id": "stalk-color-above-ring=g", "kind": "input", "label": "stalk-color-above-ring=g"}, {"id": "L1U5", "kind": "unit", "layer": 1, "label": "tree(d3)(stalk-shape, stalk-root=b, gill-size)", "mu": 0.8662465725740757, "Pi": 0.5, "pi": 0.375, "delta": 2.3105767377885034, "coverage": 2.3071966143909037, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["stalk-shape", "stalk-root=b", "gill-size"], "form": "tree(d3)", "feats": ["gill-size", "stalk-root=b", "stalk-shape"], "in_contrib": [{"p": "odor=y", "share": 0.4675}, {"p": "odor=s", "share": 0.4585}, {"p": "odor=f", "share": 0.0414}, {"p": "stalk-shape", "share": 0.0325}]}, {"id": "L1U2", "kind": "unit", "layer": 1, "label": "tree(d3)(odor=n, stalk-root=c, bruises%3F)", "mu": 0.9640262226295725, "Pi": 0.125, "pi": 0.025, "delta": 0.034136949672203154, "coverage": 0.03338931322376415, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["odor=n", "stalk-root=c", "bruises%3F"], "form": "tree(d3)", "feats": ["bruises%3F", "odor=n", "stalk-root=c"], "in_contrib": [{"p": "stalk-color-above-ring=g", "share": 0.9745}, {"p": "odor=n", "share": 0.0255}]}, {"id": "class_0", "kind": "output", "label": "class_0"}, {"id": "class_1", "kind": "output", "label": "class_1"}], "edges": [{"src": "odor=f", "dst": "L1U5", "share": 0.0358}, {"src": "odor=y", "dst": "L1U5", "share": 0.4041}, {"src": "odor=s", "dst": "L1U5", "share": 0.3963}, {"src": "stalk-shape", "dst": "L1U5", "share": 0.0281}, {"src": "odor=n", "dst": "L1U2", "share": 0.0243}, {"src": "stalk-color-above-ring=g", "dst": "L1U2", "share": 0.9298}, {"src": "L1U5", "dst": "class_0", "share": 0.8606}, {"src": "L1U2", "dst": "class_0", "share": 0.1394}, {"src": "L1U5", "dst": "class_1", "share": 0.8587}, {"src": "L1U2", "dst": "class_1", "share": 0.1413}], "outCol": 3}, "hier": {"features": [{"id": "F::odor=n", "kind": "feature", "label": "odor=n"}, {"id": "F::bruises%3F", "kind": "feature", "label": "bruises%3F"}, {"id": "F::stalk-root=c", "kind": "feature", "label": "stalk-root=c"}, {"id": "F::gill-spacing", "kind": "feature", "label": "gill-spacing"}, {"id": "F::odor=f", "kind": "feature", "label": "odor=f"}, {"id": "F::stalk-surface-above-ring=s", "kind": "feature", "label": "stalk-surface-above-ring=s"}, {"id": "F::stalk-surface-below-ring=k", "kind": "feature", "label": "stalk-surface-below-ring=k"}, {"id": "F::odor=s", "kind": "feature", "label": "odor=s"}, {"id": "F::gill-size", "kind": "feature", "label": "gill-size"}, {"id": "F::stalk-root=b", "kind": "feature", "label": "stalk-root=b"}, {"id": "F::stalk-shape", "kind": "feature", "label": "stalk-shape"}, {"id": "F::stalk-surface-above-ring=f", "kind": "feature", "label": "stalk-surface-above-ring=f"}, {"id": "F::odor=y", "kind": "feature", "label": "odor=y"}, {"id": "F::spore-print-color=k", "kind": "feature", "label": "spore-print-color=k"}, {"id": "F::spore-print-color=n", "kind": "feature", "label": "spore-print-color=n"}], "components": [{"id": "C0", "kind": "component", "support_names": ["odor=n"], "share": 0.4392, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "n_members": 1, "members": [{"uid": "L1U2", "mu": 0.9640262226295725, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["odor=n", "stalk-root=c", "bruises%3F"], "feats": ["bruises%3F", "odor=n", "stalk-root=c"], "coverage": 0.03338931322376415, "contrib": 0.0}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C1", "kind": "component", "support_names": ["gill-spacing"], "share": 0.1729, "Pi": 1.0, "pi": 0.95, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["gill-spacing"]}, {"id": "C2", "kind": "component", "support_names": ["odor=f"], "share": 0.0872, "Pi": 0.875, "pi": 0.775, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["odor=f"]}, {"id": "C3", "kind": "component", "support_names": ["stalk-surface-above-ring=s"], "share": 0.053, "Pi": 0.875, "pi": 0.875, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["stalk-surface-above-ring=s"]}, {"id": "C4", "kind": "component", "support_names": ["bruises%3F"], "share": 0.045, "Pi": 1.0, "pi": 0.975, "tag": "CORE", "n_members": 1, "members": [{"uid": "L1U2", "mu": 0.9640262226295725, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["odor=n", "stalk-root=c", "bruises%3F"], "feats": ["bruises%3F", "odor=n", "stalk-root=c"], "coverage": 0.03338931322376415, "contrib": 0.0}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C5", "kind": "component", "support_names": ["stalk-surface-below-ring=k"], "share": 0.04, "Pi": 0.75, "pi": 0.95, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["stalk-surface-below-ring=k"]}, {"id": "C6", "kind": "component", "support_names": ["odor=s"], "share": 0.0274, "Pi": 1.0, "pi": 0.775, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["odor=s"]}, {"id": "C7", "kind": "component", "support_names": ["gill-size"], "share": 0.1301, "Pi": 0.75, "pi": 0.65, "tag": "PERIPHERY", "n_members": 1, "members": [{"uid": "L1U5", "mu": 0.8662465725740757, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["stalk-shape", "stalk-root=b", "gill-size"], "feats": ["gill-size", "stalk-root=b", "stalk-shape"], "coverage": 2.3071966143909037, "contrib": 0.0}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C8", "kind": "component", "support_names": ["stalk-surface-above-ring=f"], "share": 0.0311, "Pi": 0.5, "pi": 0.275, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["stalk-surface-above-ring=f"]}, {"id": "C9", "kind": "component", "support_names": ["stalk-shape"], "share": 0.0304, "Pi": 0.5, "pi": 0.675, "tag": "PERIPHERY", "n_members": 1, "members": [{"uid": "L1U5", "mu": 0.8662465725740757, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["stalk-shape", "stalk-root=b", "gill-size"], "feats": ["gill-size", "stalk-root=b", "stalk-shape"], "coverage": 2.3071966143909037, "contrib": 0.0}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C10", "kind": "component", "support_names": ["odor=y"], "share": 0.0229, "Pi": 0.75, "pi": 0.65, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["odor=y"]}, {"id": "C11", "kind": "component", "support_names": ["spore-print-color=k"], "share": 0.0197, "Pi": 0.875, "pi": 0.45, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["spore-print-color=k"]}, {"id": "C12", "kind": "component", "support_names": ["spore-print-color=n"], "share": 0.0196, "Pi": 0.75, "pi": 0.45, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["spore-print-color=n"]}], "output": {"id": "OUT", "kind": "output", "label": "class decision", "sub": "classification · mushroom"}}}</script>
 <script>
 "use strict";
 const $ = s => document.getElementById(s);
@@ -220,12 +220,32 @@ function moveTip(ev){ tip.style.left=Math.min(ev.clientX+14,innerWidth-tip.offse
 function showTip(html,ev){ tip.innerHTML=html; tip.style.opacity=1; moveTip(ev); }
 function hideTip(){ tip.style.opacity=0; }
 
+// segmented horizontal contribution bar. segs = [{share, label}] (shares need
+// not be normalised); drawn left->right into parent group at (x,y,width).
+const SEG=["#2a78d6","#1baf7a","#eb6834","#eda100","#8a63d2","#e0567f","#159e8e",
+           "#6b7bd6","#c06a2b","#3f9a3f","#a05fd0","#5a9fd6"];
+function drawBar(parent,x,y,w,h,segs){
+  const tot=segs.reduce((s,z)=>s+(z.share||0),0)||1;
+  el("rect",{x,y,width:w,height:h,rx:2,fill:"var(--grid)","fill-opacity":0.5},parent);
+  let cx=x;
+  segs.forEach((z,i)=>{ const sw=w*(z.share||0)/tot; if(sw<=0)return;
+    const r=el("rect",{x:cx,y,width:Math.max(0.5,sw),height:h,
+      fill:z.color||SEG[i%SEG.length]},parent);
+    r.style.cursor="default";
+    r.addEventListener("mousemove",ev=>{ev.stopPropagation();
+      showTip(`<h4>${z.label}</h4><div class="m">${(100*(z.share||0)/tot).toFixed(1)}% of this bar</div>`,ev);});
+    r.addEventListener("mouseleave",hideTip);
+    cx+=sw; });
+}
+
 // =================================================================== LAYER F
-const FEATCX=96, COMPX=360, COMPW=232, ROWH=24, HEADH=42, BOXGAP=20, PAD=10;
+const FEATCX=96, COMPX=360, COMPW=232, ROWH=24, HEADH=42, BARZONE=17, BOXGAP=20, PAD=10;
 const OUTCX=COMPX+COMPW+150;
 function rowCount(c){ const base=c.members.length||c.feats_direct.length;
   return base + ((c.extra_members||0)>0?1:0); }
-function compHeight(c){ return EXP[c.id] ? HEADH + Math.max(1,rowCount(c))*ROWH + PAD : HEADH; }
+function barH(c){ return c.measured ? BARZONE : 0; }   // contribution bar zone
+function compHeight(c){ return HEADH + barH(c) +
+  (EXP[c.id] ? Math.max(1,rowCount(c))*ROWH + PAD : 0); }
 function layoutHier(){
   const comps=HIER.components;
   let y=40; const cpos={};
@@ -240,7 +260,7 @@ function layoutHier(){
   POS.out={x:OUTCX,y:H/2};
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
 }
-function memberRowY(c,i){ return POS.cpos[c.id].top+HEADH+i*ROWH+ROWH/2; }
+function memberRowY(c,i){ return POS.cpos[c.id].top+HEADH+barH(c)+i*ROWH+ROWH/2; }
 function tagStroke(t){ return t==="CORE"?"var(--core)":"var(--peri)"; }
 function tagFill(t){ return t==="CORE"?"var(--corewash)":"var(--periwash)"; }
 
@@ -312,31 +332,43 @@ function drawHier(){
         style:"font:13px system-ui;font-weight:700;fill:var(--ink2);pointer-events:none"},grp);
       bt.textContent=EXP[c.id]?"–":"+";
     }
+    // measured-contribution bar (how the component's mass distributes across
+    // its member units, from per-unit ablation) — always visible on the box.
+    if(c.measured){
+      const segs=c.members.filter(m=>m.contrib>0)
+        .map(m=>({share:m.contrib,label:m.uid+" — Δshare "+fmt(m.contrib,3)}));
+      drawBar(grp,12,HEADH-3,COMPW-24,10,segs.length?segs:[{share:1,label:"no single dominant carrier"}]);
+    }
     // member rows inside the box
     if(EXP[c.id]){
+      const y0=HEADH+barH(c);
       const rows=c.members.length?c.members:c.feats_direct.map(f=>({uid:f,direct:true,feats:[f]}));
       rows.forEach((m,i)=>{
-        const ry=HEADH+i*ROWH+ROWH/2;
+        const ry=y0+i*ROWH+ROWH/2;
         const rg=el("g",{transform:`translate(0,${ry})`,style:"cursor:pointer"},grp);
         el("rect",{x:8,y:-ROWH/2+2,width:COMPW-16,height:ROWH-4,rx:5,
           fill:m.direct?"var(--wash)":tagFill(m.tag),stroke:m.direct?"var(--grid)":tagStroke(m.tag),
           "stroke-width":1,"stroke-opacity":0.7},rg);
         const mt=el("text",{x:14,y:3.5,style:"font:10.5px system-ui;fill:var(--ink);pointer-events:none"},rg);
+        // label with RESOLVED features (L2 units otherwise read as parent ids)
         mt.textContent = m.direct ? ("feature · "+abbr(m.uid,16))
-          : `${m.uid} · ${(m.immediate||[]).map(s=>abbr(s,7)).join("·")}`;
+          : `${m.uid} · ${(m.feats||[]).map(s=>abbr(s,7)).join("·")}`;
         if(!m.direct){ const mm=el("text",{x:COMPW-16,y:3.5,"text-anchor":"end",
           style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},rg);
-          mm.textContent="μ "+fmt(m.mu,2); }
+          mm.textContent = (c.measured && c.contrib_sum>0)
+            ? (fmt(100*m.contrib/c.contrib_sum,0)+"%") : ("μ "+fmt(m.mu,2)); }
         if(!m.direct){
           rg.addEventListener("mousemove",ev=>showTip(
-            `<h4>${m.uid}</h4><div class="m">${m.tag} · layer ${m.layer} · ${m.form||"?"}</div>`+
-            `<div class="m">μ ${fmt(m.mu)} · features: ${m.feats.join(", ")}</div>`,ev));
+            `<h4>${m.uid} · layer ${m.layer}</h4>`+
+            `<div class="m">${m.tag} · ${m.form||"?"} · μ ${fmt(m.mu)}</div>`+
+            `<div class="m">features: ${m.feats.join(", ")}</div>`+
+            (c.measured?`<div class="m">measured Δshare when ablated: ${fmt(m.contrib,3)}</div>`:""),ev));
           rg.addEventListener("mouseleave",hideTip);
           rg.addEventListener("click",ev=>{ev.stopPropagation(); selectMember(c,m);});
         }
       });
       if((c.extra_members||0)>0){
-        const ry=HEADH+rows.length*ROWH+ROWH/2;
+        const ry=y0+rows.length*ROWH+ROWH/2;
         const et=el("text",{x:COMPW/2,y:ry+3.5,"text-anchor":"middle",
           style:"font:9.5px system-ui;font-style:italic;fill:var(--muted);pointer-events:none"},grp);
         et.textContent=`+${c.extra_members} more member unit(s)`;
@@ -366,6 +398,7 @@ function drawHier(){
 }
 
 // =================================================================== UNITS
+const UW=158, UH=44, UVGAP=20;   // unit box size + vertical gap
 function drawUnits(){
   g.textContent="";
   const N=UNITS.nodes, E=UNITS.edges;
@@ -375,36 +408,53 @@ function drawUnits(){
     if(n.kind==="unit"&&n.tag!=="CORE"&&!SHOW_PERI)return false; return true; });
   const cols={}; vis.forEach(n=>{const c=colf(n);(cols[c]=cols[c]||[]).push(n);});
   const keys=Object.keys(cols).map(Number).sort((a,b)=>a-b);
-  const COLW=232,VGAP=60; let maxR=1; keys.forEach(k=>maxR=Math.max(maxR,cols[k].length));
-  H=92+(maxR-1)*VGAP; W=(Math.max(...keys,0)+1)*COLW;
+  const COLW=232; let maxR=1; keys.forEach(k=>maxR=Math.max(maxR,cols[k].length));
+  H=60+maxR*(UH+UVGAP); W=(Math.max(...keys,0)+1)*COLW;
   const pos={};
-  keys.forEach(k=>{const arr=cols[k],x=k*COLW+COLW/2,span=(arr.length-1)*VGAP,y0=(H-span)/2;
-    arr.forEach((n,i)=>pos[n.id]={x,y:y0+i*VGAP});});
+  keys.forEach(k=>{const arr=cols[k],x=k*COLW+COLW/2,span=(arr.length-1)*(UH+UVGAP),y0=(H-span)/2;
+    arr.forEach((n,i)=>pos[n.id]={x,y:y0+i*(UH+UVGAP)});});
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
-  const R=17, visIds=new Set(vis.map(n=>n.id));
+  const visIds=new Set(vis.map(n=>n.id));
+  const halfW=n=>n.kind==="unit"?UW/2:(n.kind==="output"?46:56);
   E.forEach(e=>{ if(!visIds.has(e.src)||!visIds.has(e.dst))return;
     const p=pos[e.src],q=pos[e.dst]; if(!p||!q)return;
-    drawEdge(p.x+R,p.y,q.x-R,q.y,e.share, SEL&&SEL!==e.src&&SEL!==e.dst); });
+    drawEdge(p.x+halfW(nById(e.src)),p.y,q.x-halfW(nById(e.dst)),q.y,e.share,
+      SEL&&SEL!==e.src&&SEL!==e.dst); });
+  function nById(id){ return N.find(n=>n.id===id); }
   vis.forEach(n=>{ const p=pos[n.id]; if(!p)return;
     const grp=el("g",{transform:`translate(${p.x},${p.y})`,style:"cursor:pointer"},g);
-    const fill=n.kind==="unit"?(n.tag==="CORE"?"var(--corewash)":"var(--periwash)"):
-      (n.kind==="output"?"var(--surface)":"var(--wash)");
-    const stroke=n.kind==="unit"?(n.tag==="CORE"?"var(--core)":"var(--peri)"):
-      (n.kind==="output"?"var(--accent)":"var(--grid)");
-    if(n.kind==="unit") el("circle",{r:R,fill,stroke,"stroke-width":n.id===SEL?3:1.8},grp);
-    else el("rect",{x:-R-12,y:-12,width:2*R+24,height:24,rx:12,fill,stroke,"stroke-width":1.2},grp);
-    const t=el("text",{"text-anchor":"middle",y:4,style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},grp);
-    t.textContent = n.kind==="unit" ? ((n.support_names&&n.support_names.length)?n.support_names.map(s=>abbr(s,9)).join("·"):n.id) : abbr(n.label,16);
-    if(n.kind==="unit"&&n.mu!=null){ const st=el("text",{"text-anchor":"middle",y:R+12,
-      style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},grp); st.textContent="μ "+fmt(n.mu,2); }
+    if(n.kind==="unit"){
+      const fill=n.tag==="CORE"?"var(--corewash)":"var(--periwash)";
+      const stroke=n.tag==="CORE"?"var(--core)":"var(--peri)";
+      el("rect",{x:-UW/2,y:-UH/2,width:UW,height:UH,rx:7,fill,stroke,
+        "stroke-width":n.id===SEL?2.6:1.4},grp);
+      // resolved-feature label (L2 units read as features, not parent ids)
+      const feats=(n.feats&&n.feats.length)?n.feats:(n.support_names||[]);
+      const lab=el("text",{x:0,y:-UH/2+15,"text-anchor":"middle",
+        style:"font:10.5px system-ui;fill:var(--ink);pointer-events:none"},grp);
+      lab.textContent=abbr(feats.map(s=>abbr(s,10)).join(", "),24);
+      const sub=el("text",{x:-UW/2+8,y:-UH/2+28,
+        style:"font:9px system-ui;fill:var(--muted);pointer-events:none"},grp);
+      sub.textContent=`${n.id} · L${n.layer} · μ ${fmt(n.mu,2)}`;
+      // per-input contribution bar (masked-weight contribution of each parent)
+      if(n.in_contrib&&n.in_contrib.length)
+        drawBar(grp,-UW/2+8,UH/2-13,UW-16,8,
+          n.in_contrib.map(z=>({share:z.share,label:z.p+" — "+fmt(100*z.share,0)+"%"})));
+    } else {
+      const fill=n.kind==="output"?"var(--surface)":"var(--wash)";
+      const stroke=n.kind==="output"?"var(--accent)":"var(--grid)";
+      el("rect",{x:-halfW(n),y:-14,width:2*halfW(n),height:28,rx:8,fill,stroke,"stroke-width":1.3},grp);
+      const t=el("text",{"text-anchor":"middle",y:4,style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},grp);
+      t.textContent=abbr(n.label,16);
+    }
     grp.addEventListener("mousemove",ev=>showTip(unitTip(n),ev));
     grp.addEventListener("mouseleave",hideTip);
     grp.addEventListener("click",ev=>{ev.stopPropagation(); select(n.id);});
   });
   applyZoom();
 }
-function unitTip(n){ if(n.kind==="unit") return `<h4>${(n.support_names||[]).join("·")||n.id}</h4>`+
-  `<div class="m">${n.tag} · layer ${n.layer} · ${n.form||"?"}</div>`+
+function unitTip(n){ if(n.kind==="unit") return `<h4>${(n.feats||n.support_names||[]).join(", ")||n.id}</h4>`+
+  `<div class="m">${n.id} · ${n.tag} · layer ${n.layer} · ${n.form||"?"}</div>`+
   `<div class="m">μ ${fmt(n.mu)} · Π ${fmt(n.Pi)} · π ${fmt(n.pi)}</div>`;
   return `<h4>${n.label}</h4><div class="m">${n.kind}</div>`; }
 
@@ -447,14 +497,16 @@ function emptyHelp(){
   if(MODE==="hier") return `<div class="empty"><b>Layer F flow (left → right).</b>
     Input features on the left feed the certified <b>function components</b> (the middle
     boxes — additive terms of the model's function, NOT classes), which sum into the
-    output on the right. <b>Double-click a component box</b> to open it: its <b>member
-    units</b> — the model units that physically carry that term — appear inside,
-    each wired back to the features it uses (edge width = real contribution share).
-    <b>Green</b> = CORE (certified); <b>grey</b> = periphery. Click a box for its numbers;
-    drag to pan, scroll to zoom.</div>`;
-  return `<div class="empty"><b>Model units.</b> The raw network graph: input features →
-    hidden units → output. Circles are units, labelled by support and μ. <b>Green</b>
-    = CORE, <b>grey</b> = periphery. Toggle inputs/periphery above.</div>`;
+    output on the right. The <b>coloured bar under each box header</b> is the
+    <b>measured</b> split of that term's mass across its carriers (from ablating each
+    unit). <b>Double-click a box</b> to open it: its <b>member units</b> appear inside,
+    labelled by resolved features, each wired back to the features it uses. <b>Green</b>
+    = CORE (certified); <b>grey</b> = periphery. Drag to pan, scroll to zoom.</div>`;
+  return `<div class="empty"><b>Model units.</b> The raw network graph: features → hidden
+    units → output. Each unit is a <b>box labelled by its resolved input features</b>
+    (layer-2 units too), and the <b>coloured bar at its base</b> shows each input's
+    measured contribution (masked-weight share). <b>Green</b> = CORE, <b>grey</b> =
+    periphery. Hover a bar segment for the feature and %. Toggle inputs/periphery above.</div>`;
 }
 
 // =================================================================== pan/zoom

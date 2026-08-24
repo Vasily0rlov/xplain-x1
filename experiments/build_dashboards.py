@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from xplain_x1.certify.certify import certify              # noqa: E402
+from xplain_x1.certify.fanova import component_shares      # noqa: E402
 from xplain_x1.data.registry import get_dataset            # noqa: E402
 from xplain_x1.extract.certificate import build_certificate  # noqa: E402
 from xplain_x1.extract.dag import build_dag                # noqa: E402
@@ -42,6 +43,37 @@ REVIEW = [
     "mushroom", "drybean", "bike", "adult",
     "wine", "zoo", "tictactoe",
 ]
+
+
+def _member_contributions(model, ds, splits) -> dict:
+    """Measured contribution of each unit to each function component.
+
+    Ablate a unit's outgoing edges, re-run the purified decomposition, and read
+    the drop in every component's share.  One re-decomposition per unit, all
+    components read from it.  Keyed by the component's sorted feature-index
+    tuple (as a comma string, JSON-safe) -> {uid: share_drop}.
+    """
+    base = component_shares(model, ds, splits)["components"]
+    contrib: dict = {}
+
+    def key(supp):
+        return ",".join(map(str, sorted(supp)))
+
+    for li in range(len(model.layers)):
+        out_mask = (model.mask(li + 1) if li + 1 < len(model.layers)
+                    else model.mask_head)
+        for i, uid in enumerate(model.unit_ids[li]):
+            saved = out_mask[:, i].clone()
+            out_mask[:, i] = 0.0
+            try:
+                sh = component_shares(model, ds, splits)["components"]
+            finally:
+                out_mask[:, i] = saved
+            for supp, b in base.items():
+                drop = max(0.0, b - sh.get(supp, 0.0))
+                if drop > 1e-4:
+                    contrib.setdefault(key(supp), {})[uid] = round(float(drop), 4)
+    return contrib
 
 
 def _enrich_dag(dag: dict, concepts: list[dict]) -> dict:
@@ -92,11 +124,18 @@ def build_one(name: str, cfg: dict, suffix: str = "") -> dict:
         (c.get("share_main", 0) or 0) for c in cert["components"]
         if c.get("label") == "CORE"), 4)
 
+    try:
+        member_contrib = _member_contributions(cert["model"], ds, cert["splits"])
+    except Exception as e:   # never let the measurement sink the dashboard
+        print(f"   (member-contribution measurement skipped: {e})", flush=True)
+        member_contrib = {}
+
     data = {
         "dag": dag,
         "cert": cert_doc,
         "core_share_sum": core_share_sum,
         "bars": _bars(cert_doc, core_share_sum),
+        "member_contrib": member_contrib,
     }
     safe = name.replace(":", "_") + suffix
     if suffix:   # variant runs carry their tag into the page identity
