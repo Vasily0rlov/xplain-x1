@@ -253,7 +253,7 @@ function drawHier(){
     const title=el("text",{x:12,y:19,style:"font:12.5px system-ui;font-weight:650;fill:var(--ink);pointer-events:none"},grp);
     title.textContent=abbr(c.support_names.join(" × "),24);
     const sub=el("text",{x:12,y:33,style:"font:10px system-ui;fill:var(--muted);pointer-events:none"},grp);
-    sub.textContent=`${(100*c.share).toFixed(1)}% · Π ${fmt(c.Pi)} · ${c.n_members} member${c.n_members===1?"":"s"}`;
+    sub.textContent=`${(100*c.share).toFixed(1)}% · Π ${fmt(c.Pi)} · ${c.n_members} carrier${c.n_members===1?"":"s"}`;
     // expand badge
     if(c.n_members||c.feats_direct.length){
       const bx=COMPW-16;
@@ -283,15 +283,24 @@ function drawHier(){
         // label with RESOLVED features (L2 units otherwise read as parent ids)
         mt.textContent = m.direct ? ("feature · "+abbr(m.uid,16))
           : `${m.uid} · ${(m.feats||[]).map(s=>abbr(s,7)).join("·")}`;
-        if(!m.direct){ const mm=el("text",{x:COMPW-16,y:3.5,"text-anchor":"end",
-          style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},rg);
-          mm.textContent = (c.measured && c.contrib_sum>0)
-            ? (fmt(100*m.contrib/c.contrib_sum,0)+"%") : ("μ "+fmt(m.mu,2)); }
         if(!m.direct){
+          // "reads directly" tag when the unit also literally contains the
+          // component's support (vs carrying it through a collinear sibling)
+          const pctX = m.structural ? COMPW-34 : COMPW-16;
+          if(m.structural){
+            const tg=el("text",{x:COMPW-16,y:3.5,"text-anchor":"end",
+              style:"font:8.5px system-ui;fill:var(--core);pointer-events:none"},rg);
+            tg.textContent="⌾ direct";
+          }
+          const mm=el("text",{x:pctX,y:3.5,"text-anchor":"end",
+            style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},rg);
+          mm.textContent = (c.measured && c.contrib_sum>0)
+            ? (fmt(100*m.contrib/c.contrib_sum,0)+"%") : ("μ "+fmt(m.mu,2));
           rg.addEventListener("mousemove",ev=>showTip(
             `<h4>${m.uid} · layer ${m.layer}</h4>`+
             `<div class="m">${m.tag} · ${m.form||"?"} · μ ${fmt(m.mu)}</div>`+
-            `<div class="m">features: ${m.feats.join(", ")}</div>`+
+            `<div class="m">reads: ${m.feats.join(", ")}`+
+            (m.structural?" (contains this term's features directly)":" (carries it via a collinear feature)")+`</div>`+
             (c.measured?`<div class="m">measured Δshare when ablated: ${fmt(m.contrib,3)}</div>`:""),ev));
           rg.addEventListener("mouseleave",hideTip);
           rg.addEventListener("click",ev=>{ev.stopPropagation(); selectMember(c,m);});
@@ -301,7 +310,7 @@ function drawHier(){
         const ry=y0+rows.length*ROWH+ROWH/2;
         const et=el("text",{x:COMPW/2,y:ry+3.5,"text-anchor":"middle",
           style:"font:9.5px system-ui;font-style:italic;fill:var(--muted);pointer-events:none"},grp);
-        et.textContent=`+${c.extra_members} more member unit(s)`;
+        et.textContent=`+${c.extra_members} more carrier unit(s)`;
       }
     }
     grp.addEventListener("mousemove",ev=>{ if(ev.target.tagName!=="rect"||ev.offsetY==null){} showTip(
@@ -394,12 +403,16 @@ function draw(){ if(MODE==="hier"){layoutHier(); drawHier();} else drawUnits(); 
 function select(id){ SEL=(SEL===id)?null:id; draw(); renderDetail(); }
 function selectMember(c,m){ SEL=m.uid; draw();
   const box=$("detail");
-  box.innerHTML=`<h3>${m.uid}</h3><div class="did">member unit of “${c.support_names.join(" × ")}”</div>`+
-    `<div style="margin-top:7px"><span class="pill ${m.tag==="CORE"?"core":"peri"}">${m.tag}</span></div>`+
+  box.innerHTML=`<h3>${m.uid}</h3><div class="did">carrier of “${c.support_names.join(" × ")}”</div>`+
+    `<div style="margin-top:7px"><span class="pill ${m.tag==="CORE"?"core":"peri"}">${m.tag}</span>`+
+    (m.structural?` <span class="pill core">reads it directly</span>`:` <span class="pill peri">via collinear feature</span>`)+`</div>`+
     `<dl><dt>form</dt><dd>${m.form||"—"}</dd><dt>layer</dt><dd>${m.layer}</dd>`+
-    `<dt>μ mono</dt><dd>${fmt(m.mu)}</dd><dt>parents</dt><dd>${(m.immediate||[]).join(", ")||"—"}</dd>`+
-    `<dt>features</dt><dd>${m.feats.join(", ")}</dd></dl>`+
-    `<div class="chips"><span class="chip">carries this certified component</span></div>`;
+    `<dt>μ mono</dt><dd>${fmt(m.mu)}</dd><dt>reads</dt><dd>${m.feats.join(", ")}</dd>`+
+    (c.measured?`<dt>Δshare</dt><dd>${fmt(m.contrib,3)} when ablated (${c.contrib_sum>0?fmt(100*m.contrib/c.contrib_sum,0):0}% of measured mass)</dd>`:"")+
+    `</dl>`+
+    `<div class="chips"><span class="chip">${m.structural
+      ? "carries this component and literally reads its features"
+      : "carries this component through a collinear feature ("+m.feats.join(", ")+")"}</span></div>`;
 }
 function renderDetail(){
   const box=$("detail");
@@ -420,18 +433,21 @@ function renderDetail(){
     `<div style="margin-top:7px"><span class="pill ${c.tag==="CORE"?"core":"peri"}">${c.tag}</span></div>`+
     `<dl><dt>share</dt><dd>${(100*c.share).toFixed(1)}% of function variance</dd>`+
     `<dt>Π stab</dt><dd>${fmt(c.Pi)}</dd><dt>π cpss</dt><dd>${fmt(c.pi)}</dd>`+
-    `<dt>members</dt><dd>${c.n_members} unit(s) carry it</dd></dl>`+
-    `<div class="chips"><span class="chip">${(c.n_members||c.feats_direct.length)?"double-click the box to open its member units":"leaf"}</span></div>`;
+    `<dt>carriers</dt><dd>${c.n_members} unit(s) carry it (measured)</dd></dl>`+
+    `<div class="chips"><span class="chip">${(c.n_members||c.feats_direct.length)?"double-click the box to open its carrier units":"leaf"}</span></div>`;
 }
 function emptyHelp(){
   if(MODE==="hier") return `<div class="empty"><b>Layer F flow (left → right).</b>
     Input features on the left feed the certified <b>function components</b> (the middle
     boxes — additive terms of the model's function, NOT classes), which sum into the
     output on the right. The <b>coloured bar under each box header</b> is the
-    <b>measured</b> split of that term's mass across its carriers (from ablating each
-    unit). <b>Double-click a box</b> to open it: its <b>member units</b> appear inside,
-    labelled by resolved features, each wired back to the features it uses. <b>Green</b>
-    = CORE (certified); <b>grey</b> = periphery. Drag to pan, scroll to zoom.</div>`;
+    <b>measured</b> split of that term's mass across its carrier units (from ablating each
+    unit). <b>Double-click a box</b> to open it: its <b>carrier units</b> appear inside —
+    identified by measurement, so a unit that carries the term through a collinear
+    feature is included (a <span style="color:var(--core)">⌾ direct</span> tag marks the
+    ones that also literally read the term's features). This is why the carrier here can
+    match the CORE unit in the Model-units view. <b>Green</b> = CORE; <b>grey</b> =
+    periphery. Drag to pan, scroll to zoom.</div>`;
   return `<div class="empty"><b>Model units.</b> The raw network graph: features → hidden
     units → output. Each unit is a <b>box labelled by its resolved input features</b>
     (layer-2 units too), and the <b>coloured bar at its base</b> shows each input's
@@ -637,12 +653,13 @@ def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
 
     Three lanes: INPUT FEATURES (left) -> CERTIFIED COMPONENT boxes (middle) ->
     OUTPUT (right).  A component is a purified additive term of the learned
-    function (NOT a class); its *member units* are the model units through which
-    that term's mass physically flows — a unit is a member iff the component's
-    feature support is contained in the unit's transitive input support.  Each
-    component box expands to show its member units as objects INSIDE the box,
-    each wired back to the input features it depends on (edge width = real
-    masked-weight contribution share): the end-to-end parameter flow.
+    function (NOT a class).  Its *member units* are the model units that
+    physically carry that term's mass, identified by MEASUREMENT: ablate a unit
+    and the component's purified share drops.  This sees through feature
+    collinearity (a unit reading `workingday` can carry the `hour × weekday`
+    term), unlike a structural containment test.  Units that ALSO literally read
+    the component's features are tagged `structural`.  When no ablation
+    measurement is available the membership falls back to structural containment.
     """
     fdec = cert["function_decomposition"]
     ident = cert["identification"]
@@ -667,15 +684,22 @@ def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
         sset = set(supp)
         for f in supp:
             feat_id(f)
-        member_uids = [uid for uid, tf in trans.items() if sset and sset <= tf]
-        # measured contribution of each unit to THIS component (ablation drop of
-        # its purified share), keyed by the component's feature-index tuple.
+        # structural carriers: units whose input features literally contain the
+        # component's support (a guess from wiring, blind to feature collinearity)
+        structural = {uid for uid, tf in trans.items() if sset and sset <= tf}
+        # measured carriers: ablating the unit drops this component's purified
+        # share (the ground truth — sees through workingday≈weekday collinearity).
         ckey = ",".join(map(str, sorted(c.get("support", []))))
         cdrop = mc.get(ckey, {})
         measured = bool(cdrop)
-        # order carriers by MEASURED contribution when available, else structural
-        member_uids.sort(key=lambda uid: -(cdrop.get(uid, 0.0) if measured
-                                           else (unit_nodes[uid].get("coverage") or 0)))
+        # membership = MEASURED carriers when we have them (so the physical carrier
+        # of a certified term shows up even if it reads a collinear sibling
+        # feature); fall back to structural containment otherwise.
+        if measured:
+            member_uids = sorted(cdrop, key=lambda uid: -cdrop[uid])
+        else:
+            member_uids = sorted(structural,
+                                 key=lambda uid: -(unit_nodes[uid].get("coverage") or 0))
         MAX_ROWS = 12
         shown, extra = member_uids[:MAX_ROWS], len(member_uids) - MAX_ROWS
         members = []
@@ -690,7 +714,9 @@ def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
                 "immediate": u.get("support_names") or [],
                 "feats": tfeats,                 # transitive input features
                 "coverage": u.get("coverage"),
-                "contrib": round(float(cdrop.get(uid, 0.0)), 4)})
+                "contrib": round(float(cdrop.get(uid, 0.0)), 4),
+                # tag units that ALSO literally read the component's features
+                "structural": uid in structural})
         contrib_sum = round(sum(m["contrib"] for m in members), 4)
         components.append({
             "id": f"C{i}", "kind": "component",
