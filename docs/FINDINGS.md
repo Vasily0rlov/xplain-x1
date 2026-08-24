@@ -485,6 +485,43 @@ periphery, so the certificate covers the coarse grammatical backbone and decline
 the sparse-suffix long tail.  A different periphery mechanism (low support, not
 collinearity), same honest handling.
 
+### Spambase — high-d generality probe (d=57), 2026-08-24
+
+Second generality dataset (owner-chosen): 4,601 emails × 57 continuous features,
+binary spam.  Purpose: stress the interaction screen at C(57,2)=1,596 candidate
+pairs (the d-scaling axis flagged in the POSITIONING assessment) with known
+structure, on a third domain + continuous features (complements morpher).
+
+- **The screen held at d=57 — no blow-up** (~144 s full certification, well
+  within budget).  Frozen and batched are near-identical (both [8], fid 0.778,
+  13 CORE, coverage 0.48) — like morpher, batching adds nothing because the
+  model is near ceiling with 8 units.
+- **13 CORE components, ALL main effects — honest-shallow, zero certified
+  interactions.**  The literature's headline capital-run × `!` interaction does
+  **not** certify: the purified pairwise mass is negligible.  Another instance of
+  the bike-hour×temp lesson — a widely-cited interaction that, purified, is
+  mostly additive main effects.  On present evidence Spambase is additive.
+- **The certified drivers are a domain fingerprint, not the generic spam
+  lexicon.**  Top: `george` .138, `cap_total` .087, `hp` .041, `lab` .034,
+  `telnet` .028, `hp`/`lab`/`telnet`/`650`/`85`/`meeting` — these are the
+  HP-Labs collection's ham markers (the non-spam mail was one person's work
+  email at Hewlett-Packard).  Generic spam tokens (`char_$`, `char_!`, `remove`,
+  `your`, `our`) certify too but with smaller shares.  The method faithfully
+  recovered that this corpus separates on *sender-context* tokens more than on
+  universal spam cues — a correct, expert-checkable read of THIS dataset (and a
+  known caveat about Spambase's generalisability).
+- **Coverage 0.48, recon R² 0.67**: 57 weak token signals, no single dominant
+  driver — the method certifies the robust ~13 and leaves the diffuse tail as
+  labelled periphery.
+
+**Generality verdict (morpher + Spambase together):** the method transferred
+across three domains (linguistic / spam / the MVL) and both feature types
+(categorical-predicate + continuous), stayed honest-shallow where the data is
+additive, and recovered domain-correct structure an expert can validate.  The
+d=57 screen did not strain — the practical dimensionality ceiling is higher than
+the MVL alone showed.  Two datasets, two orthogonal stressors (sparsity, then
+dimensionality), honesty layer intact throughout.
+
 ### E8.3 — hour-interaction partner stability (weekday vs workingday), 2026-08-24
 
 Literature's canonical bike interaction is hour × **workingday**; our pipeline

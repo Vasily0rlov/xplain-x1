@@ -130,5 +130,41 @@
     "coverage": 0.1456,
     "regime": "standard",
     "file": "morpher.html"
+  },
+  {
+    "dataset": "morpher@grow-batch-8",
+    "task": "classification",
+    "n": 10195,
+    "d": 38,
+    "fidelity": 0.8784486522286448,
+    "ratio": 0.9935,
+    "n_core": 3,
+    "coverage": 0.1456,
+    "regime": "standard",
+    "file": "morpher@grow-batch-8.html"
+  },
+  {
+    "dataset": "spambase",
+    "task": "classification",
+    "n": 4601,
+    "d": 57,
+    "fidelity": 0.7789854178413917,
+    "ratio": 0.942,
+    "n_core": 13,
+    "coverage": 0.4789,
+    "regime": "standard",
+    "file": "spambase.html"
+  },
+  {
+    "dataset": "spambase@grow-batch-8",
+    "task": "classification",
+    "n": 4601,
+    "d": 57,
+    "fidelity": 0.7775668411489033,
+    "ratio": 0.9403,
+    "n_core": 13,
+    "coverage": 0.4783,
+    "regime": "standard",
+    "file": "spambase@grow-batch-8.html"
   }
 ]
