@@ -1,0 +1,264 @@
+{
+  "experiment": "E8.3 hour-interaction partner stability",
+  "git_commit": "0c1c774df490226c89018467c01029372ca2bfbb",
+  "rows": [
+    {
+      "grow_batch": 2,
+      "seed": 0,
+      "widths": [
+        6
+      ],
+      "weekday_share": 0.0571,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0571
+      },
+      "wall_s": 2730.6
+    },
+    {
+      "grow_batch": 2,
+      "seed": 1,
+      "widths": [
+        11
+      ],
+      "weekday_share": 0.0768,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0768
+      },
+      "wall_s": 3388.3
+    },
+    {
+      "grow_batch": 2,
+      "seed": 2,
+      "widths": [
+        8
+      ],
+      "weekday_share": 0.0857,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0857
+      },
+      "wall_s": 3413.2
+    },
+    {
+      "grow_batch": 2,
+      "seed": 3,
+      "widths": [
+        10,
+        10
+      ],
+      "weekday_share": 0.0768,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0768
+      },
+      "wall_s": 3433.0
+    },
+    {
+      "grow_batch": 2,
+      "seed": 4,
+      "widths": [
+        11
+      ],
+      "weekday_share": 0.0699,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0699
+      },
+      "wall_s": 2334.5
+    },
+    {
+      "grow_batch": 2,
+      "seed": 5,
+      "widths": [
+        8
+      ],
+      "weekday_share": 0.0219,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0219
+      },
+      "wall_s": 2693.7
+    },
+    {
+      "grow_batch": 2,
+      "seed": 6,
+      "widths": [
+        9,
+        7
+      ],
+      "weekday_share": 0.0759,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0759
+      },
+      "wall_s": 3179.8
+    },
+    {
+      "grow_batch": 2,
+      "seed": 7,
+      "widths": [
+        8
+      ],
+      "weekday_share": 0.0629,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0629
+      },
+      "wall_s": 3356.9
+    },
+    {
+      "grow_batch": 8,
+      "seed": 0,
+      "widths": [
+        14,
+        14
+      ],
+      "weekday_share": 0.0759,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0759
+      },
+      "wall_s": 3421.5
+    },
+    {
+      "grow_batch": 8,
+      "seed": 1,
+      "widths": [
+        15
+      ],
+      "weekday_share": 0.0795,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0795
+      },
+      "wall_s": 2978.5
+    },
+    {
+      "grow_batch": 8,
+      "seed": 2,
+      "widths": [
+        10
+      ],
+      "weekday_share": 0.0846,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0846
+      },
+      "wall_s": 3404.5
+    },
+    {
+      "grow_batch": 8,
+      "seed": 3,
+      "widths": [
+        11
+      ],
+      "weekday_share": 0.0804,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0804
+      },
+      "wall_s": 2362.8
+    },
+    {
+      "grow_batch": 8,
+      "seed": 4,
+      "widths": [
+        11,
+        10
+      ],
+      "weekday_share": 0.0702,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0702
+      },
+      "wall_s": 3404.3
+    },
+    {
+      "grow_batch": 8,
+      "seed": 5,
+      "widths": [
+        14,
+        9
+      ],
+      "weekday_share": 0.0793,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0793
+      },
+      "wall_s": 3483.3
+    },
+    {
+      "grow_batch": 8,
+      "seed": 6,
+      "widths": [
+        11,
+        11
+      ],
+      "weekday_share": 0.0777,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0777
+      },
+      "wall_s": 3448.4
+    },
+    {
+      "grow_batch": 8,
+      "seed": 7,
+      "widths": [
+        8
+      ],
+      "weekday_share": 0.0629,
+      "workingday_share": 0.0,
+      "dominant_partner": "weekday",
+      "all_hour_pairs": {
+        "weekday": 0.0629
+      },
+      "wall_s": 3370.3
+    }
+  ],
+  "summary": {
+    "2": {
+      "grow_batch": 2,
+      "n": 8,
+      "dominant_counts": {
+        "weekday": 8
+      },
+      "weekday_present": 8,
+      "workingday_present": 0,
+      "both_present": 0,
+      "median_weekday_share": 0.0759,
+      "median_workingday_share": 0.0,
+      "stable_partner": true
+    },
+    "8": {
+      "grow_batch": 8,
+      "n": 8,
+      "dominant_counts": {
+        "weekday": 8
+      },
+      "weekday_present": 8,
+      "workingday_present": 0,
+      "both_present": 0,
+      "median_weekday_share": 0.0793,
+      "median_workingday_share": 0.0,
+      "stable_partner": true
+    }
+  }
+}

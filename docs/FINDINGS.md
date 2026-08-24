@@ -453,6 +453,31 @@ traced bike's fidelity shortfall to one mechanism, then E8.1 fixed it.
   S-§9 default ⇒ certification re-run on batched-growth models + re-freeze
   before any new confirmatory claim.
 
+### E8.3 — hour-interaction partner stability (weekday vs workingday), 2026-08-24
+
+Literature's canonical bike interaction is hour × **workingday**; our pipeline
+certifies hour × **weekday**.  Diagnostic: per restart (dev seeds 0–7, BOTH
+regimes), measure the purified interaction share on each hour-pair.
+
+**Result — the partner is perfectly stable, and it is NOT the collinear coin-flip
+expected: `weekday` wins 8/8 in BOTH regimes; `hour × workingday` carries zero
+purified mass (0/8, both regimes); no other hour-pair appears at all.**
+Frozen weekday shares 0.022–0.086; batched 0.063–0.085 — same effect, same
+partner, wider models.  So the weekday-vs-workingday difference is NOT
+carving-multiplicity: the method consistently prefers `weekday` as the
+interaction partner.
+
+**Why (assessment, not yet a proven mechanism):** `workingday` is a *coarsening*
+of `weekday` (weekend/holiday → 0).  The commute double-peak differs across the
+five weekdays and between Sat/Sun, so `hour × weekday` (7 levels) fits the true
+daily-shape modulation strictly better than the binary `hour × workingday` — the
+purification then assigns the interaction mass to the finer, more explanatory
+term and leaves the binary with ~0 residual.  The literature names the *binary*
+because EBM/GA²M demos privilege the 2-level split for display; our method,
+given both, measurably prefers the higher-resolution partner.  This is a case
+where the certified structure is *more* refined than the textbook, not a
+mismatch to fix.  (Not adjudicated against ground truth — bike has none.)
+
 ### E8.2 — bike claims-invariance under batched growth: **MET** (2026-08-23)
 
 Full bike certification (R=8 + 40 CPSS) at grow_batch=8, 0.12 h wall:
