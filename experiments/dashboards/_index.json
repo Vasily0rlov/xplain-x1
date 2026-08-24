@@ -24,6 +24,18 @@
     "file": "bike.html"
   },
   {
+    "dataset": "bike@grow-batch-8",
+    "task": "regression",
+    "n": 17379,
+    "d": 14,
+    "fidelity": 0.9404665820089643,
+    "ratio": 0.9925,
+    "n_core": 6,
+    "coverage": 0.7844,
+    "regime": "standard",
+    "file": "bike@grow-batch-8.html"
+  },
+  {
     "dataset": "drybean",
     "task": "classification",
     "n": 13611,
@@ -106,17 +118,5 @@
     "coverage": 2.8975,
     "regime": "below stability power floor (n < 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A)",
     "file": "zoo.html"
-  },
-  {
-    "dataset": "bike@grow-batch-8",
-    "task": "regression",
-    "n": 17379,
-    "d": 14,
-    "fidelity": 0.9404665820089643,
-    "ratio": 0.9925,
-    "n_core": 6,
-    "coverage": 0.7844,
-    "regime": "standard",
-    "file": "bike@grow-batch-8.html"
   }
 ]

@@ -136,216 +136,258 @@ const tip = $("tip");
 function el(t,a,p){ const e=document.createElementNS(NS,t);
   for(const k in a) e.setAttribute(k,a[k]); if(p) p.appendChild(e); return e; }
 function fmt(v,d){ return (v==null||isNaN(v))?"—":Number(v).toFixed(d==null?2:d); }
-function abbr(s,m){ m=m||13; return s.length>m ? s.slice(0,m-1)+"…" : s; }
+function abbr(s,m){ m=m||15; return s.length>m ? s.slice(0,m-1)+"…" : s; }
 
-// Two models over the same run: HIER (drill-down concept hierarchy) and UNITS
-// (the raw model graph). MODE switches between them.
 const HIER = D.hier, UNITS = D.units;
-let MODE = "hier", SEL=null, EXP={}, SHOW_PERI=true, SHOW_IN=true;
-let VZ={k:1,x:0,y:0}, drag=null, W=900, H=560;
+let MODE="hier", SEL=null, EXP={}, SHOW_PERI=true, SHOW_IN=true;
+let VZ={k:1,x:0,y:0}, drag=null, W=980, H=560, POS={};
 const svg=$("dag"), g=$("dagg");
 
-function M(){ return MODE==="hier" ? HIER : UNITS; }
-function byId(){ const m={}; M().nodes.forEach(n=>m[n.id]=n); return m; }
+// each component starts collapsed; the LR skeleton (features -> boxes -> output)
+// is the default Layer F view.
+function moveTip(ev){ tip.style.left=Math.min(ev.clientX+14,innerWidth-tip.offsetWidth-8)+"px";
+  tip.style.top=Math.min(ev.clientY+14,innerHeight-tip.offsetHeight-8)+"px"; }
+function showTip(html,ev){ tip.innerHTML=html; tip.style.opacity=1; moveTip(ev); }
+function hideTip(){ tip.style.opacity=0; }
 
-// ---------- visibility: expansion-set + reachability ------------------------
-// A node is visible iff reachable from a root through EXPANDED ancestors.
-// Member units are SHARED between components, so visibility is recomputed by
-// BFS rather than per-node flags (collapsing one parent keeps a shared child
-// visible while another expanded parent still declares it).
-let VIS = new Set();
-function recomputeVis(){
-  VIS = new Set(); const B=byId();
-  const queue = M().nodes.filter(n=>n.start).map(n=>n.id);
-  queue.forEach(id=>VIS.add(id));
-  while(queue.length){
-    const id = queue.shift(), n = B[id];
-    if(!n || !EXP[id]) continue;
-    (n.drill||[]).forEach(cid=>{
-      if(!VIS.has(cid)){ VIS.add(cid); queue.push(cid); } });
-  }
-}
-function visible(n){
-  if(MODE==="units"){
-    if(n.kind==="input" && !SHOW_IN) return false;
-    if(n.kind==="unit" && n.tag!=="CORE" && !SHOW_PERI) return false;
-    return true;
-  }
-  return VIS.has(n.id);
-}
-function hasChildren(n){ return n.drill && n.drill.length; }
-function isExpanded(n){ return !!EXP[n.id]; }
-function toggleDrill(n){
-  if(!hasChildren(n)) return;
-  EXP[n.id] = !EXP[n.id];
-  layout(); draw();
-}
-
-// ---------- layout: columns by level, spread visible nodes vertically -------
-let POS={};
-function level(n){
-  if(MODE==="hier") return n.lvl;
-  return n.kind==="input"?0 : n.kind==="output"?UNITS.outCol : (n.layer||1);
-}
-function layout(){
-  if(MODE==="hier") recomputeVis();
-  const vis=M().nodes.filter(visible);
-  const cols={}; vis.forEach(n=>{ const c=level(n); (cols[c]=cols[c]||[]).push(n); });
-  const keys=Object.keys(cols).map(Number).sort((a,b)=>a-b);
-  const COLW=232, VGAP=60, TOP=46;
-  let maxRows=1; keys.forEach(k=>maxRows=Math.max(maxRows,cols[k].length));
-  H=TOP*2 + (maxRows-1)*VGAP + 30;
-  W=(keys.length? (Math.max(...keys)+1):1)*COLW;
-  POS={};
-  keys.forEach(k=>{ const arr=cols[k], x=k*COLW+COLW/2;
-    const span=(arr.length-1)*VGAP, y0=(H-span)/2;
-    arr.forEach((n,i)=>POS[n.id]={x,y:y0+i*VGAP}); });
+// =================================================================== LAYER F
+const FEATCX=96, COMPX=360, COMPW=232, ROWH=24, HEADH=42, BOXGAP=20, PAD=10;
+const OUTCX=COMPX+COMPW+150;
+function rowCount(c){ const base=c.members.length||c.feats_direct.length;
+  return base + ((c.extra_members||0)>0?1:0); }
+function compHeight(c){ return EXP[c.id] ? HEADH + Math.max(1,rowCount(c))*ROWH + PAD : HEADH; }
+function layoutHier(){
+  const comps=HIER.components;
+  let y=40; const cpos={};
+  comps.forEach(c=>{ const h=compHeight(c); cpos[c.id]={y, h, top:y}; y+=h+BOXGAP; });
+  const compsBottom=y;
+  const feats=HIER.features;
+  const fh=Math.max(compsBottom, 40+feats.length*30);
+  H=Math.max(fh, 200)+30; W=OUTCX+150;
+  POS={cpos, feat:{}, };
+  const fy0=(H-(feats.length-1)*30)/2;
+  feats.forEach((f,i)=>POS.feat[f.id]={x:FEATCX,y:fy0+i*30});
+  POS.out={x:OUTCX,y:H/2};
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
 }
+function memberRowY(c,i){ return POS.cpos[c.id].top+HEADH+i*ROWH+ROWH/2; }
+function tagStroke(t){ return t==="CORE"?"var(--core)":"var(--peri)"; }
+function tagFill(t){ return t==="CORE"?"var(--corewash)":"var(--periwash)"; }
 
-const R=17;
-function nodeFill(n){
-  if(n.kind==="feature"||n.kind==="input") return "var(--wash)";
-  if(n.kind==="output") return "var(--surface)";
-  return (n.tag==="CORE") ? "var(--corewash)" : "var(--periwash)";
-}
-function nodeStroke(n){
-  if(n.kind==="component"||n.kind==="unit") return n.tag==="CORE"?"var(--core)":"var(--peri)";
-  if(n.kind==="output") return "var(--accent)";
-  return "var(--grid)";
-}
-function nlabel(n){
-  if(n.kind==="component") return n.support_names.map(s=>abbr(s,10)).join("·");
-  if(n.kind==="unit") return (n.support_names&&n.support_names.length)
-      ? n.support_names.map(s=>abbr(s,9)).join("·") : n.id;
-  return abbr(n.label,16);
-}
+function edgePath(x1,y1,x2,y2){ const mx=(x1+x2)/2;
+  return `M${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`; }
+function drawEdge(x1,y1,x2,y2,share,dim){
+  const w=0.7+5*Math.min(1,(share||0)*3);
+  el("path",{d:edgePath(x1,y1,x2,y2),fill:"none",stroke:"var(--edge)",
+    "stroke-width":w.toFixed(2),"stroke-opacity":dim?0.12:0.5},g); }
 
-function draw(){
+function drawHier(){
   g.textContent="";
-  const B=byId();
-  M().edges.forEach(e=>{
-    const a=B[e.src], b=B[e.dst]; if(!a||!b||!visible(a)||!visible(b)) return;
-    const p=POS[e.src], q=POS[e.dst]; if(!p||!q) return;
-    const mx=(p.x+q.x)/2, w=0.8+5*Math.min(1,(e.share||0)*3);
-    el("path",{d:`M${p.x+R} ${p.y} C ${mx} ${p.y}, ${mx} ${q.y}, ${q.x-R} ${q.y}`,
-      fill:"none",stroke:"var(--edge)","stroke-width":w.toFixed(2),
-      "stroke-opacity":(SEL&&SEL!==e.src&&SEL!==e.dst)?0.14:0.5},g);
-  });
-  M().nodes.forEach(n=>{
-    if(!visible(n)) return; const p=POS[n.id]; if(!p) return;
-    const dim=SEL&&SEL!==n.id&&!adjacent(n.id,SEL,B);
-    const grp=el("g",{transform:`translate(${p.x},${p.y})`,
-      style:`cursor:pointer;opacity:${dim?0.3:1}`},g);
-    if(n.kind==="output"){
-      el("rect",{x:-R-18,y:-14,width:2*R+36,height:28,rx:7,fill:nodeFill(n),
-        stroke:nodeStroke(n),"stroke-width":1.5},grp);
-    } else if(n.kind==="feature"||n.kind==="input"){
-      el("rect",{x:-R-12,y:-12,width:2*R+24,height:24,rx:12,fill:nodeFill(n),
-        stroke:nodeStroke(n),"stroke-width":1.2},grp);
+  const focus = SEL;
+  const featSel = new Set();  // features touched by the selected node (for focus dim)
+  if(focus){
+    const c=HIER.components.find(c=>c.id===focus);
+    if(c){ (c.members.length?c.members.flatMap(m=>m.feats):c.support_names).forEach(f=>featSel.add(f)); }
+  }
+  // ---- edges (drawn first, behind) ----
+  HIER.components.forEach(c=>{
+    const cx1=COMPX, cy=POS.cpos[c.id].top+HEADH/2;
+    const dimC = focus && focus!==c.id;
+    // component -> output
+    drawEdge(COMPX+COMPW, POS.cpos[c.id].top+compHeight(c)/2, OUTCX-46, POS.out.y, c.share, dimC);
+    if(!EXP[c.id]){
+      // collapsed: feature -> component (the support), summary width
+      c.support_names.forEach(f=>{ const fp=POS.feat["F::"+f]; if(!fp)return;
+        drawEdge(fp.x+56, fp.y, cx1, cy, c.share, dimC); });
     } else {
-      el("circle",{r:R,fill:nodeFill(n),stroke:nodeStroke(n),
-        "stroke-width":(n.id===SEL)?3:1.8},grp);
+      // expanded: feature -> each member row (real flow)
+      const rows = c.members.length?c.members:c.feats_direct.map(f=>({feats:[f],direct:true}));
+      rows.forEach((m,i)=>{ const ry=memberRowY(c,i);
+        (m.feats||[]).forEach(f=>{ const fp=POS.feat["F::"+f]; if(!fp)return;
+          const dim = dimC || (focus && !featSel.has(f) && focus!==c.id);
+          drawEdge(fp.x+56, fp.y, cx1, ry, (m.coverage||0.04), dim); }); });
     }
-    const t=el("text",{"text-anchor":"middle",y:4,
+  });
+  // ---- feature nodes (left lane) ----
+  HIER.features.forEach(f=>{ const p=POS.feat[f.id]; if(!p)return;
+    const dim=focus && !featSel.has(f.label) && !HIER.components.some(c=>c.id===focus && c.support_names.includes(f.label));
+    const grp=el("g",{transform:`translate(${p.x},${p.y})`,style:`cursor:default;opacity:${dim?0.35:1}`},g);
+    const wpx=Math.max(64, 8+7*abbr(f.label,18).length);
+    el("rect",{x:-wpx/2,y:-11,width:wpx,height:22,rx:11,fill:"var(--wash)",
+      stroke:"var(--grid)","stroke-width":1},grp);
+    const t=el("text",{x:0,y:4,"text-anchor":"middle",
       style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},grp);
-    t.textContent=nlabel(n);
-    // sub-label: μ for units, share for components
-    let sub=null;
-    if(n.kind==="unit"&&n.mu!=null) sub="μ "+fmt(n.mu,2);
-    else if(n.kind==="component"&&n.share!=null) sub=(100*n.share).toFixed(0)+"%";
-    if(sub){ const st=el("text",{"text-anchor":"middle",y:R+12,
-      style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},grp);
-      st.textContent=sub; }
-    // drill affordance: a small +/- badge when the node has children
-    if(MODE==="hier"&&hasChildren(n)){
-      const open=isExpanded(n);
-      el("circle",{cx:R-2,cy:-R+2,r:6.5,fill:"var(--surface)",
-        stroke:nodeStroke(n),"stroke-width":1.2},grp);
-      const bt=el("text",{x:R-2,y:-R+5.4,"text-anchor":"middle",
-        style:"font:11px system-ui;font-weight:700;fill:var(--ink2);pointer-events:none"},grp);
-      bt.textContent=open?"–":"+";
+    t.textContent=abbr(f.label,18);
+    grp.addEventListener("mousemove",ev=>showTip(`<h4>${f.label}</h4><div class="m">input feature</div>`,ev));
+    grp.addEventListener("mouseleave",hideTip);
+  });
+  // ---- component boxes (middle lane) ----
+  HIER.components.forEach(c=>{
+    const P=POS.cpos[c.id]; const h=compHeight(c);
+    const dimC=focus && focus!==c.id && !(HIER.components.find(x=>x.id===focus));
+    const grp=el("g",{transform:`translate(${COMPX},${P.top})`,
+      style:`cursor:pointer;opacity:${(focus&&focus!==c.id)?0.5:1}`},g);
+    el("rect",{x:0,y:0,width:COMPW,height:h,rx:9,fill:tagFill(c.tag),
+      stroke:tagStroke(c.tag),"stroke-width":c.id===SEL?2.4:1.5},grp);
+    // header
+    const title=el("text",{x:12,y:19,style:"font:12.5px system-ui;font-weight:650;fill:var(--ink);pointer-events:none"},grp);
+    title.textContent=abbr(c.support_names.join(" × "),24);
+    const sub=el("text",{x:12,y:33,style:"font:10px system-ui;fill:var(--muted);pointer-events:none"},grp);
+    sub.textContent=`${(100*c.share).toFixed(1)}% · Π ${fmt(c.Pi)} · ${c.n_members} member${c.n_members===1?"":"s"}`;
+    // expand badge
+    if(c.n_members||c.feats_direct.length){
+      const bx=COMPW-16;
+      el("circle",{cx:bx,cy:14,r:8,fill:"var(--surface)",stroke:tagStroke(c.tag),"stroke-width":1.2},grp);
+      const bt=el("text",{x:bx,y:18,"text-anchor":"middle",
+        style:"font:13px system-ui;font-weight:700;fill:var(--ink2);pointer-events:none"},grp);
+      bt.textContent=EXP[c.id]?"–":"+";
     }
-    grp.addEventListener("mouseenter",ev=>hover(n,ev));
-    grp.addEventListener("mousemove",moveTip);
-    grp.addEventListener("mouseleave",()=>tip.style.opacity=0);
-    grp.addEventListener("click",ev=>{ev.stopPropagation(); select(n.id);});
+    // member rows inside the box
+    if(EXP[c.id]){
+      const rows=c.members.length?c.members:c.feats_direct.map(f=>({uid:f,direct:true,feats:[f]}));
+      rows.forEach((m,i)=>{
+        const ry=HEADH+i*ROWH+ROWH/2;
+        const rg=el("g",{transform:`translate(0,${ry})`,style:"cursor:pointer"},grp);
+        el("rect",{x:8,y:-ROWH/2+2,width:COMPW-16,height:ROWH-4,rx:5,
+          fill:m.direct?"var(--wash)":tagFill(m.tag),stroke:m.direct?"var(--grid)":tagStroke(m.tag),
+          "stroke-width":1,"stroke-opacity":0.7},rg);
+        const mt=el("text",{x:14,y:3.5,style:"font:10.5px system-ui;fill:var(--ink);pointer-events:none"},rg);
+        mt.textContent = m.direct ? ("feature · "+abbr(m.uid,16))
+          : `${m.uid} · ${(m.immediate||[]).map(s=>abbr(s,7)).join("·")}`;
+        if(!m.direct){ const mm=el("text",{x:COMPW-16,y:3.5,"text-anchor":"end",
+          style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},rg);
+          mm.textContent="μ "+fmt(m.mu,2); }
+        if(!m.direct){
+          rg.addEventListener("mousemove",ev=>showTip(
+            `<h4>${m.uid}</h4><div class="m">${m.tag} · layer ${m.layer} · ${m.form||"?"}</div>`+
+            `<div class="m">μ ${fmt(m.mu)} · features: ${m.feats.join(", ")}</div>`,ev));
+          rg.addEventListener("mouseleave",hideTip);
+          rg.addEventListener("click",ev=>{ev.stopPropagation(); selectMember(c,m);});
+        }
+      });
+      if((c.extra_members||0)>0){
+        const ry=HEADH+rows.length*ROWH+ROWH/2;
+        const et=el("text",{x:COMPW/2,y:ry+3.5,"text-anchor":"middle",
+          style:"font:9.5px system-ui;font-style:italic;fill:var(--muted);pointer-events:none"},grp);
+        et.textContent=`+${c.extra_members} more member unit(s)`;
+      }
+    }
+    grp.addEventListener("mousemove",ev=>{ if(ev.target.tagName!=="rect"||ev.offsetY==null){} showTip(
+      `<h4>${c.support_names.join(" × ")}</h4>`+
+      `<div class="m">${c.tag} function component · ${(100*c.share).toFixed(1)}% of variance</div>`+
+      `<div class="m">Π ${fmt(c.Pi)} · π ${fmt(c.pi)} · ${c.n_members} member unit(s)`+
+      `${(c.n_members||c.feats_direct.length)?" · double-click to open":""}</div>`,ev); });
+    grp.addEventListener("mouseleave",hideTip);
+    grp.addEventListener("click",ev=>{ev.stopPropagation(); select(c.id);});
     grp.addEventListener("dblclick",ev=>{ev.stopPropagation();
-      if(MODE==="hier") toggleDrill(n);});
+      if(c.n_members||c.feats_direct.length){ EXP[c.id]=!EXP[c.id]; layoutHier(); drawHier(); }});
+  });
+  // ---- output node (right) ----
+  const o=HIER.output, op=POS.out;
+  const og=el("g",{transform:`translate(${op.x},${op.y})`},g);
+  el("rect",{x:-46,y:-16,width:92,height:32,rx:8,fill:"var(--surface)",
+    stroke:"var(--accent)","stroke-width":1.6},og);
+  const ot=el("text",{x:0,y:4,"text-anchor":"middle",
+    style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},og);
+  ot.textContent=abbr(o.label,12);
+  og.addEventListener("mousemove",ev=>showTip(`<h4>${o.label}</h4><div class="m">${o.sub}</div>`,ev));
+  og.addEventListener("mouseleave",hideTip);
+  applyZoom();
+}
+
+// =================================================================== UNITS
+function drawUnits(){
+  g.textContent="";
+  const N=UNITS.nodes, E=UNITS.edges;
+  const outCol=UNITS.outCol;
+  const colf=n=>n.kind==="input"?0:n.kind==="output"?outCol:(n.layer||1);
+  const vis=N.filter(n=>{ if(n.kind==="input"&&!SHOW_IN)return false;
+    if(n.kind==="unit"&&n.tag!=="CORE"&&!SHOW_PERI)return false; return true; });
+  const cols={}; vis.forEach(n=>{const c=colf(n);(cols[c]=cols[c]||[]).push(n);});
+  const keys=Object.keys(cols).map(Number).sort((a,b)=>a-b);
+  const COLW=232,VGAP=60; let maxR=1; keys.forEach(k=>maxR=Math.max(maxR,cols[k].length));
+  H=92+(maxR-1)*VGAP; W=(Math.max(...keys,0)+1)*COLW;
+  const pos={};
+  keys.forEach(k=>{const arr=cols[k],x=k*COLW+COLW/2,span=(arr.length-1)*VGAP,y0=(H-span)/2;
+    arr.forEach((n,i)=>pos[n.id]={x,y:y0+i*VGAP});});
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  const R=17, visIds=new Set(vis.map(n=>n.id));
+  E.forEach(e=>{ if(!visIds.has(e.src)||!visIds.has(e.dst))return;
+    const p=pos[e.src],q=pos[e.dst]; if(!p||!q)return;
+    drawEdge(p.x+R,p.y,q.x-R,q.y,e.share, SEL&&SEL!==e.src&&SEL!==e.dst); });
+  vis.forEach(n=>{ const p=pos[n.id]; if(!p)return;
+    const grp=el("g",{transform:`translate(${p.x},${p.y})`,style:"cursor:pointer"},g);
+    const fill=n.kind==="unit"?(n.tag==="CORE"?"var(--corewash)":"var(--periwash)"):
+      (n.kind==="output"?"var(--surface)":"var(--wash)");
+    const stroke=n.kind==="unit"?(n.tag==="CORE"?"var(--core)":"var(--peri)"):
+      (n.kind==="output"?"var(--accent)":"var(--grid)");
+    if(n.kind==="unit") el("circle",{r:R,fill,stroke,"stroke-width":n.id===SEL?3:1.8},grp);
+    else el("rect",{x:-R-12,y:-12,width:2*R+24,height:24,rx:12,fill,stroke,"stroke-width":1.2},grp);
+    const t=el("text",{"text-anchor":"middle",y:4,style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},grp);
+    t.textContent = n.kind==="unit" ? ((n.support_names&&n.support_names.length)?n.support_names.map(s=>abbr(s,9)).join("·"):n.id) : abbr(n.label,16);
+    if(n.kind==="unit"&&n.mu!=null){ const st=el("text",{"text-anchor":"middle",y:R+12,
+      style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},grp); st.textContent="μ "+fmt(n.mu,2); }
+    grp.addEventListener("mousemove",ev=>showTip(unitTip(n),ev));
+    grp.addEventListener("mouseleave",hideTip);
+    grp.addEventListener("click",ev=>{ev.stopPropagation(); select(n.id);});
   });
   applyZoom();
 }
-function adjacent(a,b,B){ return M().edges.some(e=>(e.src===a&&e.dst===b)||(e.src===b&&e.dst===a)); }
+function unitTip(n){ if(n.kind==="unit") return `<h4>${(n.support_names||[]).join("·")||n.id}</h4>`+
+  `<div class="m">${n.tag} · layer ${n.layer} · ${n.form||"?"}</div>`+
+  `<div class="m">μ ${fmt(n.mu)} · Π ${fmt(n.Pi)} · π ${fmt(n.pi)}</div>`;
+  return `<h4>${n.label}</h4><div class="m">${n.kind}</div>`; }
 
-// ---------- hover + detail --------------------------------------------------
-function hover(n,ev){
-  let h=`<h4>${nlabel(n)}</h4>`;
-  if(n.kind==="unit")
-    h+=`<div class="m">${n.tag} · layer ${n.layer} · ${n.form||"?"}</div>`+
-       `<div class="m">μ ${fmt(n.mu)} · Π ${fmt(n.Pi)} · π ${fmt(n.pi)} · Δ ${fmt(n.delta)}</div>`;
-  else if(n.kind==="component")
-    h+=`<div class="m">${n.tag} function component · share ${fmt(100*n.share,1)}%</div>`+
-       `<div class="m">Π ${fmt(n.Pi)} · π ${fmt(n.pi)} · ${n.n_members||0} member unit${n.n_members===1?"":"s"}`+
-       `${hasChildren(n)?" · double-click to drill":""}</div>`;
-  else if(n.kind==="output")
-    h+=`<div class="m">${n.sub||"output"}${hasChildren(n)?" · double-click to drill into its components":""}</div>`;
-  else h+=`<div class="m">input feature</div>`;
-  tip.innerHTML=h; tip.style.opacity=1; moveTip(ev);
-}
-function moveTip(ev){
-  tip.style.left=Math.min(ev.clientX+14, innerWidth-tip.offsetWidth-8)+"px";
-  tip.style.top=Math.min(ev.clientY+14, innerHeight-tip.offsetHeight-8)+"px";
-}
+function draw(){ if(MODE==="hier"){layoutHier(); drawHier();} else drawUnits(); }
+
+// =================================================================== detail
 function select(id){ SEL=(SEL===id)?null:id; draw(); renderDetail(); }
-
+function selectMember(c,m){ SEL=m.uid; draw();
+  const box=$("detail");
+  box.innerHTML=`<h3>${m.uid}</h3><div class="did">member unit of “${c.support_names.join(" × ")}”</div>`+
+    `<div style="margin-top:7px"><span class="pill ${m.tag==="CORE"?"core":"peri"}">${m.tag}</span></div>`+
+    `<dl><dt>form</dt><dd>${m.form||"—"}</dd><dt>layer</dt><dd>${m.layer}</dd>`+
+    `<dt>μ mono</dt><dd>${fmt(m.mu)}</dd><dt>parents</dt><dd>${(m.immediate||[]).join(", ")||"—"}</dd>`+
+    `<dt>features</dt><dd>${m.feats.join(", ")}</dd></dl>`+
+    `<div class="chips"><span class="chip">carries this certified component</span></div>`;
+}
 function renderDetail(){
-  const box=$("detail"), B=byId();
-  if(!SEL || !B[SEL]){ box.innerHTML=emptyHelp(); return; }
-  const n=B[SEL];
-  if(n.kind==="unit"){
-    let h=`<h3>${nlabel(n)}</h3><div class="did">${n.id}</div>`+
-      `<div style="margin-top:7px"><span class="pill ${n.tag==="CORE"?"core":"peri"}">${n.tag}</span></div>`+
-      `<dl><dt>support</dt><dd>${(n.support_names||[]).join(", ")||"—"}</dd>`+
-      `<dt>form</dt><dd>${n.form||"—"}</dd><dt>layer</dt><dd>${n.layer}</dd>`+
-      `<dt>μ mono</dt><dd>${fmt(n.mu)}</dd><dt>Π stab</dt><dd>${fmt(n.Pi)}</dd>`+
-      `<dt>π cpss</dt><dd>${fmt(n.pi)}</dd><dt>Δ real</dt><dd>${fmt(n.delta,3)}</dd></dl>`;
-    h+=(n.reasons&&n.reasons.length)
-      ? `<div class="chips">`+n.reasons.map(r=>`<span class="chip r">${r}</span>`).join("")+`</div>`
-      : `<div class="chips"><span class="chip">certified: stable, frequent, real</span></div>`;
-    box.innerHTML=h; return;
+  const box=$("detail");
+  if(MODE==="units"){ const n=UNITS.nodes.find(n=>n.id===SEL);
+    if(!n){ box.innerHTML=emptyHelp(); return; }
+    if(n.kind==="unit"){ box.innerHTML=`<h3>${(n.support_names||[]).join("·")||n.id}</h3>`+
+      `<div class="did">${n.id}</div><div style="margin-top:7px"><span class="pill ${n.tag==="CORE"?"core":"peri"}">${n.tag}</span></div>`+
+      `<dl><dt>support</dt><dd>${(n.support_names||[]).join(", ")||"—"}</dd><dt>form</dt><dd>${n.form||"—"}</dd>`+
+      `<dt>μ</dt><dd>${fmt(n.mu)}</dd><dt>Π</dt><dd>${fmt(n.Pi)}</dd><dt>π</dt><dd>${fmt(n.pi)}</dd><dt>Δ</dt><dd>${fmt(n.delta,3)}</dd></dl>`+
+      ((n.reasons&&n.reasons.length)?`<div class="chips">`+n.reasons.map(r=>`<span class="chip r">${r}</span>`).join("")+`</div>`
+        :`<div class="chips"><span class="chip">certified: stable, frequent, real</span></div>`);
+      return; }
+    box.innerHTML=`<h3>${n.label}</h3><div class="did">${n.kind}</div>`; return;
   }
-  if(n.kind==="component"){
-    box.innerHTML=`<h3>${nlabel(n)}</h3><div class="did">function component</div>`+
-      `<div style="margin-top:7px"><span class="pill ${n.tag==="CORE"?"core":"peri"}">${n.tag}</span></div>`+
-      `<dl><dt>support</dt><dd>${n.support_names.join(", ")}</dd>`+
-      `<dt>share</dt><dd>${fmt(100*n.share,1)}% of function variance</dd>`+
-      `<dt>Π stab</dt><dd>${fmt(n.Pi)}</dd><dt>π cpss</dt><dd>${fmt(n.pi)}</dd>`+
-      `<dt>members</dt><dd>${n.n_members||0} unit(s) carry this claim</dd></dl>`+
-      `<div class="chips"><span class="chip">${hasChildren(n)
-        ? (n.n_members ? "double-click: expand member units" : "double-click: features (no localised carrier)")
-        : "leaf"}</span></div>`;
-    return;
-  }
-  box.innerHTML=`<h3>${n.label}</h3><div class="did">${n.kind}</div>`+
-    `<div class="empty" style="margin-top:10px">${n.kind==="output"
-      ? "Model output. Double-click to drill into the certified components that drive it."
-      : "Input feature (one monosemantic column)."}</div>`;
+  const c=HIER.components.find(c=>c.id===SEL);
+  if(!c){ box.innerHTML=emptyHelp(); return; }
+  box.innerHTML=`<h3>${c.support_names.join(" × ")}</h3><div class="did">certified function component</div>`+
+    `<div style="margin-top:7px"><span class="pill ${c.tag==="CORE"?"core":"peri"}">${c.tag}</span></div>`+
+    `<dl><dt>share</dt><dd>${(100*c.share).toFixed(1)}% of function variance</dd>`+
+    `<dt>Π stab</dt><dd>${fmt(c.Pi)}</dd><dt>π cpss</dt><dd>${fmt(c.pi)}</dd>`+
+    `<dt>members</dt><dd>${c.n_members} unit(s) carry it</dd></dl>`+
+    `<div class="chips"><span class="chip">${(c.n_members||c.feats_direct.length)?"double-click the box to open its member units":"leaf"}</span></div>`;
 }
 function emptyHelp(){
-  if(MODE==="hier") return `<div class="empty"><b>Layer F DAG.</b> The certified function
-    components (the “laws”) are shown by default. <b>Double-click</b> a component to expand
-    its <b>member units</b> — the model units its mass physically flows through — then
-    double-click a unit to expand its parents down to input features: the end-to-end
-    parameter flow, with edge width = real contribution share. A <b>+</b> badge marks an
-    expandable node; <b>–</b> collapses it.<br><br><b>Green</b> = CORE (certified);
-    <b>grey</b> = periphery. Single-click any node for its numbers. Drag to pan, scroll to zoom.</div>`;
-  return `<div class="empty"><b>Model units.</b> Circles are the network's hidden units,
-    labelled by their support and μ (monosemanticity). <b>Green</b> = CORE, <b>grey</b> =
-    periphery (labelled with why it failed to certify). This is the raw graph for judging
-    node nameability. Click a unit for detail; toggle inputs/periphery above.</div>`;
+  if(MODE==="hier") return `<div class="empty"><b>Layer F flow (left → right).</b>
+    Input features on the left feed the certified <b>function components</b> (the middle
+    boxes — additive terms of the model's function, NOT classes), which sum into the
+    output on the right. <b>Double-click a component box</b> to open it: its <b>member
+    units</b> — the model units that physically carry that term — appear inside,
+    each wired back to the features it uses (edge width = real contribution share).
+    <b>Green</b> = CORE (certified); <b>grey</b> = periphery. Click a box for its numbers;
+    drag to pan, scroll to zoom.</div>`;
+  return `<div class="empty"><b>Model units.</b> The raw network graph: input features →
+    hidden units → output. Circles are units, labelled by support and μ. <b>Green</b>
+    = CORE, <b>grey</b> = periphery. Toggle inputs/periphery above.</div>`;
 }
 
-// ---------- pan / zoom ------------------------------------------------------
+// =================================================================== pan/zoom
 function applyZoom(){ g.setAttribute("transform",`translate(${VZ.x},${VZ.y}) scale(${VZ.k})`); }
 svg.addEventListener("mousedown",e=>{drag={x:e.clientX,y:e.clientY,ox:VZ.x,oy:VZ.y};});
 addEventListener("mousemove",e=>{ if(!drag)return;
@@ -354,33 +396,25 @@ addEventListener("mouseup",()=>drag=null);
 svg.addEventListener("click",()=>{ if(SEL){SEL=null; draw(); renderDetail();} });
 svg.addEventListener("wheel",e=>{ e.preventDefault();
   const r=svg.getBoundingClientRect(), sx=(e.clientX-r.left)/r.width*W, sy=(e.clientY-r.top)/r.height*H;
-  const f=e.deltaY<0?1.12:1/1.12, nk=Math.max(0.3,Math.min(3.2,VZ.k*f));
-  VZ.x=sx-(sx-VZ.x)*(nk/VZ.k); VZ.y=sy-(sy-VZ.y)*(nk/VZ.k); VZ.k=nk; applyZoom();
-},{passive:false});
-function fit(){ VZ={k:1,x:0,y:0}; applyZoom(); }
+  const f=e.deltaY<0?1.12:1/1.12, nk=Math.max(0.25,Math.min(3.2,VZ.k*f));
+  VZ.x=sx-(sx-VZ.x)*(nk/VZ.k); VZ.y=sy-(sy-VZ.y)*(nk/VZ.k); VZ.k=nk; applyZoom(); },{passive:false});
+function fit(){ VZ={k:1,x:0,y:0};
+  const r=svg.getBoundingClientRect();   // fit whole graph into view
+  const s=Math.min(1, (r.width||900)/W*0.98, (r.height||520)/H*0.98);
+  VZ.k=Math.max(0.25,s); applyZoom(); }
 
-// ---------- mode + controls -------------------------------------------------
-function setMode(m){
-  MODE=m; SEL=null;
-  $("m_hier").classList.toggle("on",m==="hier");
-  $("m_units").classList.toggle("on",m==="units");
-  $("unitctrls").style.display = m==="units" ? "" : "none";
-  $("hierctrls").style.display = m==="hier" ? "" : "none";
-  layout(); draw(); renderDetail();
-}
+// =================================================================== controls
+function setMode(m){ MODE=m; SEL=null;
+  $("m_hier").classList.toggle("on",m==="hier"); $("m_units").classList.toggle("on",m==="units");
+  $("unitctrls").style.display=m==="units"?"":"none"; $("hierctrls").style.display=m==="hier"?"":"none";
+  draw(); renderDetail(); fit(); }
 $("m_hier").addEventListener("click",()=>setMode("hier"));
 $("m_units").addEventListener("click",()=>setMode("units"));
-$("b_fit").addEventListener("click",()=>{ // reset: back to the Layer F view
-  EXP={}; HIER.nodes.filter(n=>n.start).forEach(n=>EXP[n.id]=true);
-  layout(); draw(); fit(); });
-$("b_expand").addEventListener("click",()=>{ // expand every component's members
-  HIER.nodes.forEach(n=>{ if(n.start||n.kind==="component") EXP[n.id]=true; });
-  layout(); draw(); });
-$("t_peri").addEventListener("change",e=>{SHOW_PERI=e.target.checked; layout(); draw();});
-$("t_in").addEventListener("change",e=>{SHOW_IN=e.target.checked; layout(); draw();});
-// default view: the Layer F DAG (root expanded -> components visible)
-HIER.nodes.filter(n=>n.start).forEach(n=>EXP[n.id]=true);
-setMode("hier"); fit();
+$("b_fit").addEventListener("click",()=>{ EXP={}; draw(); fit(); });
+$("b_expand").addEventListener("click",()=>{ HIER.components.forEach(c=>EXP[c.id]=!!(c.n_members||c.feats_direct.length)); draw(); });
+$("t_peri").addEventListener("change",e=>{SHOW_PERI=e.target.checked; draw();});
+$("t_in").addEventListener("change",e=>{SHOW_IN=e.target.checked; draw();});
+setMode("hier");
 """
 
 
@@ -527,15 +561,16 @@ def _transitive_feature_supports(dag: dict) -> dict:
 
 def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
                 n_classes: int) -> dict:
-    """The Layer F DAG with drill-down into the physical model.
+    """The Layer F DAG as a left-to-right flow with expandable component boxes.
 
-    Levels: output (0) -> certified components (1) -> member units (2..) ->
-    input features.  A unit is a MEMBER of a component iff the component's
-    feature support is contained in the unit's transitive input support — the
-    units through which that certified claim's mass physically flows.  A unit
-    drills into its physical parents (deeper units, then features) with edge
-    widths taken from the real masked-weight contribution shares, so the fully
-    expanded view is the end-to-end parameter flow.
+    Three lanes: INPUT FEATURES (left) -> CERTIFIED COMPONENT boxes (middle) ->
+    OUTPUT (right).  A component is a purified additive term of the learned
+    function (NOT a class); its *member units* are the model units through which
+    that term's mass physically flows — a unit is a member iff the component's
+    feature support is contained in the unit's transitive input support.  Each
+    component box expands to show its member units as objects INSIDE the box,
+    each wired back to the input features it depends on (edge width = real
+    masked-weight contribution share): the end-to-end parameter flow.
     """
     fdec = cert["function_decomposition"]
     ident = cert["identification"]
@@ -546,78 +581,58 @@ def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
 
     unit_nodes = {n["id"]: n for n in dag["nodes"] if n["kind"] == "unit"}
     trans = _transitive_feature_supports(dag)
-    n_layers = max([1] + [n.get("layer", 1) for n in unit_nodes.values()])
-    feat_lvl = 2 + n_layers
-    edge_share = {(e["src"], e["dst"]): e.get("share", 0)
-                  for e in dag.get("edges", [])}
 
-    nodes, edges = [], []
-    feats: dict = {}
-    used_units: dict = {}
+    feat_names: list = []       # left lane, in first-seen order
+    def feat_id(name: str) -> str:
+        if name not in feat_names:
+            feat_names.append(name)
+        return "F::" + name
 
-    def feat_node(name: str) -> str:
-        fid = "F::" + name
-        if fid not in feats:
-            feats[fid] = {"id": fid, "kind": "feature", "label": name,
-                          "lvl": feat_lvl}
-        return fid
-
-    def unit_node(uid: str) -> str:
-        if uid in used_units:
-            return uid
-        u = unit_nodes[uid]
-        lvl = 2 + (n_layers - u.get("layer", 1))
-        used_units[uid] = {**u, "lvl": lvl, "drill": []}   # placeholder first
-        drill = []
-        for pname in (u.get("support_names") or []):
-            if pname in unit_nodes:
-                drill.append(unit_node(pname))
-                edges.append({"src": uid, "dst": pname,
-                              "share": edge_share.get((pname, uid), 0.05)})
-            else:
-                drill.append(feat_node(pname))
-                edges.append({"src": uid, "dst": "F::" + pname,
-                              "share": edge_share.get((pname, uid), 0.05)})
-        used_units[uid]["drill"] = drill
-        return uid
-
-    comp_ids: list = []
+    components = []
     for i, c in enumerate(chosen):
-        cid = f"C{i}"
-        comp_ids.append(cid)
         supp = c.get("support_names", c.get("names", []))
         sset = set(supp)
-        members = [uid for uid, tf in trans.items() if sset and sset <= tf]
-        drill = [unit_node(uid) for uid in members]
-        for uid in members:
-            edges.append({"src": cid, "dst": uid,
-                          "share": unit_nodes[uid].get("coverage") or 0.02})
-        if not members:   # unlocalised claim: drill straight to its features
-            drill = [feat_node(f) for f in supp]
-            for f in supp:
-                edges.append({"src": cid, "dst": "F::" + f, "share": 0.03})
-        nodes.append({
-            "id": cid, "kind": "component", "lvl": 1,
+        for f in supp:
+            feat_id(f)
+        member_uids = [uid for uid, tf in trans.items() if sset and sset <= tf]
+        # strongest carriers first; cap the displayed rows so a dominant term
+        # (e.g. hour, carried by ~20 units) stays legible.
+        member_uids.sort(key=lambda uid: -(unit_nodes[uid].get("coverage") or 0))
+        MAX_ROWS = 12
+        shown, extra = member_uids[:MAX_ROWS], len(member_uids) - MAX_ROWS
+        members = []
+        for uid in shown:
+            u = unit_nodes[uid]
+            tfeats = sorted(trans[uid])
+            for f in tfeats:
+                feat_id(f)
+            members.append({
+                "uid": uid, "mu": u.get("mu"), "tag": u.get("tag", "PERIPHERY"),
+                "form": u.get("form"), "layer": u.get("layer", 1),
+                "immediate": u.get("support_names") or [],
+                "feats": tfeats,                 # transitive input features
+                "coverage": u.get("coverage")})
+        components.append({
+            "id": f"C{i}", "kind": "component",
             "support_names": supp, "share": _comp_share(c),
             "Pi": c.get("Pi", 0), "pi": c.get("pi", 0),
-            "n_members": len(members),
-            "tag": c.get("label", "PERIPHERY"), "drill": drill})
+            "tag": c.get("label", "PERIPHERY"),
+            "n_members": len(member_uids), "members": members,
+            "extra_members": max(0, extra),
+            # a component with no localised carrier wires its features directly
+            "feats_direct": supp if not member_uids else []})
 
     root_label = (f"{n_classes}-class output" if is_multiclass
                   else ("class decision" if ident["task"] == "classification"
                         else "output"))
-    root = {"id": "OUT", "kind": "output", "lvl": 0, "start": True,
-            "label": root_label, "sub": f"{ident['task']} · {ident['dataset']}",
-            "drill": comp_ids}
-    for cid, c in zip(comp_ids, chosen):
-        edges.append({"src": "OUT", "dst": cid, "share": _comp_share(c)})
-    nodes = [root] + nodes + list(used_units.values()) + list(feats.values())
-    dedup: dict = {}
-    for e in edges:
-        k = (e["src"], e["dst"])
-        if k not in dedup or e.get("share", 0) > dedup[k].get("share", 0):
-            dedup[k] = e
-    return {"nodes": nodes, "edges": list(dedup.values())}
+    features = [{"id": "F::" + n, "kind": "feature", "label": n}
+                for n in feat_names]
+    return {
+        "features": features,
+        "components": components,
+        "output": {"id": "OUT", "kind": "output", "label": root_label,
+                   "sub": f"{ident['task']} · {ident['dataset']}"},
+    }
 
 
 def render_dashboard(data: dict) -> str:
@@ -702,12 +717,12 @@ def render_dashboard(data: dict) -> str:
     <div class="daghdr">
       <h2>Concept DAG</h2>
       <div class="seg">
-        <button id="m_hier" class="on">Layer F DAG</button>
+        <button id="m_hier" class="on">Layer F flow</button>
         <button id="m_units">Model units</button>
       </div>
       <div class="ctrls">
         <span id="hierctrls" class="ctrls" style="border:none;padding:0">
-          <button id="b_expand">expand all members</button>
+          <button id="b_expand">open all boxes</button>
         </span>
         <span id="unitctrls" class="ctrls" style="border:none;padding:0;display:none">
           <label><input type="checkbox" id="t_peri" checked> periphery</label>
@@ -722,9 +737,9 @@ def render_dashboard(data: dict) -> str:
         <div class="legend">
           <span><i style="background:var(--corewash);border:1.5px solid var(--core)"></i>CORE</span>
           <span><i style="background:var(--periwash);border:1.5px solid var(--peri)"></i>periphery</span>
-          <span><i style="background:var(--surface);border:1.5px solid var(--accent)"></i>output</span>
-          <span><i style="background:var(--wash);border:1px solid var(--grid)"></i>feature</span>
-          <span>double-click: component → member units → features · edge = real share</span>
+          <span><i style="background:var(--surface);border:1.5px solid var(--accent)"></i>output (right)</span>
+          <span><i style="background:var(--wash);border:1px solid var(--grid)"></i>input feature (left)</span>
+          <span>features → components → output · double-click a box to open its member units</span>
         </div>
       </div>
       <div class="detail" id="detail"></div>
