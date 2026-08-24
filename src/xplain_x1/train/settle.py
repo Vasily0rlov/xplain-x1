@@ -63,6 +63,8 @@ def null_statistics(ds: Dataset, splits: Splits) -> dict:
 
 def settle(model: MaskedMLP, ds: Dataset, splits: Splits, cfg: dict, seed: int,
            pressures: Callable[[MaskedMLP, list[torch.Tensor], float], torch.Tensor]
+           | None = None,
+           opt_factory: Callable[[MaskedMLP, dict], torch.optim.Optimizer]
            | None = None) -> SettleResult:
     tcfg = cfg["train"]
     torch.manual_seed(torch_seed(seed, "settle"))
@@ -72,8 +74,13 @@ def settle(model: MaskedMLP, ds: Dataset, splits: Splits, cfg: dict, seed: int,
     Xtr, ytr = _tensors(ds, splits, splits.train)
     n = len(splits.train)
     batch = min(int(tcfg["batch_size"]), n)
-    opt = torch.optim.AdamW(model.parameters(), lr=float(tcfg["lr"]),
-                            weight_decay=float(tcfg["weight_decay"]))
+    # opt_factory (x2 enabling hook): lets a caller build the optimiser (e.g. with
+    # gate/deviation param groups).  None reproduces the standard AdamW exactly.
+    if opt_factory is None:
+        opt = torch.optim.AdamW(model.parameters(), lr=float(tcfg["lr"]),
+                                weight_decay=float(tcfg["weight_decay"]))
+    else:
+        opt = opt_factory(model, tcfg)
     loss_fn = (F.cross_entropy if ds.task == "classification" else F.mse_loss)
 
     # Stopping is TOTAL-train-loss driven (task + pressures): the structural

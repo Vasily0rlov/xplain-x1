@@ -5,6 +5,7 @@ train-index override).
 """
 from __future__ import annotations
 
+import importlib
 from dataclasses import replace
 
 import numpy as np
@@ -14,6 +15,20 @@ from .data.registry import get_dataset
 from .data.splits import Splits, make_splits
 from .train.reference import reference_ceiling
 from .train.settle import evaluate, null_statistics
+
+
+def _resolve_controller(cfg: dict):
+    """Controller dispatch (x2 enabling hook): the default is the x1 grow
+    controller; an alternative is selected by controller.kind != "grow" plus
+    controller.entry (a dotted path to a callable with grow's signature).  With
+    the default config (no controller.kind, or "grow") this returns `grow`, so
+    behaviour is byte-identical to before the hook.
+    """
+    ccfg = cfg.get("controller", {})
+    if ccfg.get("kind", "grow") == "grow":
+        return grow
+    module_path, _, fn = ccfg["entry"].rpartition(".")
+    return getattr(importlib.import_module(module_path), fn)
 
 
 def run_pipeline(dataset: str, cfg: dict, seed: int,
@@ -30,7 +45,7 @@ def run_pipeline(dataset: str, cfg: dict, seed: int,
         ref = reference_ceiling(ds, splits, cfg,
                                 use_cache=train_override is None)
         fid_ref = float(ref["fid_ref_val"])
-    trace: GrowthTrace = grow(ds, splits, cfg, seed, fid_ref)
+    trace: GrowthTrace = _resolve_controller(cfg)(ds, splits, cfg, seed, fid_ref)
 
     null_stats = null_statistics(ds, splits)
     val = evaluate(trace.model, ds, splits, splits.val, null_stats)

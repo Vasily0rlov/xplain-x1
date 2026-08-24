@@ -174,6 +174,13 @@ def _prune_step(model: MaskedMLP, audit: dict, ds: Dataset, splits: Splits,
     return model
 
 
+def prune_step(model: MaskedMLP, audit: dict, ds: Dataset, splits: Splits,
+               cfg: dict, actions: list[dict]) -> MaskedMLP:
+    """Public alias for the budgeted prune/merge step (x2 enabling hook): x2's
+    CONSOLIDATE phase reuses it verbatim.  Pure re-export — no behaviour change."""
+    return _prune_step(model, audit, ds, splits, cfg, actions)
+
+
 def grow(ds: Dataset, splits: Splits, cfg: dict, seed: int,
          fid_ref: float) -> GrowthTrace:
     mcfg, ccfg = cfg["model"], cfg["controller"]
