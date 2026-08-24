@@ -221,3 +221,56 @@ def load_drybean() -> Dataset:
                    continuous_mask=cont,
                    meta={"source": "uci:602:dry-bean", "expected_depth": 2,
                          "known_rung": "Compactness x ShapeFactor1"})
+
+
+def load_morpher() -> Dataset:
+    """Russian declension (morpher, local): 18 raw morphological columns ->
+    monosemantic binary VALUE PREDICATES + syllable count.  Replicates the
+    xplain-v4 encoding recipe.  Target = declension type (3-class).  Feature
+    names are the human-readable Cyrillic labels so a Russian speaker can read
+    the DAG directly."""
+    src = Path(__file__).resolve().parents[3] / "data" / "morpher" / \
+        "morpher-sample-single-words-only.csv"
+    df = pd.read_csv(src, encoding="utf-16")
+    cols: list[str] = []
+    data: list[np.ndarray] = []
+    cont: list[bool] = []
+
+    def add(name: str, vals, continuous: bool = False) -> None:
+        cols.append(name)
+        data.append(np.asarray(vals, dtype=np.float32))
+        cont.append(continuous)
+
+    def onehot(col: str, mapping: dict) -> None:
+        for cat in mapping:
+            add(f"{col}={cat}", (df[col].astype(str) == cat).astype(int))
+
+    onehot("РодЧисло", {"м": 0, "ж": 0, "с": 0, "мн": 0})
+    onehot("ЧастьРечи", {"прил": 0, "сущ": 0, "неименительный": 0, "нерусское": 0})
+    onehot("Заглавные", {"1-я": 0, "нет": 0, "все": 0, "другие": 0})
+    add("Одушевленное=одуш", (df["Одушевленное"].astype(str) == "одуш").astype(int))
+    add("КоличествоСлогов", pd.to_numeric(df["КоличествоСлогов"], errors="coerce")
+        .fillna(0).astype(int), continuous=True)
+    for col, lab in [("Ударение", "Ударение(есть)"),
+                     ("УдарениеМнож", "УдарениеМнож(есть)"),
+                     ("НаСогласную", "НаСогласную"),
+                     ("ПредлогНа", "ПредлогНа")]:
+        add(lab, df[col].notna().astype(int))
+    add("Имя", df["Имя"].astype(str).str.upper().isin(["TRUE", "1"]).astype(int))
+    top = df["Суффикс"].value_counts().head(18).index.tolist()
+    for s in top:
+        add(f"Суффикс={s}", (df["Суффикс"].astype(str) == str(s)).astype(int))
+    add("Суффикс(есть)", df["Суффикс"].notna().astype(int))
+
+    X = np.column_stack(data).astype(np.float32)
+    classes = ["сущ", "нескл", "прил"]
+    cmap = {c: i for i, c in enumerate(classes)}
+    y = df["ТипСклонения"].astype(str).map(cmap).to_numpy()
+    keep = ~np.isnan(y.astype(float))
+    X, y = X[keep], y[keep].astype(np.int64)
+    return Dataset(name="morpher", X=X, y=y, feature_names=cols,
+                   task="classification", n_classes=3,
+                   continuous_mask=np.asarray(cont, dtype=bool),
+                   meta={"source": "data/morpher (UTF-16, v4 recipe)",
+                         "classes": classes, "expected_depth": 1,
+                         "domain": "Russian morphology / declension"})
