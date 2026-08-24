@@ -308,3 +308,73 @@ def load_spambase() -> Dataset:
                          "known": "token main effects (free,!,$,remove,cap_*) "
                                   "+ capital-run x ! interaction",
                          "domain": "email spam (high-d probe)"})
+
+
+def load_taiwan_credit() -> Dataset:
+    """Taiwan credit-card default (UCI 350 via OpenML, n=30,000): real bank
+    clients, target = default on next month's payment.  A creditworthiness
+    decision — EU AI Act Annex III high-risk category; the programme's first
+    genuinely regulated dataset.  OpenML v1 anonymises columns as x1..x23; the
+    canonical UCI codebook names are restored here.  PAY_* repayment statuses
+    are meaningfully ordered (-2..8) and kept ordinal; SEX and MARRIAGE become
+    value predicates."""
+    raw = _fetch("default-of-credit-card-clients", version=1)
+    df = raw.frame.drop(columns=[raw.target.name])
+    ucimap = {"x1": "LIMIT_BAL", "x2": "SEX", "x3": "EDUCATION",
+              "x4": "MARRIAGE", "x5": "AGE",
+              "x6": "PAY_0", "x7": "PAY_2", "x8": "PAY_3", "x9": "PAY_4",
+              "x10": "PAY_5", "x11": "PAY_6",
+              **{f"x{i}": f"BILL_AMT{i-11}" for i in range(12, 18)},
+              **{f"x{i}": f"PAY_AMT{i-17}" for i in range(18, 24)}}
+    df = df.rename(columns=ucimap)
+
+    cols, arrs, cont = [], [], []
+
+    def add(name, vals, continuous):
+        cols.append(name)
+        arrs.append(np.asarray(vals, dtype=np.float32))
+        cont.append(continuous)
+
+    num = lambda c: pd.to_numeric(df[c], errors="coerce").fillna(0)
+    add("LIMIT_BAL", num("LIMIT_BAL"), True)
+    add("SEX=female", (num("SEX") == 2).astype(int), False)
+    edu = num("EDUCATION").clip(1, 4)          # 0/5/6 are undocumented -> "others"
+    add("EDUCATION", edu, True)                # 1 grad school .. 4 others (ordinal)
+    add("MARRIAGE=married", (num("MARRIAGE") == 1).astype(int), False)
+    add("MARRIAGE=single", (num("MARRIAGE") == 2).astype(int), False)
+    add("AGE", num("AGE"), True)
+    for c in ("PAY_0", "PAY_2", "PAY_3", "PAY_4", "PAY_5", "PAY_6"):
+        add(c, num(c), True)                   # repayment status: ordered delay
+    for i in range(1, 7):
+        add(f"BILL_AMT{i}", num(f"BILL_AMT{i}"), True)
+        add(f"PAY_AMT{i}", num(f"PAY_AMT{i}"), True)
+
+    X = np.column_stack(arrs).astype(np.float32)
+    y = (raw.target.astype(str) == "1").to_numpy().astype(np.int64)
+    return Dataset(name="taiwan_credit", X=X, y=y, feature_names=cols,
+                   task="classification", n_classes=2,
+                   continuous_mask=np.asarray(cont, dtype=bool),
+                   meta={"source": "openml:default-of-credit-card-clients:v1",
+                         "domain": "consumer credit default (regulated: "
+                                   "EU AI Act Annex III creditworthiness / SR 11-7)",
+                         "known": "PAY_0 (most recent repayment status) dominates",
+                         "expected_depth": 1})
+
+
+def load_german_credit() -> Dataset:
+    """German Credit / Statlog (OpenML credit-g, n=1,000): the canonical
+    credit-scoring benchmark.  Readable nominal features -> value predicates via
+    the standard encoder.  BELOW the stability power floor (n < 2000): the
+    certificate carries the honest small-n regime label by design."""
+    raw = _fetch("credit-g", version=1)
+    df = raw.frame.drop(columns=[raw.target.name])
+    X, cols, cont = _encode_frame(df)
+    y = (raw.target.astype(str) == "bad").to_numpy().astype(np.int64)
+    return Dataset(name="german_credit", X=X, y=y, feature_names=cols,
+                   task="classification", n_classes=2, continuous_mask=cont,
+                   meta={"source": "openml:credit-g:v1",
+                         "domain": "consumer credit risk (regulated; canonical "
+                                   "benchmark)",
+                         "known": "checking_status dominates; duration, "
+                                  "credit_amount, credit_history secondary",
+                         "expected_depth": 1, "regime": "small-n"})
