@@ -118,5 +118,17 @@
     "coverage": 2.8975,
     "regime": "below stability power floor (n < 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A)",
     "file": "zoo.html"
+  },
+  {
+    "dataset": "morpher",
+    "task": "classification",
+    "n": 10195,
+    "d": 38,
+    "fidelity": 0.8784486522286448,
+    "ratio": 0.9935,
+    "n_core": 3,
+    "coverage": 0.1456,
+    "regime": "standard",
+    "file": "morpher.html"
   }
 ]

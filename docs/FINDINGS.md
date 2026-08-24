@@ -453,6 +453,38 @@ traced bike's fidelity shortfall to one mechanism, then E8.1 fixed it.
   S-§9 default ⇒ certification re-run on batched-growth models + re-freeze
   before any new confirmatory claim.
 
+### Morpher (Russian declension) — generality probe + expert analysis, 2026-08-24
+
+First non-English, linguistic, categorical-predicate dataset (10,195 words, 38
+morphological value-predicates, 3-class declension target сущ/нескл/прил).
+Loader replicates the v4 encoding; Cyrillic feature names kept for expert reading.
+
+- **Fidelity 0.878, ratio 0.994** vs ceiling; **honest-shallow [7], 1 layer**
+  (declension cues act largely independently — order-1, correctly).
+- **3 CORE function components, one per declension paradigm — all textbook-correct
+  Russian grammar:** `ЧастьРечи=прил` (part-of-speech = adjective → adjectival
+  declension, share 0.115, Π=1.0) · `НаСогласную` (ends in consonant → masc noun
+  declension, Π=0.875) · `Суффикс=ово` (the -ово/-ино toponym suffix →
+  indeclinable, Π=0.875).  The method recovered real grammar an expert confirms.
+- **Coverage only 0.15**, and the honest reason is a NEW periphery mechanism:
+  **low-support multiplicity** (distinct from bike's collinearity multiplicity).
+  The dominant *raw* shares sit on rare suffix predicates (`Суффикс=цы` 0.72,
+  `Суффикс=ца` 0.61) that are near-deterministic on the few words carrying them
+  but **unstable (Π 0.25–0.38) and infrequent (π 0.13–0.35)** — genuine sparse
+  lexical sub-regularities the honesty layer correctly refuses to certify.
+  (Those >0.5 numbers are per-class-logit max-merged raw shares, not fractions of
+  total variance — the multiclass share caveat.)
+- **0 CORE units, 0 CORE routes** — as everywhere on real data, the certifiable
+  invariant is the function component, not the unit/route.
+
+**Generality verdict:** the method transfers cleanly to a new domain and feature
+type — honest-shallow, near-ceiling fit, certified components = genuine grammar,
+honesty layer intact.  It also surfaced a domain-specific stressor: extreme
+categorical **feature sparsity** pushes most mass into an honestly-labelled
+periphery, so the certificate covers the coarse grammatical backbone and declines
+the sparse-suffix long tail.  A different periphery mechanism (low support, not
+collinearity), same honest handling.
+
 ### E8.3 — hour-interaction partner stability (weekday vs workingday), 2026-08-24
 
 Literature's canonical bike interaction is hour × **workingday**; our pipeline
