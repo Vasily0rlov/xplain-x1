@@ -1,0 +1,3891 @@
+{
+  "dag": {
+    "dataset": "german_credit",
+    "nodes": [
+      {
+        "id": "checking_status=no checking",
+        "kind": "input",
+        "label": "checking_status=no checking"
+      },
+      {
+        "id": "checking_status=<0",
+        "kind": "input",
+        "label": "checking_status=<0"
+      },
+      {
+        "id": "checking_status=>=200",
+        "kind": "input",
+        "label": "checking_status=>=200"
+      },
+      {
+        "id": "duration",
+        "kind": "input",
+        "label": "duration"
+      },
+      {
+        "id": "credit_history=existing paid",
+        "kind": "input",
+        "label": "credit_history=existing paid"
+      },
+      {
+        "id": "credit_history=critical/other existing credit",
+        "kind": "input",
+        "label": "credit_history=critical/other existing credit"
+      },
+      {
+        "id": "credit_history=delayed previously",
+        "kind": "input",
+        "label": "credit_history=delayed previously"
+      },
+      {
+        "id": "purpose=radio/tv",
+        "kind": "input",
+        "label": "purpose=radio/tv"
+      },
+      {
+        "id": "purpose=new car",
+        "kind": "input",
+        "label": "purpose=new car"
+      },
+      {
+        "id": "purpose=furniture/equipment",
+        "kind": "input",
+        "label": "purpose=furniture/equipment"
+      },
+      {
+        "id": "purpose=used car",
+        "kind": "input",
+        "label": "purpose=used car"
+      },
+      {
+        "id": "purpose=business",
+        "kind": "input",
+        "label": "purpose=business"
+      },
+      {
+        "id": "credit_amount",
+        "kind": "input",
+        "label": "credit_amount"
+      },
+      {
+        "id": "savings_status=<100",
+        "kind": "input",
+        "label": "savings_status=<100"
+      },
+      {
+        "id": "savings_status=no known savings",
+        "kind": "input",
+        "label": "savings_status=no known savings"
+      },
+      {
+        "id": "employment=>=7",
+        "kind": "input",
+        "label": "employment=>=7"
+      },
+      {
+        "id": "employment=4<=X<7",
+        "kind": "input",
+        "label": "employment=4<=X<7"
+      },
+      {
+        "id": "employment=unemployed",
+        "kind": "input",
+        "label": "employment=unemployed"
+      },
+      {
+        "id": "installment_commitment",
+        "kind": "input",
+        "label": "installment_commitment"
+      },
+      {
+        "id": "personal_status=male single",
+        "kind": "input",
+        "label": "personal_status=male single"
+      },
+      {
+        "id": "personal_status=female div/dep/mar",
+        "kind": "input",
+        "label": "personal_status=female div/dep/mar"
+      },
+      {
+        "id": "personal_status=male div/sep",
+        "kind": "input",
+        "label": "personal_status=male div/sep"
+      },
+      {
+        "id": "other_parties=guarantor",
+        "kind": "input",
+        "label": "other_parties=guarantor"
+      },
+      {
+        "id": "residence_since",
+        "kind": "input",
+        "label": "residence_since"
+      },
+      {
+        "id": "property_magnitude=real estate",
+        "kind": "input",
+        "label": "property_magnitude=real estate"
+      },
+      {
+        "id": "property_magnitude=life insurance",
+        "kind": "input",
+        "label": "property_magnitude=life insurance"
+      },
+      {
+        "id": "age",
+        "kind": "input",
+        "label": "age"
+      },
+      {
+        "id": "other_payment_plans=bank",
+        "kind": "input",
+        "label": "other_payment_plans=bank"
+      },
+      {
+        "id": "housing=rent",
+        "kind": "input",
+        "label": "housing=rent"
+      },
+      {
+        "id": "housing=for free",
+        "kind": "input",
+        "label": "housing=for free"
+      },
+      {
+        "id": "existing_credits",
+        "kind": "input",
+        "label": "existing_credits"
+      },
+      {
+        "id": "job=skilled",
+        "kind": "input",
+        "label": "job=skilled"
+      },
+      {
+        "id": "job=unskilled resident",
+        "kind": "input",
+        "label": "job=unskilled resident"
+      },
+      {
+        "id": "job=high qualif/self emp/mgmt",
+        "kind": "input",
+        "label": "job=high qualif/self emp/mgmt"
+      },
+      {
+        "id": "num_dependents",
+        "kind": "input",
+        "label": "num_dependents"
+      },
+      {
+        "id": "own_telephone",
+        "kind": "input",
+        "label": "own_telephone"
+      },
+      {
+        "id": "L1U7",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(purpose=used car, credit_amount, credit_history=critical/other existing credit)",
+        "mu": 0.5082384943962097,
+        "Pi": 0.375,
+        "pi": 0.025,
+        "delta": 0.00044786594763956966,
+        "coverage": 0.09975569993421507,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "purpose=used car",
+          "credit_amount",
+          "credit_history=critical/other existing credit"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U1",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(savings_status=no known savings, checking_status=<0, job=high qualif/self emp/mgmt)",
+        "mu": 0.7418054342269897,
+        "Pi": 0.125,
+        "pi": 0.0,
+        "delta": 0.04347490371077889,
+        "coverage": 0.035652520001988486,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "savings_status=no known savings",
+          "checking_status=<0",
+          "job=high qualif/self emp/mgmt"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U2",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(age, residence_since, housing=rent)",
+        "mu": 0.7348390221595764,
+        "Pi": 0.125,
+        "pi": 0.0,
+        "delta": 0.00460013945565807,
+        "coverage": 0.006210749317251629,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "age",
+          "residence_since",
+          "housing=rent"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U3",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(purpose=radio/tv, credit_amount, employment=>=7)",
+        "mu": 0.9227100610733032,
+        "Pi": 0.375,
+        "pi": 0.1,
+        "delta": 0.011129224863143716,
+        "coverage": 0.033981170150764184,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "purpose=radio/tv",
+          "credit_amount",
+          "employment=>=7"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U4",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(checking_status=no checking, credit_amount, duration)",
+        "mu": 0.7402865290641785,
+        "Pi": 0.125,
+        "pi": 0.0,
+        "delta": 0.00937522959630921,
+        "coverage": 0.011193819036855679,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "checking_status=no checking",
+          "credit_amount",
+          "duration"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U5",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(purpose=used car, age, existing_credits)",
+        "mu": 0.9404070377349854,
+        "Pi": 0.125,
+        "pi": 0.0,
+        "delta": 0.007212983539730988,
+        "coverage": 0.028374942288545646,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "purpose=used car",
+          "age",
+          "existing_credits"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U6",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(checking_status=no checking, employment=4<=X<7, credit_history=critical/other existing credit)",
+        "mu": 0.8361409902572632,
+        "Pi": 0.125,
+        "pi": 0.0,
+        "delta": 0.013850181250045446,
+        "coverage": 0.0184268540912359,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "checking_status=no checking",
+          "employment=4<=X<7",
+          "credit_history=critical/other existing credit"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U9",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(checking_status=no checking, credit_history=critical/other existing credit, installment_commitment)",
+        "mu": 0.5519058509360124,
+        "Pi": 0.125,
+        "pi": 0.0,
+        "delta": 0.01586187019176366,
+        "coverage": 0.00557197928975206,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "checking_status=no checking",
+          "credit_history=critical/other existing credit",
+          "installment_commitment"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "class_0",
+        "kind": "output",
+        "label": "class_0"
+      },
+      {
+        "id": "class_1",
+        "kind": "output",
+        "label": "class_1"
+      }
+    ],
+    "edges": [
+      {
+        "src": "checking_status=no checking",
+        "dst": "L1U7",
+        "share": 0.0526
+      },
+      {
+        "src": "duration",
+        "dst": "L1U7",
+        "share": 0.0914
+      },
+      {
+        "src": "credit_history=critical/other existing credit",
+        "dst": "L1U7",
+        "share": 0.07
+      },
+      {
+        "src": "purpose=new car",
+        "dst": "L1U7",
+        "share": 0.0433
+      },
+      {
+        "src": "purpose=used car",
+        "dst": "L1U7",
+        "share": 0.1148
+      },
+      {
+        "src": "credit_amount",
+        "dst": "L1U7",
+        "share": 0.0989
+      },
+      {
+        "src": "employment=unemployed",
+        "dst": "L1U7",
+        "share": 0.028
+      },
+      {
+        "src": "installment_commitment",
+        "dst": "L1U7",
+        "share": 0.082
+      },
+      {
+        "src": "personal_status=male div/sep",
+        "dst": "L1U7",
+        "share": 0.0567
+      },
+      {
+        "src": "other_parties=guarantor",
+        "dst": "L1U7",
+        "share": 0.0522
+      },
+      {
+        "src": "residence_since",
+        "dst": "L1U7",
+        "share": 0.0494
+      },
+      {
+        "src": "property_magnitude=life insurance",
+        "dst": "L1U7",
+        "share": 0.035
+      },
+      {
+        "src": "age",
+        "dst": "L1U7",
+        "share": 0.0624
+      },
+      {
+        "src": "housing=for free",
+        "dst": "L1U7",
+        "share": 0.0853
+      },
+      {
+        "src": "own_telephone",
+        "dst": "L1U7",
+        "share": 0.0309
+      },
+      {
+        "src": "checking_status=<0",
+        "dst": "L1U1",
+        "share": 0.1268
+      },
+      {
+        "src": "checking_status=>=200",
+        "dst": "L1U1",
+        "share": 0.0461
+      },
+      {
+        "src": "credit_history=delayed previously",
+        "dst": "L1U1",
+        "share": 0.06
+      },
+      {
+        "src": "purpose=radio/tv",
+        "dst": "L1U1",
+        "share": 0.0536
+      },
+      {
+        "src": "purpose=furniture/equipment",
+        "dst": "L1U1",
+        "share": 0.0739
+      },
+      {
+        "src": "savings_status=<100",
+        "dst": "L1U1",
+        "share": 0.0319
+      },
+      {
+        "src": "savings_status=no known savings",
+        "dst": "L1U1",
+        "share": 0.1518
+      },
+      {
+        "src": "employment=>=7",
+        "dst": "L1U1",
+        "share": 0.0653
+      },
+      {
+        "src": "installment_commitment",
+        "dst": "L1U1",
+        "share": 0.0673
+      },
+      {
+        "src": "property_magnitude=real estate",
+        "dst": "L1U1",
+        "share": 0.0785
+      },
+      {
+        "src": "existing_credits",
+        "dst": "L1U1",
+        "share": 0.0583
+      },
+      {
+        "src": "job=skilled",
+        "dst": "L1U1",
+        "share": 0.064
+      },
+      {
+        "src": "job=unskilled resident",
+        "dst": "L1U1",
+        "share": 0.0245
+      },
+      {
+        "src": "job=high qualif/self emp/mgmt",
+        "dst": "L1U1",
+        "share": 0.0893
+      },
+      {
+        "src": "duration",
+        "dst": "L1U2",
+        "share": 0.1256
+      },
+      {
+        "src": "purpose=new car",
+        "dst": "L1U2",
+        "share": 0.0203
+      },
+      {
+        "src": "purpose=business",
+        "dst": "L1U2",
+        "share": 0.0973
+      },
+      {
+        "src": "credit_amount",
+        "dst": "L1U2",
+        "share": 0.056
+      },
+      {
+        "src": "residence_since",
+        "dst": "L1U2",
+        "share": 0.0844
+      },
+      {
+        "src": "age",
+        "dst": "L1U2",
+        "share": 0.2153
+      },
+      {
+        "src": "other_payment_plans=bank",
+        "dst": "L1U2",
+        "share": 0.0533
+      },
+      {
+        "src": "housing=rent",
+        "dst": "L1U2",
+        "share": 0.0755
+      },
+      {
+        "src": "housing=for free",
+        "dst": "L1U2",
+        "share": 0.2721
+      },
+      {
+        "src": "duration",
+        "dst": "L1U3",
+        "share": 0.0469
+      },
+      {
+        "src": "purpose=radio/tv",
+        "dst": "L1U3",
+        "share": 0.3584
+      },
+      {
+        "src": "credit_amount",
+        "dst": "L1U3",
+        "share": 0.1824
+      },
+      {
+        "src": "employment=>=7",
+        "dst": "L1U3",
+        "share": 0.0524
+      },
+      {
+        "src": "property_magnitude=real estate",
+        "dst": "L1U3",
+        "share": 0.3591
+      },
+      {
+        "src": "checking_status=no checking",
+        "dst": "L1U4",
+        "share": 0.3516
+      },
+      {
+        "src": "duration",
+        "dst": "L1U4",
+        "share": 0.1847
+      },
+      {
+        "src": "purpose=new car",
+        "dst": "L1U4",
+        "share": 0.0675
+      },
+      {
+        "src": "credit_amount",
+        "dst": "L1U4",
+        "share": 0.3384
+      },
+      {
+        "src": "savings_status=no known savings",
+        "dst": "L1U4",
+        "share": 0.0559
+      },
+      {
+        "src": "credit_history=existing paid",
+        "dst": "L1U5",
+        "share": 0.0842
+      },
+      {
+        "src": "credit_history=critical/other existing credit",
+        "dst": "L1U5",
+        "share": 0.1707
+      },
+      {
+        "src": "purpose=used car",
+        "dst": "L1U5",
+        "share": 0.3542
+      },
+      {
+        "src": "personal_status=male single",
+        "dst": "L1U5",
+        "share": 0.0326
+      },
+      {
+        "src": "age",
+        "dst": "L1U5",
+        "share": 0.1952
+      },
+      {
+        "src": "existing_credits",
+        "dst": "L1U5",
+        "share": 0.162
+      },
+      {
+        "src": "checking_status=no checking",
+        "dst": "L1U6",
+        "share": 0.182
+      },
+      {
+        "src": "credit_history=critical/other existing credit",
+        "dst": "L1U6",
+        "share": 0.1234
+      },
+      {
+        "src": "purpose=furniture/equipment",
+        "dst": "L1U6",
+        "share": 0.0791
+      },
+      {
+        "src": "employment=4<=X<7",
+        "dst": "L1U6",
+        "share": 0.18
+      },
+      {
+        "src": "installment_commitment",
+        "dst": "L1U6",
+        "share": 0.0925
+      },
+      {
+        "src": "personal_status=male div/sep",
+        "dst": "L1U6",
+        "share": 0.3388
+      },
+      {
+        "src": "checking_status=no checking",
+        "dst": "L1U9",
+        "share": 0.2615
+      },
+      {
+        "src": "checking_status=<0",
+        "dst": "L1U9",
+        "share": 0.0257
+      },
+      {
+        "src": "credit_history=critical/other existing credit",
+        "dst": "L1U9",
+        "share": 0.1188
+      },
+      {
+        "src": "credit_amount",
+        "dst": "L1U9",
+        "share": 0.0242
+      },
+      {
+        "src": "employment=4<=X<7",
+        "dst": "L1U9",
+        "share": 0.0341
+      },
+      {
+        "src": "installment_commitment",
+        "dst": "L1U9",
+        "share": 0.0846
+      },
+      {
+        "src": "personal_status=female div/dep/mar",
+        "dst": "L1U9",
+        "share": 0.0594
+      },
+      {
+        "src": "other_parties=guarantor",
+        "dst": "L1U9",
+        "share": 0.2218
+      },
+      {
+        "src": "age",
+        "dst": "L1U9",
+        "share": 0.0956
+      },
+      {
+        "src": "num_dependents",
+        "dst": "L1U9",
+        "share": 0.0578
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_0",
+        "share": 0.3036
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_0",
+        "share": 0.1059
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_0",
+        "share": 0.1168
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_0",
+        "share": 0.1617
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_0",
+        "share": 0.0725
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_0",
+        "share": 0.0543
+      },
+      {
+        "src": "L1U9",
+        "dst": "class_0",
+        "share": 0.1672
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_1",
+        "share": 0.1274
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_1",
+        "share": 0.2281
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_1",
+        "share": 0.126
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_1",
+        "share": 0.073
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_1",
+        "share": 0.1264
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_1",
+        "share": 0.1067
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_1",
+        "share": 0.1028
+      },
+      {
+        "src": "L1U9",
+        "dst": "class_1",
+        "share": 0.1096
+      }
+    ]
+  },
+  "cert": {
+    "identification": {
+      "system": "XPLAIN-x1",
+      "dataset": "german_credit",
+      "task": "classification",
+      "n": 1000,
+      "d": 49,
+      "git_commit": "e91e26368d35873075e1e14d299c19a62d2cfda1",
+      "config_hash": "528920056f3ff88a892fa350f98df78dd0311a77575cabde03f59e1f009e31a4",
+      "data_hash": "5a69e884239d5055-44b4ee009af0848b",
+      "seeds": {
+        "main": 0,
+        "restarts": 8,
+        "cpss_runs": 40
+      }
+    },
+    "performance_and_limits": {
+      "fidelity_val": 0.1944305941159159,
+      "fidelity_ceiling": 0.19715730738536896,
+      "fidelity_ratio": 0.9862,
+      "accuracy_test": 0.71,
+      "concept_tax_note": "vs best(unconstrained MLP, HGB) on val",
+      "restart_fidelities": [
+        0.1944305941159159,
+        0.1838006568462518,
+        0.19828087522568938,
+        0.18198782428825688,
+        0.18518650435264095,
+        0.19429374618747042,
+        0.19492812537234605,
+        0.19101373796026333
+      ]
+    },
+    "interpretability_structure": {
+      "widths": [
+        8
+      ],
+      "honest_depth": {
+        "depth": 1,
+        "eps_depth": 0.005,
+        "pairwise_dissolutions": [],
+        "all_earned": true
+      },
+      "n_concepts": 59,
+      "n_core": 0,
+      "n_periphery": 59,
+      "core_coverage_share": 0,
+      "periphery_reasons": [
+        "absent_in_main",
+        "infrequent",
+        "multiplicitous",
+        "no_effect",
+        "polysemantic",
+        "unstable"
+      ]
+    },
+    "statistical_certification": {
+      "regime": "below stability power floor (n < 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A)",
+      "restarts_R": 8,
+      "cpss_pairs_B": 20,
+      "tau_match": 0.7,
+      "pi_thr": 0.7,
+      "mu_min": 0.8,
+      "ev_bound": 1.5586034912718207e-05,
+      "q_mean": 0.35,
+      "p_universe": 19649,
+      "assumptions": [
+        "CPSS exchangeability (Meinshausen-Buhlmann) over an adaptive learned pipeline is a modelling idealisation; the reality test provides an independent assumption-light check.",
+        "The universe is structure-level: supports of arity <= F_max per layer interface of the delivered topology."
+      ]
+    },
+    "concepts": [
+      {
+        "cid": "c0",
+        "Pi": 0.375,
+        "members": {
+          "0": "L1U7",
+          "3": "L1U1",
+          "4": "L1U1"
+        },
+        "modal_support": [
+          6,
+          11,
+          14
+        ],
+        "support_variants": [
+          [
+            6,
+            11,
+            14
+          ],
+          [
+            0,
+            6,
+            33
+          ],
+          [
+            0,
+            4,
+            36
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U7",
+        "mu": 0.5082384943962097,
+        "form": "poly(2)",
+        "support_names": [
+          "purpose=used car",
+          "credit_amount",
+          "credit_history=critical/other existing credit"
+        ],
+        "layer": 1,
+        "contribution": 0.09975569993421507,
+        "pi": 0.025,
+        "delta": 0.00044786594763956966,
+        "ci_low": -0.11121979969234777,
+        "ci_high": 0.11435474259703741,
+        "label": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0042
+      },
+      {
+        "cid": "c1",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U1"
+        },
+        "modal_support": [
+          1,
+          16,
+          45
+        ],
+        "support_variants": [
+          [
+            1,
+            16,
+            45
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U1",
+        "mu": 0.7418054342269897,
+        "form": "poly(2)",
+        "support_names": [
+          "savings_status=no known savings",
+          "checking_status=<0",
+          "job=high qualif/self emp/mgmt"
+        ],
+        "layer": 1,
+        "contribution": 0.035652520001988486,
+        "pi": 0.0,
+        "delta": 0.04347490371077889,
+        "ci_low": -0.044948126709662244,
+        "ci_high": 0.1431039851102543,
+        "label": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.4103
+      },
+      {
+        "cid": "c2",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U2"
+        },
+        "modal_support": [
+          31,
+          36,
+          40
+        ],
+        "support_variants": [
+          [
+            31,
+            36,
+            40
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U2",
+        "mu": 0.7348390221595764,
+        "form": "poly(2)",
+        "support_names": [
+          "age",
+          "residence_since",
+          "housing=rent"
+        ],
+        "layer": 1,
+        "contribution": 0.006210749317251629,
+        "pi": 0.0,
+        "delta": 0.00460013945565807,
+        "ci_low": -0.0593738071219924,
+        "ci_high": 0.06445803445126363,
+        "label": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.0434
+      },
+      {
+        "cid": "c3",
+        "Pi": 0.375,
+        "members": {
+          "0": "L1U3",
+          "5": "L1U1",
+          "6": "L1U4"
+        },
+        "modal_support": [
+          8,
+          14,
+          20
+        ],
+        "support_variants": [
+          [
+            8,
+            14,
+            20
+          ],
+          [
+            4,
+            14,
+            36
+          ],
+          [
+            14,
+            22,
+            36
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U3",
+        "mu": 0.9227100610733032,
+        "form": "poly(2)",
+        "support_names": [
+          "purpose=radio/tv",
+          "credit_amount",
+          "employment=>=7"
+        ],
+        "layer": 1,
+        "contribution": 0.033981170150764184,
+        "pi": 0.1,
+        "delta": 0.011129224863143716,
+        "ci_low": -0.03027024263284815,
+        "ci_high": 0.05128703275876521,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.105
+      },
+      {
+        "cid": "c4",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U4"
+        },
+        "modal_support": [
+          0,
+          4,
+          14
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            14
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U4",
+        "mu": 0.7402865290641785,
+        "form": "poly(2)",
+        "support_names": [
+          "checking_status=no checking",
+          "credit_amount",
+          "duration"
+        ],
+        "layer": 1,
+        "contribution": 0.011193819036855679,
+        "pi": 0.0,
+        "delta": 0.00937522959630921,
+        "ci_low": -0.044897986741157934,
+        "ci_high": 0.06075312746473829,
+        "label": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.0885
+      },
+      {
+        "cid": "c5",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U5"
+        },
+        "modal_support": [
+          11,
+          36,
+          42
+        ],
+        "support_variants": [
+          [
+            11,
+            36,
+            42
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U5",
+        "mu": 0.9404070377349854,
+        "form": "poly(2)",
+        "support_names": [
+          "purpose=used car",
+          "age",
+          "existing_credits"
+        ],
+        "layer": 1,
+        "contribution": 0.028374942288545646,
+        "pi": 0.0,
+        "delta": 0.007212983539730988,
+        "ci_low": -0.04138630892907056,
+        "ci_high": 0.06191973611239513,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.0681
+      },
+      {
+        "cid": "c6",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U6"
+        },
+        "modal_support": [
+          0,
+          6,
+          21
+        ],
+        "support_variants": [
+          [
+            0,
+            6,
+            21
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U6",
+        "mu": 0.8361409902572632,
+        "form": "poly(2)",
+        "support_names": [
+          "checking_status=no checking",
+          "employment=4<=X<7",
+          "credit_history=critical/other existing credit"
+        ],
+        "layer": 1,
+        "contribution": 0.0184268540912359,
+        "pi": 0.0,
+        "delta": 0.013850181250045446,
+        "ci_low": -0.01593008774455811,
+        "ci_high": 0.04817570854281938,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.1307
+      },
+      {
+        "cid": "c7",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U9"
+        },
+        "modal_support": [
+          0,
+          6,
+          24
+        ],
+        "support_variants": [
+          [
+            0,
+            6,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U9",
+        "mu": 0.5519058509360124,
+        "form": "tree(d3)",
+        "support_names": [
+          "checking_status=no checking",
+          "credit_history=critical/other existing credit",
+          "installment_commitment"
+        ],
+        "layer": 1,
+        "contribution": 0.00557197928975206,
+        "pi": 0.0,
+        "delta": 0.01586187019176366,
+        "ci_low": -0.04213295201153947,
+        "ci_high": 0.07384555349539919,
+        "label": "PERIPHERY",
+        "reasons": [
+          "polysemantic",
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.1497
+      },
+      {
+        "cid": "e0",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U0"
+        },
+        "modal_support": [
+          0,
+          6,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            6,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e1",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U6"
+        },
+        "modal_support": [
+          0,
+          6,
+          24
+        ],
+        "support_variants": [
+          [
+            0,
+            6,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e2",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U2"
+        },
+        "modal_support": [
+          0,
+          9,
+          42
+        ],
+        "support_variants": [
+          [
+            0,
+            9,
+            42
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e3",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U1"
+        },
+        "modal_support": [
+          0,
+          16,
+          36
+        ],
+        "support_variants": [
+          [
+            0,
+            16,
+            36
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e4",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U7"
+        },
+        "modal_support": [
+          0,
+          23,
+          31
+        ],
+        "support_variants": [
+          [
+            0,
+            23,
+            31
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e5",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U8"
+        },
+        "modal_support": [
+          21,
+          30,
+          42
+        ],
+        "support_variants": [
+          [
+            21,
+            30,
+            42
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e6",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U4"
+        },
+        "modal_support": [
+          4,
+          21,
+          30
+        ],
+        "support_variants": [
+          [
+            4,
+            21,
+            30
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e7",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U5"
+        },
+        "modal_support": [
+          14,
+          16,
+          30
+        ],
+        "support_variants": [
+          [
+            14,
+            16,
+            30
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e8",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U9"
+        },
+        "modal_support": [
+          27,
+          33,
+          34
+        ],
+        "support_variants": [
+          [
+            27,
+            33,
+            34
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e9",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U1"
+        },
+        "modal_support": [
+          0,
+          10,
+          14
+        ],
+        "support_variants": [
+          [
+            0,
+            10,
+            14
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e10",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U0"
+        },
+        "modal_support": [
+          0,
+          4,
+          14
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            14
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e11",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U5"
+        },
+        "modal_support": [
+          4,
+          6,
+          31
+        ],
+        "support_variants": [
+          [
+            4,
+            6,
+            31
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e12",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U4"
+        },
+        "modal_support": [
+          16,
+          31,
+          33
+        ],
+        "support_variants": [
+          [
+            16,
+            31,
+            33
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e13",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U6"
+        },
+        "modal_support": [
+          14,
+          15,
+          24
+        ],
+        "support_variants": [
+          [
+            14,
+            15,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e14",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U7"
+        },
+        "modal_support": [
+          11,
+          31,
+          36
+        ],
+        "support_variants": [
+          [
+            11,
+            31,
+            36
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e15",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U2"
+        },
+        "modal_support": [
+          1,
+          16,
+          23
+        ],
+        "support_variants": [
+          [
+            1,
+            16,
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e16",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U3"
+        },
+        "modal_support": [
+          6,
+          11,
+          14
+        ],
+        "support_variants": [
+          [
+            6,
+            11,
+            14
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e17",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U6"
+        },
+        "modal_support": [
+          1,
+          4,
+          36
+        ],
+        "support_variants": [
+          [
+            1,
+            4,
+            36
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e18",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U0"
+        },
+        "modal_support": [
+          0,
+          4,
+          31
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            31
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e19",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U5"
+        },
+        "modal_support": [
+          0,
+          16,
+          46
+        ],
+        "support_variants": [
+          [
+            0,
+            16,
+            46
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e20",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U4"
+        },
+        "modal_support": [
+          1,
+          4,
+          46
+        ],
+        "support_variants": [
+          [
+            1,
+            4,
+            46
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e21",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U2"
+        },
+        "modal_support": [
+          9,
+          36,
+          38
+        ],
+        "support_variants": [
+          [
+            9,
+            36,
+            38
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e22",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U7"
+        },
+        "modal_support": [
+          14,
+          24,
+          31
+        ],
+        "support_variants": [
+          [
+            14,
+            24,
+            31
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e23",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U3"
+        },
+        "modal_support": [
+          4,
+          42,
+          45
+        ],
+        "support_variants": [
+          [
+            4,
+            42,
+            45
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e24",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U4"
+        },
+        "modal_support": [
+          1,
+          6,
+          36
+        ],
+        "support_variants": [
+          [
+            1,
+            6,
+            36
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e25",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U7"
+        },
+        "modal_support": [
+          6,
+          14,
+          24
+        ],
+        "support_variants": [
+          [
+            6,
+            14,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e26",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U6"
+        },
+        "modal_support": [
+          1,
+          4,
+          36
+        ],
+        "support_variants": [
+          [
+            1,
+            4,
+            36
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e27",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U5"
+        },
+        "modal_support": [
+          9,
+          42,
+          43
+        ],
+        "support_variants": [
+          [
+            9,
+            42,
+            43
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e28",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U0"
+        },
+        "modal_support": [
+          20,
+          36,
+          46
+        ],
+        "support_variants": [
+          [
+            20,
+            36,
+            46
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e29",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U2"
+        },
+        "modal_support": [
+          41,
+          45,
+          46
+        ],
+        "support_variants": [
+          [
+            41,
+            45,
+            46
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e30",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U3"
+        },
+        "modal_support": [
+          4,
+          6,
+          35
+        ],
+        "support_variants": [
+          [
+            4,
+            6,
+            35
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e31",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U2"
+        },
+        "modal_support": [
+          0,
+          4,
+          6
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e32",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U0"
+        },
+        "modal_support": [
+          0,
+          23,
+          31
+        ],
+        "support_variants": [
+          [
+            0,
+            23,
+            31
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e33",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U6"
+        },
+        "modal_support": [
+          1,
+          6,
+          28
+        ],
+        "support_variants": [
+          [
+            1,
+            6,
+            28
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e34",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U3"
+        },
+        "modal_support": [
+          6,
+          16,
+          30
+        ],
+        "support_variants": [
+          [
+            6,
+            16,
+            30
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e35",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U4"
+        },
+        "modal_support": [
+          14,
+          26,
+          31
+        ],
+        "support_variants": [
+          [
+            14,
+            26,
+            31
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e36",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U7"
+        },
+        "modal_support": [
+          11,
+          23,
+          42
+        ],
+        "support_variants": [
+          [
+            11,
+            23,
+            42
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e37",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U5"
+        },
+        "modal_support": [
+          9,
+          24,
+          36
+        ],
+        "support_variants": [
+          [
+            9,
+            24,
+            36
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e38",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U0"
+        },
+        "modal_support": [
+          1,
+          4,
+          6
+        ],
+        "support_variants": [
+          [
+            1,
+            4,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e39",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U7"
+        },
+        "modal_support": [
+          0,
+          6,
+          16
+        ],
+        "support_variants": [
+          [
+            0,
+            6,
+            16
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e40",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U3"
+        },
+        "modal_support": [
+          0,
+          9,
+          24
+        ],
+        "support_variants": [
+          [
+            0,
+            9,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e41",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U5"
+        },
+        "modal_support": [
+          4,
+          19,
+          31
+        ],
+        "support_variants": [
+          [
+            4,
+            19,
+            31
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e42",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U6"
+        },
+        "modal_support": [
+          4,
+          31,
+          36
+        ],
+        "support_variants": [
+          [
+            4,
+            31,
+            36
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e43",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U1"
+        },
+        "modal_support": [
+          1,
+          6,
+          21
+        ],
+        "support_variants": [
+          [
+            1,
+            6,
+            21
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e44",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U1"
+        },
+        "modal_support": [
+          0,
+          11,
+          16
+        ],
+        "support_variants": [
+          [
+            0,
+            11,
+            16
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e45",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U4"
+        },
+        "modal_support": [
+          0,
+          6,
+          9
+        ],
+        "support_variants": [
+          [
+            0,
+            6,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e46",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U6"
+        },
+        "modal_support": [
+          4,
+          33,
+          41
+        ],
+        "support_variants": [
+          [
+            4,
+            33,
+            41
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e47",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U2"
+        },
+        "modal_support": [
+          0,
+          30,
+          36
+        ],
+        "support_variants": [
+          [
+            0,
+            30,
+            36
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e48",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U7"
+        },
+        "modal_support": [
+          1,
+          6,
+          24
+        ],
+        "support_variants": [
+          [
+            1,
+            6,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e49",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U3"
+        },
+        "modal_support": [
+          7,
+          14,
+          42
+        ],
+        "support_variants": [
+          [
+            7,
+            14,
+            42
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e50",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U5"
+        },
+        "modal_support": [
+          11,
+          15,
+          23
+        ],
+        "support_variants": [
+          [
+            11,
+            15,
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      }
+    ],
+    "routes": {
+      "feature_groups": [
+        [
+          "checking_status=no checking"
+        ],
+        [
+          "checking_status=<0"
+        ],
+        [
+          "checking_status=0<=X<200"
+        ],
+        [
+          "checking_status=>=200"
+        ],
+        [
+          "duration"
+        ],
+        [
+          "credit_history=existing paid"
+        ],
+        [
+          "credit_history=critical/other existing credit"
+        ],
+        [
+          "credit_history=delayed previously"
+        ],
+        [
+          "purpose=radio/tv"
+        ],
+        [
+          "purpose=new car"
+        ],
+        [
+          "purpose=furniture/equipment"
+        ],
+        [
+          "purpose=used car"
+        ],
+        [
+          "purpose=business"
+        ],
+        [
+          "purpose=education"
+        ],
+        [
+          "credit_amount"
+        ],
+        [
+          "savings_status=<100"
+        ],
+        [
+          "savings_status=no known savings"
+        ],
+        [
+          "savings_status=100<=X<500"
+        ],
+        [
+          "savings_status=500<=X<1000"
+        ],
+        [
+          "employment=1<=X<4"
+        ],
+        [
+          "employment=>=7"
+        ],
+        [
+          "employment=4<=X<7"
+        ],
+        [
+          "employment=<1"
+        ],
+        [
+          "employment=unemployed"
+        ],
+        [
+          "installment_commitment"
+        ],
+        [
+          "personal_status=male single"
+        ],
+        [
+          "personal_status=female div/dep/mar"
+        ],
+        [
+          "personal_status=male mar/wid"
+        ],
+        [
+          "personal_status=male div/sep"
+        ],
+        [
+          "other_parties=none"
+        ],
+        [
+          "other_parties=guarantor"
+        ],
+        [
+          "residence_since"
+        ],
+        [
+          "property_magnitude=car"
+        ],
+        [
+          "property_magnitude=real estate"
+        ],
+        [
+          "property_magnitude=life insurance"
+        ],
+        [
+          "property_magnitude=no known property"
+        ],
+        [
+          "age"
+        ],
+        [
+          "other_payment_plans=none",
+          "other_payment_plans=bank"
+        ],
+        [
+          "housing=own"
+        ],
+        [
+          "housing=rent"
+        ],
+        [
+          "housing=for free"
+        ],
+        [
+          "existing_credits"
+        ],
+        [
+          "job=skilled"
+        ],
+        [
+          "job=unskilled resident"
+        ],
+        [
+          "job=high qualif/self emp/mgmt"
+        ],
+        [
+          "num_dependents"
+        ],
+        [
+          "own_telephone"
+        ],
+        [
+          "foreign_worker"
+        ]
+      ],
+      "rows": [
+        {
+          "rid": "r0",
+          "support_groups": [
+            0,
+            6,
+            21
+          ],
+          "support_names": [
+            "checking_status=no checking",
+            "credit_history=critical/other existing credit",
+            "employment=4<=X<7"
+          ],
+          "common_core": [
+            0,
+            6,
+            21
+          ],
+          "common_core_names": [
+            "checking_status=no checking",
+            "credit_history=critical/other existing credit",
+            "employment=4<=X<7"
+          ],
+          "variants": [
+            [
+              0,
+              6,
+              21
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [
+            "L1U6"
+          ],
+          "mu": 0.8361409902572632,
+          "multiplicitous": false,
+          "delta": 0.013850181250045446,
+          "ci_low": -0.01593008774455811,
+          "ci_high": 0.04817570854281938,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r1",
+          "support_groups": [
+            0,
+            9,
+            41
+          ],
+          "support_names": [
+            "checking_status=no checking",
+            "purpose=new car",
+            "existing_credits"
+          ],
+          "common_core": [
+            0,
+            9,
+            41
+          ],
+          "common_core_names": [
+            "checking_status=no checking",
+            "purpose=new car",
+            "existing_credits"
+          ],
+          "variants": [
+            [
+              0,
+              9,
+              41
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r2",
+          "support_groups": [
+            4,
+            14,
+            36
+          ],
+          "support_names": [
+            "duration",
+            "credit_amount",
+            "age"
+          ],
+          "common_core": [
+            4,
+            14,
+            36
+          ],
+          "common_core_names": [
+            "duration",
+            "credit_amount",
+            "age"
+          ],
+          "variants": [
+            [
+              4,
+              14,
+              36
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r3",
+          "support_groups": [
+            6,
+            11,
+            14
+          ],
+          "support_names": [
+            "credit_history=critical/other existing credit",
+            "purpose=used car",
+            "credit_amount"
+          ],
+          "common_core": [
+            6,
+            11,
+            14
+          ],
+          "common_core_names": [
+            "credit_history=critical/other existing credit",
+            "purpose=used car",
+            "credit_amount"
+          ],
+          "variants": [
+            [
+              6,
+              11,
+              14
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [
+            "L1U7"
+          ],
+          "mu": 0.5082384943962097,
+          "multiplicitous": false,
+          "delta": 0.00044786594763956966,
+          "ci_low": -0.11121979969234777,
+          "ci_high": 0.11435474259703741,
+          "label": "PERIPHERY",
+          "reasons": [
+            "polysemantic",
+            "unstable",
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r4",
+          "support_groups": [
+            7,
+            14,
+            41
+          ],
+          "support_names": [
+            "credit_history=delayed previously",
+            "credit_amount",
+            "existing_credits"
+          ],
+          "common_core": [
+            7,
+            14,
+            41
+          ],
+          "common_core_names": [
+            "credit_history=delayed previously",
+            "credit_amount",
+            "existing_credits"
+          ],
+          "variants": [
+            [
+              7,
+              14,
+              41
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r5",
+          "support_groups": [
+            8,
+            14,
+            20
+          ],
+          "support_names": [
+            "purpose=radio/tv",
+            "credit_amount",
+            "employment=>=7"
+          ],
+          "common_core": [
+            8,
+            14,
+            20
+          ],
+          "common_core_names": [
+            "purpose=radio/tv",
+            "credit_amount",
+            "employment=>=7"
+          ],
+          "variants": [
+            [
+              8,
+              14,
+              20
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [
+            "L1U3"
+          ],
+          "mu": 0.9227100610733032,
+          "multiplicitous": false,
+          "delta": 0.011129224863143716,
+          "ci_low": -0.03027024263284815,
+          "ci_high": 0.05128703275876521,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r6",
+          "support_groups": [
+            9,
+            24,
+            36
+          ],
+          "support_names": [
+            "purpose=new car",
+            "installment_commitment",
+            "age"
+          ],
+          "common_core": [
+            9,
+            24,
+            36
+          ],
+          "common_core_names": [
+            "purpose=new car",
+            "installment_commitment",
+            "age"
+          ],
+          "variants": [
+            [
+              9,
+              24,
+              36
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r7",
+          "support_groups": [
+            11,
+            36,
+            41
+          ],
+          "support_names": [
+            "purpose=used car",
+            "age",
+            "existing_credits"
+          ],
+          "common_core": [
+            11,
+            36,
+            41
+          ],
+          "common_core_names": [
+            "purpose=used car",
+            "age",
+            "existing_credits"
+          ],
+          "variants": [
+            [
+              11,
+              36,
+              41
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [
+            "L1U5"
+          ],
+          "mu": 0.9404070377349854,
+          "multiplicitous": false,
+          "delta": 0.007212983539730988,
+          "ci_low": -0.04138630892907056,
+          "ci_high": 0.06191973611239513,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r8",
+          "support_groups": [
+            14,
+            16,
+            30
+          ],
+          "support_names": [
+            "credit_amount",
+            "savings_status=no known savings",
+            "other_parties=guarantor"
+          ],
+          "common_core": [
+            14,
+            16,
+            30
+          ],
+          "common_core_names": [
+            "credit_amount",
+            "savings_status=no known savings",
+            "other_parties=guarantor"
+          ],
+          "variants": [
+            [
+              14,
+              16,
+              30
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r9",
+          "support_groups": [
+            14,
+            22,
+            36
+          ],
+          "support_names": [
+            "credit_amount",
+            "employment=<1",
+            "age"
+          ],
+          "common_core": [
+            14,
+            22,
+            36
+          ],
+          "common_core_names": [
+            "credit_amount",
+            "employment=<1",
+            "age"
+          ],
+          "variants": [
+            [
+              14,
+              22,
+              36
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r10",
+          "support_groups": [
+            27,
+            33,
+            34
+          ],
+          "support_names": [
+            "personal_status=male mar/wid",
+            "property_magnitude=real estate",
+            "property_magnitude=life insurance"
+          ],
+          "common_core": [
+            27,
+            33,
+            34
+          ],
+          "common_core_names": [
+            "personal_status=male mar/wid",
+            "property_magnitude=real estate",
+            "property_magnitude=life insurance"
+          ],
+          "variants": [
+            [
+              27,
+              33,
+              34
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        }
+      ],
+      "n_core_routes": 0,
+      "ev_bound_routes": 1.6579146816803813e-05,
+      "note": "Routes are certified at the collinearity-group level (the level stable across retrainings); unit members are one carving from an explicit equivalence class."
+    },
+    "function_decomposition": {
+      "note": "Purified weighted-fANOVA components of the learned function under the DECLARED empirical training measure (unique given the measure; carving-invariant).  Shares are out-of-sample covariances on validation.",
+      "components": [
+        {
+          "support": [
+            0
+          ],
+          "support_names": [
+            "checking_status=no checking"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "checking_status=no checking"
+          ],
+          "share_main": 0.0485,
+          "shares_all": [
+            0.0485,
+            0.0652,
+            0.0684,
+            0.0577,
+            0.0398,
+            0.0604,
+            0.0553,
+            0.0689
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            1
+          ],
+          "support_names": [
+            "checking_status=<0"
+          ],
+          "group_support": [
+            1
+          ],
+          "group_names": [
+            "checking_status=<0"
+          ],
+          "share_main": 0.0124,
+          "shares_all": [
+            0.0124,
+            0.0133,
+            0.0,
+            0.0105,
+            0.0134,
+            0.0108,
+            0.0124,
+            0.0117
+          ],
+          "Pi": 0.875,
+          "pi": 0.65,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            4
+          ],
+          "support_names": [
+            "duration"
+          ],
+          "group_support": [
+            4
+          ],
+          "group_names": [
+            "duration"
+          ],
+          "share_main": 0.019,
+          "shares_all": [
+            0.019,
+            0.0,
+            0.0157,
+            0.0299,
+            0.0188,
+            0.0117,
+            0.02,
+            0.0113
+          ],
+          "Pi": 0.875,
+          "pi": 0.95,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            6
+          ],
+          "support_names": [
+            "credit_history=critical/other existing credit"
+          ],
+          "group_support": [
+            6
+          ],
+          "group_names": [
+            "credit_history=critical/other existing credit"
+          ],
+          "share_main": 0.0234,
+          "shares_all": [
+            0.0234,
+            0.0257,
+            0.0298,
+            0.0205,
+            0.024,
+            0.0339,
+            0.0256,
+            0.0293
+          ],
+          "Pi": 1.0,
+          "pi": 0.825,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            9
+          ],
+          "support_names": [
+            "purpose=new car"
+          ],
+          "group_support": [
+            9
+          ],
+          "group_names": [
+            "purpose=new car"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0163,
+            0.0,
+            0.0,
+            0.0142,
+            0.0118,
+            0.0104,
+            0.0127
+          ],
+          "Pi": 0.625,
+          "pi": 0.175,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            11
+          ],
+          "support_names": [
+            "purpose=used car"
+          ],
+          "group_support": [
+            11
+          ],
+          "group_names": [
+            "purpose=used car"
+          ],
+          "share_main": 0.0203,
+          "shares_all": [
+            0.0203,
+            0.0161,
+            0.0129,
+            0.0,
+            0.0,
+            0.0135,
+            0.0,
+            0.0144
+          ],
+          "Pi": 0.625,
+          "pi": 0.05,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            14
+          ],
+          "support_names": [
+            "credit_amount"
+          ],
+          "group_support": [
+            14
+          ],
+          "group_names": [
+            "credit_amount"
+          ],
+          "share_main": 0.0149,
+          "shares_all": [
+            0.0149,
+            0.0,
+            0.0,
+            0.014,
+            0.012,
+            0.0,
+            0.0,
+            0.0125
+          ],
+          "Pi": 0.5,
+          "pi": 0.375,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            15
+          ],
+          "support_names": [
+            "savings_status=<100"
+          ],
+          "group_support": [
+            15
+          ],
+          "group_names": [
+            "savings_status=<100"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0214,
+            0.0134,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.25,
+          "pi": 0.475,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            16
+          ],
+          "support_names": [
+            "savings_status=no known savings"
+          ],
+          "group_support": [
+            16
+          ],
+          "group_names": [
+            "savings_status=no known savings"
+          ],
+          "share_main": 0.0205,
+          "shares_all": [
+            0.0205,
+            0.0,
+            0.015,
+            0.0,
+            0.0,
+            0.0111,
+            0.0113,
+            0.0
+          ],
+          "Pi": 0.5,
+          "pi": 0.275,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            36
+          ],
+          "support_names": [
+            "age"
+          ],
+          "group_support": [
+            36
+          ],
+          "group_names": [
+            "age"
+          ],
+          "share_main": 0.012,
+          "shares_all": [
+            0.012,
+            0.0,
+            0.0114,
+            0.0156,
+            0.0181,
+            0.0113,
+            0.0133,
+            0.0
+          ],
+          "Pi": 0.75,
+          "pi": 0.55,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            39
+          ],
+          "support_names": [
+            "housing=own"
+          ],
+          "group_support": [
+            38
+          ],
+          "group_names": [
+            "housing=own"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0112,
+            0.0,
+            0.0,
+            0.0164,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.25,
+          "pi": 0.475,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        }
+      ],
+      "n_core": 3,
+      "group_shares": {
+        "0": 0.0485,
+        "4": 0.019,
+        "6": 0.0234
+      },
+      "ev_bound": 0.005049875311720699,
+      "recon_r2": 0.86
+    },
+    "portfolio_reliance": [
+      {
+        "group": "checking_status=no checking",
+        "min_reliance": 0.0612,
+        "max_reliance": 0.1367
+      },
+      {
+        "group": "checking_status=<0",
+        "min_reliance": 0.0256,
+        "max_reliance": 0.0662
+      },
+      {
+        "group": "checking_status=0<=X<200",
+        "min_reliance": -0.003,
+        "max_reliance": 0.0152
+      },
+      {
+        "group": "checking_status=>=200",
+        "min_reliance": -0.0073,
+        "max_reliance": 0.0113
+      },
+      {
+        "group": "duration",
+        "min_reliance": 0.011,
+        "max_reliance": 0.1339
+      },
+      {
+        "group": "credit_history=existing paid",
+        "min_reliance": -0.0029,
+        "max_reliance": 0.0088
+      },
+      {
+        "group": "credit_history=critical/other existing credit",
+        "min_reliance": 0.0342,
+        "max_reliance": 0.1122
+      },
+      {
+        "group": "credit_history=delayed previously",
+        "min_reliance": -0.0042,
+        "max_reliance": 0.0106
+      },
+      {
+        "group": "purpose=radio/tv",
+        "min_reliance": -0.0023,
+        "max_reliance": 0.0044
+      },
+      {
+        "group": "purpose=new car",
+        "min_reliance": -0.0001,
+        "max_reliance": 0.0117
+      },
+      {
+        "group": "purpose=furniture/equipment",
+        "min_reliance": 0.0002,
+        "max_reliance": 0.0162
+      },
+      {
+        "group": "purpose=used car",
+        "min_reliance": 0.0154,
+        "max_reliance": 0.0896
+      },
+      {
+        "group": "purpose=business",
+        "min_reliance": -0.0042,
+        "max_reliance": 0.0005
+      },
+      {
+        "group": "purpose=education",
+        "min_reliance": -0.0,
+        "max_reliance": 0.0049
+      },
+      {
+        "group": "credit_amount",
+        "min_reliance": -0.0074,
+        "max_reliance": 0.0342
+      },
+      {
+        "group": "savings_status=<100",
+        "min_reliance": -0.0009,
+        "max_reliance": 0.0127
+      },
+      {
+        "group": "savings_status=no known savings",
+        "min_reliance": 0.0023,
+        "max_reliance": 0.0195
+      },
+      {
+        "group": "savings_status=100<=X<500",
+        "min_reliance": -0.0073,
+        "max_reliance": 0.0048
+      },
+      {
+        "group": "savings_status=500<=X<1000",
+        "min_reliance": -0.0082,
+        "max_reliance": 0.0016
+      },
+      {
+        "group": "employment=1<=X<4",
+        "min_reliance": -0.0076,
+        "max_reliance": 0.0026
+      },
+      {
+        "group": "employment=>=7",
+        "min_reliance": -0.0007,
+        "max_reliance": 0.0067
+      },
+      {
+        "group": "employment=4<=X<7",
+        "min_reliance": 0.0031,
+        "max_reliance": 0.0183
+      },
+      {
+        "group": "employment=<1",
+        "min_reliance": -0.0031,
+        "max_reliance": 0.0086
+      },
+      {
+        "group": "employment=unemployed",
+        "min_reliance": -0.0082,
+        "max_reliance": 0.0239
+      },
+      {
+        "group": "installment_commitment",
+        "min_reliance": -0.0037,
+        "max_reliance": 0.0137
+      },
+      {
+        "group": "personal_status=male single",
+        "min_reliance": -0.01,
+        "max_reliance": 0.0163
+      },
+      {
+        "group": "personal_status=female div/dep/mar",
+        "min_reliance": -0.0012,
+        "max_reliance": 0.0085
+      },
+      {
+        "group": "personal_status=male mar/wid",
+        "min_reliance": -0.0019,
+        "max_reliance": 0.0
+      },
+      {
+        "group": "personal_status=male div/sep",
+        "min_reliance": -0.007,
+        "max_reliance": 0.0035
+      },
+      {
+        "group": "other_parties=none",
+        "min_reliance": -0.0043,
+        "max_reliance": 0.0001
+      },
+      {
+        "group": "other_parties=guarantor",
+        "min_reliance": 0.0069,
+        "max_reliance": 0.0446
+      },
+      {
+        "group": "residence_since",
+        "min_reliance": -0.0158,
+        "max_reliance": 0.0138
+      },
+      {
+        "group": "property_magnitude=car",
+        "min_reliance": -0.0015,
+        "max_reliance": 0.0035
+      },
+      {
+        "group": "property_magnitude=real estate",
+        "min_reliance": 0.002,
+        "max_reliance": 0.0132
+      },
+      {
+        "group": "property_magnitude=life insurance",
+        "min_reliance": -0.0,
+        "max_reliance": 0.0083
+      },
+      {
+        "group": "property_magnitude=no known property",
+        "min_reliance": 0.0,
+        "max_reliance": 0.0089
+      },
+      {
+        "group": "age",
+        "min_reliance": 0.0185,
+        "max_reliance": 0.0416
+      },
+      {
+        "group": "G37{other_payment_plans=none, other_payment_plans=bank}",
+        "min_reliance": 0.0015,
+        "max_reliance": 0.0273
+      },
+      {
+        "group": "housing=own",
+        "min_reliance": -0.0025,
+        "max_reliance": 0.0067
+      },
+      {
+        "group": "housing=rent",
+        "min_reliance": 0.0007,
+        "max_reliance": 0.0167
+      },
+      {
+        "group": "housing=for free",
+        "min_reliance": -0.0067,
+        "max_reliance": 0.0143
+      },
+      {
+        "group": "existing_credits",
+        "min_reliance": -0.017,
+        "max_reliance": 0.0029
+      },
+      {
+        "group": "job=skilled",
+        "min_reliance": -0.0074,
+        "max_reliance": 0.0054
+      },
+      {
+        "group": "job=unskilled resident",
+        "min_reliance": 0.0004,
+        "max_reliance": 0.0093
+      },
+      {
+        "group": "job=high qualif/self emp/mgmt",
+        "min_reliance": -0.0109,
+        "max_reliance": 0.0013
+      },
+      {
+        "group": "num_dependents",
+        "min_reliance": -0.0147,
+        "max_reliance": 0.01
+      },
+      {
+        "group": "own_telephone",
+        "min_reliance": 0.0,
+        "max_reliance": 0.0119
+      },
+      {
+        "group": "foreign_worker",
+        "min_reliance": -0.0016,
+        "max_reliance": 0.0016
+      }
+    ],
+    "non_claims": [
+      "CORE concepts are stable, real structures - not proven causal mechanisms of the world (M-C7).",
+      "The periphery is labelled, not certified.",
+      "Unit semantics require expert review (the soft target)."
+    ]
+  },
+  "core_share_sum": 0.0909,
+  "bars": [
+    {
+      "id": "fidelity \u2265 ceiling",
+      "pass": true,
+      "detail": "ratio 0.986 vs unconstrained MLP/HGB"
+    },
+    {
+      "id": "core coverage \u2265 0.5",
+      "pass": false,
+      "detail": "certified components cover 0.09 of function variance"
+    },
+    {
+      "id": "E[V] non-vacuous",
+      "pass": true,
+      "detail": "E[V] \u2264 0.005 over the structure-level universe"
+    },
+    {
+      "id": "honest depth",
+      "pass": true,
+      "detail": "depth 1; widths 8"
+    }
+  ],
+  "member_contrib": {
+    "0": {
+      "L1U7": 0.0022,
+      "L1U3": 0.0022,
+      "L1U4": 0.0589,
+      "L1U6": 0.0552,
+      "L1U9": 0.0508
+    },
+    "4": {
+      "L1U7": 0.0307,
+      "L1U2": 0.0298,
+      "L1U3": 0.0025,
+      "L1U4": 0.0211
+    },
+    "6": {
+      "L1U7": 0.0458,
+      "L1U5": 0.0084,
+      "L1U6": 0.0046,
+      "L1U9": 0.0338
+    },
+    "9": {
+      "L1U7": 0.0113,
+      "L1U2": 0.0017,
+      "L1U4": 0.0093,
+      "L1U5": 0.0011
+    },
+    "11": {
+      "L1U7": 0.0531,
+      "L1U5": 0.0475
+    },
+    "14": {
+      "L1U7": 0.0018,
+      "L1U3": 0.0767
+    },
+    "36": {
+      "L1U7": 0.0114,
+      "L1U2": 0.0615,
+      "L1U5": 0.0259
+    },
+    "39": {
+      "L1U7": 0.0239,
+      "L1U2": 0.0115,
+      "L1U9": 0.0029
+    },
+    "1": {
+      "L1U1": 0.0639,
+      "L1U9": 0.0091
+    },
+    "15": {
+      "L1U1": 0.0319,
+      "L1U3": 0.0006
+    },
+    "16": {
+      "L1U1": 0.0924
+    },
+    "45": {
+      "L1U1": 0.0186,
+      "L1U3": 0.0049
+    },
+    "22": {
+      "L1U1": 0.0025,
+      "L1U2": 0.0004,
+      "L1U4": 0.0006,
+      "L1U5": 0.0002,
+      "L1U6": 0.0137
+    },
+    "43": {
+      "L1U1": 0.026,
+      "L1U3": 0.003,
+      "L1U6": 0.0005
+    },
+    "25": {
+      "L1U2": 0.0107,
+      "L1U5": 0.0107,
+      "L1U6": 0.0107,
+      "L1U9": 0.0107
+    }
+  }
+}

@@ -166,5 +166,29 @@
     "coverage": 0.4783,
     "regime": "standard",
     "file": "spambase@grow-batch-8.html"
+  },
+  {
+    "dataset": "german_credit",
+    "task": "classification",
+    "n": 1000,
+    "d": 49,
+    "fidelity": 0.1944305941159159,
+    "ratio": 0.9862,
+    "n_core": 3,
+    "coverage": 0.0909,
+    "regime": "below stability power floor (n < 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A)",
+    "file": "german_credit.html"
+  },
+  {
+    "dataset": "taiwan_credit",
+    "task": "classification",
+    "n": 30000,
+    "d": 24,
+    "fidelity": 0.16742681130435222,
+    "ratio": 0.8605,
+    "n_core": 2,
+    "coverage": 0.0967,
+    "regime": "standard",
+    "file": "taiwan_credit.html"
   }
 ]
