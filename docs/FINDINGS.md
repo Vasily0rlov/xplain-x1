@@ -449,9 +449,16 @@ traced bike's fidelity shortfall to one mechanism, then E8.1 fixed it.
   vs 6; seed 0 accepted a second hidden layer that survived dissolution —
   operationally earned, flagged for owner review); COMP2 seed 2 kept 13 units
   at ceiling (batching trades some minimality for fidelity); ~20 min/seed.
-- **Status:** P8-X awaits owner adoption decision.  Adoption changes a pinned
-  S-§9 default ⇒ certification re-run on batched-growth models + re-freeze
-  before any new confirmatory claim.
+- **P8-X owner decision (2026-08-24): SHIP BOTH AS A CONFIG SWITCH.**  Default
+  stays `grow_batch: 2` (frozen, `freeze-x1-v1`-certified — the legible,
+  depth-honest interpretability deliverable); `grow_batch: 8` is documented as
+  the opt-in **accuracy mode** (S-§14, S-§16.1).  Rationale: the certified Layer-F
+  structure is near-identical between the two (E8.2), so batch buys *accuracy*
+  (bike count-space R² 0.69→0.91, log1p 0.945→0.988) not more *certified
+  interpretable structure* — and the added complexity (6→28 units, +unwarranted
+  2nd layer) lives entirely in the uncertified unit layer.  Default unchanged ⇒
+  **no re-freeze**; every existing certified/confirmatory claim stands.  Batch is
+  inert when already near ceiling (morpher, Spambase both unchanged at [7]/[8]).
 
 ### Morpher (Russian declension) — generality probe + expert analysis, 2026-08-24
 
