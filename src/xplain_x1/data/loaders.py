@@ -274,3 +274,37 @@ def load_morpher() -> Dataset:
                    meta={"source": "data/morpher (UTF-16, v4 recipe)",
                          "classes": classes, "expected_depth": 1,
                          "domain": "Russian morphology / declension"})
+
+
+def load_spambase() -> Dataset:
+    """Spambase (OpenML v1): 57 continuous features (word/char frequencies +
+    capital-run stats), binary spam target.  High-d generality probe (d=57);
+    the interaction screen's stress test.  Feature names shortened for legibility
+    (word_freq_free -> 'free', char_freq_%21 -> 'char_!', capital_run_length_*
+    -> cap_*)."""
+    raw = _fetch("spambase", version=1)
+    df = raw.frame.drop(columns=[raw.target.name])
+    charmap = {"%3B": ";", "%28": "(", "%5B": "[", "%21": "!", "%24": "$",
+               "%23": "#"}
+
+    def short(col: str) -> str:
+        if col.startswith("word_freq_"):
+            return col[len("word_freq_"):]
+        if col.startswith("char_freq_"):
+            c = col[len("char_freq_"):]
+            return "char_" + charmap.get(c, c)
+        if col.startswith("capital_run_length_"):
+            return "cap_" + {"average": "avg", "longest": "max",
+                             "total": "total"}[col[len("capital_run_length_"):]]
+        return col
+
+    cols = [short(c) for c in df.columns]
+    X = df.to_numpy(dtype=np.float32)
+    y = (raw.target.astype(str) == "1").to_numpy().astype(np.int64)
+    return Dataset(name="spambase", X=X, y=y, feature_names=cols,
+                   task="classification", n_classes=2,
+                   continuous_mask=np.ones(X.shape[1], dtype=bool),
+                   meta={"source": "openml:spambase:v1", "expected_depth": 2,
+                         "known": "token main effects (free,!,$,remove,cap_*) "
+                                  "+ capital-run x ! interaction",
+                         "domain": "email spam (high-d probe)"})

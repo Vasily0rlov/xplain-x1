@@ -5,7 +5,8 @@ from typing import Callable
 
 from .dataset import Dataset
 from .loaders import (load_adult, load_bike, load_drybean, load_morpher,
-                      load_mushroom, load_tictactoe, load_wine, load_zoo)
+                      load_mushroom, load_spambase, load_tictactoe, load_wine,
+                      load_zoo)
 from .synthetic import CONFIGS, EXTRA_CONFIGS, make_synthetic
 
 _LOADERS: dict[str, Callable[[], Dataset]] = {
@@ -17,6 +18,7 @@ _LOADERS: dict[str, Callable[[], Dataset]] = {
     "bike": load_bike,
     "drybean": load_drybean,
     "morpher": load_morpher,
+    "spambase": load_spambase,
 }
 for _name in {**CONFIGS, **EXTRA_CONFIGS}:
     _LOADERS[_name] = (lambda n=_name: make_synthetic(n))
