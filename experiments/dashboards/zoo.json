@@ -1,0 +1,5476 @@
+{
+  "dag": {
+    "dataset": "zoo",
+    "nodes": [
+      {
+        "id": "hair",
+        "kind": "input",
+        "label": "hair"
+      },
+      {
+        "id": "feathers",
+        "kind": "input",
+        "label": "feathers"
+      },
+      {
+        "id": "eggs",
+        "kind": "input",
+        "label": "eggs"
+      },
+      {
+        "id": "milk",
+        "kind": "input",
+        "label": "milk"
+      },
+      {
+        "id": "airborne",
+        "kind": "input",
+        "label": "airborne"
+      },
+      {
+        "id": "aquatic",
+        "kind": "input",
+        "label": "aquatic"
+      },
+      {
+        "id": "predator",
+        "kind": "input",
+        "label": "predator"
+      },
+      {
+        "id": "toothed",
+        "kind": "input",
+        "label": "toothed"
+      },
+      {
+        "id": "backbone",
+        "kind": "input",
+        "label": "backbone"
+      },
+      {
+        "id": "breathes",
+        "kind": "input",
+        "label": "breathes"
+      },
+      {
+        "id": "venomous",
+        "kind": "input",
+        "label": "venomous"
+      },
+      {
+        "id": "fins",
+        "kind": "input",
+        "label": "fins"
+      },
+      {
+        "id": "legs",
+        "kind": "input",
+        "label": "legs"
+      },
+      {
+        "id": "tail",
+        "kind": "input",
+        "label": "tail"
+      },
+      {
+        "id": "catsize",
+        "kind": "input",
+        "label": "catsize"
+      },
+      {
+        "id": "L1U7",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(legs, milk, toothed)",
+        "mu": 0.945433177767028,
+        "Pi": 0.5,
+        "pi": 0.475,
+        "delta": 0.3832584333388087,
+        "coverage": 0.5357272133291376,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "legs",
+          "milk",
+          "toothed"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U1",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(toothed, fins, milk)",
+        "mu": 0.9654656533573315,
+        "Pi": 0.75,
+        "pi": 0.675,
+        "delta": 0.13282585146146264,
+        "coverage": 0.16370049161844324,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "toothed",
+          "fins",
+          "milk"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U6",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(legs, milk, predator)",
+        "mu": 0.9051171541213989,
+        "Pi": 0.5,
+        "pi": 0.325,
+        "delta": 0.31224536762158683,
+        "coverage": 0.3616447373577871,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "legs",
+          "milk",
+          "predator"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U3",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(legs, catsize, hair)",
+        "mu": 0.8663166658166996,
+        "Pi": 0.625,
+        "pi": 0.525,
+        "delta": -0.028685518637490026,
+        "coverage": 0.07295362979594266,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "legs",
+          "catsize",
+          "hair"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U2",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(fins, feathers, eggs)",
+        "mu": 0.951306939125061,
+        "Pi": 0.625,
+        "pi": 0.225,
+        "delta": 0.10146105694847873,
+        "coverage": 0.15258677950851496,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "fins",
+          "feathers",
+          "eggs"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U8",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(legs, hair, aquatic)",
+        "mu": 0.8880070447921753,
+        "Pi": 0.375,
+        "pi": 0.075,
+        "delta": 0.15572733148685258,
+        "coverage": 0.1776435616456884,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "legs",
+          "hair",
+          "aquatic"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U9",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(legs, breathes, backbone)",
+        "mu": 0.9988141263964646,
+        "Pi": 0.125,
+        "pi": 0.025,
+        "delta": 0.021737070534442737,
+        "coverage": 0.003210251011282028,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "legs",
+          "breathes",
+          "backbone"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "class_0",
+        "kind": "output",
+        "label": "class_0"
+      },
+      {
+        "id": "class_1",
+        "kind": "output",
+        "label": "class_1"
+      },
+      {
+        "id": "class_2",
+        "kind": "output",
+        "label": "class_2"
+      },
+      {
+        "id": "class_3",
+        "kind": "output",
+        "label": "class_3"
+      },
+      {
+        "id": "class_4",
+        "kind": "output",
+        "label": "class_4"
+      },
+      {
+        "id": "class_5",
+        "kind": "output",
+        "label": "class_5"
+      },
+      {
+        "id": "class_6",
+        "kind": "output",
+        "label": "class_6"
+      }
+    ],
+    "edges": [
+      {
+        "src": "feathers",
+        "dst": "L1U7",
+        "share": 0.0672
+      },
+      {
+        "src": "eggs",
+        "dst": "L1U7",
+        "share": 0.094
+      },
+      {
+        "src": "milk",
+        "dst": "L1U7",
+        "share": 0.1465
+      },
+      {
+        "src": "airborne",
+        "dst": "L1U7",
+        "share": 0.0978
+      },
+      {
+        "src": "predator",
+        "dst": "L1U7",
+        "share": 0.0751
+      },
+      {
+        "src": "toothed",
+        "dst": "L1U7",
+        "share": 0.1195
+      },
+      {
+        "src": "backbone",
+        "dst": "L1U7",
+        "share": 0.1117
+      },
+      {
+        "src": "breathes",
+        "dst": "L1U7",
+        "share": 0.1028
+      },
+      {
+        "src": "venomous",
+        "dst": "L1U7",
+        "share": 0.0234
+      },
+      {
+        "src": "legs",
+        "dst": "L1U7",
+        "share": 0.1608
+      },
+      {
+        "src": "hair",
+        "dst": "L1U1",
+        "share": 0.0749
+      },
+      {
+        "src": "feathers",
+        "dst": "L1U1",
+        "share": 0.1142
+      },
+      {
+        "src": "eggs",
+        "dst": "L1U1",
+        "share": 0.0697
+      },
+      {
+        "src": "milk",
+        "dst": "L1U1",
+        "share": 0.0912
+      },
+      {
+        "src": "predator",
+        "dst": "L1U1",
+        "share": 0.0398
+      },
+      {
+        "src": "toothed",
+        "dst": "L1U1",
+        "share": 0.1331
+      },
+      {
+        "src": "backbone",
+        "dst": "L1U1",
+        "share": 0.1108
+      },
+      {
+        "src": "breathes",
+        "dst": "L1U1",
+        "share": 0.072
+      },
+      {
+        "src": "venomous",
+        "dst": "L1U1",
+        "share": 0.0245
+      },
+      {
+        "src": "fins",
+        "dst": "L1U1",
+        "share": 0.122
+      },
+      {
+        "src": "legs",
+        "dst": "L1U1",
+        "share": 0.0857
+      },
+      {
+        "src": "tail",
+        "dst": "L1U1",
+        "share": 0.0438
+      },
+      {
+        "src": "hair",
+        "dst": "L1U6",
+        "share": 0.1099
+      },
+      {
+        "src": "feathers",
+        "dst": "L1U6",
+        "share": 0.032
+      },
+      {
+        "src": "eggs",
+        "dst": "L1U6",
+        "share": 0.0724
+      },
+      {
+        "src": "milk",
+        "dst": "L1U6",
+        "share": 0.0958
+      },
+      {
+        "src": "predator",
+        "dst": "L1U6",
+        "share": 0.0925
+      },
+      {
+        "src": "toothed",
+        "dst": "L1U6",
+        "share": 0.0646
+      },
+      {
+        "src": "backbone",
+        "dst": "L1U6",
+        "share": 0.0826
+      },
+      {
+        "src": "breathes",
+        "dst": "L1U6",
+        "share": 0.0295
+      },
+      {
+        "src": "venomous",
+        "dst": "L1U6",
+        "share": 0.038
+      },
+      {
+        "src": "fins",
+        "dst": "L1U6",
+        "share": 0.0459
+      },
+      {
+        "src": "legs",
+        "dst": "L1U6",
+        "share": 0.1614
+      },
+      {
+        "src": "tail",
+        "dst": "L1U6",
+        "share": 0.0795
+      },
+      {
+        "src": "catsize",
+        "dst": "L1U6",
+        "share": 0.0877
+      },
+      {
+        "src": "hair",
+        "dst": "L1U3",
+        "share": 0.1212
+      },
+      {
+        "src": "feathers",
+        "dst": "L1U3",
+        "share": 0.0543
+      },
+      {
+        "src": "milk",
+        "dst": "L1U3",
+        "share": 0.1199
+      },
+      {
+        "src": "airborne",
+        "dst": "L1U3",
+        "share": 0.0752
+      },
+      {
+        "src": "aquatic",
+        "dst": "L1U3",
+        "share": 0.0856
+      },
+      {
+        "src": "backbone",
+        "dst": "L1U3",
+        "share": 0.0808
+      },
+      {
+        "src": "breathes",
+        "dst": "L1U3",
+        "share": 0.0939
+      },
+      {
+        "src": "venomous",
+        "dst": "L1U3",
+        "share": 0.0663
+      },
+      {
+        "src": "legs",
+        "dst": "L1U3",
+        "share": 0.1625
+      },
+      {
+        "src": "catsize",
+        "dst": "L1U3",
+        "share": 0.1242
+      },
+      {
+        "src": "hair",
+        "dst": "L1U2",
+        "share": 0.104
+      },
+      {
+        "src": "feathers",
+        "dst": "L1U2",
+        "share": 0.0996
+      },
+      {
+        "src": "eggs",
+        "dst": "L1U2",
+        "share": 0.0887
+      },
+      {
+        "src": "milk",
+        "dst": "L1U2",
+        "share": 0.0297
+      },
+      {
+        "src": "airborne",
+        "dst": "L1U2",
+        "share": 0.091
+      },
+      {
+        "src": "aquatic",
+        "dst": "L1U2",
+        "share": 0.0355
+      },
+      {
+        "src": "toothed",
+        "dst": "L1U2",
+        "share": 0.1271
+      },
+      {
+        "src": "backbone",
+        "dst": "L1U2",
+        "share": 0.0814
+      },
+      {
+        "src": "breathes",
+        "dst": "L1U2",
+        "share": 0.0494
+      },
+      {
+        "src": "venomous",
+        "dst": "L1U2",
+        "share": 0.0431
+      },
+      {
+        "src": "fins",
+        "dst": "L1U2",
+        "share": 0.1195
+      },
+      {
+        "src": "tail",
+        "dst": "L1U2",
+        "share": 0.0691
+      },
+      {
+        "src": "catsize",
+        "dst": "L1U2",
+        "share": 0.049
+      },
+      {
+        "src": "hair",
+        "dst": "L1U8",
+        "share": 0.1794
+      },
+      {
+        "src": "airborne",
+        "dst": "L1U8",
+        "share": 0.0756
+      },
+      {
+        "src": "aquatic",
+        "dst": "L1U8",
+        "share": 0.1514
+      },
+      {
+        "src": "predator",
+        "dst": "L1U8",
+        "share": 0.1269
+      },
+      {
+        "src": "toothed",
+        "dst": "L1U8",
+        "share": 0.0622
+      },
+      {
+        "src": "breathes",
+        "dst": "L1U8",
+        "share": 0.0215
+      },
+      {
+        "src": "venomous",
+        "dst": "L1U8",
+        "share": 0.0756
+      },
+      {
+        "src": "fins",
+        "dst": "L1U8",
+        "share": 0.0693
+      },
+      {
+        "src": "legs",
+        "dst": "L1U8",
+        "share": 0.2351
+      },
+      {
+        "src": "breathes",
+        "dst": "L1U9",
+        "share": 0.0717
+      },
+      {
+        "src": "legs",
+        "dst": "L1U9",
+        "share": 0.9273
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_0",
+        "share": 0.2728
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_0",
+        "share": 0.0935
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_0",
+        "share": 0.1181
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_0",
+        "share": 0.1641
+      },
+      {
+        "src": "L1U8",
+        "dst": "class_0",
+        "share": 0.2742
+      },
+      {
+        "src": "L1U9",
+        "dst": "class_0",
+        "share": 0.0745
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_1",
+        "share": 0.164
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_1",
+        "share": 0.2576
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_1",
+        "share": 0.0348
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_1",
+        "share": 0.0385
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_1",
+        "share": 0.2502
+      },
+      {
+        "src": "L1U8",
+        "dst": "class_1",
+        "share": 0.1962
+      },
+      {
+        "src": "L1U9",
+        "dst": "class_1",
+        "share": 0.0587
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_2",
+        "share": 0.2711
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_2",
+        "share": 0.1745
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_2",
+        "share": 0.2054
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_2",
+        "share": 0.1637
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_2",
+        "share": 0.1022
+      },
+      {
+        "src": "L1U8",
+        "dst": "class_2",
+        "share": 0.0592
+      },
+      {
+        "src": "L1U9",
+        "dst": "class_2",
+        "share": 0.0239
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_3",
+        "share": 0.3262
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_3",
+        "share": 0.0595
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_3",
+        "share": 0.2802
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_3",
+        "share": 0.135
+      },
+      {
+        "src": "L1U8",
+        "dst": "class_3",
+        "share": 0.1555
+      },
+      {
+        "src": "L1U9",
+        "dst": "class_3",
+        "share": 0.0384
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_4",
+        "share": 0.2124
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_4",
+        "share": 0.2427
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_4",
+        "share": 0.0819
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_4",
+        "share": 0.1896
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_4",
+        "share": 0.1233
+      },
+      {
+        "src": "L1U8",
+        "dst": "class_4",
+        "share": 0.1116
+      },
+      {
+        "src": "L1U9",
+        "dst": "class_4",
+        "share": 0.0384
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_5",
+        "share": 0.301
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_5",
+        "share": 0.1866
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_5",
+        "share": 0.1951
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_5",
+        "share": 0.11
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_5",
+        "share": 0.0505
+      },
+      {
+        "src": "L1U8",
+        "dst": "class_5",
+        "share": 0.1254
+      },
+      {
+        "src": "L1U9",
+        "dst": "class_5",
+        "share": 0.0314
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_6",
+        "share": 0.1899
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_6",
+        "share": 0.1637
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_6",
+        "share": 0.1544
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_6",
+        "share": 0.2329
+      },
+      {
+        "src": "L1U2",
+        "dst": "class_6",
+        "share": 0.1831
+      },
+      {
+        "src": "L1U8",
+        "dst": "class_6",
+        "share": 0.0464
+      },
+      {
+        "src": "L1U9",
+        "dst": "class_6",
+        "share": 0.0296
+      }
+    ]
+  },
+  "cert": {
+    "identification": {
+      "system": "XPLAIN-x1",
+      "dataset": "zoo",
+      "task": "classification",
+      "n": 101,
+      "d": 16,
+      "git_commit": "37579b51d1a602325dd0665d13d4e73b3b86ee3b",
+      "config_hash": "c9e5554685f05c4ec9c450d45c96538be894ce5fd3d6d1ebbf6f31c98f973c77",
+      "data_hash": "9ca5c76c649eca04-63b4df317a052362",
+      "seeds": {
+        "main": 0,
+        "restarts": 8,
+        "cpss_runs": 40
+      }
+    },
+    "performance_and_limits": {
+      "fidelity_val": 0.9657951471014857,
+      "fidelity_ceiling": 0.9130616013846671,
+      "fidelity_ratio": 1.0578,
+      "accuracy_test": 0.9523809523809523,
+      "concept_tax_note": "vs best(unconstrained MLP, HGB) on val",
+      "restart_fidelities": [
+        0.9657951471014857,
+        0.9328993538718111,
+        0.933703359535217,
+        0.9465250365211286,
+        0.9384457830224537,
+        0.9191717584919767,
+        0.9007356061042405,
+        0.916317663703891
+      ]
+    },
+    "interpretability_structure": {
+      "widths": [
+        7
+      ],
+      "honest_depth": {
+        "depth": 1,
+        "eps_depth": 0.005,
+        "pairwise_dissolutions": [],
+        "all_earned": true
+      },
+      "n_concepts": 44,
+      "n_core": 0,
+      "n_periphery": 44,
+      "core_coverage_share": 0,
+      "periphery_reasons": [
+        "absent_in_main",
+        "infrequent",
+        "multiplicitous",
+        "no_effect",
+        "unstable"
+      ]
+    },
+    "statistical_certification": {
+      "regime": "below stability power floor (n < 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A)",
+      "restarts_R": 8,
+      "cpss_pairs_B": 20,
+      "tau_match": 0.7,
+      "pi_thr": 0.7,
+      "mu_min": 0.8,
+      "ev_bound": 0.16124281609195407,
+      "q_mean": 6.7,
+      "p_universe": 696,
+      "assumptions": [
+        "CPSS exchangeability (Meinshausen-Buhlmann) over an adaptive learned pipeline is a modelling idealisation; the reality test provides an independent assumption-light check.",
+        "The universe is structure-level: supports of arity <= F_max per layer interface of the delivered topology."
+      ]
+    },
+    "concepts": [
+      {
+        "cid": "c0",
+        "Pi": 0.5,
+        "members": {
+          "0": "L1U7",
+          "1": "L1U10",
+          "4": "L1U6",
+          "7": "L1U5"
+        },
+        "modal_support": [
+          3,
+          7,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            7,
+            12
+          ],
+          [
+            2,
+            9,
+            12
+          ],
+          [
+            4,
+            8,
+            9
+          ],
+          [
+            2,
+            6,
+            7
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U7",
+        "mu": 0.945433177767028,
+        "form": "tree(d3)",
+        "support_names": [
+          "legs",
+          "milk",
+          "toothed"
+        ],
+        "layer": 1,
+        "contribution": 0.5357272133291376,
+        "pi": 0.475,
+        "delta": 0.3832584333388087,
+        "ci_low": 0.14175861769629955,
+        "ci_high": 0.6742856977850925,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.3553
+      },
+      {
+        "cid": "c1",
+        "Pi": 0.75,
+        "members": {
+          "0": "L1U1",
+          "1": "L1U2",
+          "3": "L1U5",
+          "4": "L1U7",
+          "6": "L1U3",
+          "7": "L1U6"
+        },
+        "modal_support": [
+          3,
+          7,
+          11
+        ],
+        "support_variants": [
+          [
+            3,
+            7,
+            11
+          ],
+          [
+            2,
+            6,
+            12
+          ],
+          [
+            3,
+            7,
+            12
+          ],
+          [
+            2,
+            6,
+            7
+          ],
+          [
+            1,
+            2,
+            8
+          ],
+          [
+            3,
+            9,
+            13
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U1",
+        "mu": 0.9654656533573315,
+        "form": "tree(d3)",
+        "support_names": [
+          "toothed",
+          "fins",
+          "milk"
+        ],
+        "layer": 1,
+        "contribution": 0.16370049161844324,
+        "pi": 0.675,
+        "delta": 0.13282585146146264,
+        "ci_low": 0.013261473417127967,
+        "ci_high": 0.3100232123083256,
+        "label": "PERIPHERY",
+        "reasons": [
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1232
+      },
+      {
+        "cid": "c2",
+        "Pi": 0.5,
+        "members": {
+          "0": "L1U6",
+          "1": "L1U3",
+          "2": "L1U8",
+          "4": "L1U5"
+        },
+        "modal_support": [
+          3,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            6,
+            12
+          ],
+          [
+            4,
+            5,
+            8
+          ],
+          [
+            6,
+            8,
+            12
+          ],
+          [
+            2,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U6",
+        "mu": 0.9051171541213989,
+        "form": "poly(2)",
+        "support_names": [
+          "legs",
+          "milk",
+          "predator"
+        ],
+        "layer": 1,
+        "contribution": 0.3616447373577871,
+        "pi": 0.325,
+        "delta": 0.31224536762158683,
+        "ci_low": 0.09958142254817465,
+        "ci_high": 0.5506866023162581,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.2895
+      },
+      {
+        "cid": "c3",
+        "Pi": 0.625,
+        "members": {
+          "0": "L1U3",
+          "1": "L1U0",
+          "2": "L1U1",
+          "4": "L1U4",
+          "6": "L1U7"
+        },
+        "modal_support": [
+          0,
+          12,
+          15
+        ],
+        "support_variants": [
+          [
+            0,
+            12,
+            15
+          ],
+          [
+            4,
+            9,
+            14
+          ],
+          [
+            1,
+            8,
+            12
+          ],
+          [
+            1,
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U3",
+        "mu": 0.8663166658166996,
+        "form": "tree(d3)",
+        "support_names": [
+          "legs",
+          "catsize",
+          "hair"
+        ],
+        "layer": 1,
+        "contribution": 0.07295362979594266,
+        "pi": 0.525,
+        "delta": -0.028685518637490026,
+        "ci_low": -0.27408078259704405,
+        "ci_high": 0.14018889060306403,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "coverage_share": -0.0266
+      },
+      {
+        "cid": "c4",
+        "Pi": 0.625,
+        "members": {
+          "0": "L1U2",
+          "1": "L1U4",
+          "3": "L1U0",
+          "5": "L1U0",
+          "7": "L1U7"
+        },
+        "modal_support": [
+          1,
+          2,
+          11
+        ],
+        "support_variants": [
+          [
+            1,
+            2,
+            11
+          ],
+          [
+            1,
+            11,
+            13
+          ],
+          [
+            2,
+            12,
+            14
+          ],
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            1,
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U2",
+        "mu": 0.951306939125061,
+        "form": "poly(2)",
+        "support_names": [
+          "fins",
+          "feathers",
+          "eggs"
+        ],
+        "layer": 1,
+        "contribution": 0.15258677950851496,
+        "pi": 0.225,
+        "delta": 0.10146105694847873,
+        "ci_low": -0.08051098982110938,
+        "ci_high": 0.284273424643329,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0941
+      },
+      {
+        "cid": "c5",
+        "Pi": 0.375,
+        "members": {
+          "0": "L1U8",
+          "2": "L1U2",
+          "3": "L1U3"
+        },
+        "modal_support": [
+          0,
+          5,
+          12
+        ],
+        "support_variants": [
+          [
+            0,
+            5,
+            12
+          ],
+          [
+            3,
+            5,
+            6
+          ],
+          [
+            5,
+            12
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U8",
+        "mu": 0.8880070447921753,
+        "form": "poly(2)",
+        "support_names": [
+          "legs",
+          "hair",
+          "aquatic"
+        ],
+        "layer": 1,
+        "contribution": 0.1776435616456884,
+        "pi": 0.075,
+        "delta": 0.15572733148685258,
+        "ci_low": -0.0037801063934438965,
+        "ci_high": 0.3513521169604207,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1444
+      },
+      {
+        "cid": "c6",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U9"
+        },
+        "modal_support": [
+          8,
+          9,
+          12
+        ],
+        "support_variants": [
+          [
+            8,
+            9,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U9",
+        "mu": 0.9988141263964646,
+        "form": "tree(d3)",
+        "support_names": [
+          "legs",
+          "breathes",
+          "backbone"
+        ],
+        "layer": 1,
+        "contribution": 0.003210251011282028,
+        "pi": 0.025,
+        "delta": 0.021737070534442737,
+        "ci_low": -0.0056169345875403485,
+        "ci_high": 0.06598492006059492,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.0202
+      },
+      {
+        "cid": "e0",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U1"
+        },
+        "modal_support": [
+          2,
+          7,
+          11
+        ],
+        "support_variants": [
+          [
+            2,
+            7,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e1",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U5"
+        },
+        "modal_support": [
+          2,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            2,
+            6,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e2",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U6"
+        },
+        "modal_support": [
+          1,
+          3,
+          12
+        ],
+        "support_variants": [
+          [
+            1,
+            3,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e3",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U7"
+        },
+        "modal_support": [
+          5,
+          7,
+          15
+        ],
+        "support_variants": [
+          [
+            5,
+            7,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e4",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U6"
+        },
+        "modal_support": [
+          1,
+          2,
+          4
+        ],
+        "support_variants": [
+          [
+            1,
+            2,
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e5",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U5"
+        },
+        "modal_support": [
+          9,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            9,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e6",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U3"
+        },
+        "modal_support": [
+          0,
+          8,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            8,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e7",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U7"
+        },
+        "modal_support": [
+          6,
+          8,
+          12
+        ],
+        "support_variants": [
+          [
+            6,
+            8,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e8",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U9"
+        },
+        "modal_support": [
+          10,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            10,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e9",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U4"
+        },
+        "modal_support": [
+          3,
+          9,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            9,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e10",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U2"
+        },
+        "modal_support": [
+          2,
+          12,
+          15
+        ],
+        "support_variants": [
+          [
+            2,
+            12,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e11",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U1"
+        },
+        "modal_support": [
+          0,
+          7,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            7,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e12",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U6"
+        },
+        "modal_support": [
+          0,
+          8,
+          12
+        ],
+        "support_variants": [
+          [
+            0,
+            8,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e13",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U7"
+        },
+        "modal_support": [
+          7,
+          11,
+          13
+        ],
+        "support_variants": [
+          [
+            7,
+            11,
+            13
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e14",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U10"
+        },
+        "modal_support": [
+          4,
+          8,
+          11
+        ],
+        "support_variants": [
+          [
+            4,
+            8,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e15",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U0"
+        },
+        "modal_support": [
+          2,
+          12,
+          15
+        ],
+        "support_variants": [
+          [
+            2,
+            12,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e16",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U3"
+        },
+        "modal_support": [
+          1,
+          2,
+          11
+        ],
+        "support_variants": [
+          [
+            1,
+            2,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e17",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U2"
+        },
+        "modal_support": [
+          1,
+          7,
+          13
+        ],
+        "support_variants": [
+          [
+            1,
+            7,
+            13
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e18",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U8"
+        },
+        "modal_support": [
+          3,
+          4,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            4,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e19",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U9"
+        },
+        "modal_support": [
+          9
+        ],
+        "support_variants": [
+          [
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e20",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U2"
+        },
+        "modal_support": [
+          4,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            4,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e21",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U1"
+        },
+        "modal_support": [
+          2,
+          5,
+          12
+        ],
+        "support_variants": [
+          [
+            2,
+            5,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e22",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U5"
+        },
+        "modal_support": [
+          1,
+          3,
+          4
+        ],
+        "support_variants": [
+          [
+            1,
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e23",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U4"
+        },
+        "modal_support": [
+          0,
+          7,
+          10
+        ],
+        "support_variants": [
+          [
+            0,
+            7,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e24",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U6"
+        },
+        "modal_support": [
+          9,
+          12
+        ],
+        "support_variants": [
+          [
+            9,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e25",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U2"
+        },
+        "modal_support": [
+          0,
+          12,
+          13
+        ],
+        "support_variants": [
+          [
+            0,
+            12,
+            13
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e26",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U6"
+        },
+        "modal_support": [
+          0,
+          12,
+          15
+        ],
+        "support_variants": [
+          [
+            0,
+            12,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e27",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U4"
+        },
+        "modal_support": [
+          7,
+          11,
+          13
+        ],
+        "support_variants": [
+          [
+            7,
+            11,
+            13
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e28",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U5"
+        },
+        "modal_support": [
+          0,
+          6,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            6,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e29",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U8"
+        },
+        "modal_support": [
+          6,
+          8,
+          12
+        ],
+        "support_variants": [
+          [
+            6,
+            8,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e30",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U9"
+        },
+        "modal_support": [
+          3,
+          8,
+          15
+        ],
+        "support_variants": [
+          [
+            3,
+            8,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e31",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U9"
+        },
+        "modal_support": [
+          7,
+          13,
+          15
+        ],
+        "support_variants": [
+          [
+            7,
+            13,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e32",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U0"
+        },
+        "modal_support": [
+          0,
+          7,
+          12
+        ],
+        "support_variants": [
+          [
+            0,
+            7,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e33",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U3"
+        },
+        "modal_support": [
+          0,
+          12,
+          15
+        ],
+        "support_variants": [
+          [
+            0,
+            12,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e34",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U2"
+        },
+        "modal_support": [
+          0,
+          3,
+          8
+        ],
+        "support_variants": [
+          [
+            0,
+            3,
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e35",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U1"
+        },
+        "modal_support": [
+          3,
+          6,
+          9
+        ],
+        "support_variants": [
+          [
+            3,
+            6,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e36",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U10"
+        },
+        "modal_support": [
+          2,
+          11
+        ],
+        "support_variants": [
+          [
+            2,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      }
+    ],
+    "routes": {
+      "feature_groups": [
+        [
+          "hair",
+          "milk"
+        ],
+        [
+          "feathers"
+        ],
+        [
+          "eggs"
+        ],
+        [
+          "airborne"
+        ],
+        [
+          "aquatic"
+        ],
+        [
+          "predator"
+        ],
+        [
+          "toothed"
+        ],
+        [
+          "backbone"
+        ],
+        [
+          "breathes"
+        ],
+        [
+          "venomous"
+        ],
+        [
+          "fins"
+        ],
+        [
+          "legs"
+        ],
+        [
+          "tail"
+        ],
+        [
+          "domestic"
+        ],
+        [
+          "catsize"
+        ]
+      ],
+      "rows": [
+        {
+          "rid": "r0",
+          "support_groups": [
+            8
+          ],
+          "support_names": [
+            "breathes"
+          ],
+          "common_core": [
+            8
+          ],
+          "common_core_names": [
+            "breathes"
+          ],
+          "variants": [
+            [
+              0,
+              5,
+              8
+            ],
+            [
+              0,
+              8,
+              11
+            ],
+            [
+              0,
+              8,
+              12
+            ],
+            [
+              2,
+              8,
+              11
+            ],
+            [
+              3,
+              7,
+              8
+            ],
+            [
+              3,
+              8,
+              13
+            ],
+            [
+              7,
+              8,
+              11
+            ],
+            [
+              8
+            ],
+            [
+              8,
+              10,
+              11
+            ],
+            [
+              8,
+              11
+            ]
+          ],
+          "Pi": 0.875,
+          "pi": 0.175,
+          "members_main": [
+            "L1U9"
+          ],
+          "mu": 0.9988141263964646,
+          "multiplicitous": false,
+          "delta": 0.021737070534442737,
+          "ci_low": -0.0056169345875403485,
+          "ci_high": 0.06598492006059492,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r1",
+          "support_groups": [
+            0,
+            7
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "backbone"
+          ],
+          "common_core": [
+            0,
+            7
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "backbone"
+          ],
+          "variants": [
+            [
+              0,
+              7
+            ],
+            [
+              0,
+              7,
+              10
+            ],
+            [
+              0,
+              7,
+              11
+            ],
+            [
+              0,
+              7,
+              14
+            ]
+          ],
+          "Pi": 0.5,
+          "pi": 0.125,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r2",
+          "support_groups": [
+            1,
+            2,
+            10
+          ],
+          "support_names": [
+            "feathers",
+            "eggs",
+            "fins"
+          ],
+          "common_core": [
+            2,
+            10
+          ],
+          "common_core_names": [
+            "eggs",
+            "fins"
+          ],
+          "variants": [
+            [
+              1,
+              2,
+              10
+            ],
+            [
+              2,
+              6,
+              10
+            ],
+            [
+              2,
+              10
+            ],
+            [
+              2,
+              10,
+              11
+            ]
+          ],
+          "Pi": 0.5,
+          "pi": 0.05,
+          "members_main": [
+            "L1U2"
+          ],
+          "mu": 0.951306939125061,
+          "multiplicitous": false,
+          "delta": 0.10146105694847873,
+          "ci_low": -0.08051098982110938,
+          "ci_high": 0.284273424643329,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r3",
+          "support_groups": [
+            4,
+            11
+          ],
+          "support_names": [
+            "aquatic",
+            "legs"
+          ],
+          "common_core": [
+            4,
+            11
+          ],
+          "common_core_names": [
+            "aquatic",
+            "legs"
+          ],
+          "variants": [
+            [
+              0,
+              4,
+              11
+            ],
+            [
+              2,
+              4,
+              11
+            ],
+            [
+              4,
+              11
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.225,
+          "members_main": [
+            "L1U8"
+          ],
+          "mu": 0.8880070447921753,
+          "multiplicitous": false,
+          "delta": 0.15572733148685258,
+          "ci_low": -0.0037801063934438965,
+          "ci_high": 0.3513521169604207,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r4",
+          "support_groups": [
+            0,
+            1,
+            3
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "feathers",
+            "airborne"
+          ],
+          "common_core": [
+            0,
+            1,
+            3
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "feathers",
+            "airborne"
+          ],
+          "variants": [
+            [
+              0,
+              1,
+              3
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r5",
+          "support_groups": [
+            0,
+            1,
+            11
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "feathers",
+            "legs"
+          ],
+          "common_core": [
+            0,
+            1,
+            11
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "feathers",
+            "legs"
+          ],
+          "variants": [
+            [
+              0,
+              1,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r6",
+          "support_groups": [
+            0,
+            4,
+            5
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "aquatic",
+            "predator"
+          ],
+          "common_core": [
+            0,
+            4,
+            5
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "aquatic",
+            "predator"
+          ],
+          "variants": [
+            [
+              0,
+              4,
+              5
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r7",
+          "support_groups": [
+            0,
+            5,
+            10
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "predator",
+            "fins"
+          ],
+          "common_core": [
+            0,
+            5,
+            10
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "predator",
+            "fins"
+          ],
+          "variants": [
+            [
+              0,
+              5,
+              10
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r8",
+          "support_groups": [
+            0,
+            5,
+            11
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "predator",
+            "legs"
+          ],
+          "common_core": [
+            0,
+            5,
+            11
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "predator",
+            "legs"
+          ],
+          "variants": [
+            [
+              0,
+              5,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "members_main": [
+            "L1U6"
+          ],
+          "mu": 0.9051171541213989,
+          "multiplicitous": false,
+          "delta": 0.31224536762158683,
+          "ci_low": 0.09958142254817465,
+          "ci_high": 0.5506866023162581,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r9",
+          "support_groups": [
+            0,
+            6,
+            9
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "toothed",
+            "venomous"
+          ],
+          "common_core": [
+            0,
+            6,
+            9
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "toothed",
+            "venomous"
+          ],
+          "variants": [
+            [
+              0,
+              6,
+              9
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r10",
+          "support_groups": [
+            0,
+            6,
+            10
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "toothed",
+            "fins"
+          ],
+          "common_core": [
+            0,
+            6,
+            10
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "toothed",
+            "fins"
+          ],
+          "variants": [
+            [
+              0,
+              6,
+              10
+            ]
+          ],
+          "Pi": 0.25,
+          "pi": 0.075,
+          "members_main": [
+            "L1U1"
+          ],
+          "mu": 0.9654656533573315,
+          "multiplicitous": false,
+          "delta": 0.13282585146146264,
+          "ci_low": 0.013261473417127967,
+          "ci_high": 0.3100232123083256,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r11",
+          "support_groups": [
+            0,
+            6,
+            11
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "toothed",
+            "legs"
+          ],
+          "common_core": [
+            0,
+            6,
+            11
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "toothed",
+            "legs"
+          ],
+          "variants": [
+            [
+              0,
+              6,
+              11
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.2,
+          "members_main": [
+            "L1U7"
+          ],
+          "mu": 0.945433177767028,
+          "multiplicitous": false,
+          "delta": 0.3832584333388087,
+          "ci_low": 0.14175861769629955,
+          "ci_high": 0.6742856977850925,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r12",
+          "support_groups": [
+            0,
+            11,
+            12
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "legs",
+            "tail"
+          ],
+          "common_core": [
+            0,
+            11,
+            12
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "legs",
+            "tail"
+          ],
+          "variants": [
+            [
+              0,
+              11,
+              12
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.05,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r13",
+          "support_groups": [
+            0,
+            11,
+            14
+          ],
+          "support_names": [
+            "G0{hair, milk}",
+            "legs",
+            "catsize"
+          ],
+          "common_core": [
+            0,
+            11,
+            14
+          ],
+          "common_core_names": [
+            "G0{hair, milk}",
+            "legs",
+            "catsize"
+          ],
+          "variants": [
+            [
+              0,
+              11,
+              14
+            ]
+          ],
+          "Pi": 0.5,
+          "pi": 0.1,
+          "members_main": [
+            "L1U3"
+          ],
+          "mu": 0.8663166658166996,
+          "multiplicitous": false,
+          "delta": -0.028685518637490026,
+          "ci_low": -0.27408078259704405,
+          "ci_high": 0.14018889060306403,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r14",
+          "support_groups": [
+            1,
+            2,
+            3
+          ],
+          "support_names": [
+            "feathers",
+            "eggs",
+            "airborne"
+          ],
+          "common_core": [
+            1,
+            2,
+            3
+          ],
+          "common_core_names": [
+            "feathers",
+            "eggs",
+            "airborne"
+          ],
+          "variants": [
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "Pi": 0.25,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r15",
+          "support_groups": [
+            1,
+            2,
+            7
+          ],
+          "support_names": [
+            "feathers",
+            "eggs",
+            "backbone"
+          ],
+          "common_core": [
+            1,
+            2,
+            7
+          ],
+          "common_core_names": [
+            "feathers",
+            "eggs",
+            "backbone"
+          ],
+          "variants": [
+            [
+              1,
+              2,
+              7
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r16",
+          "support_groups": [
+            1,
+            6,
+            12
+          ],
+          "support_names": [
+            "feathers",
+            "toothed",
+            "tail"
+          ],
+          "common_core": [
+            1,
+            6,
+            12
+          ],
+          "common_core_names": [
+            "feathers",
+            "toothed",
+            "tail"
+          ],
+          "variants": [
+            [
+              1,
+              6,
+              12
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r17",
+          "support_groups": [
+            1,
+            7,
+            11
+          ],
+          "support_names": [
+            "feathers",
+            "backbone",
+            "legs"
+          ],
+          "common_core": [
+            1,
+            7,
+            11
+          ],
+          "common_core_names": [
+            "feathers",
+            "backbone",
+            "legs"
+          ],
+          "variants": [
+            [
+              1,
+              7,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r18",
+          "support_groups": [
+            1,
+            10,
+            12
+          ],
+          "support_names": [
+            "feathers",
+            "fins",
+            "tail"
+          ],
+          "common_core": [
+            1,
+            10,
+            12
+          ],
+          "common_core_names": [
+            "feathers",
+            "fins",
+            "tail"
+          ],
+          "variants": [
+            [
+              1,
+              10,
+              12
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r19",
+          "support_groups": [
+            2,
+            5,
+            6
+          ],
+          "support_names": [
+            "eggs",
+            "predator",
+            "toothed"
+          ],
+          "common_core": [
+            2,
+            5,
+            6
+          ],
+          "common_core_names": [
+            "eggs",
+            "predator",
+            "toothed"
+          ],
+          "variants": [
+            [
+              2,
+              5,
+              6
+            ]
+          ],
+          "Pi": 0.25,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r20",
+          "support_groups": [
+            2,
+            5,
+            11
+          ],
+          "support_names": [
+            "eggs",
+            "predator",
+            "legs"
+          ],
+          "common_core": [
+            2,
+            5,
+            11
+          ],
+          "common_core_names": [
+            "eggs",
+            "predator",
+            "legs"
+          ],
+          "variants": [
+            [
+              2,
+              5,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.05,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r21",
+          "support_groups": [
+            2,
+            11,
+            13
+          ],
+          "support_names": [
+            "eggs",
+            "legs",
+            "domestic"
+          ],
+          "common_core": [
+            2,
+            11,
+            13
+          ],
+          "common_core_names": [
+            "eggs",
+            "legs",
+            "domestic"
+          ],
+          "variants": [
+            [
+              2,
+              11,
+              13
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r22",
+          "support_groups": [
+            2,
+            11,
+            14
+          ],
+          "support_names": [
+            "eggs",
+            "legs",
+            "catsize"
+          ],
+          "common_core": [
+            2,
+            11,
+            14
+          ],
+          "common_core_names": [
+            "eggs",
+            "legs",
+            "catsize"
+          ],
+          "variants": [
+            [
+              2,
+              11,
+              14
+            ]
+          ],
+          "Pi": 0.25,
+          "pi": 0.15,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r23",
+          "support_groups": [
+            3,
+            7,
+            10
+          ],
+          "support_names": [
+            "airborne",
+            "backbone",
+            "fins"
+          ],
+          "common_core": [
+            3,
+            7,
+            10
+          ],
+          "common_core_names": [
+            "airborne",
+            "backbone",
+            "fins"
+          ],
+          "variants": [
+            [
+              3,
+              7,
+              10
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r24",
+          "support_groups": [
+            3,
+            10,
+            11
+          ],
+          "support_names": [
+            "airborne",
+            "fins",
+            "legs"
+          ],
+          "common_core": [
+            3,
+            10,
+            11
+          ],
+          "common_core_names": [
+            "airborne",
+            "fins",
+            "legs"
+          ],
+          "variants": [
+            [
+              3,
+              10,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r25",
+          "support_groups": [
+            4,
+            6,
+            14
+          ],
+          "support_names": [
+            "aquatic",
+            "toothed",
+            "catsize"
+          ],
+          "common_core": [
+            4,
+            6,
+            14
+          ],
+          "common_core_names": [
+            "aquatic",
+            "toothed",
+            "catsize"
+          ],
+          "variants": [
+            [
+              4,
+              6,
+              14
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r26",
+          "support_groups": [
+            5,
+            7,
+            11
+          ],
+          "support_names": [
+            "predator",
+            "backbone",
+            "legs"
+          ],
+          "common_core": [
+            5,
+            7,
+            11
+          ],
+          "common_core_names": [
+            "predator",
+            "backbone",
+            "legs"
+          ],
+          "variants": [
+            [
+              5,
+              7,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r27",
+          "support_groups": [
+            6,
+            10,
+            12
+          ],
+          "support_names": [
+            "toothed",
+            "fins",
+            "tail"
+          ],
+          "common_core": [
+            6,
+            10,
+            12
+          ],
+          "common_core_names": [
+            "toothed",
+            "fins",
+            "tail"
+          ],
+          "variants": [
+            [
+              6,
+              10,
+              12
+            ]
+          ],
+          "Pi": 0.25,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r28",
+          "support_groups": [
+            6,
+            12,
+            14
+          ],
+          "support_names": [
+            "toothed",
+            "tail",
+            "catsize"
+          ],
+          "common_core": [
+            6,
+            12,
+            14
+          ],
+          "common_core_names": [
+            "toothed",
+            "tail",
+            "catsize"
+          ],
+          "variants": [
+            [
+              6,
+              12,
+              14
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r29",
+          "support_groups": [
+            9,
+            10,
+            11
+          ],
+          "support_names": [
+            "venomous",
+            "fins",
+            "legs"
+          ],
+          "common_core": [
+            9,
+            10,
+            11
+          ],
+          "common_core_names": [
+            "venomous",
+            "fins",
+            "legs"
+          ],
+          "variants": [
+            [
+              9,
+              10,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        }
+      ],
+      "n_core_routes": 0,
+      "ev_bound_routes": 0.19082880434782615,
+      "note": "Routes are certified at the collinearity-group level (the level stable across retrainings); unit members are one carving from an explicit equivalence class."
+    },
+    "function_decomposition": {
+      "note": "Purified weighted-fANOVA components of the learned function under the DECLARED empirical training measure (unique given the measure; carving-invariant).  Shares are out-of-sample covariances on validation.",
+      "components": [
+        {
+          "support": [
+            0
+          ],
+          "support_names": [
+            "hair"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{hair, milk}"
+          ],
+          "share_main": 0.3939,
+          "shares_all": [
+            0.3939,
+            0.3859,
+            0.4742,
+            0.2843,
+            0.2085,
+            0.2767,
+            0.3673,
+            0.3257
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            1
+          ],
+          "support_names": [
+            "feathers"
+          ],
+          "group_support": [
+            1
+          ],
+          "group_names": [
+            "feathers"
+          ],
+          "share_main": 0.5574,
+          "shares_all": [
+            0.5574,
+            0.6328,
+            0.7061,
+            0.4505,
+            0.707,
+            0.6728,
+            0.5227,
+            0.6293
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            2
+          ],
+          "support_names": [
+            "eggs"
+          ],
+          "group_support": [
+            2
+          ],
+          "group_names": [
+            "eggs"
+          ],
+          "share_main": 0.194,
+          "shares_all": [
+            0.194,
+            0.3627,
+            0.3045,
+            0.2974,
+            0.2691,
+            0.2096,
+            0.1966,
+            0.276
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            3
+          ],
+          "support_names": [
+            "milk"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "G0{hair, milk}"
+          ],
+          "share_main": 0.0822,
+          "shares_all": [
+            0.0822,
+            0.0805,
+            0.0679,
+            0.0858,
+            0.0327,
+            0.0738,
+            0.0974,
+            0.0766
+          ],
+          "Pi": 1.0,
+          "pi": 0.875,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            4
+          ],
+          "support_names": [
+            "airborne"
+          ],
+          "group_support": [
+            3
+          ],
+          "group_names": [
+            "airborne"
+          ],
+          "share_main": 0.1656,
+          "shares_all": [
+            0.1656,
+            0.2923,
+            0.122,
+            0.0487,
+            0.2141,
+            0.165,
+            0.0662,
+            0.1409
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            5
+          ],
+          "support_names": [
+            "aquatic"
+          ],
+          "group_support": [
+            4
+          ],
+          "group_names": [
+            "aquatic"
+          ],
+          "share_main": 0.0866,
+          "shares_all": [
+            0.0866,
+            0.1014,
+            0.1675,
+            0.0386,
+            0.1274,
+            0.1652,
+            0.0219,
+            0.0776
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            6
+          ],
+          "support_names": [
+            "predator"
+          ],
+          "group_support": [
+            5
+          ],
+          "group_names": [
+            "predator"
+          ],
+          "share_main": 0.0193,
+          "shares_all": [
+            0.0193,
+            0.2768,
+            0.1331,
+            0.0368,
+            0.0582,
+            0.1634,
+            0.0387,
+            0.0918
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            7
+          ],
+          "support_names": [
+            "toothed"
+          ],
+          "group_support": [
+            6
+          ],
+          "group_names": [
+            "toothed"
+          ],
+          "share_main": 0.2747,
+          "shares_all": [
+            0.2747,
+            0.2596,
+            0.1145,
+            0.458,
+            0.2405,
+            0.1595,
+            0.256,
+            0.1351
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            8
+          ],
+          "support_names": [
+            "backbone"
+          ],
+          "group_support": [
+            7
+          ],
+          "group_names": [
+            "backbone"
+          ],
+          "share_main": 0.2876,
+          "shares_all": [
+            0.2876,
+            0.2478,
+            0.2303,
+            0.5461,
+            0.3934,
+            0.4843,
+            0.3044,
+            0.2931
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            9
+          ],
+          "support_names": [
+            "breathes"
+          ],
+          "group_support": [
+            8
+          ],
+          "group_names": [
+            "breathes"
+          ],
+          "share_main": 0.27,
+          "shares_all": [
+            0.27,
+            0.1574,
+            0.3245,
+            0.1552,
+            0.1959,
+            0.2332,
+            0.2196,
+            0.2517
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            10
+          ],
+          "support_names": [
+            "venomous"
+          ],
+          "group_support": [
+            9
+          ],
+          "group_names": [
+            "venomous"
+          ],
+          "share_main": 0.0184,
+          "shares_all": [
+            0.0184,
+            0.03,
+            0.0156,
+            0.0134,
+            0.0217,
+            0.0231,
+            0.0221,
+            0.0196
+          ],
+          "Pi": 1.0,
+          "pi": 0.825,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            11
+          ],
+          "support_names": [
+            "fins"
+          ],
+          "group_support": [
+            10
+          ],
+          "group_names": [
+            "fins"
+          ],
+          "share_main": 0.0822,
+          "shares_all": [
+            0.0822,
+            0.1537,
+            0.1432,
+            0.3612,
+            0.1729,
+            0.1404,
+            0.1682,
+            0.0889
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            12
+          ],
+          "support_names": [
+            "legs"
+          ],
+          "group_support": [
+            11
+          ],
+          "group_names": [
+            "legs"
+          ],
+          "share_main": 0.3666,
+          "shares_all": [
+            0.3666,
+            0.4437,
+            0.3787,
+            0.4292,
+            0.6799,
+            0.4174,
+            0.4983,
+            0.8172
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            13
+          ],
+          "support_names": [
+            "tail"
+          ],
+          "group_support": [
+            12
+          ],
+          "group_names": [
+            "tail"
+          ],
+          "share_main": 0.0678,
+          "shares_all": [
+            0.0678,
+            0.0489,
+            0.0929,
+            0.0657,
+            0.0908,
+            0.0268,
+            0.1393,
+            0.1226
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            14
+          ],
+          "support_names": [
+            "domestic"
+          ],
+          "group_support": [
+            13
+          ],
+          "group_names": [
+            "domestic"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0336,
+            0.0154,
+            0.0107,
+            0.0,
+            0.0,
+            0.0373,
+            0.0148
+          ],
+          "Pi": 0.625,
+          "pi": 0.65,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            15
+          ],
+          "support_names": [
+            "catsize"
+          ],
+          "group_support": [
+            14
+          ],
+          "group_names": [
+            "catsize"
+          ],
+          "share_main": 0.0312,
+          "shares_all": [
+            0.0312,
+            0.051,
+            0.111,
+            0.105,
+            0.0836,
+            0.0772,
+            0.1516,
+            0.0933
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            0,
+            5
+          ],
+          "support_names": [
+            "hair",
+            "aquatic"
+          ],
+          "group_support": [
+            0,
+            4
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "aquatic"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.013,
+            0.0,
+            0.0,
+            0.016
+          ],
+          "Pi": 0.25,
+          "pi": 0.425,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            6
+          ],
+          "support_names": [
+            "hair",
+            "predator"
+          ],
+          "group_support": [
+            0,
+            5
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "predator"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0188,
+            0.0172,
+            0.0123,
+            0.0446,
+            0.0,
+            0.0323
+          ],
+          "Pi": 0.625,
+          "pi": 0.625,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            7
+          ],
+          "support_names": [
+            "hair",
+            "toothed"
+          ],
+          "group_support": [
+            0,
+            6
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "toothed"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.015,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.425,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            8
+          ],
+          "support_names": [
+            "hair",
+            "backbone"
+          ],
+          "group_support": [
+            0,
+            7
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "backbone"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0148,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.15,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            10
+          ],
+          "support_names": [
+            "hair",
+            "venomous"
+          ],
+          "group_support": [
+            0,
+            9
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "venomous"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0231
+          ],
+          "Pi": 0.125,
+          "pi": 0.2,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            11
+          ],
+          "support_names": [
+            "hair",
+            "fins"
+          ],
+          "group_support": [
+            0,
+            10
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "fins"
+          ],
+          "share_main": 0.0109,
+          "shares_all": [
+            0.0109,
+            0.0122,
+            0.0,
+            0.0115,
+            0.0174,
+            0.0,
+            0.0133,
+            0.0
+          ],
+          "Pi": 0.625,
+          "pi": 0.35,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            12
+          ],
+          "support_names": [
+            "hair",
+            "legs"
+          ],
+          "group_support": [
+            0,
+            11
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "legs"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0209,
+            0.0,
+            0.0,
+            0.0104,
+            0.0
+          ],
+          "Pi": 0.25,
+          "pi": 0.575,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            13
+          ],
+          "support_names": [
+            "hair",
+            "tail"
+          ],
+          "group_support": [
+            0,
+            12
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "tail"
+          ],
+          "share_main": 0.0159,
+          "shares_all": [
+            0.0159,
+            0.011,
+            0.012,
+            0.0245,
+            0.0606,
+            0.0,
+            0.0,
+            0.0107
+          ],
+          "Pi": 0.75,
+          "pi": 0.2,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            15
+          ],
+          "support_names": [
+            "hair",
+            "catsize"
+          ],
+          "group_support": [
+            0,
+            14
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "catsize"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0247,
+            0.0,
+            0.0193,
+            0.0,
+            0.0,
+            0.0172
+          ],
+          "Pi": 0.375,
+          "pi": 0.325,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            1,
+            5
+          ],
+          "support_names": [
+            "feathers",
+            "aquatic"
+          ],
+          "group_support": [
+            1,
+            4
+          ],
+          "group_names": [
+            "feathers",
+            "aquatic"
+          ],
+          "share_main": 0.0219,
+          "shares_all": [
+            0.0219,
+            0.0,
+            0.0,
+            0.0184,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.25,
+          "pi": 0.35,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            1,
+            15
+          ],
+          "support_names": [
+            "feathers",
+            "catsize"
+          ],
+          "group_support": [
+            1,
+            14
+          ],
+          "group_names": [
+            "feathers",
+            "catsize"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0149,
+            0.0217,
+            0.0228,
+            0.0118,
+            0.018,
+            0.0295,
+            0.0148
+          ],
+          "Pi": 0.875,
+          "pi": 0.325,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            2,
+            5
+          ],
+          "support_names": [
+            "eggs",
+            "aquatic"
+          ],
+          "group_support": [
+            2,
+            4
+          ],
+          "group_names": [
+            "eggs",
+            "aquatic"
+          ],
+          "share_main": 0.0221,
+          "shares_all": [
+            0.0221,
+            0.0,
+            0.0,
+            0.0219,
+            0.0219,
+            0.0,
+            0.0133,
+            0.0329
+          ],
+          "Pi": 0.625,
+          "pi": 0.225,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            2,
+            6
+          ],
+          "support_names": [
+            "eggs",
+            "predator"
+          ],
+          "group_support": [
+            2,
+            5
+          ],
+          "group_names": [
+            "eggs",
+            "predator"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0109,
+            0.0,
+            0.0167,
+            0.0,
+            0.0,
+            0.0136
+          ],
+          "Pi": 0.375,
+          "pi": 0.225,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            2,
+            12
+          ],
+          "support_names": [
+            "eggs",
+            "legs"
+          ],
+          "group_support": [
+            2,
+            11
+          ],
+          "group_names": [
+            "eggs",
+            "legs"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0121,
+            0.0284,
+            0.0,
+            0.0,
+            0.0155,
+            0.0
+          ],
+          "Pi": 0.375,
+          "pi": 0.425,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            2,
+            15
+          ],
+          "support_names": [
+            "eggs",
+            "catsize"
+          ],
+          "group_support": [
+            2,
+            14
+          ],
+          "group_names": [
+            "eggs",
+            "catsize"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0124,
+            0.0116,
+            0.0327,
+            0.0268,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.5,
+          "pi": 0.15,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            3,
+            4
+          ],
+          "support_names": [
+            "milk",
+            "airborne"
+          ],
+          "group_support": [
+            0,
+            3
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "airborne"
+          ],
+          "share_main": 0.0153,
+          "shares_all": [
+            0.0153,
+            0.0,
+            0.0,
+            0.0138,
+            0.0,
+            0.0156,
+            0.0,
+            0.0126
+          ],
+          "Pi": 0.5,
+          "pi": 0.325,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            3,
+            5
+          ],
+          "support_names": [
+            "milk",
+            "aquatic"
+          ],
+          "group_support": [
+            0,
+            4
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "aquatic"
+          ],
+          "share_main": 0.0468,
+          "shares_all": [
+            0.0468,
+            0.0242,
+            0.0123,
+            0.0211,
+            0.0208,
+            0.0156,
+            0.0106,
+            0.0108
+          ],
+          "Pi": 1.0,
+          "pi": 0.125,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            3,
+            12
+          ],
+          "support_names": [
+            "milk",
+            "legs"
+          ],
+          "group_support": [
+            0,
+            11
+          ],
+          "group_names": [
+            "G0{hair, milk}",
+            "legs"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0172,
+            0.0,
+            0.0169,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.25,
+          "pi": 0.3,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            4,
+            5
+          ],
+          "support_names": [
+            "airborne",
+            "aquatic"
+          ],
+          "group_support": [
+            3,
+            4
+          ],
+          "group_names": [
+            "airborne",
+            "aquatic"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0131,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.2,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            4,
+            6
+          ],
+          "support_names": [
+            "airborne",
+            "predator"
+          ],
+          "group_support": [
+            3,
+            5
+          ],
+          "group_names": [
+            "airborne",
+            "predator"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0204,
+            0.0,
+            0.0,
+            0.0,
+            0.0165,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.25,
+          "pi": 0.075,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            4,
+            8
+          ],
+          "support_names": [
+            "airborne",
+            "backbone"
+          ],
+          "group_support": [
+            3,
+            7
+          ],
+          "group_names": [
+            "airborne",
+            "backbone"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.012,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.1,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            5,
+            7
+          ],
+          "support_names": [
+            "aquatic",
+            "toothed"
+          ],
+          "group_support": [
+            4,
+            6
+          ],
+          "group_names": [
+            "aquatic",
+            "toothed"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0108,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.475,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            5,
+            12
+          ],
+          "support_names": [
+            "aquatic",
+            "legs"
+          ],
+          "group_support": [
+            4,
+            11
+          ],
+          "group_names": [
+            "aquatic",
+            "legs"
+          ],
+          "share_main": 0.0102,
+          "shares_all": [
+            0.0102,
+            0.0199,
+            0.0,
+            0.0,
+            0.0,
+            0.0108,
+            0.0152,
+            0.0
+          ],
+          "Pi": 0.5,
+          "pi": 0.225,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            5,
+            13
+          ],
+          "support_names": [
+            "aquatic",
+            "tail"
+          ],
+          "group_support": [
+            4,
+            12
+          ],
+          "group_names": [
+            "aquatic",
+            "tail"
+          ],
+          "share_main": 0.0214,
+          "shares_all": [
+            0.0214,
+            0.0,
+            0.0,
+            0.0212,
+            0.0,
+            0.0574,
+            0.0123,
+            0.0
+          ],
+          "Pi": 0.5,
+          "pi": 0.075,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            6,
+            8
+          ],
+          "support_names": [
+            "predator",
+            "backbone"
+          ],
+          "group_support": [
+            5,
+            7
+          ],
+          "group_names": [
+            "predator",
+            "backbone"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.015,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.125,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            6,
+            13
+          ],
+          "support_names": [
+            "predator",
+            "tail"
+          ],
+          "group_support": [
+            5,
+            12
+          ],
+          "group_names": [
+            "predator",
+            "tail"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0117,
+            0.0101,
+            0.0304,
+            0.0149,
+            0.0229,
+            0.0,
+            0.0146
+          ],
+          "Pi": 0.75,
+          "pi": 0.05,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            6,
+            15
+          ],
+          "support_names": [
+            "predator",
+            "catsize"
+          ],
+          "group_support": [
+            5,
+            14
+          ],
+          "group_names": [
+            "predator",
+            "catsize"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0156,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            7,
+            9
+          ],
+          "support_names": [
+            "toothed",
+            "breathes"
+          ],
+          "group_support": [
+            6,
+            8
+          ],
+          "group_names": [
+            "toothed",
+            "breathes"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0106,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.25,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            9,
+            12
+          ],
+          "support_names": [
+            "breathes",
+            "legs"
+          ],
+          "group_support": [
+            8,
+            11
+          ],
+          "group_names": [
+            "breathes",
+            "legs"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.011,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.15,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            11,
+            15
+          ],
+          "support_names": [
+            "fins",
+            "catsize"
+          ],
+          "group_support": [
+            10,
+            14
+          ],
+          "group_names": [
+            "fins",
+            "catsize"
+          ],
+          "share_main": 0.0228,
+          "shares_all": [
+            0.0228,
+            0.0363,
+            0.0374,
+            0.021,
+            0.025,
+            0.024,
+            0.0308,
+            0.0
+          ],
+          "Pi": 0.875,
+          "pi": 0.1,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            12,
+            13
+          ],
+          "support_names": [
+            "legs",
+            "tail"
+          ],
+          "group_support": [
+            11,
+            12
+          ],
+          "group_names": [
+            "legs",
+            "tail"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0113,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0108
+          ],
+          "Pi": 0.25,
+          "pi": 0.1,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            12,
+            15
+          ],
+          "support_names": [
+            "legs",
+            "catsize"
+          ],
+          "group_support": [
+            11,
+            14
+          ],
+          "group_names": [
+            "legs",
+            "catsize"
+          ],
+          "share_main": 0.0132,
+          "shares_all": [
+            0.0132,
+            0.0204,
+            0.0139,
+            0.0,
+            0.0174,
+            0.0109,
+            0.0251,
+            0.0107
+          ],
+          "Pi": 0.875,
+          "pi": 0.125,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            2,
+            13,
+            15
+          ],
+          "support_names": [
+            "eggs",
+            "tail",
+            "catsize"
+          ],
+          "group_support": [
+            2,
+            12,
+            14
+          ],
+          "group_names": [
+            "eggs",
+            "tail",
+            "catsize"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0139,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            6,
+            7,
+            15
+          ],
+          "support_names": [
+            "predator",
+            "toothed",
+            "catsize"
+          ],
+          "group_support": [
+            5,
+            6,
+            14
+          ],
+          "group_names": [
+            "predator",
+            "toothed",
+            "catsize"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0115,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0103
+          ],
+          "Pi": 0.25,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        }
+      ],
+      "n_core": 15,
+      "group_shares": {
+        "0": 0.4761,
+        "1": 0.5574,
+        "2": 0.194,
+        "3": 0.1656,
+        "4": 0.0866,
+        "5": 0.0193,
+        "6": 0.2747,
+        "7": 0.2876,
+        "8": 0.27,
+        "9": 0.0184,
+        "10": 0.0822,
+        "11": 0.3666,
+        "12": 0.0678,
+        "14": 0.0312
+      },
+      "ev_bound": 2.4845186781609203,
+      "recon_r2": 0.9491
+    },
+    "portfolio_reliance": [
+      {
+        "group": "G0{hair, milk}",
+        "min_reliance": 0.0822,
+        "max_reliance": 0.3231
+      },
+      {
+        "group": "feathers",
+        "min_reliance": 0.0059,
+        "max_reliance": 0.2188
+      },
+      {
+        "group": "eggs",
+        "min_reliance": 0.0011,
+        "max_reliance": 0.0754
+      },
+      {
+        "group": "airborne",
+        "min_reliance": 0.0113,
+        "max_reliance": 0.0675
+      },
+      {
+        "group": "aquatic",
+        "min_reliance": 0.0007,
+        "max_reliance": 0.0206
+      },
+      {
+        "group": "predator",
+        "min_reliance": -0.0007,
+        "max_reliance": 0.0295
+      },
+      {
+        "group": "toothed",
+        "min_reliance": 0.008,
+        "max_reliance": 0.0845
+      },
+      {
+        "group": "backbone",
+        "min_reliance": 0.0155,
+        "max_reliance": 0.0795
+      },
+      {
+        "group": "breathes",
+        "min_reliance": 0.0038,
+        "max_reliance": 0.0363
+      },
+      {
+        "group": "venomous",
+        "min_reliance": -0.0017,
+        "max_reliance": 0.0
+      },
+      {
+        "group": "fins",
+        "min_reliance": 0.0148,
+        "max_reliance": 0.0634
+      },
+      {
+        "group": "legs",
+        "min_reliance": 0.0351,
+        "max_reliance": 0.1832
+      },
+      {
+        "group": "tail",
+        "min_reliance": 0.0007,
+        "max_reliance": 0.0213
+      },
+      {
+        "group": "domestic",
+        "min_reliance": -0.0034,
+        "max_reliance": 0.0037
+      },
+      {
+        "group": "catsize",
+        "min_reliance": -0.0067,
+        "max_reliance": 0.0053
+      }
+    ],
+    "non_claims": [
+      "CORE concepts are stable, real structures - not proven causal mechanisms of the world (M-C7).",
+      "The periphery is labelled, not certified.",
+      "Unit semantics require expert review (the soft target)."
+    ]
+  },
+  "core_share_sum": 2.8975,
+  "bars": [
+    {
+      "id": "fidelity \u2265 ceiling",
+      "pass": true,
+      "detail": "ratio 1.058 vs unconstrained MLP/HGB"
+    },
+    {
+      "id": "core coverage \u2265 0.5",
+      "pass": true,
+      "detail": "certified components cover 2.90 of function variance"
+    },
+    {
+      "id": "E[V] non-vacuous",
+      "pass": false,
+      "detail": "E[V] \u2264 2.485 over the structure-level universe"
+    },
+    {
+      "id": "honest depth",
+      "pass": true,
+      "detail": "depth 1; widths 7"
+    }
+  ]
+}

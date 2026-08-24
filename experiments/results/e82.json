@@ -1,0 +1,87 @@
+{
+  "experiment": "E8.2 bike claims-invariance (grow_batch=8)",
+  "git_commit": "7243b1eddec6817485bc9be55c8f9c5374a7f332",
+  "wall_hours": 0.12,
+  "reference_components": {
+    "hour": {
+      "recertified": true,
+      "Pi": 1.0,
+      "pi": 1.0,
+      "share": 0.5871,
+      "ref_share": 0.589
+    },
+    "temp": {
+      "recertified": true,
+      "Pi": 1.0,
+      "pi": 1.0,
+      "share": 0.0656,
+      "ref_share": 0.0804
+    },
+    "hour x weekday": {
+      "recertified": true,
+      "Pi": 1.0,
+      "pi": 1.0,
+      "share": 0.0714,
+      "ref_share": 0.0511
+    },
+    "year": {
+      "recertified": true,
+      "Pi": 1.0,
+      "pi": 1.0,
+      "share": 0.0241,
+      "ref_share": 0.0222
+    }
+  },
+  "additions_for_owner_review": [
+    {
+      "names": [
+        "season"
+      ],
+      "share": 0.0228,
+      "Pi": 0.875,
+      "pi": 0.875
+    },
+    {
+      "names": [
+        "humidity"
+      ],
+      "share": 0.0134,
+      "Pi": 1.0,
+      "pi": 0.85
+    }
+  ],
+  "hour_temp_certified": false,
+  "hour_temp_share": 0.0,
+  "core_share_sum": 0.7844,
+  "n_core": 6,
+  "core_routes": [
+    {
+      "support": [
+        "hour",
+        "workingday"
+      ],
+      "Pi": 1.0,
+      "pi": 1.0
+    }
+  ],
+  "hour_route_core": true,
+  "restart_widths": [
+    14,
+    14
+  ],
+  "fid": 0.9404665820089643,
+  "fid_ref": 0.9475763267725537,
+  "ratio": 0.9925,
+  "restart_fids": [
+    0.9404665820089643,
+    0.9388212123211123,
+    0.9216178861413379,
+    0.9330058827740919,
+    0.9366313612602812,
+    0.939817528523428,
+    0.9397248468011163,
+    0.9012499220440687
+  ],
+  "unit_n_core": 1,
+  "bar_met": true
+}

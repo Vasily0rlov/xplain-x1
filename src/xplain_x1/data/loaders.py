@@ -221,3 +221,90 @@ def load_drybean() -> Dataset:
                    continuous_mask=cont,
                    meta={"source": "uci:602:dry-bean", "expected_depth": 2,
                          "known_rung": "Compactness x ShapeFactor1"})
+
+
+def load_morpher() -> Dataset:
+    """Russian declension (morpher, local): 18 raw morphological columns ->
+    monosemantic binary VALUE PREDICATES + syllable count.  Replicates the
+    xplain-v4 encoding recipe.  Target = declension type (3-class).  Feature
+    names are the human-readable Cyrillic labels so a Russian speaker can read
+    the DAG directly."""
+    src = Path(__file__).resolve().parents[3] / "data" / "morpher" / \
+        "morpher-sample-single-words-only.csv"
+    df = pd.read_csv(src, encoding="utf-16")
+    cols: list[str] = []
+    data: list[np.ndarray] = []
+    cont: list[bool] = []
+
+    def add(name: str, vals, continuous: bool = False) -> None:
+        cols.append(name)
+        data.append(np.asarray(vals, dtype=np.float32))
+        cont.append(continuous)
+
+    def onehot(col: str, mapping: dict) -> None:
+        for cat in mapping:
+            add(f"{col}={cat}", (df[col].astype(str) == cat).astype(int))
+
+    onehot("РодЧисло", {"м": 0, "ж": 0, "с": 0, "мн": 0})
+    onehot("ЧастьРечи", {"прил": 0, "сущ": 0, "неименительный": 0, "нерусское": 0})
+    onehot("Заглавные", {"1-я": 0, "нет": 0, "все": 0, "другие": 0})
+    add("Одушевленное=одуш", (df["Одушевленное"].astype(str) == "одуш").astype(int))
+    add("КоличествоСлогов", pd.to_numeric(df["КоличествоСлогов"], errors="coerce")
+        .fillna(0).astype(int), continuous=True)
+    for col, lab in [("Ударение", "Ударение(есть)"),
+                     ("УдарениеМнож", "УдарениеМнож(есть)"),
+                     ("НаСогласную", "НаСогласную"),
+                     ("ПредлогНа", "ПредлогНа")]:
+        add(lab, df[col].notna().astype(int))
+    add("Имя", df["Имя"].astype(str).str.upper().isin(["TRUE", "1"]).astype(int))
+    top = df["Суффикс"].value_counts().head(18).index.tolist()
+    for s in top:
+        add(f"Суффикс={s}", (df["Суффикс"].astype(str) == str(s)).astype(int))
+    add("Суффикс(есть)", df["Суффикс"].notna().astype(int))
+
+    X = np.column_stack(data).astype(np.float32)
+    classes = ["сущ", "нескл", "прил"]
+    cmap = {c: i for i, c in enumerate(classes)}
+    y = df["ТипСклонения"].astype(str).map(cmap).to_numpy()
+    keep = ~np.isnan(y.astype(float))
+    X, y = X[keep], y[keep].astype(np.int64)
+    return Dataset(name="morpher", X=X, y=y, feature_names=cols,
+                   task="classification", n_classes=3,
+                   continuous_mask=np.asarray(cont, dtype=bool),
+                   meta={"source": "data/morpher (UTF-16, v4 recipe)",
+                         "classes": classes, "expected_depth": 1,
+                         "domain": "Russian morphology / declension"})
+
+
+def load_spambase() -> Dataset:
+    """Spambase (OpenML v1): 57 continuous features (word/char frequencies +
+    capital-run stats), binary spam target.  High-d generality probe (d=57);
+    the interaction screen's stress test.  Feature names shortened for legibility
+    (word_freq_free -> 'free', char_freq_%21 -> 'char_!', capital_run_length_*
+    -> cap_*)."""
+    raw = _fetch("spambase", version=1)
+    df = raw.frame.drop(columns=[raw.target.name])
+    charmap = {"%3B": ";", "%28": "(", "%5B": "[", "%21": "!", "%24": "$",
+               "%23": "#"}
+
+    def short(col: str) -> str:
+        if col.startswith("word_freq_"):
+            return col[len("word_freq_"):]
+        if col.startswith("char_freq_"):
+            c = col[len("char_freq_"):]
+            return "char_" + charmap.get(c, c)
+        if col.startswith("capital_run_length_"):
+            return "cap_" + {"average": "avg", "longest": "max",
+                             "total": "total"}[col[len("capital_run_length_"):]]
+        return col
+
+    cols = [short(c) for c in df.columns]
+    X = df.to_numpy(dtype=np.float32)
+    y = (raw.target.astype(str) == "1").to_numpy().astype(np.int64)
+    return Dataset(name="spambase", X=X, y=y, feature_names=cols,
+                   task="classification", n_classes=2,
+                   continuous_mask=np.ones(X.shape[1], dtype=bool),
+                   meta={"source": "openml:spambase:v1", "expected_depth": 2,
+                         "known": "token main effects (free,!,$,remove,cap_*) "
+                                  "+ capital-run x ! interaction",
+                         "domain": "email spam (high-d probe)"})

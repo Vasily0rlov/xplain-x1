@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XPLAIN-x1 — wine</title>
+<style>
+:root {
+  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#8b8983;
+  --grid:#e3e2db; --ring:rgba(11,11,11,.10); --wash:rgba(42,120,214,.08);
+  --core:#1baf7a; --coreink:#0d7a54; --corewash:rgba(27,175,122,.12);
+  --peri:#9a988f; --periwash:rgba(154,152,143,.12);
+  --accent:#2a78d6; --warn:#eb6834; --good:#0ca30c;
+  --edge:#b9b8ae;
+}
+@media (prefers-color-scheme: dark) { :root:where(:not([data-theme="light"])) {
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c8c7bd; --muted:#8b8983;
+  --grid:#2c2c2a; --ring:rgba(255,255,255,.11); --wash:rgba(57,135,229,.14);
+  --core:#199e70; --coreink:#5fd3a6; --corewash:rgba(25,158,112,.16);
+  --peri:#6f6e67; --periwash:rgba(120,118,110,.16);
+  --accent:#3987e5; --warn:#d95926; --good:#3fb23f; --edge:#55554e; } }
+:root[data-theme="dark"] {
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c8c7bd; --muted:#8b8983;
+  --grid:#2c2c2a; --ring:rgba(255,255,255,.11); --wash:rgba(57,135,229,.14);
+  --core:#199e70; --coreink:#5fd3a6; --corewash:rgba(25,158,112,.16);
+  --peri:#6f6e67; --periwash:rgba(120,118,110,.16);
+  --accent:#3987e5; --warn:#d95926; --good:#3fb23f; --edge:#55554e; }
+* { box-sizing:border-box; }
+body { background:var(--page); color:var(--ink); margin:0;
+  font:14px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; }
+a { color:var(--accent); }
+.wrap { max-width:1180px; margin:0 auto; padding:20px 20px 64px; }
+.top { display:flex; align-items:flex-start; gap:16px; flex-wrap:wrap;
+  border-bottom:1px solid var(--ring); padding-bottom:14px; margin-bottom:18px; }
+.top h1 { font-size:20px; margin:0 0 3px; }
+.top .sub { font-size:12.5px; color:var(--muted); }
+.back { font-size:12.5px; }
+.stats { display:flex; gap:22px; margin-left:auto; flex-wrap:wrap; }
+.stat { text-align:right; }
+.stat .v { font-size:19px; font-weight:650; font-variant-numeric:tabular-nums; }
+.stat .l { font-size:10.5px; color:var(--muted); text-transform:uppercase;
+  letter-spacing:.04em; }
+.pill { display:inline-block; font-size:11px; font-weight:700; padding:2px 9px;
+  border-radius:11px; letter-spacing:.03em; }
+.pill.core { background:var(--corewash); color:var(--coreink); }
+.pill.peri { background:var(--periwash); color:var(--ink2); }
+.pill.warn { background:color-mix(in srgb,var(--warn) 15%,transparent); color:var(--warn); }
+.pill.ok   { background:color-mix(in srgb,var(--good) 14%,transparent); color:var(--good); }
+.card { background:var(--surface); border:1px solid var(--ring); border-radius:10px;
+  padding:15px 17px; margin:16px 0; }
+.card h2 { font-size:14px; margin:0 0 3px; display:flex; gap:9px; align-items:center;
+  flex-wrap:wrap; }
+.card .note { font-size:12px; color:var(--muted); margin:2px 0 12px; line-height:1.5; }
+.layerbar { display:flex; gap:0; height:5px; border-radius:3px; overflow:hidden;
+  margin:4px 0 2px; background:var(--grid); }
+.dagcard { padding:0; overflow:hidden; }
+.daghdr { display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:12px 15px 10px; border-bottom:1px solid var(--ring); }
+.daghdr h2 { margin:0; }
+.seg { display:inline-flex; border:1px solid var(--grid); border-radius:7px; overflow:hidden; }
+.seg button { border:none; border-radius:0; padding:4px 11px; background:var(--surface);
+  color:var(--ink2); font-size:12px; cursor:pointer; }
+.seg button.on { background:var(--accent); color:#fff; }
+.ctrls { display:flex; gap:7px; align-items:center; flex-wrap:wrap; margin-left:auto; }
+.ctrls button, .ctrls label { font-size:12px; background:var(--surface); color:var(--ink);
+  border:1px solid var(--grid); border-radius:6px; padding:3px 9px; cursor:pointer; }
+.ctrls label { display:inline-flex; align-items:center; gap:5px; }
+.dagbody { display:grid; grid-template-columns:1fr 300px; }
+@media (max-width:820px){ .dagbody { grid-template-columns:1fr; } }
+.dagwrap { position:relative; height:540px; background:var(--page);
+  border-right:1px solid var(--ring); overflow:hidden; }
+.dagwrap svg { width:100%; height:100%; display:block; cursor:grab; }
+.dagwrap svg:active { cursor:grabbing; }
+.legend { position:absolute; left:12px; bottom:10px; display:flex; gap:13px;
+  flex-wrap:wrap; font-size:11px; color:var(--ink2);
+  background:color-mix(in srgb,var(--surface) 84%,transparent);
+  padding:4px 9px; border-radius:6px; }
+.legend i { width:11px; height:11px; border-radius:3px; display:inline-block;
+  vertical-align:-1px; margin-right:4px; }
+.detail { padding:14px 15px; min-height:0; overflow-y:auto; max-height:540px; }
+.detail .empty { color:var(--muted); font-size:12.5px; line-height:1.6; }
+.detail h3 { margin:0 0 2px; font-size:14px; word-break:break-word; }
+.detail .did { font-size:11px; color:var(--muted); font-family:ui-monospace,monospace; }
+.detail dl { display:grid; grid-template-columns:92px 1fr; gap:3px 10px;
+  margin:11px 0 4px; font-size:12.5px; font-variant-numeric:tabular-nums; }
+.detail dt { color:var(--muted); } .detail dd { margin:0; }
+.detail .chips { margin-top:9px; }
+.chip { display:inline-block; font-size:10.5px; border:1px solid var(--grid);
+  border-radius:10px; padding:1px 8px; margin:2px 3px 0 0; color:var(--ink2); }
+.chip.r { border-color:color-mix(in srgb,var(--warn) 45%,var(--grid));
+  color:var(--warn); }
+table.t { border-collapse:collapse; width:100%; font-size:12.5px;
+  font-variant-numeric:tabular-nums; }
+table.t th, table.t td { text-align:left; padding:5px 12px 5px 0;
+  border-top:1px solid var(--grid); vertical-align:top; }
+table.t th { color:var(--muted); font-weight:600; border-top:none;
+  font-size:11px; text-transform:uppercase; letter-spacing:.03em; }
+table.t td.num, table.t th.num { text-align:right; }
+.sharebar { display:inline-block; height:9px; border-radius:2px;
+  background:var(--accent); vertical-align:0; min-width:1px; }
+.grp { font-size:12px; color:var(--ink2); margin:2px 0; }
+.grp b { color:var(--ink); font-weight:600; }
+.bars { display:grid; gap:5px; margin-top:4px; }
+.bars .row { display:flex; gap:9px; align-items:baseline; font-size:12.5px; }
+.bars .row .u { min-width:150px; color:var(--ink2); }
+.bars .row.pass .u::before { content:"\2713 "; color:var(--good); }
+.bars .row.fail .u::before { content:"\2717 "; color:var(--warn); }
+#tip { position:fixed; pointer-events:none; background:var(--surface); color:var(--ink);
+  border:1px solid var(--ring); border-radius:8px; padding:8px 11px; font-size:12px;
+  box-shadow:0 4px 18px rgba(0,0,0,.18); opacity:0; z-index:30; max-width:300px;
+  transition:opacity .08s; }
+#tip h4 { margin:0 0 3px; font-size:12.5px; }
+#tip .m { font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.foot { font-size:11.5px; color:var(--muted); margin-top:26px; line-height:1.6;
+  border-top:1px solid var(--ring); padding-top:12px; }
+</style>
+</head>
+<body>
+<div id="tip"></div>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="back"><a href="index.html">← all dashboards</a></div>
+      <h1>wine</h1>
+      <div class="sub">classification · n=178 · d=13
+        · <span class="pill warn">small-n regime</span></div>
+    </div>
+    <div class="stats"><div class="stat"><div class="v">0.982</div><div class="l">fidelity</div></div><div class="stat"><div class="v">1.0441</div><div class="l">vs ceiling</div></div><div class="stat"><div class="v">9</div><div class="l">core components</div></div><div class="stat"><div class="v">0.62</div><div class="l">recon R²</div></div></div>
+  </div>
+
+  <div class="card dagcard">
+    <div class="daghdr">
+      <h2>Concept DAG</h2>
+      <div class="seg">
+        <button id="m_hier" class="on">Layer F flow</button>
+        <button id="m_units">Model units</button>
+      </div>
+      <div class="ctrls">
+        <span id="hierctrls" class="ctrls" style="border:none;padding:0">
+          <button id="b_expand">open all boxes</button>
+        </span>
+        <span id="unitctrls" class="ctrls" style="border:none;padding:0;display:none">
+          <label><input type="checkbox" id="t_peri" checked> periphery</label>
+          <label><input type="checkbox" id="t_in" checked> inputs</label>
+        </span>
+        <button id="b_fit">reset view</button>
+      </div>
+    </div>
+    <div class="dagbody">
+      <div class="dagwrap">
+        <svg id="dag" preserveAspectRatio="xMidYMid meet"><g id="dagg"></g></svg>
+        <div class="legend">
+          <span><i style="background:var(--corewash);border:1.5px solid var(--core)"></i>CORE</span>
+          <span><i style="background:var(--periwash);border:1.5px solid var(--peri)"></i>periphery</span>
+          <span><i style="background:var(--surface);border:1.5px solid var(--accent)"></i>output (right)</span>
+          <span><i style="background:var(--wash);border:1px solid var(--grid)"></i>input feature (left)</span>
+          <span>features → components → output · bar = measured contribution split · double-click a box to open it</span>
+        </div>
+      </div>
+      <div class="detail" id="detail"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Layer F — certified function components <span class="pill core">the certified claims</span></h2>
+    <div class="note">Purified weighted-fANOVA components of the learned function under the DECLARED empirical training measure (unique given the measure; carving-invariant).  Shares are out-of-sample covariances on validation. Reconstruction R² 0.62;
+      E[V] ≤ 0.939 over 377-support universe.</div>
+    <table class="t"><thead><tr><th>component (support)</th><th class="num">share</th><th></th><th class="num">Π</th><th class="num">π</th><th>label</th></tr></thead><tbody><tr><td>alcohol</td><td class="num">0.530</td><td><span class="sharebar" style="width:150px"></span></td><td class="num">1.00</td><td class="num">1.00</td><td><span class="pill core">CORE</span></td></tr><tr><td>total_phenols</td><td class="num">0.245</td><td><span class="sharebar" style="width:69px"></span></td><td class="num">1.00</td><td class="num">1.00</td><td><span class="pill core">CORE</span></td></tr><tr><td>malic_acid</td><td class="num">0.227</td><td><span class="sharebar" style="width:64px"></span></td><td class="num">1.00</td><td class="num">1.00</td><td><span class="pill core">CORE</span></td></tr><tr><td>alcalinity_of_ash</td><td class="num">0.146</td><td><span class="sharebar" style="width:41px"></span></td><td class="num">1.00</td><td class="num">0.95</td><td><span class="pill core">CORE</span></td></tr><tr><td>magnesium</td><td class="num">0.132</td><td><span class="sharebar" style="width:37px"></span></td><td class="num">1.00</td><td class="num">1.00</td><td><span class="pill core">CORE</span></td></tr><tr><td>flavanoids</td><td class="num">0.076</td><td><span class="sharebar" style="width:22px"></span></td><td class="num">1.00</td><td class="num">0.93</td><td><span class="pill core">CORE</span></td></tr><tr><td>proline</td><td class="num">0.051</td><td><span class="sharebar" style="width:14px"></span></td><td class="num">1.00</td><td class="num">0.65</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>color_intensity</td><td class="num">0.049</td><td><span class="sharebar" style="width:14px"></span></td><td class="num">1.00</td><td class="num">0.72</td><td><span class="pill core">CORE</span></td></tr><tr><td>od280/od315_of_diluted_wines</td><td class="num">0.048</td><td><span class="sharebar" style="width:14px"></span></td><td class="num">1.00</td><td class="num">0.90</td><td><span class="pill core">CORE</span></td></tr><tr><td>ash</td><td class="num">0.035</td><td><span class="sharebar" style="width:10px"></span></td><td class="num">1.00</td><td class="num">0.85</td><td><span class="pill core">CORE</span></td></tr><tr><td>alcohol, total_phenols</td><td class="num">0.029</td><td><span class="sharebar" style="width:8px"></span></td><td class="num">1.00</td><td class="num">0.05</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>proanthocyanins</td><td class="num">0.025</td><td><span class="sharebar" style="width:7px"></span></td><td class="num">0.88</td><td class="num">0.65</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, ash</td><td class="num">0.023</td><td><span class="sharebar" style="width:7px"></span></td><td class="num">0.88</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, hue</td><td class="num">0.021</td><td><span class="sharebar" style="width:6px"></span></td><td class="num">1.00</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>ash, proline</td><td class="num">0.014</td><td><span class="sharebar" style="width:4px"></span></td><td class="num">1.00</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>malic_acid, hue</td><td class="num">0.013</td><td><span class="sharebar" style="width:4px"></span></td><td class="num">1.00</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, malic_acid</td><td class="num">0.013</td><td><span class="sharebar" style="width:4px"></span></td><td class="num">0.88</td><td class="num">0.03</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, proline</td><td class="num">0.013</td><td><span class="sharebar" style="width:4px"></span></td><td class="num">0.50</td><td class="num">0.05</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcalinity_of_ash, nonflavanoid_phenols</td><td class="num">0.011</td><td><span class="sharebar" style="width:3px"></span></td><td class="num">1.00</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>total_phenols, flavanoids</td><td class="num">0.011</td><td><span class="sharebar" style="width:3px"></span></td><td class="num">0.38</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, proanthocyanins</td><td class="num">0.011</td><td><span class="sharebar" style="width:3px"></span></td><td class="num">0.62</td><td class="num">0.03</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>nonflavanoid_phenols, color_intensity</td><td class="num">0.010</td><td><span class="sharebar" style="width:3px"></span></td><td class="num">0.12</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, alcalinity_of_ash</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.12</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, magnesium</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.25</td><td class="num">0.05</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, flavanoids</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.12</td><td class="num">0.05</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>malic_acid, proanthocyanins</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.12</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>ash, flavanoids</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.75</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcalinity_of_ash, flavanoids</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.12</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>total_phenols, nonflavanoid_phenols</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.50</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>flavanoids, proline</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.50</td><td class="num">0.00</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>color_intensity, hue</td><td class="num">0.000</td><td><span class="sharebar" style="width:1px"></span></td><td class="num">0.25</td><td class="num">0.15</td><td><span class="pill peri">PERIPHERY</span></td></tr></tbody></table>
+  </div>
+
+  <div class="card">
+    <h2>Layer S — routes <span class="pill peri">inspectable equivalence classes</span></h2>
+    <div class="note">Collinearity groups (|Spearman| ≥ 0.8): <b>{total_phenols, flavanoids}</b>. Singletons omitted.</div><table class="t"><thead><tr><th>route (modal support)</th><th class="num">Π</th><th class="num">π</th><th class="num">variants</th><th>common core</th><th>multiplic.</th><th>label</th></tr></thead><tbody><tr><td>ash, magnesium, color_intensity</td><td class="num">0.88</td><td class="num">0.23</td><td class="num">7</td><td>ash</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>proanthocyanins, color_intensity, proline</td><td class="num">0.75</td><td class="num">0.33</td><td class="num">6</td><td>proanthocyanins</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, magnesium</td><td class="num">0.38</td><td class="num">0.25</td><td class="num">3</td><td>alcohol, magnesium</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, G5{total_phenols, flavanoids}, od280/od315_of_diluted_wines</td><td class="num">0.50</td><td class="num">0.20</td><td class="num">3</td><td>alcohol, od280/od315_of_diluted_wines</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, malic_acid, color_intensity</td><td class="num">0.12</td><td class="num">0.00</td><td class="num">1</td><td>alcohol, malic_acid, color_intensity</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, malic_acid, proline</td><td class="num">0.12</td><td class="num">0.03</td><td class="num">1</td><td>alcohol, malic_acid, proline</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, alcalinity_of_ash, G5{total_phenols, flavanoids}</td><td class="num">0.12</td><td class="num">0.07</td><td class="num">1</td><td>alcohol, alcalinity_of_ash, G5{total_phenols, flavanoids}</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, alcalinity_of_ash, color_intensity</td><td class="num">0.12</td><td class="num">0.07</td><td class="num">1</td><td>alcohol, alcalinity_of_ash, color_intensity</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcohol, alcalinity_of_ash, hue</td><td class="num">0.12</td><td class="num">0.00</td><td class="num">1</td><td>alcohol, alcalinity_of_ash, hue</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>malic_acid, G5{total_phenols, flavanoids}, color_intensity</td><td class="num">0.12</td><td class="num">0.05</td><td class="num">1</td><td>malic_acid, G5{total_phenols, flavanoids}, color_intensity</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>malic_acid, od280/od315_of_diluted_wines, proline</td><td class="num">0.12</td><td class="num">0.03</td><td class="num">1</td><td>malic_acid, od280/od315_of_diluted_wines, proline</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcalinity_of_ash, G5{total_phenols, flavanoids}, color_intensity</td><td class="num">0.12</td><td class="num">0.03</td><td class="num">1</td><td>alcalinity_of_ash, G5{total_phenols, flavanoids}, color_intensity</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcalinity_of_ash, color_intensity, proline</td><td class="num">0.12</td><td class="num">0.00</td><td class="num">1</td><td>alcalinity_of_ash, color_intensity, proline</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcalinity_of_ash, hue, od280/od315_of_diluted_wines</td><td class="num">0.12</td><td class="num">0.03</td><td class="num">1</td><td>alcalinity_of_ash, hue, od280/od315_of_diluted_wines</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>alcalinity_of_ash, od280/od315_of_diluted_wines, proline</td><td class="num">0.38</td><td class="num">0.10</td><td class="num">1</td><td>alcalinity_of_ash, od280/od315_of_diluted_wines, proline</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>magnesium, G5{total_phenols, flavanoids}, color_intensity</td><td class="num">0.12</td><td class="num">0.00</td><td class="num">1</td><td>magnesium, G5{total_phenols, flavanoids}, color_intensity</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>magnesium, G5{total_phenols, flavanoids}, proline</td><td class="num">0.12</td><td class="num">0.07</td><td class="num">1</td><td>magnesium, G5{total_phenols, flavanoids}, proline</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>magnesium, color_intensity, proline</td><td class="num">0.12</td><td class="num">0.10</td><td class="num">1</td><td>magnesium, color_intensity, proline</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>G5{total_phenols, flavanoids}, nonflavanoid_phenols, color_intensity</td><td class="num">0.12</td><td class="num">0.05</td><td class="num">1</td><td>G5{total_phenols, flavanoids}, nonflavanoid_phenols, color_intensity</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>G5{total_phenols, flavanoids}, nonflavanoid_phenols, proline</td><td class="num">0.12</td><td class="num">0.00</td><td class="num">1</td><td>G5{total_phenols, flavanoids}, nonflavanoid_phenols, proline</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>G5{total_phenols, flavanoids}, color_intensity, hue</td><td class="num">0.12</td><td class="num">0.07</td><td class="num">1</td><td>G5{total_phenols, flavanoids}, color_intensity, hue</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>G5{total_phenols, flavanoids}, color_intensity, od280/od315_of_diluted_wines</td><td class="num">0.38</td><td class="num">0.15</td><td class="num">1</td><td>G5{total_phenols, flavanoids}, color_intensity, od280/od315_of_diluted_wines</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>G5{total_phenols, flavanoids}, hue, od280/od315_of_diluted_wines</td><td class="num">0.12</td><td class="num">0.10</td><td class="num">1</td><td>G5{total_phenols, flavanoids}, hue, od280/od315_of_diluted_wines</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>G5{total_phenols, flavanoids}, od280/od315_of_diluted_wines, proline</td><td class="num">0.25</td><td class="num">0.03</td><td class="num">1</td><td>G5{total_phenols, flavanoids}, od280/od315_of_diluted_wines, proline</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>nonflavanoid_phenols, hue, od280/od315_of_diluted_wines</td><td class="num">0.12</td><td class="num">0.05</td><td class="num">1</td><td>nonflavanoid_phenols, hue, od280/od315_of_diluted_wines</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr><tr><td>color_intensity, hue, proline</td><td class="num">0.12</td><td class="num">0.07</td><td class="num">1</td><td>color_intensity, hue, proline</td><td>no</td><td><span class="pill peri">PERIPHERY</span></td></tr></tbody></table>
+  </div>
+
+  <div class="card">
+    <h2>Layer R — portfolio reliance</h2>
+    <div class="note">Every retraining relies on each group by at least the min (a portfolio guarantee robust to which carving a run picked).</div><table class="t"><thead><tr><th>feature group</th><th class="num">min</th><th class="num">max</th><th>range</th></tr></thead><tbody><tr><td>color_intensity</td><td class="num">0.068</td><td class="num">0.361</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="28" x2="150" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>alcohol</td><td class="num">0.063</td><td class="num">0.233</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="26" x2="97" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>ash</td><td class="num">0.045</td><td class="num">0.100</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="19" x2="42" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>alcalinity_of_ash</td><td class="num">0.034</td><td class="num">0.124</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="14" x2="51" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>hue</td><td class="num">0.033</td><td class="num">0.269</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="14" x2="112" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>G5{total_phenols, flavanoids}</td><td class="num">0.022</td><td class="num">0.174</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="9" x2="72" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>proline</td><td class="num">0.011</td><td class="num">0.112</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="5" x2="47" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>proanthocyanins</td><td class="num">0.007</td><td class="num">0.088</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="3" x2="37" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>malic_acid</td><td class="num">0.005</td><td class="num">0.073</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="2" x2="30" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>nonflavanoid_phenols</td><td class="num">-0.010</td><td class="num">0.001</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="-4" x2="0" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>magnesium</td><td class="num">-0.017</td><td class="num">0.015</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="-7" x2="6" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr><tr><td>od280/od315_of_diluted_wines</td><td class="num">-0.025</td><td class="num">0.096</td><td><svg width="156" height="12" style="vertical-align:-2px"><line x1="-10" x2="40" y1="6" y2="6" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/></svg></td></tr></tbody></table>
+  </div>
+
+  <div class="card">
+    <h2>Certificate summary</h2>
+    <div class="note">honest depth <b>1</b> (widths 6) · core coverage 0.00
+      · periphery reasons: absent_in_main, infrequent, multiplicitous, no_effect, unstable.
+      Regime: below stability power floor (n &lt; 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A).</div>
+    <div class="bars"><div class="row pass"><span class="u">fidelity ≥ ceiling</span><span>ratio 1.044 vs unconstrained MLP/HGB</span></div><div class="row pass"><span class="u">core coverage ≥ 0.5</span><span>certified components cover 1.49 of function variance</span></div><div class="row pass"><span class="u">E[V] non-vacuous</span><span>E[V] ≤ 0.939 over the structure-level universe</span></div><div class="row pass"><span class="u">honest depth</span><span>depth 1; widths 6</span></div></div>
+    <div class="note" style="margin-top:10px"><b>Non-claims.</b>
+      CORE concepts are stable, real structures - not proven causal mechanisms of the world (M-C7). The periphery is labelled, not certified. Unit semantics require expert review (the soft target).</div>
+  </div>
+
+  <div class="foot">
+    XPLAIN-x1 audit dashboard · git 37579b51d1
+    · config c9e5554685
+    · data fdd1a16203
+    · R=8 restarts, 40 CPSS runs.
+    Certified claims are the Layer F components; the DAG is inspectable, the periphery labelled.
+  </div>
+</div>
+<script id="dash-data" type="application/json">{"units": {"nodes": [{"id": "alcohol", "kind": "input", "label": "alcohol"}, {"id": "malic_acid", "kind": "input", "label": "malic_acid"}, {"id": "ash", "kind": "input", "label": "ash"}, {"id": "alcalinity_of_ash", "kind": "input", "label": "alcalinity_of_ash"}, {"id": "magnesium", "kind": "input", "label": "magnesium"}, {"id": "total_phenols", "kind": "input", "label": "total_phenols"}, {"id": "flavanoids", "kind": "input", "label": "flavanoids"}, {"id": "nonflavanoid_phenols", "kind": "input", "label": "nonflavanoid_phenols"}, {"id": "proanthocyanins", "kind": "input", "label": "proanthocyanins"}, {"id": "color_intensity", "kind": "input", "label": "color_intensity"}, {"id": "hue", "kind": "input", "label": "hue"}, {"id": "od280/od315_of_diluted_wines", "kind": "input", "label": "od280/od315_of_diluted_wines"}, {"id": "proline", "kind": "input", "label": "proline"}, {"id": "L1U4", "kind": "unit", "layer": 1, "label": "poly(2)(od280/od315_of_diluted_wines, alcohol, flavanoids)", "mu": 0.9462775588035583, "Pi": 0.375, "pi": 0.475, "delta": 0.36630034753635243, "coverage": 0.31647118999208, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "multiplicitous"], "support_names": ["od280/od315_of_diluted_wines", "alcohol", "flavanoids"], "form": "poly(2)", "feats": ["alcohol", "flavanoids", "od280/od315_of_diluted_wines"], "in_contrib": [{"p": "total_phenols", "share": 0.2099}, {"p": "od280/od315_of_diluted_wines", "share": 0.2021}, {"p": "alcalinity_of_ash", "share": 0.1908}, {"p": "alcohol", "share": 0.1667}, {"p": "proline", "share": 0.1312}, {"p": "flavanoids", "share": 0.0386}, {"p": "magnesium", "share": 0.0356}, {"p": "ash", "share": 0.025}]}, {"id": "L1U3", "kind": "unit", "layer": 1, "label": "poly(2)(color_intensity, flavanoids, od280/od315_of_diluted_wines)", "mu": 0.9315839409828186, "Pi": 0.75, "pi": 0.725, "delta": 0.08524460462830774, "coverage": 0.014336712814542296, "tag": "PERIPHERY", "reasons": ["multiplicitous"], "support_names": ["color_intensity", "flavanoids", "od280/od315_of_diluted_wines"], "form": "poly(2)", "feats": ["color_intensity", "flavanoids", "od280/od315_of_diluted_wines"], "in_contrib": [{"p": "color_intensity", "share": 0.2173}, {"p": "flavanoids", "share": 0.2002}, {"p": "magnesium", "share": 0.1815}, {"p": "od280/od315_of_diluted_wines", "share": 0.1752}, {"p": "hue", "share": 0.1441}, {"p": "nonflavanoid_phenols", "share": 0.0465}, {"p": "alcalinity_of_ash", "share": 0.0352}]}, {"id": "L1U0", "kind": "unit", "layer": 1, "label": "poly(2)(alcohol, alcalinity_of_ash, color_intensity)", "mu": 0.9158452749252319, "Pi": 0.875, "pi": 0.725, "delta": -0.011788252994286763, "coverage": 0.07110459822566284, "tag": "PERIPHERY", "reasons": ["no_effect", "multiplicitous"], "support_names": ["alcohol", "alcalinity_of_ash", "color_intensity"], "form": "poly(2)", "feats": ["alcalinity_of_ash", "alcohol", "color_intensity"], "in_contrib": [{"p": "alcohol", "share": 0.2538}, {"p": "alcalinity_of_ash", "share": 0.1943}, {"p": "proline", "share": 0.1563}, {"p": "color_intensity", "share": 0.1463}, {"p": "ash", "share": 0.1263}, {"p": "proanthocyanins", "share": 0.0784}, {"p": "hue", "share": 0.0447}]}, {"id": "L1U8", "kind": "unit", "layer": 1, "label": "tree(d3)(proanthocyanins, malic_acid, od280/od315_of_diluted_wines)", "mu": 0.8921275835069743, "Pi": 0.125, "pi": 0.1, "delta": 0.06574228432372453, "coverage": 0.05105736465460342, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent"], "support_names": ["proanthocyanins", "malic_acid", "od280/od315_of_diluted_wines"], "form": "tree(d3)", "feats": ["malic_acid", "od280/od315_of_diluted_wines", "proanthocyanins"], "in_contrib": [{"p": "color_intensity", "share": 0.2126}, {"p": "total_phenols", "share": 0.2078}, {"p": "proanthocyanins", "share": 0.1888}, {"p": "malic_acid", "share": 0.1855}, {"p": "magnesium", "share": 0.1662}, {"p": "od280/od315_of_diluted_wines", "share": 0.0391}]}, {"id": "L1U1", "kind": "unit", "layer": 1, "label": "poly(2)(ash, magnesium, color_intensity)", "mu": 0.9382972717285156, "Pi": 0.625, "pi": 0.45, "delta": -0.028449459887499695, "coverage": 0.08362984636823423, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "no_effect", "multiplicitous"], "support_names": ["ash", "magnesium", "color_intensity"], "form": "poly(2)", "feats": ["ash", "color_intensity", "magnesium"], "in_contrib": [{"p": "proline", "share": 0.2646}, {"p": "ash", "share": 0.2475}, {"p": "magnesium", "share": 0.247}, {"p": "color_intensity", "share": 0.1996}, {"p": "hue", "share": 0.0207}, {"p": "od280/od315_of_diluted_wines", "share": 0.0206}]}, {"id": "L1U6", "kind": "unit", "layer": 1, "label": "poly(2)(alcohol, malic_acid, color_intensity)", "mu": 0.9405402541160583, "Pi": 0.125, "pi": 0.3, "delta": 0.009338932396859234, "coverage": 0.056787301759229414, "tag": "PERIPHERY", "reasons": ["unstable", "infrequent", "no_effect"], "support_names": ["alcohol", "malic_acid", "color_intensity"], "form": "poly(2)", "feats": ["alcohol", "color_intensity", "malic_acid"], "in_contrib": [{"p": "alcohol", "share": 0.2943}, {"p": "malic_acid", "share": 0.2732}, {"p": "color_intensity", "share": 0.2289}, {"p": "proanthocyanins", "share": 0.0825}, {"p": "alcalinity_of_ash", "share": 0.0688}, {"p": "proline", "share": 0.0522}]}, {"id": "class_0", "kind": "output", "label": "class_0"}, {"id": "class_1", "kind": "output", "label": "class_1"}, {"id": "class_2", "kind": "output", "label": "class_2"}], "edges": [{"src": "alcohol", "dst": "L1U4", "share": 0.1667}, {"src": "ash", "dst": "L1U4", "share": 0.025}, {"src": "alcalinity_of_ash", "dst": "L1U4", "share": 0.1908}, {"src": "magnesium", "dst": "L1U4", "share": 0.0356}, {"src": "total_phenols", "dst": "L1U4", "share": 0.2099}, {"src": "flavanoids", "dst": "L1U4", "share": 0.0386}, {"src": "od280/od315_of_diluted_wines", "dst": "L1U4", "share": 0.2021}, {"src": "proline", "dst": "L1U4", "share": 0.1312}, {"src": "alcalinity_of_ash", "dst": "L1U3", "share": 0.0352}, {"src": "magnesium", "dst": "L1U3", "share": 0.1813}, {"src": "flavanoids", "dst": "L1U3", "share": 0.2}, {"src": "nonflavanoid_phenols", "dst": "L1U3", "share": 0.0464}, {"src": "color_intensity", "dst": "L1U3", "share": 0.217}, {"src": "hue", "dst": "L1U3", "share": 0.1439}, {"src": "od280/od315_of_diluted_wines", "dst": "L1U3", "share": 0.175}, {"src": "alcohol", "dst": "L1U0", "share": 0.2538}, {"src": "ash", "dst": "L1U0", "share": 0.1263}, {"src": "alcalinity_of_ash", "dst": "L1U0", "share": 0.1943}, {"src": "proanthocyanins", "dst": "L1U0", "share": 0.0784}, {"src": "color_intensity", "dst": "L1U0", "share": 0.1463}, {"src": "hue", "dst": "L1U0", "share": 0.0447}, {"src": "proline", "dst": "L1U0", "share": 0.1563}, {"src": "malic_acid", "dst": "L1U8", "share": 0.1828}, {"src": "magnesium", "dst": "L1U8", "share": 0.1638}, {"src": "total_phenols", "dst": "L1U8", "share": 0.2048}, {"src": "proanthocyanins", "dst": "L1U8", "share": 0.186}, {"src": "color_intensity", "dst": "L1U8", "share": 0.2095}, {"src": "od280/od315_of_diluted_wines", "dst": "L1U8", "share": 0.0385}, {"src": "ash", "dst": "L1U1", "share": 0.2426}, {"src": "magnesium", "dst": "L1U1", "share": 0.2421}, {"src": "color_intensity", "dst": "L1U1", "share": 0.1956}, {"src": "hue", "dst": "L1U1", "share": 0.0203}, {"src": "od280/od315_of_diluted_wines", "dst": "L1U1", "share": 0.0202}, {"src": "proline", "dst": "L1U1", "share": 0.2593}, {"src": "alcohol", "dst": "L1U6", "share": 0.2914}, {"src": "malic_acid", "dst": "L1U6", "share": 0.2705}, {"src": "alcalinity_of_ash", "dst": "L1U6", "share": 0.0681}, {"src": "proanthocyanins", "dst": "L1U6", "share": 0.0817}, {"src": "color_intensity", "dst": "L1U6", "share": 0.2266}, {"src": "proline", "dst": "L1U6", "share": 0.0517}, {"src": "L1U4", "dst": "class_0", "share": 0.3114}, {"src": "L1U3", "dst": "class_0", "share": 0.2201}, {"src": "L1U0", "dst": "class_0", "share": 0.1476}, {"src": "L1U8", "dst": "class_0", "share": 0.1127}, {"src": "L1U1", "dst": "class_0", "share": 0.0955}, {"src": "L1U6", "dst": "class_0", "share": 0.1127}, {"src": "L1U4", "dst": "class_1", "share": 0.2906}, {"src": "L1U3", "dst": "class_1", "share": 0.1711}, {"src": "L1U0", "dst": "class_1", "share": 0.1447}, {"src": "L1U8", "dst": "class_1", "share": 0.0705}, {"src": "L1U1", "dst": "class_1", "share": 0.1595}, {"src": "L1U6", "dst": "class_1", "share": 0.1636}, {"src": "L1U4", "dst": "class_2", "share": 0.3259}, {"src": "L1U3", "dst": "class_2", "share": 0.066}, {"src": "L1U0", "dst": "class_2", "share": 0.1514}, {"src": "L1U8", "dst": "class_2", "share": 0.1904}, {"src": "L1U1", "dst": "class_2", "share": 0.1539}, {"src": "L1U6", "dst": "class_2", "share": 0.1125}], "outCol": 3}, "hier": {"features": [{"id": "F::alcohol", "kind": "feature", "label": "alcohol"}, {"id": "F::flavanoids", "kind": "feature", "label": "flavanoids"}, {"id": "F::od280/od315_of_diluted_wines", "kind": "feature", "label": "od280/od315_of_diluted_wines"}, {"id": "F::alcalinity_of_ash", "kind": "feature", "label": "alcalinity_of_ash"}, {"id": "F::color_intensity", "kind": "feature", "label": "color_intensity"}, {"id": "F::malic_acid", "kind": "feature", "label": "malic_acid"}, {"id": "F::total_phenols", "kind": "feature", "label": "total_phenols"}, {"id": "F::proanthocyanins", "kind": "feature", "label": "proanthocyanins"}, {"id": "F::magnesium", "kind": "feature", "label": "magnesium"}, {"id": "F::ash", "kind": "feature", "label": "ash"}, {"id": "F::proline", "kind": "feature", "label": "proline"}, {"id": "F::hue", "kind": "feature", "label": "hue"}], "components": [{"id": "C0", "kind": "component", "support_names": ["alcohol"], "share": 0.5299, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "n_members": 3, "members": [{"uid": "L1U4", "mu": 0.9462775588035583, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["od280/od315_of_diluted_wines", "alcohol", "flavanoids"], "feats": ["alcohol", "flavanoids", "od280/od315_of_diluted_wines"], "coverage": 0.31647118999208, "contrib": 0.0, "structural": true}, {"uid": "L1U0", "mu": 0.9158452749252319, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["alcohol", "alcalinity_of_ash", "color_intensity"], "feats": ["alcalinity_of_ash", "alcohol", "color_intensity"], "coverage": 0.07110459822566284, "contrib": 0.0, "structural": true}, {"uid": "L1U6", "mu": 0.9405402541160583, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["alcohol", "malic_acid", "color_intensity"], "feats": ["alcohol", "color_intensity", "malic_acid"], "coverage": 0.056787301759229414, "contrib": 0.0, "structural": true}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C1", "kind": "component", "support_names": ["total_phenols"], "share": 0.2449, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["total_phenols"]}, {"id": "C2", "kind": "component", "support_names": ["malic_acid"], "share": 0.2274, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "n_members": 2, "members": [{"uid": "L1U6", "mu": 0.9405402541160583, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["alcohol", "malic_acid", "color_intensity"], "feats": ["alcohol", "color_intensity", "malic_acid"], "coverage": 0.056787301759229414, "contrib": 0.0, "structural": true}, {"uid": "L1U8", "mu": 0.8921275835069743, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["proanthocyanins", "malic_acid", "od280/od315_of_diluted_wines"], "feats": ["malic_acid", "od280/od315_of_diluted_wines", "proanthocyanins"], "coverage": 0.05105736465460342, "contrib": 0.0, "structural": true}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C3", "kind": "component", "support_names": ["alcalinity_of_ash"], "share": 0.1457, "Pi": 1.0, "pi": 0.95, "tag": "CORE", "n_members": 1, "members": [{"uid": "L1U0", "mu": 0.9158452749252319, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["alcohol", "alcalinity_of_ash", "color_intensity"], "feats": ["alcalinity_of_ash", "alcohol", "color_intensity"], "coverage": 0.07110459822566284, "contrib": 0.0, "structural": true}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C4", "kind": "component", "support_names": ["magnesium"], "share": 0.1316, "Pi": 1.0, "pi": 1.0, "tag": "CORE", "n_members": 1, "members": [{"uid": "L1U1", "mu": 0.9382972717285156, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["ash", "magnesium", "color_intensity"], "feats": ["ash", "color_intensity", "magnesium"], "coverage": 0.08362984636823423, "contrib": 0.0, "structural": true}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C5", "kind": "component", "support_names": ["flavanoids"], "share": 0.0765, "Pi": 1.0, "pi": 0.925, "tag": "CORE", "n_members": 2, "members": [{"uid": "L1U4", "mu": 0.9462775588035583, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["od280/od315_of_diluted_wines", "alcohol", "flavanoids"], "feats": ["alcohol", "flavanoids", "od280/od315_of_diluted_wines"], "coverage": 0.31647118999208, "contrib": 0.0, "structural": true}, {"uid": "L1U3", "mu": 0.9315839409828186, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["color_intensity", "flavanoids", "od280/od315_of_diluted_wines"], "feats": ["color_intensity", "flavanoids", "od280/od315_of_diluted_wines"], "coverage": 0.014336712814542296, "contrib": 0.0, "structural": true}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C6", "kind": "component", "support_names": ["color_intensity"], "share": 0.0491, "Pi": 1.0, "pi": 0.725, "tag": "CORE", "n_members": 4, "members": [{"uid": "L1U1", "mu": 0.9382972717285156, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["ash", "magnesium", "color_intensity"], "feats": ["ash", "color_intensity", "magnesium"], "coverage": 0.08362984636823423, "contrib": 0.0, "structural": true}, {"uid": "L1U0", "mu": 0.9158452749252319, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["alcohol", "alcalinity_of_ash", "color_intensity"], "feats": ["alcalinity_of_ash", "alcohol", "color_intensity"], "coverage": 0.07110459822566284, "contrib": 0.0, "structural": true}, {"uid": "L1U6", "mu": 0.9405402541160583, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["alcohol", "malic_acid", "color_intensity"], "feats": ["alcohol", "color_intensity", "malic_acid"], "coverage": 0.056787301759229414, "contrib": 0.0, "structural": true}, {"uid": "L1U3", "mu": 0.9315839409828186, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["color_intensity", "flavanoids", "od280/od315_of_diluted_wines"], "feats": ["color_intensity", "flavanoids", "od280/od315_of_diluted_wines"], "coverage": 0.014336712814542296, "contrib": 0.0, "structural": true}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C7", "kind": "component", "support_names": ["od280/od315_of_diluted_wines"], "share": 0.0479, "Pi": 1.0, "pi": 0.9, "tag": "CORE", "n_members": 3, "members": [{"uid": "L1U4", "mu": 0.9462775588035583, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["od280/od315_of_diluted_wines", "alcohol", "flavanoids"], "feats": ["alcohol", "flavanoids", "od280/od315_of_diluted_wines"], "coverage": 0.31647118999208, "contrib": 0.0, "structural": true}, {"uid": "L1U8", "mu": 0.8921275835069743, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["proanthocyanins", "malic_acid", "od280/od315_of_diluted_wines"], "feats": ["malic_acid", "od280/od315_of_diluted_wines", "proanthocyanins"], "coverage": 0.05105736465460342, "contrib": 0.0, "structural": true}, {"uid": "L1U3", "mu": 0.9315839409828186, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["color_intensity", "flavanoids", "od280/od315_of_diluted_wines"], "feats": ["color_intensity", "flavanoids", "od280/od315_of_diluted_wines"], "coverage": 0.014336712814542296, "contrib": 0.0, "structural": true}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C8", "kind": "component", "support_names": ["ash"], "share": 0.0353, "Pi": 1.0, "pi": 0.85, "tag": "CORE", "n_members": 1, "members": [{"uid": "L1U1", "mu": 0.9382972717285156, "tag": "PERIPHERY", "form": "poly(2)", "layer": 1, "immediate": ["ash", "magnesium", "color_intensity"], "feats": ["ash", "color_intensity", "magnesium"], "coverage": 0.08362984636823423, "contrib": 0.0, "structural": true}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C9", "kind": "component", "support_names": ["proline"], "share": 0.0508, "Pi": 1.0, "pi": 0.65, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["proline"]}, {"id": "C10", "kind": "component", "support_names": ["alcohol", "total_phenols"], "share": 0.0285, "Pi": 1.0, "pi": 0.05, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["alcohol", "total_phenols"]}, {"id": "C11", "kind": "component", "support_names": ["proanthocyanins"], "share": 0.0252, "Pi": 0.875, "pi": 0.65, "tag": "PERIPHERY", "n_members": 1, "members": [{"uid": "L1U8", "mu": 0.8921275835069743, "tag": "PERIPHERY", "form": "tree(d3)", "layer": 1, "immediate": ["proanthocyanins", "malic_acid", "od280/od315_of_diluted_wines"], "feats": ["malic_acid", "od280/od315_of_diluted_wines", "proanthocyanins"], "coverage": 0.05105736465460342, "contrib": 0.0, "structural": true}], "extra_members": 0, "measured": false, "contrib_sum": 0.0, "feats_direct": []}, {"id": "C12", "kind": "component", "support_names": ["alcohol", "ash"], "share": 0.0231, "Pi": 0.875, "pi": 0.0, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["alcohol", "ash"]}, {"id": "C13", "kind": "component", "support_names": ["alcohol", "hue"], "share": 0.0213, "Pi": 1.0, "pi": 0.0, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["alcohol", "hue"]}, {"id": "C14", "kind": "component", "support_names": ["ash", "proline"], "share": 0.0144, "Pi": 1.0, "pi": 0.0, "tag": "PERIPHERY", "n_members": 0, "members": [], "extra_members": 0, "measured": false, "contrib_sum": 0, "feats_direct": ["ash", "proline"]}], "output": {"id": "OUT", "kind": "output", "label": "3-class output", "sub": "classification · wine"}}}</script>
+<script>
+"use strict";
+const $ = s => document.getElementById(s);
+const NS = "http://www.w3.org/2000/svg";
+const D = JSON.parse($("dash-data").textContent);
+const tip = $("tip");
+function el(t,a,p){ const e=document.createElementNS(NS,t);
+  for(const k in a) e.setAttribute(k,a[k]); if(p) p.appendChild(e); return e; }
+function fmt(v,d){ return (v==null||isNaN(v))?"—":Number(v).toFixed(d==null?2:d); }
+function abbr(s,m){ m=m||15; return s.length>m ? s.slice(0,m-1)+"…" : s; }
+
+const HIER = D.hier, UNITS = D.units;
+let MODE="hier", SEL=null, EXP={}, SHOW_PERI=true, SHOW_IN=true;
+let VZ={k:1,x:0,y:0}, drag=null, W=980, H=560, POS={};
+const svg=$("dag"), g=$("dagg");
+
+// each component starts collapsed; the LR skeleton (features -> boxes -> output)
+// is the default Layer F view.
+function moveTip(ev){ tip.style.left=Math.min(ev.clientX+14,innerWidth-tip.offsetWidth-8)+"px";
+  tip.style.top=Math.min(ev.clientY+14,innerHeight-tip.offsetHeight-8)+"px"; }
+function showTip(html,ev){ tip.innerHTML=html; tip.style.opacity=1; moveTip(ev); }
+function hideTip(){ tip.style.opacity=0; }
+
+// segmented horizontal contribution bar. segs = [{share, label}] (shares need
+// not be normalised); drawn left->right into parent group at (x,y,width).
+const SEG=["#2a78d6","#1baf7a","#eb6834","#eda100","#8a63d2","#e0567f","#159e8e",
+           "#6b7bd6","#c06a2b","#3f9a3f","#a05fd0","#5a9fd6"];
+function drawBar(parent,x,y,w,h,segs){
+  const tot=segs.reduce((s,z)=>s+(z.share||0),0)||1;
+  el("rect",{x,y,width:w,height:h,rx:2,fill:"var(--grid)","fill-opacity":0.5},parent);
+  let cx=x;
+  segs.forEach((z,i)=>{ const sw=w*(z.share||0)/tot; if(sw<=0)return;
+    const r=el("rect",{x:cx,y,width:Math.max(0.5,sw),height:h,
+      fill:z.color||SEG[i%SEG.length]},parent);
+    r.style.cursor="default";
+    r.addEventListener("mousemove",ev=>{ev.stopPropagation();
+      showTip(`<h4>${z.label}</h4><div class="m">${(100*(z.share||0)/tot).toFixed(1)}% of this bar</div>`,ev);});
+    r.addEventListener("mouseleave",hideTip);
+    cx+=sw; });
+}
+
+// =================================================================== LAYER F
+const FEATCX=96, COMPX=360, COMPW=232, ROWH=24, HEADH=42, BARZONE=17, BOXGAP=20, PAD=10;
+const OUTCX=COMPX+COMPW+150;
+function rowCount(c){ const base=c.members.length||c.feats_direct.length;
+  return base + ((c.extra_members||0)>0?1:0); }
+function barH(c){ return c.measured ? BARZONE : 0; }   // contribution bar zone
+function compHeight(c){ return HEADH + barH(c) +
+  (EXP[c.id] ? Math.max(1,rowCount(c))*ROWH + PAD : 0); }
+function layoutHier(){
+  const comps=HIER.components;
+  let y=40; const cpos={};
+  comps.forEach(c=>{ const h=compHeight(c); cpos[c.id]={y, h, top:y}; y+=h+BOXGAP; });
+  const compsBottom=y;
+  const feats=HIER.features;
+  const fh=Math.max(compsBottom, 40+feats.length*30);
+  H=Math.max(fh, 200)+30; W=OUTCX+150;
+  POS={cpos, feat:{}, };
+  const fy0=(H-(feats.length-1)*30)/2;
+  feats.forEach((f,i)=>POS.feat[f.id]={x:FEATCX,y:fy0+i*30});
+  POS.out={x:OUTCX,y:H/2};
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+}
+function memberRowY(c,i){ return POS.cpos[c.id].top+HEADH+barH(c)+i*ROWH+ROWH/2; }
+function tagStroke(t){ return t==="CORE"?"var(--core)":"var(--peri)"; }
+function tagFill(t){ return t==="CORE"?"var(--corewash)":"var(--periwash)"; }
+
+function edgePath(x1,y1,x2,y2){ const mx=(x1+x2)/2;
+  return `M${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`; }
+function drawEdge(x1,y1,x2,y2,share,dim){
+  const w=0.7+5*Math.min(1,(share||0)*3);
+  el("path",{d:edgePath(x1,y1,x2,y2),fill:"none",stroke:"var(--edge)",
+    "stroke-width":w.toFixed(2),"stroke-opacity":dim?0.12:0.5},g); }
+
+function drawHier(){
+  g.textContent="";
+  const focus = SEL;
+  const featSel = new Set();  // features touched by the selected node (for focus dim)
+  if(focus){
+    const c=HIER.components.find(c=>c.id===focus);
+    if(c){ (c.members.length?c.members.flatMap(m=>m.feats):c.support_names).forEach(f=>featSel.add(f)); }
+  }
+  // ---- edges (drawn first, behind) ----
+  HIER.components.forEach(c=>{
+    const cx1=COMPX, cy=POS.cpos[c.id].top+HEADH/2;
+    const dimC = focus && focus!==c.id;
+    // component -> output
+    drawEdge(COMPX+COMPW, POS.cpos[c.id].top+compHeight(c)/2, OUTCX-46, POS.out.y, c.share, dimC);
+    if(!EXP[c.id]){
+      // collapsed: feature -> component (the support), summary width
+      c.support_names.forEach(f=>{ const fp=POS.feat["F::"+f]; if(!fp)return;
+        drawEdge(fp.x+56, fp.y, cx1, cy, c.share, dimC); });
+    } else {
+      // expanded: feature -> each member row (real flow)
+      const rows = c.members.length?c.members:c.feats_direct.map(f=>({feats:[f],direct:true}));
+      rows.forEach((m,i)=>{ const ry=memberRowY(c,i);
+        (m.feats||[]).forEach(f=>{ const fp=POS.feat["F::"+f]; if(!fp)return;
+          const dim = dimC || (focus && !featSel.has(f) && focus!==c.id);
+          drawEdge(fp.x+56, fp.y, cx1, ry, (m.coverage||0.04), dim); }); });
+    }
+  });
+  // ---- feature nodes (left lane) ----
+  HIER.features.forEach(f=>{ const p=POS.feat[f.id]; if(!p)return;
+    const dim=focus && !featSel.has(f.label) && !HIER.components.some(c=>c.id===focus && c.support_names.includes(f.label));
+    const grp=el("g",{transform:`translate(${p.x},${p.y})`,style:`cursor:default;opacity:${dim?0.35:1}`},g);
+    const wpx=Math.max(64, 8+7*abbr(f.label,18).length);
+    el("rect",{x:-wpx/2,y:-11,width:wpx,height:22,rx:11,fill:"var(--wash)",
+      stroke:"var(--grid)","stroke-width":1},grp);
+    const t=el("text",{x:0,y:4,"text-anchor":"middle",
+      style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},grp);
+    t.textContent=abbr(f.label,18);
+    grp.addEventListener("mousemove",ev=>showTip(`<h4>${f.label}</h4><div class="m">input feature</div>`,ev));
+    grp.addEventListener("mouseleave",hideTip);
+  });
+  // ---- component boxes (middle lane) ----
+  HIER.components.forEach(c=>{
+    const P=POS.cpos[c.id]; const h=compHeight(c);
+    const dimC=focus && focus!==c.id && !(HIER.components.find(x=>x.id===focus));
+    const grp=el("g",{transform:`translate(${COMPX},${P.top})`,
+      style:`cursor:pointer;opacity:${(focus&&focus!==c.id)?0.5:1}`},g);
+    el("rect",{x:0,y:0,width:COMPW,height:h,rx:9,fill:tagFill(c.tag),
+      stroke:tagStroke(c.tag),"stroke-width":c.id===SEL?2.4:1.5},grp);
+    // header
+    const title=el("text",{x:12,y:19,style:"font:12.5px system-ui;font-weight:650;fill:var(--ink);pointer-events:none"},grp);
+    title.textContent=abbr(c.support_names.join(" × "),24);
+    const sub=el("text",{x:12,y:33,style:"font:10px system-ui;fill:var(--muted);pointer-events:none"},grp);
+    sub.textContent=`${(100*c.share).toFixed(1)}% · Π ${fmt(c.Pi)} · ${c.n_members} carrier${c.n_members===1?"":"s"}`;
+    // expand badge
+    if(c.n_members||c.feats_direct.length){
+      const bx=COMPW-16;
+      el("circle",{cx:bx,cy:14,r:8,fill:"var(--surface)",stroke:tagStroke(c.tag),"stroke-width":1.2},grp);
+      const bt=el("text",{x:bx,y:18,"text-anchor":"middle",
+        style:"font:13px system-ui;font-weight:700;fill:var(--ink2);pointer-events:none"},grp);
+      bt.textContent=EXP[c.id]?"–":"+";
+    }
+    // measured-contribution bar (how the component's mass distributes across
+    // its member units, from per-unit ablation) — always visible on the box.
+    if(c.measured){
+      const segs=c.members.filter(m=>m.contrib>0)
+        .map(m=>({share:m.contrib,label:m.uid+" — Δshare "+fmt(m.contrib,3)}));
+      drawBar(grp,12,HEADH-3,COMPW-24,10,segs.length?segs:[{share:1,label:"no single dominant carrier"}]);
+    }
+    // member rows inside the box
+    if(EXP[c.id]){
+      const y0=HEADH+barH(c);
+      const rows=c.members.length?c.members:c.feats_direct.map(f=>({uid:f,direct:true,feats:[f]}));
+      rows.forEach((m,i)=>{
+        const ry=y0+i*ROWH+ROWH/2;
+        const rg=el("g",{transform:`translate(0,${ry})`,style:"cursor:pointer"},grp);
+        el("rect",{x:8,y:-ROWH/2+2,width:COMPW-16,height:ROWH-4,rx:5,
+          fill:m.direct?"var(--wash)":tagFill(m.tag),stroke:m.direct?"var(--grid)":tagStroke(m.tag),
+          "stroke-width":1,"stroke-opacity":0.7},rg);
+        const mt=el("text",{x:14,y:3.5,style:"font:10.5px system-ui;fill:var(--ink);pointer-events:none"},rg);
+        // label with RESOLVED features (L2 units otherwise read as parent ids)
+        mt.textContent = m.direct ? ("feature · "+abbr(m.uid,16))
+          : `${m.uid} · ${(m.feats||[]).map(s=>abbr(s,7)).join("·")}`;
+        if(!m.direct){
+          // "reads directly" tag when the unit also literally contains the
+          // component's support (vs carrying it through a collinear sibling)
+          const pctX = m.structural ? COMPW-34 : COMPW-16;
+          if(m.structural){
+            const tg=el("text",{x:COMPW-16,y:3.5,"text-anchor":"end",
+              style:"font:8.5px system-ui;fill:var(--core);pointer-events:none"},rg);
+            tg.textContent="⌾ direct";
+          }
+          const mm=el("text",{x:pctX,y:3.5,"text-anchor":"end",
+            style:"font:9.5px system-ui;fill:var(--muted);pointer-events:none"},rg);
+          mm.textContent = (c.measured && c.contrib_sum>0)
+            ? (fmt(100*m.contrib/c.contrib_sum,0)+"%") : ("μ "+fmt(m.mu,2));
+          rg.addEventListener("mousemove",ev=>showTip(
+            `<h4>${m.uid} · layer ${m.layer}</h4>`+
+            `<div class="m">${m.tag} · ${m.form||"?"} · μ ${fmt(m.mu)}</div>`+
+            `<div class="m">reads: ${m.feats.join(", ")}`+
+            (m.structural?" (contains this term's features directly)":" (carries it via a collinear feature)")+`</div>`+
+            (c.measured?`<div class="m">measured Δshare when ablated: ${fmt(m.contrib,3)}</div>`:""),ev));
+          rg.addEventListener("mouseleave",hideTip);
+          rg.addEventListener("click",ev=>{ev.stopPropagation(); selectMember(c,m);});
+        }
+      });
+      if((c.extra_members||0)>0){
+        const ry=y0+rows.length*ROWH+ROWH/2;
+        const et=el("text",{x:COMPW/2,y:ry+3.5,"text-anchor":"middle",
+          style:"font:9.5px system-ui;font-style:italic;fill:var(--muted);pointer-events:none"},grp);
+        et.textContent=`+${c.extra_members} more carrier unit(s)`;
+      }
+    }
+    grp.addEventListener("mousemove",ev=>{ if(ev.target.tagName!=="rect"||ev.offsetY==null){} showTip(
+      `<h4>${c.support_names.join(" × ")}</h4>`+
+      `<div class="m">${c.tag} function component · ${(100*c.share).toFixed(1)}% of variance</div>`+
+      `<div class="m">Π ${fmt(c.Pi)} · π ${fmt(c.pi)} · ${c.n_members} member unit(s)`+
+      `${(c.n_members||c.feats_direct.length)?" · double-click to open":""}</div>`,ev); });
+    grp.addEventListener("mouseleave",hideTip);
+    grp.addEventListener("click",ev=>{ev.stopPropagation(); select(c.id);});
+    grp.addEventListener("dblclick",ev=>{ev.stopPropagation();
+      if(c.n_members||c.feats_direct.length){ EXP[c.id]=!EXP[c.id]; layoutHier(); drawHier(); }});
+  });
+  // ---- output node (right) ----
+  const o=HIER.output, op=POS.out;
+  const og=el("g",{transform:`translate(${op.x},${op.y})`},g);
+  el("rect",{x:-46,y:-16,width:92,height:32,rx:8,fill:"var(--surface)",
+    stroke:"var(--accent)","stroke-width":1.6},og);
+  const ot=el("text",{x:0,y:4,"text-anchor":"middle",
+    style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},og);
+  ot.textContent=abbr(o.label,12);
+  og.addEventListener("mousemove",ev=>showTip(`<h4>${o.label}</h4><div class="m">${o.sub}</div>`,ev));
+  og.addEventListener("mouseleave",hideTip);
+  applyZoom();
+}
+
+// =================================================================== UNITS
+const UW=158, UH=44, UVGAP=20;   // unit box size + vertical gap
+function drawUnits(){
+  g.textContent="";
+  const N=UNITS.nodes, E=UNITS.edges;
+  const outCol=UNITS.outCol;
+  const colf=n=>n.kind==="input"?0:n.kind==="output"?outCol:(n.layer||1);
+  const vis=N.filter(n=>{ if(n.kind==="input"&&!SHOW_IN)return false;
+    if(n.kind==="unit"&&n.tag!=="CORE"&&!SHOW_PERI)return false; return true; });
+  const cols={}; vis.forEach(n=>{const c=colf(n);(cols[c]=cols[c]||[]).push(n);});
+  const keys=Object.keys(cols).map(Number).sort((a,b)=>a-b);
+  const COLW=232; let maxR=1; keys.forEach(k=>maxR=Math.max(maxR,cols[k].length));
+  H=60+maxR*(UH+UVGAP); W=(Math.max(...keys,0)+1)*COLW;
+  const pos={};
+  keys.forEach(k=>{const arr=cols[k],x=k*COLW+COLW/2,span=(arr.length-1)*(UH+UVGAP),y0=(H-span)/2;
+    arr.forEach((n,i)=>pos[n.id]={x,y:y0+i*(UH+UVGAP)});});
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  const visIds=new Set(vis.map(n=>n.id));
+  const halfW=n=>n.kind==="unit"?UW/2:(n.kind==="output"?46:56);
+  E.forEach(e=>{ if(!visIds.has(e.src)||!visIds.has(e.dst))return;
+    const p=pos[e.src],q=pos[e.dst]; if(!p||!q)return;
+    drawEdge(p.x+halfW(nById(e.src)),p.y,q.x-halfW(nById(e.dst)),q.y,e.share,
+      SEL&&SEL!==e.src&&SEL!==e.dst); });
+  function nById(id){ return N.find(n=>n.id===id); }
+  vis.forEach(n=>{ const p=pos[n.id]; if(!p)return;
+    const grp=el("g",{transform:`translate(${p.x},${p.y})`,style:"cursor:pointer"},g);
+    if(n.kind==="unit"){
+      const fill=n.tag==="CORE"?"var(--corewash)":"var(--periwash)";
+      const stroke=n.tag==="CORE"?"var(--core)":"var(--peri)";
+      el("rect",{x:-UW/2,y:-UH/2,width:UW,height:UH,rx:7,fill,stroke,
+        "stroke-width":n.id===SEL?2.6:1.4},grp);
+      // resolved-feature label (L2 units read as features, not parent ids)
+      const feats=(n.feats&&n.feats.length)?n.feats:(n.support_names||[]);
+      const lab=el("text",{x:0,y:-UH/2+15,"text-anchor":"middle",
+        style:"font:10.5px system-ui;fill:var(--ink);pointer-events:none"},grp);
+      lab.textContent=abbr(feats.map(s=>abbr(s,10)).join(", "),24);
+      const sub=el("text",{x:-UW/2+8,y:-UH/2+28,
+        style:"font:9px system-ui;fill:var(--muted);pointer-events:none"},grp);
+      sub.textContent=`${n.id} · L${n.layer} · μ ${fmt(n.mu,2)}`;
+      // per-input contribution bar (masked-weight contribution of each parent)
+      if(n.in_contrib&&n.in_contrib.length)
+        drawBar(grp,-UW/2+8,UH/2-13,UW-16,8,
+          n.in_contrib.map(z=>({share:z.share,label:z.p+" — "+fmt(100*z.share,0)+"%"})));
+    } else {
+      const fill=n.kind==="output"?"var(--surface)":"var(--wash)";
+      const stroke=n.kind==="output"?"var(--accent)":"var(--grid)";
+      el("rect",{x:-halfW(n),y:-14,width:2*halfW(n),height:28,rx:8,fill,stroke,"stroke-width":1.3},grp);
+      const t=el("text",{"text-anchor":"middle",y:4,style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},grp);
+      t.textContent=abbr(n.label,16);
+    }
+    grp.addEventListener("mousemove",ev=>showTip(unitTip(n),ev));
+    grp.addEventListener("mouseleave",hideTip);
+    grp.addEventListener("click",ev=>{ev.stopPropagation(); select(n.id);});
+  });
+  applyZoom();
+}
+function unitTip(n){ if(n.kind==="unit") return `<h4>${(n.feats||n.support_names||[]).join(", ")||n.id}</h4>`+
+  `<div class="m">${n.id} · ${n.tag} · layer ${n.layer} · ${n.form||"?"}</div>`+
+  `<div class="m">μ ${fmt(n.mu)} · Π ${fmt(n.Pi)} · π ${fmt(n.pi)}</div>`;
+  return `<h4>${n.label}</h4><div class="m">${n.kind}</div>`; }
+
+function draw(){ if(MODE==="hier"){layoutHier(); drawHier();} else drawUnits(); }
+
+// =================================================================== detail
+function select(id){ SEL=(SEL===id)?null:id; draw(); renderDetail(); }
+function selectMember(c,m){ SEL=m.uid; draw();
+  const box=$("detail");
+  box.innerHTML=`<h3>${m.uid}</h3><div class="did">carrier of “${c.support_names.join(" × ")}”</div>`+
+    `<div style="margin-top:7px"><span class="pill ${m.tag==="CORE"?"core":"peri"}">${m.tag}</span>`+
+    (m.structural?` <span class="pill core">reads it directly</span>`:` <span class="pill peri">via collinear feature</span>`)+`</div>`+
+    `<dl><dt>form</dt><dd>${m.form||"—"}</dd><dt>layer</dt><dd>${m.layer}</dd>`+
+    `<dt>μ mono</dt><dd>${fmt(m.mu)}</dd><dt>reads</dt><dd>${m.feats.join(", ")}</dd>`+
+    (c.measured?`<dt>Δshare</dt><dd>${fmt(m.contrib,3)} when ablated (${c.contrib_sum>0?fmt(100*m.contrib/c.contrib_sum,0):0}% of measured mass)</dd>`:"")+
+    `</dl>`+
+    `<div class="chips"><span class="chip">${m.structural
+      ? "carries this component and literally reads its features"
+      : "carries this component through a collinear feature ("+m.feats.join(", ")+")"}</span></div>`;
+}
+function renderDetail(){
+  const box=$("detail");
+  if(MODE==="units"){ const n=UNITS.nodes.find(n=>n.id===SEL);
+    if(!n){ box.innerHTML=emptyHelp(); return; }
+    if(n.kind==="unit"){ box.innerHTML=`<h3>${(n.support_names||[]).join("·")||n.id}</h3>`+
+      `<div class="did">${n.id}</div><div style="margin-top:7px"><span class="pill ${n.tag==="CORE"?"core":"peri"}">${n.tag}</span></div>`+
+      `<dl><dt>support</dt><dd>${(n.support_names||[]).join(", ")||"—"}</dd><dt>form</dt><dd>${n.form||"—"}</dd>`+
+      `<dt>μ</dt><dd>${fmt(n.mu)}</dd><dt>Π</dt><dd>${fmt(n.Pi)}</dd><dt>π</dt><dd>${fmt(n.pi)}</dd><dt>Δ</dt><dd>${fmt(n.delta,3)}</dd></dl>`+
+      ((n.reasons&&n.reasons.length)?`<div class="chips">`+n.reasons.map(r=>`<span class="chip r">${r}</span>`).join("")+`</div>`
+        :`<div class="chips"><span class="chip">certified: stable, frequent, real</span></div>`);
+      return; }
+    box.innerHTML=`<h3>${n.label}</h3><div class="did">${n.kind}</div>`; return;
+  }
+  const c=HIER.components.find(c=>c.id===SEL);
+  if(!c){ box.innerHTML=emptyHelp(); return; }
+  box.innerHTML=`<h3>${c.support_names.join(" × ")}</h3><div class="did">certified function component</div>`+
+    `<div style="margin-top:7px"><span class="pill ${c.tag==="CORE"?"core":"peri"}">${c.tag}</span></div>`+
+    `<dl><dt>share</dt><dd>${(100*c.share).toFixed(1)}% of function variance</dd>`+
+    `<dt>Π stab</dt><dd>${fmt(c.Pi)}</dd><dt>π cpss</dt><dd>${fmt(c.pi)}</dd>`+
+    `<dt>carriers</dt><dd>${c.n_members} unit(s) carry it (measured)</dd></dl>`+
+    `<div class="chips"><span class="chip">${(c.n_members||c.feats_direct.length)?"double-click the box to open its carrier units":"leaf"}</span></div>`;
+}
+function emptyHelp(){
+  if(MODE==="hier") return `<div class="empty"><b>Layer F flow (left → right).</b>
+    Input features on the left feed the certified <b>function components</b> (the middle
+    boxes — additive terms of the model's function, NOT classes), which sum into the
+    output on the right. The <b>coloured bar under each box header</b> is the
+    <b>measured</b> split of that term's mass across its carrier units (from ablating each
+    unit). <b>Double-click a box</b> to open it: its <b>carrier units</b> appear inside —
+    identified by measurement, so a unit that carries the term through a collinear
+    feature is included (a <span style="color:var(--core)">⌾ direct</span> tag marks the
+    ones that also literally read the term's features). This is why the carrier here can
+    match the CORE unit in the Model-units view. <b>Green</b> = CORE; <b>grey</b> =
+    periphery. Drag to pan, scroll to zoom.</div>`;
+  return `<div class="empty"><b>Model units.</b> The raw network graph: features → hidden
+    units → output. Each unit is a <b>box labelled by its resolved input features</b>
+    (layer-2 units too), and the <b>coloured bar at its base</b> shows each input's
+    measured contribution (masked-weight share). <b>Green</b> = CORE, <b>grey</b> =
+    periphery. Hover a bar segment for the feature and %. Toggle inputs/periphery above.</div>`;
+}
+
+// =================================================================== pan/zoom
+function applyZoom(){ g.setAttribute("transform",`translate(${VZ.x},${VZ.y}) scale(${VZ.k})`); }
+svg.addEventListener("mousedown",e=>{drag={x:e.clientX,y:e.clientY,ox:VZ.x,oy:VZ.y};});
+addEventListener("mousemove",e=>{ if(!drag)return;
+  VZ.x=drag.ox+(e.clientX-drag.x); VZ.y=drag.oy+(e.clientY-drag.y); applyZoom(); });
+addEventListener("mouseup",()=>drag=null);
+svg.addEventListener("click",()=>{ if(SEL){SEL=null; draw(); renderDetail();} });
+svg.addEventListener("wheel",e=>{ e.preventDefault();
+  const r=svg.getBoundingClientRect(), sx=(e.clientX-r.left)/r.width*W, sy=(e.clientY-r.top)/r.height*H;
+  const f=e.deltaY<0?1.12:1/1.12, nk=Math.max(0.25,Math.min(3.2,VZ.k*f));
+  VZ.x=sx-(sx-VZ.x)*(nk/VZ.k); VZ.y=sy-(sy-VZ.y)*(nk/VZ.k); VZ.k=nk; applyZoom(); },{passive:false});
+function fit(){ VZ={k:1,x:0,y:0};
+  const r=svg.getBoundingClientRect();   // fit whole graph into view
+  const s=Math.min(1, (r.width||900)/W*0.98, (r.height||520)/H*0.98);
+  VZ.k=Math.max(0.25,s); applyZoom(); }
+
+// =================================================================== controls
+function setMode(m){ MODE=m; SEL=null;
+  $("m_hier").classList.toggle("on",m==="hier"); $("m_units").classList.toggle("on",m==="units");
+  $("unitctrls").style.display=m==="units"?"":"none"; $("hierctrls").style.display=m==="hier"?"":"none";
+  draw(); renderDetail(); fit(); }
+$("m_hier").addEventListener("click",()=>setMode("hier"));
+$("m_units").addEventListener("click",()=>setMode("units"));
+$("b_fit").addEventListener("click",()=>{ EXP={}; draw(); fit(); });
+$("b_expand").addEventListener("click",()=>{ HIER.components.forEach(c=>EXP[c.id]=!!(c.n_members||c.feats_direct.length)); draw(); });
+$("t_peri").addEventListener("change",e=>{SHOW_PERI=e.target.checked; draw();});
+$("t_in").addEventListener("change",e=>{SHOW_IN=e.target.checked; draw();});
+setMode("hier");
+</script>
+</body>
+</html>

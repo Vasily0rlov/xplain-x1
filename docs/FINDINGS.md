@@ -427,3 +427,152 @@ harder than anticipated).  The honesty layer never broke once, including on
 quarantined seeds.  What stands between this and the §7 moat being real is not
 more method — it is the expert nameability review, small-n power, and a
 practitioner's eyes on the certificate.
+
+## P8 (2026-08-23) — batched width growth: the bike gap localised and closed
+
+The standard-NN baseline comparison (`baselines/standard_nn/`, owner-requested)
+traced bike's fidelity shortfall to one mechanism, then E8.1 fixed it.
+
+- **Diagnosis** (seed-0 trace + plain capacity curve): the width-growth accept
+  bar δ_grow=0.005 is a *per-step* test; bike's residual past ~0.90 arrives as
+  ~0.003-sized diffuse increments that never individually clear it though they
+  sum to ~0.05 (plain curve w6 0.8725 → w16 0.9384 → w32 0.9424 test fid).
+  Crucially, **at matched capacity the tax is negative**: ours-at-6 0.8909 vs
+  plain-at-6 0.8725 — pressures cost nothing; the whole gap was capacity.
+  Depth gating worked correctly throughout (bike honestly 1 composition layer;
+  the depth trial was run and refused at +0.001).
+- **E8.1 (grow_batch=8, dev seeds 0–3): MET as pre-registered.**  Bike median
+  ratio 0.945 → **0.9877**, median live-unit μ **0.992**; guards 3/3 (NOISE
+  zero accepted growth, ADD flat-at-ceiling, COMP2 recovery 4/4).
+- **Honest notes:** adult unmoved (0.876/0.885, zero accepted growth even
+  batched — a different frontier than bike's); bike models larger (10–15 units
+  vs 6; seed 0 accepted a second hidden layer that survived dissolution —
+  operationally earned, flagged for owner review); COMP2 seed 2 kept 13 units
+  at ceiling (batching trades some minimality for fidelity); ~20 min/seed.
+- **P8-X owner decision (2026-08-24): SHIP BOTH AS A CONFIG SWITCH.**  Default
+  stays `grow_batch: 2` (frozen, `freeze-x1-v1`-certified — the legible,
+  depth-honest interpretability deliverable); `grow_batch: 8` is documented as
+  the opt-in **accuracy mode** (S-§14, S-§16.1).  Rationale: the certified Layer-F
+  structure is near-identical between the two (E8.2), so batch buys *accuracy*
+  (bike count-space R² 0.69→0.91, log1p 0.945→0.988) not more *certified
+  interpretable structure* — and the added complexity (6→28 units, +unwarranted
+  2nd layer) lives entirely in the uncertified unit layer.  Default unchanged ⇒
+  **no re-freeze**; every existing certified/confirmatory claim stands.  Batch is
+  inert when already near ceiling (morpher, Spambase both unchanged at [7]/[8]).
+
+### Morpher (Russian declension) — generality probe + expert analysis, 2026-08-24
+
+First non-English, linguistic, categorical-predicate dataset (10,195 words, 38
+morphological value-predicates, 3-class declension target сущ/нескл/прил).
+Loader replicates the v4 encoding; Cyrillic feature names kept for expert reading.
+
+- **Fidelity 0.878, ratio 0.994** vs ceiling; **honest-shallow [7], 1 layer**
+  (declension cues act largely independently — order-1, correctly).
+- **3 CORE function components, one per declension paradigm — all textbook-correct
+  Russian grammar:** `ЧастьРечи=прил` (part-of-speech = adjective → adjectival
+  declension, share 0.115, Π=1.0) · `НаСогласную` (ends in consonant → masc noun
+  declension, Π=0.875) · `Суффикс=ово` (the -ово/-ино toponym suffix →
+  indeclinable, Π=0.875).  The method recovered real grammar an expert confirms.
+- **Coverage only 0.15**, and the honest reason is a NEW periphery mechanism:
+  **low-support multiplicity** (distinct from bike's collinearity multiplicity).
+  The dominant *raw* shares sit on rare suffix predicates (`Суффикс=цы` 0.72,
+  `Суффикс=ца` 0.61) that are near-deterministic on the few words carrying them
+  but **unstable (Π 0.25–0.38) and infrequent (π 0.13–0.35)** — genuine sparse
+  lexical sub-regularities the honesty layer correctly refuses to certify.
+  (Those >0.5 numbers are per-class-logit max-merged raw shares, not fractions of
+  total variance — the multiclass share caveat.)
+- **0 CORE units, 0 CORE routes** — as everywhere on real data, the certifiable
+  invariant is the function component, not the unit/route.
+
+**Generality verdict:** the method transfers cleanly to a new domain and feature
+type — honest-shallow, near-ceiling fit, certified components = genuine grammar,
+honesty layer intact.  It also surfaced a domain-specific stressor: extreme
+categorical **feature sparsity** pushes most mass into an honestly-labelled
+periphery, so the certificate covers the coarse grammatical backbone and declines
+the sparse-suffix long tail.  A different periphery mechanism (low support, not
+collinearity), same honest handling.
+
+### Spambase — high-d generality probe (d=57), 2026-08-24
+
+Second generality dataset (owner-chosen): 4,601 emails × 57 continuous features,
+binary spam.  Purpose: stress the interaction screen at C(57,2)=1,596 candidate
+pairs (the d-scaling axis flagged in the POSITIONING assessment) with known
+structure, on a third domain + continuous features (complements morpher).
+
+- **The screen held at d=57 — no blow-up** (~144 s full certification, well
+  within budget).  Frozen and batched are near-identical (both [8], fid 0.778,
+  13 CORE, coverage 0.48) — like morpher, batching adds nothing because the
+  model is near ceiling with 8 units.
+- **13 CORE components, ALL main effects — honest-shallow, zero certified
+  interactions.**  The literature's headline capital-run × `!` interaction does
+  **not** certify: the purified pairwise mass is negligible.  Another instance of
+  the bike-hour×temp lesson — a widely-cited interaction that, purified, is
+  mostly additive main effects.  On present evidence Spambase is additive.
+- **The certified drivers are a domain fingerprint, not the generic spam
+  lexicon.**  Top: `george` .138, `cap_total` .087, `hp` .041, `lab` .034,
+  `telnet` .028, `hp`/`lab`/`telnet`/`650`/`85`/`meeting` — these are the
+  HP-Labs collection's ham markers (the non-spam mail was one person's work
+  email at Hewlett-Packard).  Generic spam tokens (`char_$`, `char_!`, `remove`,
+  `your`, `our`) certify too but with smaller shares.  The method faithfully
+  recovered that this corpus separates on *sender-context* tokens more than on
+  universal spam cues — a correct, expert-checkable read of THIS dataset (and a
+  known caveat about Spambase's generalisability).
+- **Coverage 0.48, recon R² 0.67**: 57 weak token signals, no single dominant
+  driver — the method certifies the robust ~13 and leaves the diffuse tail as
+  labelled periphery.
+
+**Generality verdict (morpher + Spambase together):** the method transferred
+across three domains (linguistic / spam / the MVL) and both feature types
+(categorical-predicate + continuous), stayed honest-shallow where the data is
+additive, and recovered domain-correct structure an expert can validate.  The
+d=57 screen did not strain — the practical dimensionality ceiling is higher than
+the MVL alone showed.  Two datasets, two orthogonal stressors (sparsity, then
+dimensionality), honesty layer intact throughout.
+
+### E8.3 — hour-interaction partner stability (weekday vs workingday), 2026-08-24
+
+Literature's canonical bike interaction is hour × **workingday**; our pipeline
+certifies hour × **weekday**.  Diagnostic: per restart (dev seeds 0–7, BOTH
+regimes), measure the purified interaction share on each hour-pair.
+
+**Result — the partner is perfectly stable, and it is NOT the collinear coin-flip
+expected: `weekday` wins 8/8 in BOTH regimes; `hour × workingday` carries zero
+purified mass (0/8, both regimes); no other hour-pair appears at all.**
+Frozen weekday shares 0.022–0.086; batched 0.063–0.085 — same effect, same
+partner, wider models.  So the weekday-vs-workingday difference is NOT
+carving-multiplicity: the method consistently prefers `weekday` as the
+interaction partner.
+
+**Why (assessment, not yet a proven mechanism):** `workingday` is a *coarsening*
+of `weekday` (weekend/holiday → 0).  The commute double-peak differs across the
+five weekdays and between Sat/Sun, so `hour × weekday` (7 levels) fits the true
+daily-shape modulation strictly better than the binary `hour × workingday` — the
+purification then assigns the interaction mass to the finer, more explanatory
+term and leaves the binary with ~0 residual.  The literature names the *binary*
+because EBM/GA²M demos privilege the 2-level split for display; our method,
+given both, measurably prefers the higher-resolution partner.  This is a case
+where the certified structure is *more* refined than the textbook, not a
+mismatch to fix.  (Not adjudicated against ground truth — bike has none.)
+
+### E8.2 — bike claims-invariance under batched growth: **MET** (2026-08-23)
+
+Full bike certification (R=8 + 40 CPSS) at grow_batch=8, 0.12 h wall:
+
+| component | frozen ref (e7x dev) | at grow_batch=8 |
+|---|---|---|
+| hour | .589, Π=1.0 | **.5871, Π=1.0** |
+| temp | .0804, Π=1.0 | **.0656, Π=1.0** |
+| hour×weekday | .0511, Π=1.0 | **.0714, Π=1.0** |
+| year | .0222, Π=1.0 | **.0241, Π=1.0** |
+
+Purified hour×temp **stays uncertified** (share 0.0) — the purification finding
+survives a 2× capacity change.  Coverage 0.743 → **0.784**; fid ratio 0.9925;
+hour-anchored CORE route retained (Π=1.0, π=1.0).  **The certified function
+structure is capacity-invariant** — the strongest evidence yet that Layer F
+captures the data's structure, not the model size's artefacts.
+
+**Two additions for owner review** (small, domain-canonical mains the 6-unit
+model truncated): `season` (.0228, Π=.875, π=.875) and `humidity` (.0134,
+Π=1.0, π=.85) — both textbook ridership drivers.  Main restart is [14,14]
+(second layer survived dissolution); unit-level n_core=1 (multiplicity remains,
+as expected — the claims live at the function level).  Restart fids 0.90–0.94.

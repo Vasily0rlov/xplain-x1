@@ -270,6 +270,7 @@ rounds 12), `certify` (R 8, B 20, τ_match 0.7, π_thr 0.7, μ_min 0.8, Π_min 0
 | half/half CPSS pairs | r-concave CPSS variant with tighter bound |
 | no decorrelation loss (M-C3) | none — measured dead end, do not add |
 | post-hoc rotation of trained model | none — architecturally unsound (M-§3.3), do not add |
+| **`grow_batch: 2`** (default: legible, depth-honest, certified) | **`grow_batch: 8` — supported ACCURACY MODE** (owner-approved 2026-08-24, not a silent substitution): use when a fidelity gap from diffuse residual is decision-relevant and the audience tolerates a denser DAG. Costs legibility + possible unwarranted depth; certified claims proven invariant (E8.2). No effect near ceiling. See S-§16.1. |
 
 *Invoked to date: **Hoyer sparsity** (trigger fired at E1.3 — the L2,1 term measured as a
 unit-killer; owner-ratified, see §16). All other pins stand; the decorrelation and
@@ -330,3 +331,40 @@ Deltas from the pinned defaults above, each with its trigger and evidence record
   certification) were added by owner decisions of 2026-08-22 after the P5 multiplicity
   finding, followed by the confirmatory gate **C-1** — statuses and exit criteria in
   `docs/03-BUILD-PLAN.md`.
+
+### 16.1 P8 — growth batch size as a config switch (owner decision 2026-08-24)
+
+The controller's width-growth accept bar (`δ_grow`) is a *per-step* test; on
+diffuse-residual data the true gains arrive in sub-threshold increments, so the
+frozen `grow_batch=2` under-grows (bike ratio 0.945; the minimal model under-fits
+the peak-hour tail).  `grow_batch=K` adds K units per width trial so diffuse gains
+aggregate above the bar.
+
+**Decision: ship both as a config switch — do NOT change the default.**
+
+- **`grow_batch: 2` (default, unchanged):** the frozen, `freeze-x1-v1`-certified
+  behaviour.  The legible, depth-honest interpretability model — the programme's
+  primary deliverable.  Because the default is untouched, **no re-freeze is
+  required** and every existing certified/confirmatory claim stands.
+- **`grow_batch: 8` (documented accuracy mode):** opt-in when the count-space
+  fidelity gap is decision-relevant and the audience can consume a denser DAG (or
+  only reads Layer F, where the two regimes are near-identical).
+
+**Trade-off, on the evidence (bike; morpher and Spambase were already near
+ceiling so batching was inert there):**
+
+| | frozen (2) | accuracy (8) |
+|---|---|---|
+| log1p fidelity / ratio | 0.891 / 0.945 | 0.940 / 0.988 |
+| count-space R² / RMSE | 0.693 / 103 | 0.911 / 56 |
+| hidden units / layers | 6 / 1 | 28 / 2 |
+| certified components | 4 | same 4 + season + humidity |
+| depth-honesty | honest-shallow (correct) | adds an order-2-unwarranted 2nd layer |
+
+Evidence: **E8.1** (fidelity gain + honesty guards 3/3), **E8.2** (certified claims
+capacity-invariant — the four bike components re-certify at Π=1.0, purified
+hour×temp stays uncertified), **E8.3** (interaction partner stable either way).
+Full record in `docs/FINDINGS.md` (P8).  Verdict: batch buys *accuracy*, not
+materially more *certified interpretable structure*; the added complexity lives in
+the uncertified unit layer.  Hence: default stays legible; accuracy is one config
+flag away when a deployment needs it.

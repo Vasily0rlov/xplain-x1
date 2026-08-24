@@ -198,3 +198,33 @@ out-of-sample.  Companion-split shelved (superseded at the right level).
 | P7-X | **exit criteria:** E7.1 + E7.2 bars met → freeze + confirmatory | — | — | phase gate | ☑ | `freeze-x1-v1` |
 
 **P7 status:** E7.1 MET (exact synthetic sweep, untradeable holds). E7.2 ☑\*: 3/4 real datasets certify function components at Π≈1.0 (mushroom .865 coverage, bike .743, drybean 20 comps; adult certifies its 5 textbook mains at Π=1.0 with coverage .289); the bike hour×temp clause is NOT MET as-registered and re-scored as a FINDING — the purified interaction is genuinely <1%, the v3-era claim was an unpurified-screen artifact (FINDINGS P7). Merge-corruption bug found and fixed en route. **Ratified 2026-08-23; frozen at `freeze-x1-v1`; confirmatory E-C.1 MET (see C-1); merged to `main`.**
+
+## P8 — Post-freeze method iteration (owner-approved 2026-08-23)
+
+**Trigger:** the bike baseline comparison (`baselines/standard_nn/`) traced bike's fidelity
+shortfall (ratio 0.945) to a single mechanism: `δ_grow` as a *per-step* width-growth bar
+under-grows on diffuse-residual data — each +2-unit trial gained ~0.003 < 0.005 and was
+reverted, though the aggregate 8→16-unit gain is ~0.04 (plain capacity curve: w6 0.8725,
+w8 0.8984, w16 0.9384, w32 0.9424 test fid; ours-at-6 0.8909, i.e. negative tax at matched
+capacity).  Depth gating worked correctly throughout (bike honestly one composition layer).
+
+| id | step | deliverable | verify | outcome | status | ref |
+|---|---|---|---|---|---|---|
+| P8-1 | `grow_batch` config knob in the controller (default 2 = frozen behaviour bit-for-bit; batch = 1 split + (K−1) fresh; same accept bar δ_grow on the batch; pruning trims non-paying members after) | `controller/growth.py` + config | P2 tests green at default | width trials can aggregate diffuse gains | ☑ | `exp/batched-growth` |
+| **E8.1** | **experiment (batched width trials, grow_batch=8, dev seeds 0–3):** bike primary; adult secondary (report-only); guards: NOISE (zero accepted growth), ADD (stays L=1, at ceiling), COMP2 (planted support recovered at μ≥0.8, ≥3/4 seeds). **Bar:** bike median val fid ratio ≥ 0.97 ∧ median live-unit μ ≥ 0.9 ∧ all guards hold | `results/e81.json` | bar met | width-sufficiency fixed without breaking honesty | ☑ | `exp/batched-growth` |
+| **E8.2** | **experiment (claims invariance under batched growth; owner decision (a) 2026-08-23):** full bike certification (R=8 + 40 CPSS, dev seeds) at grow_batch=8. **Bar:** the four frozen-claim components (hour · temp · hour×weekday · year, e7x dev refs .589/.080/.051/.022) re-certify CORE at Π ≥ 0.875 ∧ purified hour×temp stays uncertified ∧ route level keeps an hour-anchored CORE route. Any *additional* certified components are listed for owner review (not auto-fail — extra capacity may capture real small structure). Coverage and restart depths reported | `results/e82.json` | bar met | certified claims shown carving- and capacity-invariant | ☑ | `exp/batched-growth` |
+| **E8.3** | **diagnostic (interaction-partner stability):** does the hour-interaction partner (weekday vs workingday) flip across restarts, both regimes? | `results/e83.json` | reported | partner is stably `weekday` 8/8 in BOTH regimes (not multiplicitous) | ☑ | `exp/batched-growth` |
+| P8-X | **exit criteria + owner decision (2026-08-24): SHIP BOTH AS A CONFIG SWITCH.** Default stays `grow_batch: 2` (frozen, `freeze-x1-v1`-certified — the legible, depth-honest deliverable); `grow_batch: 8` documented as the opt-in ACCURACY MODE (S-§14, S-§16.1) with the trade-off recorded. Default unchanged ⇒ **no re-freeze**; all certified/confirmatory claims stand. Batch buys accuracy (bike count-R² 0.69→0.91) not certified structure; the extra complexity is in the uncertified unit layer. | — | — | phase gate — **DECIDED** | ☑ | `exp/batched-growth` |
+
+**E8.1 result (2026-08-23, `results/e81.json`): MET as pre-registered.** Bike median val
+ratio **0.9877** (from 0.945; seeds 0.9925/0.9908/0.9726/0.9846), median live-unit μ
+**0.992** — the fidelity gap closes with legibility intact. Guards 3/3: NOISE zero accepted
+growth 4/4; ADD flat-at-ceiling 4/4; COMP2 planted-support recovery 4/4. Honest notes:
+(1) **adult is unmoved** (ratios 0.876/0.885, zero accepted growth even batched) — its
+frontier is a different phenomenon than bike's sub-threshold width increments;
+(2) bike models are larger (10–15 units vs 6; seed 0 also accepted a **second hidden layer**,
+[14,14], which survived the dissolution test — earned by the operational bar, worth owner
+scrutiny); (3) COMP2 seed 2 kept 13 units at ceiling — batching trades some minimality for
+fidelity; (4) bike growth runs now ~20 min/seed (more accepted rounds).  Before adoption:
+re-run route/Layer-F certification on batched-growth bike models to confirm certified
+components are unchanged, then re-freeze.

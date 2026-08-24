@@ -37,6 +37,15 @@ controller:
   eps_prune: 0.001
   eps_depth: 0.005
   delta_grow: 0.005
+  grow_batch: 2            # units added per width trial.  DEFAULT 2 = the frozen,
+                           # certified behaviour (1 split + 1 fresh); the legible,
+                           # depth-honest interpretability model.  Set to 8 for the
+                           # documented ACCURACY MODE: aggregates diffuse per-unit
+                           # gains above delta_grow — closes the fidelity gap on
+                           # diffuse-residual data (bike 0.945->0.988) at the cost
+                           # of a denser DAG + possible unwarranted depth; certified
+                           # claims proven invariant (P8-X owner decision 2026-08-24,
+                           # E8.1/E8.2/E8.3).  No effect when already near ceiling.
   delta_stop: 0.02         # = pressure fid-neutrality budget (E1.3c, H-X1-4):
                            # the stop bar cannot be tighter than the distortion
                            # full-strength pressure is allowed to cause

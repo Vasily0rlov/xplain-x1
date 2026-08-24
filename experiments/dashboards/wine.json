@@ -1,0 +1,3983 @@
+{
+  "dag": {
+    "dataset": "wine",
+    "nodes": [
+      {
+        "id": "alcohol",
+        "kind": "input",
+        "label": "alcohol"
+      },
+      {
+        "id": "malic_acid",
+        "kind": "input",
+        "label": "malic_acid"
+      },
+      {
+        "id": "ash",
+        "kind": "input",
+        "label": "ash"
+      },
+      {
+        "id": "alcalinity_of_ash",
+        "kind": "input",
+        "label": "alcalinity_of_ash"
+      },
+      {
+        "id": "magnesium",
+        "kind": "input",
+        "label": "magnesium"
+      },
+      {
+        "id": "total_phenols",
+        "kind": "input",
+        "label": "total_phenols"
+      },
+      {
+        "id": "flavanoids",
+        "kind": "input",
+        "label": "flavanoids"
+      },
+      {
+        "id": "nonflavanoid_phenols",
+        "kind": "input",
+        "label": "nonflavanoid_phenols"
+      },
+      {
+        "id": "proanthocyanins",
+        "kind": "input",
+        "label": "proanthocyanins"
+      },
+      {
+        "id": "color_intensity",
+        "kind": "input",
+        "label": "color_intensity"
+      },
+      {
+        "id": "hue",
+        "kind": "input",
+        "label": "hue"
+      },
+      {
+        "id": "od280/od315_of_diluted_wines",
+        "kind": "input",
+        "label": "od280/od315_of_diluted_wines"
+      },
+      {
+        "id": "proline",
+        "kind": "input",
+        "label": "proline"
+      },
+      {
+        "id": "L1U4",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(od280/od315_of_diluted_wines, alcohol, flavanoids)",
+        "mu": 0.9462775588035583,
+        "Pi": 0.375,
+        "pi": 0.475,
+        "delta": 0.36630034753635243,
+        "coverage": 0.31647118999208,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "od280/od315_of_diluted_wines",
+          "alcohol",
+          "flavanoids"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U3",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(color_intensity, flavanoids, od280/od315_of_diluted_wines)",
+        "mu": 0.9315839409828186,
+        "Pi": 0.75,
+        "pi": 0.725,
+        "delta": 0.08524460462830774,
+        "coverage": 0.014336712814542296,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "support_names": [
+          "color_intensity",
+          "flavanoids",
+          "od280/od315_of_diluted_wines"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U0",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(alcohol, alcalinity_of_ash, color_intensity)",
+        "mu": 0.9158452749252319,
+        "Pi": 0.875,
+        "pi": 0.725,
+        "delta": -0.011788252994286763,
+        "coverage": 0.07110459822566284,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "no_effect",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "alcohol",
+          "alcalinity_of_ash",
+          "color_intensity"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U8",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(proanthocyanins, malic_acid, od280/od315_of_diluted_wines)",
+        "mu": 0.8921275835069743,
+        "Pi": 0.125,
+        "pi": 0.1,
+        "delta": 0.06574228432372453,
+        "coverage": 0.05105736465460342,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "support_names": [
+          "proanthocyanins",
+          "malic_acid",
+          "od280/od315_of_diluted_wines"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U1",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(ash, magnesium, color_intensity)",
+        "mu": 0.9382972717285156,
+        "Pi": 0.625,
+        "pi": 0.45,
+        "delta": -0.028449459887499695,
+        "coverage": 0.08362984636823423,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "ash",
+          "magnesium",
+          "color_intensity"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U6",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(alcohol, malic_acid, color_intensity)",
+        "mu": 0.9405402541160583,
+        "Pi": 0.125,
+        "pi": 0.3,
+        "delta": 0.009338932396859234,
+        "coverage": 0.056787301759229414,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "alcohol",
+          "malic_acid",
+          "color_intensity"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "class_0",
+        "kind": "output",
+        "label": "class_0"
+      },
+      {
+        "id": "class_1",
+        "kind": "output",
+        "label": "class_1"
+      },
+      {
+        "id": "class_2",
+        "kind": "output",
+        "label": "class_2"
+      }
+    ],
+    "edges": [
+      {
+        "src": "alcohol",
+        "dst": "L1U4",
+        "share": 0.1667
+      },
+      {
+        "src": "ash",
+        "dst": "L1U4",
+        "share": 0.025
+      },
+      {
+        "src": "alcalinity_of_ash",
+        "dst": "L1U4",
+        "share": 0.1908
+      },
+      {
+        "src": "magnesium",
+        "dst": "L1U4",
+        "share": 0.0356
+      },
+      {
+        "src": "total_phenols",
+        "dst": "L1U4",
+        "share": 0.2099
+      },
+      {
+        "src": "flavanoids",
+        "dst": "L1U4",
+        "share": 0.0386
+      },
+      {
+        "src": "od280/od315_of_diluted_wines",
+        "dst": "L1U4",
+        "share": 0.2021
+      },
+      {
+        "src": "proline",
+        "dst": "L1U4",
+        "share": 0.1312
+      },
+      {
+        "src": "alcalinity_of_ash",
+        "dst": "L1U3",
+        "share": 0.0352
+      },
+      {
+        "src": "magnesium",
+        "dst": "L1U3",
+        "share": 0.1813
+      },
+      {
+        "src": "flavanoids",
+        "dst": "L1U3",
+        "share": 0.2
+      },
+      {
+        "src": "nonflavanoid_phenols",
+        "dst": "L1U3",
+        "share": 0.0464
+      },
+      {
+        "src": "color_intensity",
+        "dst": "L1U3",
+        "share": 0.217
+      },
+      {
+        "src": "hue",
+        "dst": "L1U3",
+        "share": 0.1439
+      },
+      {
+        "src": "od280/od315_of_diluted_wines",
+        "dst": "L1U3",
+        "share": 0.175
+      },
+      {
+        "src": "alcohol",
+        "dst": "L1U0",
+        "share": 0.2538
+      },
+      {
+        "src": "ash",
+        "dst": "L1U0",
+        "share": 0.1263
+      },
+      {
+        "src": "alcalinity_of_ash",
+        "dst": "L1U0",
+        "share": 0.1943
+      },
+      {
+        "src": "proanthocyanins",
+        "dst": "L1U0",
+        "share": 0.0784
+      },
+      {
+        "src": "color_intensity",
+        "dst": "L1U0",
+        "share": 0.1463
+      },
+      {
+        "src": "hue",
+        "dst": "L1U0",
+        "share": 0.0447
+      },
+      {
+        "src": "proline",
+        "dst": "L1U0",
+        "share": 0.1563
+      },
+      {
+        "src": "malic_acid",
+        "dst": "L1U8",
+        "share": 0.1828
+      },
+      {
+        "src": "magnesium",
+        "dst": "L1U8",
+        "share": 0.1638
+      },
+      {
+        "src": "total_phenols",
+        "dst": "L1U8",
+        "share": 0.2048
+      },
+      {
+        "src": "proanthocyanins",
+        "dst": "L1U8",
+        "share": 0.186
+      },
+      {
+        "src": "color_intensity",
+        "dst": "L1U8",
+        "share": 0.2095
+      },
+      {
+        "src": "od280/od315_of_diluted_wines",
+        "dst": "L1U8",
+        "share": 0.0385
+      },
+      {
+        "src": "ash",
+        "dst": "L1U1",
+        "share": 0.2426
+      },
+      {
+        "src": "magnesium",
+        "dst": "L1U1",
+        "share": 0.2421
+      },
+      {
+        "src": "color_intensity",
+        "dst": "L1U1",
+        "share": 0.1956
+      },
+      {
+        "src": "hue",
+        "dst": "L1U1",
+        "share": 0.0203
+      },
+      {
+        "src": "od280/od315_of_diluted_wines",
+        "dst": "L1U1",
+        "share": 0.0202
+      },
+      {
+        "src": "proline",
+        "dst": "L1U1",
+        "share": 0.2593
+      },
+      {
+        "src": "alcohol",
+        "dst": "L1U6",
+        "share": 0.2914
+      },
+      {
+        "src": "malic_acid",
+        "dst": "L1U6",
+        "share": 0.2705
+      },
+      {
+        "src": "alcalinity_of_ash",
+        "dst": "L1U6",
+        "share": 0.0681
+      },
+      {
+        "src": "proanthocyanins",
+        "dst": "L1U6",
+        "share": 0.0817
+      },
+      {
+        "src": "color_intensity",
+        "dst": "L1U6",
+        "share": 0.2266
+      },
+      {
+        "src": "proline",
+        "dst": "L1U6",
+        "share": 0.0517
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_0",
+        "share": 0.3114
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_0",
+        "share": 0.2201
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_0",
+        "share": 0.1476
+      },
+      {
+        "src": "L1U8",
+        "dst": "class_0",
+        "share": 0.1127
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_0",
+        "share": 0.0955
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_0",
+        "share": 0.1127
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_1",
+        "share": 0.2906
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_1",
+        "share": 0.1711
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_1",
+        "share": 0.1447
+      },
+      {
+        "src": "L1U8",
+        "dst": "class_1",
+        "share": 0.0705
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_1",
+        "share": 0.1595
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_1",
+        "share": 0.1636
+      },
+      {
+        "src": "L1U4",
+        "dst": "class_2",
+        "share": 0.3259
+      },
+      {
+        "src": "L1U3",
+        "dst": "class_2",
+        "share": 0.066
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_2",
+        "share": 0.1514
+      },
+      {
+        "src": "L1U8",
+        "dst": "class_2",
+        "share": 0.1904
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_2",
+        "share": 0.1539
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_2",
+        "share": 0.1125
+      }
+    ]
+  },
+  "cert": {
+    "identification": {
+      "system": "XPLAIN-x1",
+      "dataset": "wine",
+      "task": "classification",
+      "n": 178,
+      "d": 13,
+      "git_commit": "37579b51d1a602325dd0665d13d4e73b3b86ee3b",
+      "config_hash": "c9e5554685f05c4ec9c450d45c96538be894ce5fd3d6d1ebbf6f31c98f973c77",
+      "data_hash": "fdd1a162030a8e5b-28570293bbf6f313",
+      "seeds": {
+        "main": 0,
+        "restarts": 8,
+        "cpss_runs": 40
+      }
+    },
+    "performance_and_limits": {
+      "fidelity_val": 0.9816345494344422,
+      "fidelity_ceiling": 0.940196239367143,
+      "fidelity_ratio": 1.0441,
+      "accuracy_test": 0.9166666666666666,
+      "concept_tax_note": "vs best(unconstrained MLP, HGB) on val",
+      "restart_fidelities": [
+        0.9816345494344422,
+        0.9220037442935889,
+        0.9486114700153934,
+        0.954388870071419,
+        0.9594191040589979,
+        0.9673770727187784,
+        0.9354045421806972,
+        0.9417172769656726
+      ]
+    },
+    "interpretability_structure": {
+      "widths": [
+        6
+      ],
+      "honest_depth": {
+        "depth": 1,
+        "eps_depth": 0.005,
+        "pairwise_dissolutions": [],
+        "all_earned": true
+      },
+      "n_concepts": 36,
+      "n_core": 0,
+      "n_periphery": 36,
+      "core_coverage_share": 0,
+      "periphery_reasons": [
+        "absent_in_main",
+        "infrequent",
+        "multiplicitous",
+        "no_effect",
+        "unstable"
+      ]
+    },
+    "statistical_certification": {
+      "regime": "below stability power floor (n < 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A)",
+      "restarts_R": 8,
+      "cpss_pairs_B": 20,
+      "tau_match": 0.7,
+      "pi_thr": 0.7,
+      "mu_min": 0.8,
+      "ev_bound": 0.2954617042440319,
+      "q_mean": 6.675,
+      "p_universe": 377,
+      "assumptions": [
+        "CPSS exchangeability (Meinshausen-Buhlmann) over an adaptive learned pipeline is a modelling idealisation; the reality test provides an independent assumption-light check.",
+        "The universe is structure-level: supports of arity <= F_max per layer interface of the delivered topology."
+      ]
+    },
+    "concepts": [
+      {
+        "cid": "c0",
+        "Pi": 0.375,
+        "members": {
+          "0": "L1U4",
+          "2": "L1U2",
+          "6": "L1U3"
+        },
+        "modal_support": [
+          0,
+          6,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            6,
+            11
+          ],
+          [
+            0,
+            11
+          ],
+          [
+            3,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U4",
+        "mu": 0.9462775588035583,
+        "form": "poly(2)",
+        "support_names": [
+          "od280/od315_of_diluted_wines",
+          "alcohol",
+          "flavanoids"
+        ],
+        "layer": 1,
+        "contribution": 0.31647118999208,
+        "pi": 0.475,
+        "delta": 0.36630034753635243,
+        "ci_low": 0.2004579826218863,
+        "ci_high": 0.5683556168573353,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.7531
+      },
+      {
+        "cid": "c1",
+        "Pi": 0.75,
+        "members": {
+          "0": "L1U3",
+          "3": "L1U1",
+          "4": "L1U5",
+          "5": "L1U2",
+          "6": "L1U2",
+          "7": "L1U7"
+        },
+        "modal_support": [
+          6,
+          9,
+          11
+        ],
+        "support_variants": [
+          [
+            6,
+            9,
+            11
+          ],
+          [
+            0,
+            6,
+            11
+          ],
+          [
+            8,
+            9,
+            10
+          ],
+          [
+            6,
+            10,
+            11
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U3",
+        "mu": 0.9315839409828186,
+        "form": "poly(2)",
+        "support_names": [
+          "color_intensity",
+          "flavanoids",
+          "od280/od315_of_diluted_wines"
+        ],
+        "layer": 1,
+        "contribution": 0.014336712814542296,
+        "pi": 0.725,
+        "delta": 0.08524460462830774,
+        "ci_low": 0.0004993518603191004,
+        "ci_high": 0.2109514580663946,
+        "label": "PERIPHERY",
+        "reasons": [
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1753
+      },
+      {
+        "cid": "c2",
+        "Pi": 0.875,
+        "members": {
+          "0": "L1U0",
+          "1": "L1U0",
+          "2": "L1U6",
+          "3": "L1U4",
+          "4": "L1U1",
+          "5": "L1U3",
+          "6": "L1U4"
+        },
+        "modal_support": [
+          8,
+          9,
+          12
+        ],
+        "support_variants": [
+          [
+            0,
+            3,
+            9
+          ],
+          [
+            0,
+            1,
+            12
+          ],
+          [
+            0,
+            8,
+            9
+          ],
+          [
+            0,
+            2,
+            8
+          ],
+          [
+            8,
+            9,
+            12
+          ],
+          [
+            9,
+            10,
+            12
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U0",
+        "mu": 0.9158452749252319,
+        "form": "poly(2)",
+        "support_names": [
+          "alcohol",
+          "alcalinity_of_ash",
+          "color_intensity"
+        ],
+        "layer": 1,
+        "contribution": 0.07110459822566284,
+        "pi": 0.725,
+        "delta": -0.011788252994286763,
+        "ci_low": -0.06149732201108409,
+        "ci_high": 0.022673247443777883,
+        "label": "PERIPHERY",
+        "reasons": [
+          "no_effect",
+          "multiplicitous"
+        ],
+        "coverage_share": -0.0242
+      },
+      {
+        "cid": "c3",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U8"
+        },
+        "modal_support": [
+          1,
+          8,
+          11
+        ],
+        "support_variants": [
+          [
+            1,
+            8,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U8",
+        "mu": 0.8921275835069743,
+        "form": "tree(d3)",
+        "support_names": [
+          "proanthocyanins",
+          "malic_acid",
+          "od280/od315_of_diluted_wines"
+        ],
+        "layer": 1,
+        "contribution": 0.05105736465460342,
+        "pi": 0.1,
+        "delta": 0.06574228432372453,
+        "ci_low": 0.006119686917743397,
+        "ci_high": 0.13469028746310296,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent"
+        ],
+        "coverage_share": 0.1352
+      },
+      {
+        "cid": "c4",
+        "Pi": 0.625,
+        "members": {
+          "0": "L1U1",
+          "2": "L1U8",
+          "4": "L1U0",
+          "5": "L1U4",
+          "7": "L1U5"
+        },
+        "modal_support": [
+          2,
+          4,
+          9
+        ],
+        "support_variants": [
+          [
+            2,
+            4,
+            9
+          ],
+          [
+            0,
+            4,
+            9
+          ],
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            4,
+            9,
+            12
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U1",
+        "mu": 0.9382972717285156,
+        "form": "poly(2)",
+        "support_names": [
+          "ash",
+          "magnesium",
+          "color_intensity"
+        ],
+        "layer": 1,
+        "contribution": 0.08362984636823423,
+        "pi": 0.45,
+        "delta": -0.028449459887499695,
+        "ci_low": -0.11097918961344608,
+        "ci_high": 0.02616353855837117,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect",
+          "multiplicitous"
+        ],
+        "coverage_share": -0.0585
+      },
+      {
+        "cid": "c5",
+        "Pi": 0.125,
+        "members": {
+          "0": "L1U6"
+        },
+        "modal_support": [
+          0,
+          1,
+          9
+        ],
+        "support_variants": [
+          [
+            0,
+            1,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U6",
+        "mu": 0.9405402541160583,
+        "form": "poly(2)",
+        "support_names": [
+          "alcohol",
+          "malic_acid",
+          "color_intensity"
+        ],
+        "layer": 1,
+        "contribution": 0.056787301759229414,
+        "pi": 0.3,
+        "delta": 0.009338932396859234,
+        "ci_low": -0.09201847542575062,
+        "ci_high": 0.10428607633204874,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.0192
+      },
+      {
+        "cid": "e0",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U5"
+        },
+        "modal_support": [
+          8,
+          9,
+          10
+        ],
+        "support_variants": [
+          [
+            8,
+            9,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e1",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U7"
+        },
+        "modal_support": [
+          6,
+          7,
+          12
+        ],
+        "support_variants": [
+          [
+            6,
+            7,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e2",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U4"
+        },
+        "modal_support": [
+          2,
+          3,
+          12
+        ],
+        "support_variants": [
+          [
+            2,
+            3,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e3",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U1"
+        },
+        "modal_support": [
+          4,
+          6,
+          9
+        ],
+        "support_variants": [
+          [
+            4,
+            6,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e4",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U8"
+        },
+        "modal_support": [
+          2,
+          3,
+          4
+        ],
+        "support_variants": [
+          [
+            2,
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e5",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U6"
+        },
+        "modal_support": [
+          0,
+          4
+        ],
+        "support_variants": [
+          [
+            0,
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e6",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U9"
+        },
+        "modal_support": [
+          8
+        ],
+        "support_variants": [
+          [
+            8
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e7",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U7"
+        },
+        "modal_support": [
+          2,
+          4,
+          9
+        ],
+        "support_variants": [
+          [
+            2,
+            4,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e8",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U9"
+        },
+        "modal_support": [
+          1,
+          5,
+          9
+        ],
+        "support_variants": [
+          [
+            1,
+            5,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e9",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U1"
+        },
+        "modal_support": [
+          7,
+          10,
+          11
+        ],
+        "support_variants": [
+          [
+            7,
+            10,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e10",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U0"
+        },
+        "modal_support": [
+          2
+        ],
+        "support_variants": [
+          [
+            2
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e11",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U5"
+        },
+        "modal_support": [
+          6,
+          9,
+          10
+        ],
+        "support_variants": [
+          [
+            6,
+            9,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e12",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U7"
+        },
+        "modal_support": [
+          3,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e13",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U6"
+        },
+        "modal_support": [
+          0,
+          2,
+          12
+        ],
+        "support_variants": [
+          [
+            0,
+            2,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e14",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U8"
+        },
+        "modal_support": [
+          0,
+          3,
+          4
+        ],
+        "support_variants": [
+          [
+            0,
+            3,
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e15",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U2"
+        },
+        "modal_support": [
+          3,
+          5,
+          9
+        ],
+        "support_variants": [
+          [
+            3,
+            5,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e16",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U2"
+        },
+        "modal_support": [
+          0,
+          3,
+          6
+        ],
+        "support_variants": [
+          [
+            0,
+            3,
+            6
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e17",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U3"
+        },
+        "modal_support": [
+          1,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            1,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e18",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U4"
+        },
+        "modal_support": [
+          6,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            6,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e19",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U6"
+        },
+        "modal_support": [
+          3,
+          10,
+          11
+        ],
+        "support_variants": [
+          [
+            3,
+            10,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e20",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U6"
+        },
+        "modal_support": [
+          0,
+          3,
+          11
+        ],
+        "support_variants": [
+          [
+            0,
+            3,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e21",
+        "Pi": 0.125,
+        "members": {
+          "5": "L1U5"
+        },
+        "modal_support": [
+          4,
+          6,
+          12
+        ],
+        "support_variants": [
+          [
+            4,
+            6,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e22",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U1"
+        },
+        "modal_support": [
+          3,
+          9,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            9,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e23",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U0"
+        },
+        "modal_support": [
+          6,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            6,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e24",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U6"
+        },
+        "modal_support": [
+          0,
+          2,
+          4
+        ],
+        "support_variants": [
+          [
+            0,
+            2,
+            4
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e25",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U7"
+        },
+        "modal_support": [
+          2,
+          6,
+          9
+        ],
+        "support_variants": [
+          [
+            2,
+            6,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e26",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U8"
+        },
+        "modal_support": [
+          3,
+          11,
+          12
+        ],
+        "support_variants": [
+          [
+            3,
+            11,
+            12
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e27",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U0"
+        },
+        "modal_support": [
+          0,
+          3,
+          10
+        ],
+        "support_variants": [
+          [
+            0,
+            3,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e28",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U3"
+        },
+        "modal_support": [
+          6,
+          7,
+          9
+        ],
+        "support_variants": [
+          [
+            6,
+            7,
+            9
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e29",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U9"
+        },
+        "modal_support": [
+          6,
+          9,
+          11
+        ],
+        "support_variants": [
+          [
+            6,
+            9,
+            11
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      }
+    ],
+    "routes": {
+      "feature_groups": [
+        [
+          "alcohol"
+        ],
+        [
+          "malic_acid"
+        ],
+        [
+          "ash"
+        ],
+        [
+          "alcalinity_of_ash"
+        ],
+        [
+          "magnesium"
+        ],
+        [
+          "total_phenols",
+          "flavanoids"
+        ],
+        [
+          "nonflavanoid_phenols"
+        ],
+        [
+          "proanthocyanins"
+        ],
+        [
+          "color_intensity"
+        ],
+        [
+          "hue"
+        ],
+        [
+          "od280/od315_of_diluted_wines"
+        ],
+        [
+          "proline"
+        ]
+      ],
+      "rows": [
+        {
+          "rid": "r0",
+          "support_groups": [
+            2,
+            4,
+            8
+          ],
+          "support_names": [
+            "ash",
+            "magnesium",
+            "color_intensity"
+          ],
+          "common_core": [
+            2
+          ],
+          "common_core_names": [
+            "ash"
+          ],
+          "variants": [
+            [
+              0,
+              2,
+              4
+            ],
+            [
+              0,
+              2,
+              11
+            ],
+            [
+              2
+            ],
+            [
+              2,
+              3,
+              4
+            ],
+            [
+              2,
+              3,
+              11
+            ],
+            [
+              2,
+              4,
+              8
+            ],
+            [
+              2,
+              5,
+              8
+            ]
+          ],
+          "Pi": 0.875,
+          "pi": 0.225,
+          "members_main": [
+            "L1U1"
+          ],
+          "mu": 0.9382972717285156,
+          "multiplicitous": false,
+          "delta": -0.028449459887499695,
+          "ci_low": -0.11097918961344608,
+          "ci_high": 0.02616353855837117,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r1",
+          "support_groups": [
+            7,
+            8,
+            11
+          ],
+          "support_names": [
+            "proanthocyanins",
+            "color_intensity",
+            "proline"
+          ],
+          "common_core": [
+            7
+          ],
+          "common_core_names": [
+            "proanthocyanins"
+          ],
+          "variants": [
+            [
+              0,
+              2,
+              7
+            ],
+            [
+              0,
+              7,
+              8
+            ],
+            [
+              1,
+              7,
+              10
+            ],
+            [
+              7
+            ],
+            [
+              7,
+              8,
+              9
+            ],
+            [
+              7,
+              8,
+              11
+            ]
+          ],
+          "Pi": 0.75,
+          "pi": 0.325,
+          "members_main": [
+            "L1U8"
+          ],
+          "mu": 0.8921275835069743,
+          "multiplicitous": false,
+          "delta": 0.06574228432372453,
+          "ci_low": 0.006119686917743397,
+          "ci_high": 0.13469028746310296,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r2",
+          "support_groups": [
+            0,
+            4
+          ],
+          "support_names": [
+            "alcohol",
+            "magnesium"
+          ],
+          "common_core": [
+            0,
+            4
+          ],
+          "common_core_names": [
+            "alcohol",
+            "magnesium"
+          ],
+          "variants": [
+            [
+              0,
+              3,
+              4
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              4,
+              8
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.25,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r3",
+          "support_groups": [
+            0,
+            5,
+            10
+          ],
+          "support_names": [
+            "alcohol",
+            "G5{total_phenols, flavanoids}",
+            "od280/od315_of_diluted_wines"
+          ],
+          "common_core": [
+            0,
+            10
+          ],
+          "common_core_names": [
+            "alcohol",
+            "od280/od315_of_diluted_wines"
+          ],
+          "variants": [
+            [
+              0,
+              3,
+              10
+            ],
+            [
+              0,
+              5,
+              10
+            ],
+            [
+              0,
+              10
+            ]
+          ],
+          "Pi": 0.5,
+          "pi": 0.2,
+          "members_main": [
+            "L1U4"
+          ],
+          "mu": 0.9462775588035583,
+          "multiplicitous": false,
+          "delta": 0.36630034753635243,
+          "ci_low": 0.2004579826218863,
+          "ci_high": 0.5683556168573353,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r4",
+          "support_groups": [
+            0,
+            1,
+            8
+          ],
+          "support_names": [
+            "alcohol",
+            "malic_acid",
+            "color_intensity"
+          ],
+          "common_core": [
+            0,
+            1,
+            8
+          ],
+          "common_core_names": [
+            "alcohol",
+            "malic_acid",
+            "color_intensity"
+          ],
+          "variants": [
+            [
+              0,
+              1,
+              8
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [
+            "L1U6"
+          ],
+          "mu": 0.9405402541160583,
+          "multiplicitous": false,
+          "delta": 0.009338932396859234,
+          "ci_low": -0.09201847542575062,
+          "ci_high": 0.10428607633204874,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r5",
+          "support_groups": [
+            0,
+            1,
+            11
+          ],
+          "support_names": [
+            "alcohol",
+            "malic_acid",
+            "proline"
+          ],
+          "common_core": [
+            0,
+            1,
+            11
+          ],
+          "common_core_names": [
+            "alcohol",
+            "malic_acid",
+            "proline"
+          ],
+          "variants": [
+            [
+              0,
+              1,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r6",
+          "support_groups": [
+            0,
+            3,
+            5
+          ],
+          "support_names": [
+            "alcohol",
+            "alcalinity_of_ash",
+            "G5{total_phenols, flavanoids}"
+          ],
+          "common_core": [
+            0,
+            3,
+            5
+          ],
+          "common_core_names": [
+            "alcohol",
+            "alcalinity_of_ash",
+            "G5{total_phenols, flavanoids}"
+          ],
+          "variants": [
+            [
+              0,
+              3,
+              5
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r7",
+          "support_groups": [
+            0,
+            3,
+            8
+          ],
+          "support_names": [
+            "alcohol",
+            "alcalinity_of_ash",
+            "color_intensity"
+          ],
+          "common_core": [
+            0,
+            3,
+            8
+          ],
+          "common_core_names": [
+            "alcohol",
+            "alcalinity_of_ash",
+            "color_intensity"
+          ],
+          "variants": [
+            [
+              0,
+              3,
+              8
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "members_main": [
+            "L1U0"
+          ],
+          "mu": 0.9158452749252319,
+          "multiplicitous": false,
+          "delta": -0.011788252994286763,
+          "ci_low": -0.06149732201108409,
+          "ci_high": 0.022673247443777883,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent",
+            "no_effect"
+          ]
+        },
+        {
+          "rid": "r8",
+          "support_groups": [
+            0,
+            3,
+            9
+          ],
+          "support_names": [
+            "alcohol",
+            "alcalinity_of_ash",
+            "hue"
+          ],
+          "common_core": [
+            0,
+            3,
+            9
+          ],
+          "common_core_names": [
+            "alcohol",
+            "alcalinity_of_ash",
+            "hue"
+          ],
+          "variants": [
+            [
+              0,
+              3,
+              9
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r9",
+          "support_groups": [
+            1,
+            5,
+            8
+          ],
+          "support_names": [
+            "malic_acid",
+            "G5{total_phenols, flavanoids}",
+            "color_intensity"
+          ],
+          "common_core": [
+            1,
+            5,
+            8
+          ],
+          "common_core_names": [
+            "malic_acid",
+            "G5{total_phenols, flavanoids}",
+            "color_intensity"
+          ],
+          "variants": [
+            [
+              1,
+              5,
+              8
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.05,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r10",
+          "support_groups": [
+            1,
+            10,
+            11
+          ],
+          "support_names": [
+            "malic_acid",
+            "od280/od315_of_diluted_wines",
+            "proline"
+          ],
+          "common_core": [
+            1,
+            10,
+            11
+          ],
+          "common_core_names": [
+            "malic_acid",
+            "od280/od315_of_diluted_wines",
+            "proline"
+          ],
+          "variants": [
+            [
+              1,
+              10,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r11",
+          "support_groups": [
+            3,
+            5,
+            8
+          ],
+          "support_names": [
+            "alcalinity_of_ash",
+            "G5{total_phenols, flavanoids}",
+            "color_intensity"
+          ],
+          "common_core": [
+            3,
+            5,
+            8
+          ],
+          "common_core_names": [
+            "alcalinity_of_ash",
+            "G5{total_phenols, flavanoids}",
+            "color_intensity"
+          ],
+          "variants": [
+            [
+              3,
+              5,
+              8
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r12",
+          "support_groups": [
+            3,
+            8,
+            11
+          ],
+          "support_names": [
+            "alcalinity_of_ash",
+            "color_intensity",
+            "proline"
+          ],
+          "common_core": [
+            3,
+            8,
+            11
+          ],
+          "common_core_names": [
+            "alcalinity_of_ash",
+            "color_intensity",
+            "proline"
+          ],
+          "variants": [
+            [
+              3,
+              8,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r13",
+          "support_groups": [
+            3,
+            9,
+            10
+          ],
+          "support_names": [
+            "alcalinity_of_ash",
+            "hue",
+            "od280/od315_of_diluted_wines"
+          ],
+          "common_core": [
+            3,
+            9,
+            10
+          ],
+          "common_core_names": [
+            "alcalinity_of_ash",
+            "hue",
+            "od280/od315_of_diluted_wines"
+          ],
+          "variants": [
+            [
+              3,
+              9,
+              10
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r14",
+          "support_groups": [
+            3,
+            10,
+            11
+          ],
+          "support_names": [
+            "alcalinity_of_ash",
+            "od280/od315_of_diluted_wines",
+            "proline"
+          ],
+          "common_core": [
+            3,
+            10,
+            11
+          ],
+          "common_core_names": [
+            "alcalinity_of_ash",
+            "od280/od315_of_diluted_wines",
+            "proline"
+          ],
+          "variants": [
+            [
+              3,
+              10,
+              11
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.1,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r15",
+          "support_groups": [
+            4,
+            5,
+            8
+          ],
+          "support_names": [
+            "magnesium",
+            "G5{total_phenols, flavanoids}",
+            "color_intensity"
+          ],
+          "common_core": [
+            4,
+            5,
+            8
+          ],
+          "common_core_names": [
+            "magnesium",
+            "G5{total_phenols, flavanoids}",
+            "color_intensity"
+          ],
+          "variants": [
+            [
+              4,
+              5,
+              8
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r16",
+          "support_groups": [
+            4,
+            5,
+            11
+          ],
+          "support_names": [
+            "magnesium",
+            "G5{total_phenols, flavanoids}",
+            "proline"
+          ],
+          "common_core": [
+            4,
+            5,
+            11
+          ],
+          "common_core_names": [
+            "magnesium",
+            "G5{total_phenols, flavanoids}",
+            "proline"
+          ],
+          "variants": [
+            [
+              4,
+              5,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r17",
+          "support_groups": [
+            4,
+            8,
+            11
+          ],
+          "support_names": [
+            "magnesium",
+            "color_intensity",
+            "proline"
+          ],
+          "common_core": [
+            4,
+            8,
+            11
+          ],
+          "common_core_names": [
+            "magnesium",
+            "color_intensity",
+            "proline"
+          ],
+          "variants": [
+            [
+              4,
+              8,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.1,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r18",
+          "support_groups": [
+            5,
+            6,
+            8
+          ],
+          "support_names": [
+            "G5{total_phenols, flavanoids}",
+            "nonflavanoid_phenols",
+            "color_intensity"
+          ],
+          "common_core": [
+            5,
+            6,
+            8
+          ],
+          "common_core_names": [
+            "G5{total_phenols, flavanoids}",
+            "nonflavanoid_phenols",
+            "color_intensity"
+          ],
+          "variants": [
+            [
+              5,
+              6,
+              8
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.05,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r19",
+          "support_groups": [
+            5,
+            6,
+            11
+          ],
+          "support_names": [
+            "G5{total_phenols, flavanoids}",
+            "nonflavanoid_phenols",
+            "proline"
+          ],
+          "common_core": [
+            5,
+            6,
+            11
+          ],
+          "common_core_names": [
+            "G5{total_phenols, flavanoids}",
+            "nonflavanoid_phenols",
+            "proline"
+          ],
+          "variants": [
+            [
+              5,
+              6,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r20",
+          "support_groups": [
+            5,
+            8,
+            9
+          ],
+          "support_names": [
+            "G5{total_phenols, flavanoids}",
+            "color_intensity",
+            "hue"
+          ],
+          "common_core": [
+            5,
+            8,
+            9
+          ],
+          "common_core_names": [
+            "G5{total_phenols, flavanoids}",
+            "color_intensity",
+            "hue"
+          ],
+          "variants": [
+            [
+              5,
+              8,
+              9
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r21",
+          "support_groups": [
+            5,
+            8,
+            10
+          ],
+          "support_names": [
+            "G5{total_phenols, flavanoids}",
+            "color_intensity",
+            "od280/od315_of_diluted_wines"
+          ],
+          "common_core": [
+            5,
+            8,
+            10
+          ],
+          "common_core_names": [
+            "G5{total_phenols, flavanoids}",
+            "color_intensity",
+            "od280/od315_of_diluted_wines"
+          ],
+          "variants": [
+            [
+              5,
+              8,
+              10
+            ]
+          ],
+          "Pi": 0.375,
+          "pi": 0.15,
+          "members_main": [
+            "L1U3"
+          ],
+          "mu": 0.9315839409828186,
+          "multiplicitous": false,
+          "delta": 0.08524460462830774,
+          "ci_low": 0.0004993518603191004,
+          "ci_high": 0.2109514580663946,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r22",
+          "support_groups": [
+            5,
+            9,
+            10
+          ],
+          "support_names": [
+            "G5{total_phenols, flavanoids}",
+            "hue",
+            "od280/od315_of_diluted_wines"
+          ],
+          "common_core": [
+            5,
+            9,
+            10
+          ],
+          "common_core_names": [
+            "G5{total_phenols, flavanoids}",
+            "hue",
+            "od280/od315_of_diluted_wines"
+          ],
+          "variants": [
+            [
+              5,
+              9,
+              10
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.1,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r23",
+          "support_groups": [
+            5,
+            10,
+            11
+          ],
+          "support_names": [
+            "G5{total_phenols, flavanoids}",
+            "od280/od315_of_diluted_wines",
+            "proline"
+          ],
+          "common_core": [
+            5,
+            10,
+            11
+          ],
+          "common_core_names": [
+            "G5{total_phenols, flavanoids}",
+            "od280/od315_of_diluted_wines",
+            "proline"
+          ],
+          "variants": [
+            [
+              5,
+              10,
+              11
+            ]
+          ],
+          "Pi": 0.25,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r24",
+          "support_groups": [
+            6,
+            9,
+            10
+          ],
+          "support_names": [
+            "nonflavanoid_phenols",
+            "hue",
+            "od280/od315_of_diluted_wines"
+          ],
+          "common_core": [
+            6,
+            9,
+            10
+          ],
+          "common_core_names": [
+            "nonflavanoid_phenols",
+            "hue",
+            "od280/od315_of_diluted_wines"
+          ],
+          "variants": [
+            [
+              6,
+              9,
+              10
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.05,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r25",
+          "support_groups": [
+            8,
+            9,
+            11
+          ],
+          "support_names": [
+            "color_intensity",
+            "hue",
+            "proline"
+          ],
+          "common_core": [
+            8,
+            9,
+            11
+          ],
+          "common_core_names": [
+            "color_intensity",
+            "hue",
+            "proline"
+          ],
+          "variants": [
+            [
+              8,
+              9,
+              11
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        }
+      ],
+      "n_core_routes": 0,
+      "ev_bound_routes": 0.36267302852349004,
+      "note": "Routes are certified at the collinearity-group level (the level stable across retrainings); unit members are one carving from an explicit equivalence class."
+    },
+    "function_decomposition": {
+      "note": "Purified weighted-fANOVA components of the learned function under the DECLARED empirical training measure (unique given the measure; carving-invariant).  Shares are out-of-sample covariances on validation.",
+      "components": [
+        {
+          "support": [
+            0
+          ],
+          "support_names": [
+            "alcohol"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "alcohol"
+          ],
+          "share_main": 0.5299,
+          "shares_all": [
+            0.5299,
+            0.4695,
+            0.5135,
+            0.4651,
+            0.4956,
+            0.5299,
+            0.5068,
+            0.5778
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            1
+          ],
+          "support_names": [
+            "malic_acid"
+          ],
+          "group_support": [
+            1
+          ],
+          "group_names": [
+            "malic_acid"
+          ],
+          "share_main": 0.2274,
+          "shares_all": [
+            0.2274,
+            0.2465,
+            0.1719,
+            0.1965,
+            0.1839,
+            0.187,
+            0.1785,
+            0.1664
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            2
+          ],
+          "support_names": [
+            "ash"
+          ],
+          "group_support": [
+            2
+          ],
+          "group_names": [
+            "ash"
+          ],
+          "share_main": 0.0353,
+          "shares_all": [
+            0.0353,
+            0.0362,
+            0.0642,
+            0.0146,
+            0.0498,
+            0.0286,
+            0.0396,
+            0.0329
+          ],
+          "Pi": 1.0,
+          "pi": 0.85,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            3
+          ],
+          "support_names": [
+            "alcalinity_of_ash"
+          ],
+          "group_support": [
+            3
+          ],
+          "group_names": [
+            "alcalinity_of_ash"
+          ],
+          "share_main": 0.1457,
+          "shares_all": [
+            0.1457,
+            0.1669,
+            0.1031,
+            0.1783,
+            0.1759,
+            0.1306,
+            0.1499,
+            0.1696
+          ],
+          "Pi": 1.0,
+          "pi": 0.95,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            4
+          ],
+          "support_names": [
+            "magnesium"
+          ],
+          "group_support": [
+            4
+          ],
+          "group_names": [
+            "magnesium"
+          ],
+          "share_main": 0.1316,
+          "shares_all": [
+            0.1316,
+            0.1107,
+            0.1301,
+            0.0837,
+            0.1028,
+            0.1123,
+            0.1002,
+            0.1125
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            5
+          ],
+          "support_names": [
+            "total_phenols"
+          ],
+          "group_support": [
+            5
+          ],
+          "group_names": [
+            "G5{total_phenols, flavanoids}"
+          ],
+          "share_main": 0.2449,
+          "shares_all": [
+            0.2449,
+            0.223,
+            0.2361,
+            0.249,
+            0.2877,
+            0.2222,
+            0.2745,
+            0.2063
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            6
+          ],
+          "support_names": [
+            "flavanoids"
+          ],
+          "group_support": [
+            5
+          ],
+          "group_names": [
+            "G5{total_phenols, flavanoids}"
+          ],
+          "share_main": 0.0765,
+          "shares_all": [
+            0.0765,
+            0.1048,
+            0.0833,
+            0.1043,
+            0.0935,
+            0.1358,
+            0.0915,
+            0.0994
+          ],
+          "Pi": 1.0,
+          "pi": 0.925,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            8
+          ],
+          "support_names": [
+            "proanthocyanins"
+          ],
+          "group_support": [
+            7
+          ],
+          "group_names": [
+            "proanthocyanins"
+          ],
+          "share_main": 0.0252,
+          "shares_all": [
+            0.0252,
+            0.0205,
+            0.0,
+            0.0296,
+            0.0218,
+            0.03,
+            0.0277,
+            0.0335
+          ],
+          "Pi": 0.875,
+          "pi": 0.65,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            9
+          ],
+          "support_names": [
+            "color_intensity"
+          ],
+          "group_support": [
+            8
+          ],
+          "group_names": [
+            "color_intensity"
+          ],
+          "share_main": 0.0491,
+          "shares_all": [
+            0.0491,
+            0.0424,
+            0.0392,
+            0.0193,
+            0.0277,
+            0.0585,
+            0.0724,
+            0.013
+          ],
+          "Pi": 1.0,
+          "pi": 0.725,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            11
+          ],
+          "support_names": [
+            "od280/od315_of_diluted_wines"
+          ],
+          "group_support": [
+            10
+          ],
+          "group_names": [
+            "od280/od315_of_diluted_wines"
+          ],
+          "share_main": 0.0479,
+          "shares_all": [
+            0.0479,
+            0.0672,
+            0.0464,
+            0.0812,
+            0.0732,
+            0.1037,
+            0.1013,
+            0.0483
+          ],
+          "Pi": 1.0,
+          "pi": 0.9,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            12
+          ],
+          "support_names": [
+            "proline"
+          ],
+          "group_support": [
+            11
+          ],
+          "group_names": [
+            "proline"
+          ],
+          "share_main": 0.0508,
+          "shares_all": [
+            0.0508,
+            0.0569,
+            0.0509,
+            0.0484,
+            0.0599,
+            0.0534,
+            0.0452,
+            0.0427
+          ],
+          "Pi": 1.0,
+          "pi": 0.65,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            1
+          ],
+          "support_names": [
+            "alcohol",
+            "malic_acid"
+          ],
+          "group_support": [
+            0,
+            1
+          ],
+          "group_names": [
+            "alcohol",
+            "malic_acid"
+          ],
+          "share_main": 0.0132,
+          "shares_all": [
+            0.0132,
+            0.0143,
+            0.0143,
+            0.0,
+            0.0123,
+            0.0144,
+            0.0138,
+            0.0222
+          ],
+          "Pi": 0.875,
+          "pi": 0.025,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            2
+          ],
+          "support_names": [
+            "alcohol",
+            "ash"
+          ],
+          "group_support": [
+            0,
+            2
+          ],
+          "group_names": [
+            "alcohol",
+            "ash"
+          ],
+          "share_main": 0.0231,
+          "shares_all": [
+            0.0231,
+            0.0137,
+            0.0,
+            0.0154,
+            0.0138,
+            0.0117,
+            0.0151,
+            0.0138
+          ],
+          "Pi": 0.875,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            3
+          ],
+          "support_names": [
+            "alcohol",
+            "alcalinity_of_ash"
+          ],
+          "group_support": [
+            0,
+            3
+          ],
+          "group_names": [
+            "alcohol",
+            "alcalinity_of_ash"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0104,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            4
+          ],
+          "support_names": [
+            "alcohol",
+            "magnesium"
+          ],
+          "group_support": [
+            0,
+            4
+          ],
+          "group_names": [
+            "alcohol",
+            "magnesium"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0136,
+            0.0,
+            0.0,
+            0.0115,
+            0.0
+          ],
+          "Pi": 0.25,
+          "pi": 0.05,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            5
+          ],
+          "support_names": [
+            "alcohol",
+            "total_phenols"
+          ],
+          "group_support": [
+            0,
+            5
+          ],
+          "group_names": [
+            "alcohol",
+            "G5{total_phenols, flavanoids}"
+          ],
+          "share_main": 0.0285,
+          "shares_all": [
+            0.0285,
+            0.0356,
+            0.0244,
+            0.0291,
+            0.0233,
+            0.0321,
+            0.0191,
+            0.0168
+          ],
+          "Pi": 1.0,
+          "pi": 0.05,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            6
+          ],
+          "support_names": [
+            "alcohol",
+            "flavanoids"
+          ],
+          "group_support": [
+            0,
+            5
+          ],
+          "group_names": [
+            "alcohol",
+            "G5{total_phenols, flavanoids}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0113,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.05,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            8
+          ],
+          "support_names": [
+            "alcohol",
+            "proanthocyanins"
+          ],
+          "group_support": [
+            0,
+            7
+          ],
+          "group_names": [
+            "alcohol",
+            "proanthocyanins"
+          ],
+          "share_main": 0.0106,
+          "shares_all": [
+            0.0106,
+            0.0118,
+            0.0,
+            0.0,
+            0.0,
+            0.0129,
+            0.0106,
+            0.012
+          ],
+          "Pi": 0.625,
+          "pi": 0.025,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            10
+          ],
+          "support_names": [
+            "alcohol",
+            "hue"
+          ],
+          "group_support": [
+            0,
+            9
+          ],
+          "group_names": [
+            "alcohol",
+            "hue"
+          ],
+          "share_main": 0.0213,
+          "shares_all": [
+            0.0213,
+            0.017,
+            0.0183,
+            0.0171,
+            0.012,
+            0.0212,
+            0.0233,
+            0.0147
+          ],
+          "Pi": 1.0,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            0,
+            12
+          ],
+          "support_names": [
+            "alcohol",
+            "proline"
+          ],
+          "group_support": [
+            0,
+            11
+          ],
+          "group_names": [
+            "alcohol",
+            "proline"
+          ],
+          "share_main": 0.0129,
+          "shares_all": [
+            0.0129,
+            0.0128,
+            0.0,
+            0.0,
+            0.0,
+            0.018,
+            0.0,
+            0.0108
+          ],
+          "Pi": 0.5,
+          "pi": 0.05,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            1,
+            8
+          ],
+          "support_names": [
+            "malic_acid",
+            "proanthocyanins"
+          ],
+          "group_support": [
+            1,
+            7
+          ],
+          "group_names": [
+            "malic_acid",
+            "proanthocyanins"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.012,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            1,
+            10
+          ],
+          "support_names": [
+            "malic_acid",
+            "hue"
+          ],
+          "group_support": [
+            1,
+            9
+          ],
+          "group_names": [
+            "malic_acid",
+            "hue"
+          ],
+          "share_main": 0.0135,
+          "shares_all": [
+            0.0135,
+            0.0166,
+            0.0118,
+            0.0177,
+            0.0146,
+            0.0159,
+            0.0142,
+            0.0121
+          ],
+          "Pi": 1.0,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            2,
+            6
+          ],
+          "support_names": [
+            "ash",
+            "flavanoids"
+          ],
+          "group_support": [
+            2,
+            5
+          ],
+          "group_names": [
+            "ash",
+            "G5{total_phenols, flavanoids}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0136,
+            0.012,
+            0.0114,
+            0.0,
+            0.0104,
+            0.0129,
+            0.0109
+          ],
+          "Pi": 0.75,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            2,
+            12
+          ],
+          "support_names": [
+            "ash",
+            "proline"
+          ],
+          "group_support": [
+            2,
+            11
+          ],
+          "group_names": [
+            "ash",
+            "proline"
+          ],
+          "share_main": 0.0144,
+          "shares_all": [
+            0.0144,
+            0.0175,
+            0.0141,
+            0.0151,
+            0.0104,
+            0.0156,
+            0.0126,
+            0.0156
+          ],
+          "Pi": 1.0,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            3,
+            6
+          ],
+          "support_names": [
+            "alcalinity_of_ash",
+            "flavanoids"
+          ],
+          "group_support": [
+            3,
+            5
+          ],
+          "group_names": [
+            "alcalinity_of_ash",
+            "G5{total_phenols, flavanoids}"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0132,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            3,
+            7
+          ],
+          "support_names": [
+            "alcalinity_of_ash",
+            "nonflavanoid_phenols"
+          ],
+          "group_support": [
+            3,
+            6
+          ],
+          "group_names": [
+            "alcalinity_of_ash",
+            "nonflavanoid_phenols"
+          ],
+          "share_main": 0.0112,
+          "shares_all": [
+            0.0112,
+            0.0143,
+            0.0104,
+            0.014,
+            0.0143,
+            0.016,
+            0.0127,
+            0.018
+          ],
+          "Pi": 1.0,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            5,
+            6
+          ],
+          "support_names": [
+            "total_phenols",
+            "flavanoids"
+          ],
+          "group_support": [
+            5
+          ],
+          "group_names": [
+            "G5{total_phenols, flavanoids}"
+          ],
+          "share_main": 0.0112,
+          "shares_all": [
+            0.0112,
+            0.0116,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0101
+          ],
+          "Pi": 0.375,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            5,
+            7
+          ],
+          "support_names": [
+            "total_phenols",
+            "nonflavanoid_phenols"
+          ],
+          "group_support": [
+            5,
+            6
+          ],
+          "group_names": [
+            "G5{total_phenols, flavanoids}",
+            "nonflavanoid_phenols"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0101,
+            0.0144,
+            0.0,
+            0.0111,
+            0.0,
+            0.0127
+          ],
+          "Pi": 0.5,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            6,
+            12
+          ],
+          "support_names": [
+            "flavanoids",
+            "proline"
+          ],
+          "group_support": [
+            5,
+            11
+          ],
+          "group_names": [
+            "G5{total_phenols, flavanoids}",
+            "proline"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0109,
+            0.0102,
+            0.0108,
+            0.0,
+            0.0,
+            0.0102,
+            0.0
+          ],
+          "Pi": 0.5,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            7,
+            9
+          ],
+          "support_names": [
+            "nonflavanoid_phenols",
+            "color_intensity"
+          ],
+          "group_support": [
+            6,
+            8
+          ],
+          "group_names": [
+            "nonflavanoid_phenols",
+            "color_intensity"
+          ],
+          "share_main": 0.0102,
+          "shares_all": [
+            0.0102,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            9,
+            10
+          ],
+          "support_names": [
+            "color_intensity",
+            "hue"
+          ],
+          "group_support": [
+            8,
+            9
+          ],
+          "group_names": [
+            "color_intensity",
+            "hue"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0104,
+            0.0,
+            0.0,
+            0.0,
+            0.0117,
+            0.0
+          ],
+          "Pi": 0.25,
+          "pi": 0.15,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        }
+      ],
+      "n_core": 9,
+      "group_shares": {
+        "0": 0.5299,
+        "1": 0.2274,
+        "2": 0.0353,
+        "3": 0.1457,
+        "4": 0.1316,
+        "5": 0.3214,
+        "8": 0.0491,
+        "10": 0.0479
+      },
+      "ev_bound": 0.9390583554376661,
+      "recon_r2": 0.6243
+    },
+    "portfolio_reliance": [
+      {
+        "group": "alcohol",
+        "min_reliance": 0.0634,
+        "max_reliance": 0.2329
+      },
+      {
+        "group": "malic_acid",
+        "min_reliance": 0.0047,
+        "max_reliance": 0.0731
+      },
+      {
+        "group": "ash",
+        "min_reliance": 0.0447,
+        "max_reliance": 0.1003
+      },
+      {
+        "group": "alcalinity_of_ash",
+        "min_reliance": 0.034,
+        "max_reliance": 0.1237
+      },
+      {
+        "group": "magnesium",
+        "min_reliance": -0.0169,
+        "max_reliance": 0.0149
+      },
+      {
+        "group": "G5{total_phenols, flavanoids}",
+        "min_reliance": 0.0216,
+        "max_reliance": 0.1739
+      },
+      {
+        "group": "nonflavanoid_phenols",
+        "min_reliance": -0.0104,
+        "max_reliance": 0.0009
+      },
+      {
+        "group": "proanthocyanins",
+        "min_reliance": 0.0067,
+        "max_reliance": 0.0885
+      },
+      {
+        "group": "color_intensity",
+        "min_reliance": 0.0678,
+        "max_reliance": 0.3607
+      },
+      {
+        "group": "hue",
+        "min_reliance": 0.0327,
+        "max_reliance": 0.2694
+      },
+      {
+        "group": "od280/od315_of_diluted_wines",
+        "min_reliance": -0.0247,
+        "max_reliance": 0.0964
+      },
+      {
+        "group": "proline",
+        "min_reliance": 0.0115,
+        "max_reliance": 0.1121
+      }
+    ],
+    "non_claims": [
+      "CORE concepts are stable, real structures - not proven causal mechanisms of the world (M-C7).",
+      "The periphery is labelled, not certified.",
+      "Unit semantics require expert review (the soft target)."
+    ]
+  },
+  "core_share_sum": 1.4883,
+  "bars": [
+    {
+      "id": "fidelity \u2265 ceiling",
+      "pass": true,
+      "detail": "ratio 1.044 vs unconstrained MLP/HGB"
+    },
+    {
+      "id": "core coverage \u2265 0.5",
+      "pass": true,
+      "detail": "certified components cover 1.49 of function variance"
+    },
+    {
+      "id": "E[V] non-vacuous",
+      "pass": true,
+      "detail": "E[V] \u2264 0.939 over the structure-level universe"
+    },
+    {
+      "id": "honest depth",
+      "pass": true,
+      "detail": "depth 1; widths 6"
+    }
+  ]
+}

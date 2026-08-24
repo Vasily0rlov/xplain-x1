@@ -1,0 +1,2976 @@
+{
+  "dag": {
+    "dataset": "adult",
+    "nodes": [
+      {
+        "id": "age",
+        "kind": "input",
+        "label": "age"
+      },
+      {
+        "id": "education-num",
+        "kind": "input",
+        "label": "education-num"
+      },
+      {
+        "id": "marital-status=Married-civ-spouse",
+        "kind": "input",
+        "label": "marital-status=Married-civ-spouse"
+      },
+      {
+        "id": "occupation=Exec-managerial",
+        "kind": "input",
+        "label": "occupation=Exec-managerial"
+      },
+      {
+        "id": "relationship=Husband",
+        "kind": "input",
+        "label": "relationship=Husband"
+      },
+      {
+        "id": "relationship=Own-child",
+        "kind": "input",
+        "label": "relationship=Own-child"
+      },
+      {
+        "id": "sex",
+        "kind": "input",
+        "label": "sex"
+      },
+      {
+        "id": "capital-gain",
+        "kind": "input",
+        "label": "capital-gain"
+      },
+      {
+        "id": "hours-per-week",
+        "kind": "input",
+        "label": "hours-per-week"
+      },
+      {
+        "id": "L1U0",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(relationship=Own-child, capital-gain, education-num)",
+        "mu": 0.9943369626998901,
+        "Pi": 0.375,
+        "pi": 0.15,
+        "delta": 0.5487334974987784,
+        "coverage": 0.5267650482536078,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "relationship=Own-child",
+          "capital-gain",
+          "education-num"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U7",
+        "kind": "unit",
+        "layer": 1,
+        "label": "tree(d3)(relationship=Own-child, sex, marital-status=Married-civ-spouse)",
+        "mu": 0.9994197488778029,
+        "Pi": 0.375,
+        "pi": 0.525,
+        "delta": 3.8955731108598557,
+        "coverage": 3.8925400247071043,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "relationship=Own-child",
+          "sex",
+          "marital-status=Married-civ-spouse"
+        ],
+        "form": "tree(d3)"
+      },
+      {
+        "id": "L1U5",
+        "kind": "unit",
+        "layer": 1,
+        "label": "poly(2)(marital-status=Married-civ-spouse, hours-per-week, relationship=Husband)",
+        "mu": 0.9764877557754517,
+        "Pi": 0.625,
+        "pi": 0.325,
+        "delta": 0.10636549950233765,
+        "coverage": 0.11444254198165082,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "support_names": [
+          "marital-status=Married-civ-spouse",
+          "hours-per-week",
+          "relationship=Husband"
+        ],
+        "form": "poly(2)"
+      },
+      {
+        "id": "L1U1",
+        "kind": "unit",
+        "layer": 1,
+        "label": "monotone-(age)",
+        "mu": 0.9999738335609436,
+        "Pi": 0.75,
+        "pi": 0.575,
+        "delta": 0.03301000314612079,
+        "coverage": 0.032723512352508255,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "infrequent"
+        ],
+        "support_names": [
+          "age"
+        ],
+        "form": "monotone-"
+      },
+      {
+        "id": "L1U6",
+        "kind": "unit",
+        "layer": 1,
+        "label": "monotone-(age)",
+        "mu": 0.9997365474700928,
+        "Pi": 0.75,
+        "pi": 0.475,
+        "delta": 0.003484020659025977,
+        "coverage": 0.0020075139756301486,
+        "tag": "PERIPHERY",
+        "reasons": [
+          "infrequent",
+          "no_effect"
+        ],
+        "support_names": [
+          "age"
+        ],
+        "form": "monotone-"
+      },
+      {
+        "id": "class_0",
+        "kind": "output",
+        "label": "class_0"
+      },
+      {
+        "id": "class_1",
+        "kind": "output",
+        "label": "class_1"
+      }
+    ],
+    "edges": [
+      {
+        "src": "age",
+        "dst": "L1U0",
+        "share": 0.0233
+      },
+      {
+        "src": "education-num",
+        "dst": "L1U0",
+        "share": 0.0521
+      },
+      {
+        "src": "occupation=Exec-managerial",
+        "dst": "L1U0",
+        "share": 0.0227
+      },
+      {
+        "src": "relationship=Own-child",
+        "dst": "L1U0",
+        "share": 0.5682
+      },
+      {
+        "src": "capital-gain",
+        "dst": "L1U0",
+        "share": 0.1903
+      },
+      {
+        "src": "education-num",
+        "dst": "L1U7",
+        "share": 0.0225
+      },
+      {
+        "src": "marital-status=Married-civ-spouse",
+        "dst": "L1U7",
+        "share": 0.0277
+      },
+      {
+        "src": "relationship=Own-child",
+        "dst": "L1U7",
+        "share": 0.8324
+      },
+      {
+        "src": "sex",
+        "dst": "L1U7",
+        "share": 0.0375
+      },
+      {
+        "src": "capital-gain",
+        "dst": "L1U7",
+        "share": 0.0272
+      },
+      {
+        "src": "education-num",
+        "dst": "L1U5",
+        "share": 0.0455
+      },
+      {
+        "src": "marital-status=Married-civ-spouse",
+        "dst": "L1U5",
+        "share": 0.4741
+      },
+      {
+        "src": "relationship=Husband",
+        "dst": "L1U5",
+        "share": 0.2335
+      },
+      {
+        "src": "hours-per-week",
+        "dst": "L1U5",
+        "share": 0.2352
+      },
+      {
+        "src": "age",
+        "dst": "L1U1",
+        "share": 0.989
+      },
+      {
+        "src": "age",
+        "dst": "L1U6",
+        "share": 0.986
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_0",
+        "share": 0.3626
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_0",
+        "share": 0.4798
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_0",
+        "share": 0.068
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_0",
+        "share": 0.0428
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_0",
+        "share": 0.0467
+      },
+      {
+        "src": "L1U0",
+        "dst": "class_1",
+        "share": 0.4739
+      },
+      {
+        "src": "L1U7",
+        "dst": "class_1",
+        "share": 0.3887
+      },
+      {
+        "src": "L1U5",
+        "dst": "class_1",
+        "share": 0.0672
+      },
+      {
+        "src": "L1U1",
+        "dst": "class_1",
+        "share": 0.0364
+      },
+      {
+        "src": "L1U6",
+        "dst": "class_1",
+        "share": 0.0338
+      }
+    ]
+  },
+  "cert": {
+    "identification": {
+      "system": "XPLAIN-x1",
+      "dataset": "adult",
+      "task": "classification",
+      "n": 48842,
+      "d": 27,
+      "git_commit": "37579b51d1a602325dd0665d13d4e73b3b86ee3b",
+      "config_hash": "c9e5554685f05c4ec9c450d45c96538be894ce5fd3d6d1ebbf6f31c98f973c77",
+      "data_hash": "ad9fb0c9773854e3-472d7f85cf410a4b",
+      "seeds": {
+        "main": 0,
+        "restarts": 8,
+        "cpss_runs": 40
+      }
+    },
+    "performance_and_limits": {
+      "fidelity_val": 0.43025726404967457,
+      "fidelity_ceiling": 0.4907443445701839,
+      "fidelity_ratio": 0.8767,
+      "accuracy_test": 0.8534138601699253,
+      "concept_tax_note": "vs best(unconstrained MLP, HGB) on val",
+      "restart_fidelities": [
+        0.43025726404967457,
+        0.45841944119143996,
+        0.4410391139251034,
+        0.4273166512083785,
+        0.43005723304538446,
+        0.4230062078502952,
+        0.44260789214802587,
+        0.44656902601608306
+      ]
+    },
+    "interpretability_structure": {
+      "widths": [
+        5
+      ],
+      "honest_depth": {
+        "depth": 1,
+        "eps_depth": 0.005,
+        "pairwise_dissolutions": [],
+        "all_earned": true
+      },
+      "n_concepts": 51,
+      "n_core": 0,
+      "n_periphery": 51,
+      "core_coverage_share": 0,
+      "periphery_reasons": [
+        "absent_in_main",
+        "infrequent",
+        "multiplicitous",
+        "no_effect",
+        "unstable"
+      ]
+    },
+    "statistical_certification": {
+      "regime": "standard",
+      "restarts_R": 8,
+      "cpss_pairs_B": 20,
+      "tau_match": 0.7,
+      "pi_thr": 0.7,
+      "mu_min": 0.8,
+      "ev_bound": 0.022895852255525283,
+      "q_mean": 5.5,
+      "p_universe": 3303,
+      "assumptions": [
+        "CPSS exchangeability (Meinshausen-Buhlmann) over an adaptive learned pipeline is a modelling idealisation; the reality test provides an independent assumption-light check.",
+        "The universe is structure-level: supports of arity <= F_max per layer interface of the delivered topology."
+      ]
+    },
+    "concepts": [
+      {
+        "cid": "c0",
+        "Pi": 0.375,
+        "members": {
+          "0": "L1U0",
+          "1": "L2U19",
+          "4": "L1U5"
+        },
+        "modal_support": [
+          4,
+          18,
+          23
+        ],
+        "support_variants": [
+          [
+            4,
+            18,
+            23
+          ],
+          [
+            0,
+            5,
+            18,
+            22,
+            23,
+            24
+          ],
+          [
+            18,
+            22,
+            25
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U0",
+        "mu": 0.9943369626998901,
+        "form": "poly(2)",
+        "support_names": [
+          "relationship=Own-child",
+          "capital-gain",
+          "education-num"
+        ],
+        "layer": 1,
+        "contribution": 0.5267650482536078,
+        "pi": 0.15,
+        "delta": 0.5487334974987784,
+        "ci_low": 0.508365514550125,
+        "ci_high": 0.5941401406982121,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.1196
+      },
+      {
+        "cid": "c1",
+        "Pi": 0.375,
+        "members": {
+          "0": "L1U7",
+          "1": "L2U25",
+          "4": "L1U6"
+        },
+        "modal_support": [
+          5,
+          18,
+          22
+        ],
+        "support_variants": [
+          [
+            5,
+            18,
+            22
+          ],
+          [
+            0,
+            5,
+            18,
+            22,
+            23,
+            24
+          ],
+          [
+            18,
+            22,
+            25
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U7",
+        "mu": 0.9994197488778029,
+        "form": "tree(d3)",
+        "support_names": [
+          "relationship=Own-child",
+          "sex",
+          "marital-status=Married-civ-spouse"
+        ],
+        "layer": 1,
+        "contribution": 3.8925400247071043,
+        "pi": 0.525,
+        "delta": 3.8955731108598557,
+        "ci_low": 3.6938944121236914,
+        "ci_high": 4.098683600733123,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.8492
+      },
+      {
+        "cid": "c2",
+        "Pi": 0.625,
+        "members": {
+          "0": "L1U5",
+          "1": "L2U29",
+          "2": "L1U0",
+          "5": "L2U28",
+          "6": "L1U1"
+        },
+        "modal_support": [
+          5,
+          16,
+          25
+        ],
+        "support_variants": [
+          [
+            5,
+            16,
+            25
+          ],
+          [
+            0,
+            4,
+            5,
+            16,
+            18,
+            24,
+            25
+          ],
+          [
+            4,
+            5,
+            25
+          ],
+          [
+            0,
+            5,
+            25
+          ],
+          [
+            5,
+            13,
+            25
+          ]
+        ],
+        "multiplicitous": true,
+        "uid_main": "L1U5",
+        "mu": 0.9764877557754517,
+        "form": "poly(2)",
+        "support_names": [
+          "marital-status=Married-civ-spouse",
+          "hours-per-week",
+          "relationship=Husband"
+        ],
+        "layer": 1,
+        "contribution": 0.11444254198165082,
+        "pi": 0.325,
+        "delta": 0.10636549950233765,
+        "ci_low": 0.09346407342682674,
+        "ci_high": 0.11874309953329418,
+        "label": "PERIPHERY",
+        "reasons": [
+          "unstable",
+          "infrequent",
+          "multiplicitous"
+        ],
+        "coverage_share": 0.0232
+      },
+      {
+        "cid": "c3",
+        "Pi": 0.75,
+        "members": {
+          "0": "L1U1",
+          "1": "L2U26",
+          "2": "L1U5",
+          "3": "L1U0",
+          "6": "L2U15",
+          "7": "L2U22"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0
+          ],
+          [
+            0,
+            8,
+            15
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U1",
+        "mu": 0.9999738335609436,
+        "form": "monotone-",
+        "support_names": [
+          "age"
+        ],
+        "layer": 1,
+        "contribution": 0.032723512352508255,
+        "pi": 0.575,
+        "delta": 0.03301000314612079,
+        "ci_low": 0.02554839131289698,
+        "ci_high": 0.04039087101109284,
+        "label": "PERIPHERY",
+        "reasons": [
+          "infrequent"
+        ],
+        "coverage_share": 0.0072
+      },
+      {
+        "cid": "c4",
+        "Pi": 0.75,
+        "members": {
+          "0": "L1U6",
+          "1": "L1U0",
+          "3": "L1U5",
+          "4": "L1U1",
+          "6": "L1U2",
+          "7": "L1U0"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": "L1U6",
+        "mu": 0.9997365474700928,
+        "form": "monotone-",
+        "support_names": [
+          "age"
+        ],
+        "layer": 1,
+        "contribution": 0.0020075139756301486,
+        "pi": 0.475,
+        "delta": 0.003484020659025977,
+        "ci_low": 0.0015291257210927668,
+        "ci_high": 0.005490826078807476,
+        "label": "PERIPHERY",
+        "reasons": [
+          "infrequent",
+          "no_effect"
+        ],
+        "coverage_share": 0.0008
+      },
+      {
+        "cid": "e0",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U5"
+        },
+        "modal_support": [
+          4,
+          5,
+          18
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            18
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e1",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U2"
+        },
+        "modal_support": [
+          0,
+          18,
+          24
+        ],
+        "support_variants": [
+          [
+            0,
+            18,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e2",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U22"
+        },
+        "modal_support": [
+          0,
+          18,
+          25
+        ],
+        "support_variants": [
+          [
+            0,
+            18,
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e3",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U7"
+        },
+        "modal_support": [
+          23
+        ],
+        "support_variants": [
+          [
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e4",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U6"
+        },
+        "modal_support": [
+          5,
+          16,
+          25
+        ],
+        "support_variants": [
+          [
+            5,
+            16,
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e5",
+        "Pi": 0.125,
+        "members": {
+          "1": "L1U21"
+        },
+        "modal_support": [
+          0,
+          5,
+          22
+        ],
+        "support_variants": [
+          [
+            0,
+            5,
+            22
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e6",
+        "Pi": 0.125,
+        "members": {
+          "1": "L2U24"
+        },
+        "modal_support": [
+          0,
+          4,
+          5,
+          18,
+          23,
+          25
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            5,
+            18,
+            23,
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e7",
+        "Pi": 0.125,
+        "members": {
+          "1": "L2U23"
+        },
+        "modal_support": [
+          23
+        ],
+        "support_variants": [
+          [
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e8",
+        "Pi": 0.125,
+        "members": {
+          "1": "L2U27"
+        },
+        "modal_support": [
+          0,
+          18,
+          25
+        ],
+        "support_variants": [
+          [
+            0,
+            18,
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e9",
+        "Pi": 0.125,
+        "members": {
+          "1": "L2U28"
+        },
+        "modal_support": [
+          0,
+          5,
+          22
+        ],
+        "support_variants": [
+          [
+            0,
+            5,
+            22
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e10",
+        "Pi": 0.125,
+        "members": {
+          "1": "L2U16"
+        },
+        "modal_support": [
+          0,
+          4,
+          5,
+          18,
+          22,
+          23,
+          25
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            5,
+            18,
+            22,
+            23,
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e11",
+        "Pi": 0.125,
+        "members": {
+          "1": "L2U15"
+        },
+        "modal_support": [
+          0,
+          4,
+          5,
+          16,
+          18,
+          22,
+          23,
+          24,
+          25
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            5,
+            16,
+            18,
+            22,
+            23,
+            24,
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e12",
+        "Pi": 0.125,
+        "members": {
+          "1": "L2U17"
+        },
+        "modal_support": [
+          0,
+          5,
+          18,
+          22,
+          23,
+          24
+        ],
+        "support_variants": [
+          [
+            0,
+            5,
+            18,
+            22,
+            23,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e13",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U9"
+        },
+        "modal_support": [
+          23
+        ],
+        "support_variants": [
+          [
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e14",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U7"
+        },
+        "modal_support": [
+          23
+        ],
+        "support_variants": [
+          [
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e15",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U3"
+        },
+        "modal_support": [
+          4,
+          23,
+          24
+        ],
+        "support_variants": [
+          [
+            4,
+            23,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e16",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U2"
+        },
+        "modal_support": [
+          0,
+          4,
+          23
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e17",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U6"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e18",
+        "Pi": 0.125,
+        "members": {
+          "2": "L1U1"
+        },
+        "modal_support": [
+          0,
+          5,
+          13
+        ],
+        "support_variants": [
+          [
+            0,
+            5,
+            13
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e19",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U4"
+        },
+        "modal_support": [
+          0,
+          13,
+          22
+        ],
+        "support_variants": [
+          [
+            0,
+            13,
+            22
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e20",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U6"
+        },
+        "modal_support": [
+          5,
+          13,
+          23
+        ],
+        "support_variants": [
+          [
+            5,
+            13,
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e21",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U1"
+        },
+        "modal_support": [
+          5,
+          13,
+          25
+        ],
+        "support_variants": [
+          [
+            5,
+            13,
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e22",
+        "Pi": 0.125,
+        "members": {
+          "3": "L1U3"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e23",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U7"
+        },
+        "modal_support": [
+          4,
+          5,
+          23
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e24",
+        "Pi": 0.125,
+        "members": {
+          "4": "L1U4"
+        },
+        "modal_support": [
+          2,
+          4,
+          24
+        ],
+        "support_variants": [
+          [
+            2,
+            4,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e25",
+        "Pi": 0.125,
+        "members": {
+          "5": "L2U24"
+        },
+        "modal_support": [
+          5,
+          23,
+          24
+        ],
+        "support_variants": [
+          [
+            5,
+            23,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e26",
+        "Pi": 0.125,
+        "members": {
+          "5": "L2U25"
+        },
+        "modal_support": [
+          4,
+          5,
+          10
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e27",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U3"
+        },
+        "modal_support": [
+          4,
+          5,
+          24
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e28",
+        "Pi": 0.125,
+        "members": {
+          "6": "L1U5"
+        },
+        "modal_support": [
+          5,
+          23
+        ],
+        "support_variants": [
+          [
+            5,
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e29",
+        "Pi": 0.125,
+        "members": {
+          "6": "L2U13"
+        },
+        "modal_support": [
+          0,
+          4,
+          5,
+          23,
+          24
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            5,
+            23,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e30",
+        "Pi": 0.125,
+        "members": {
+          "6": "L2U14"
+        },
+        "modal_support": [
+          0,
+          5,
+          13,
+          23,
+          25
+        ],
+        "support_variants": [
+          [
+            0,
+            5,
+            13,
+            23,
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e31",
+        "Pi": 0.125,
+        "members": {
+          "6": "L2U12"
+        },
+        "modal_support": [
+          5,
+          23
+        ],
+        "support_variants": [
+          [
+            5,
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e32",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U3"
+        },
+        "modal_support": [
+          23
+        ],
+        "support_variants": [
+          [
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e33",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U1"
+        },
+        "modal_support": [
+          23
+        ],
+        "support_variants": [
+          [
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e34",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U5"
+        },
+        "modal_support": [
+          25
+        ],
+        "support_variants": [
+          [
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e35",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U4"
+        },
+        "modal_support": [
+          4,
+          5,
+          10
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e36",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U12"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e37",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U6"
+        },
+        "modal_support": [
+          0,
+          13,
+          24
+        ],
+        "support_variants": [
+          [
+            0,
+            13,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e38",
+        "Pi": 0.125,
+        "members": {
+          "7": "L1U11"
+        },
+        "modal_support": [
+          0,
+          4,
+          5
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            5
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e39",
+        "Pi": 0.125,
+        "members": {
+          "7": "L2U18"
+        },
+        "modal_support": [
+          23
+        ],
+        "support_variants": [
+          [
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e40",
+        "Pi": 0.125,
+        "members": {
+          "7": "L2U19"
+        },
+        "modal_support": [
+          23
+        ],
+        "support_variants": [
+          [
+            23
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e41",
+        "Pi": 0.125,
+        "members": {
+          "7": "L2U20"
+        },
+        "modal_support": [
+          4,
+          5,
+          10,
+          23,
+          25
+        ],
+        "support_variants": [
+          [
+            4,
+            5,
+            10,
+            23,
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e42",
+        "Pi": 0.125,
+        "members": {
+          "7": "L2U21"
+        },
+        "modal_support": [
+          0,
+          4,
+          5,
+          10
+        ],
+        "support_variants": [
+          [
+            0,
+            4,
+            5,
+            10
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e43",
+        "Pi": 0.125,
+        "members": {
+          "7": "L2U23"
+        },
+        "modal_support": [
+          25
+        ],
+        "support_variants": [
+          [
+            25
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e44",
+        "Pi": 0.125,
+        "members": {
+          "7": "L2U24"
+        },
+        "modal_support": [
+          0
+        ],
+        "support_variants": [
+          [
+            0
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      },
+      {
+        "cid": "e45",
+        "Pi": 0.125,
+        "members": {
+          "7": "L2U25"
+        },
+        "modal_support": [
+          0,
+          13,
+          24
+        ],
+        "support_variants": [
+          [
+            0,
+            13,
+            24
+          ]
+        ],
+        "multiplicitous": false,
+        "uid_main": null,
+        "label": "PERIPHERY",
+        "reasons": [
+          "absent_in_main"
+        ],
+        "coverage_share": 0.0
+      }
+    ],
+    "routes": {
+      "feature_groups": [
+        [
+          "age"
+        ],
+        [
+          "workclass=Private"
+        ],
+        [
+          "workclass=Self-emp-not-inc"
+        ],
+        [
+          "workclass=Local-gov"
+        ],
+        [
+          "education-num"
+        ],
+        [
+          "marital-status=Married-civ-spouse",
+          "relationship=Husband"
+        ],
+        [
+          "marital-status=Never-married"
+        ],
+        [
+          "marital-status=Divorced"
+        ],
+        [
+          "occupation=Prof-specialty"
+        ],
+        [
+          "occupation=Craft-repair"
+        ],
+        [
+          "occupation=Exec-managerial"
+        ],
+        [
+          "occupation=Adm-clerical"
+        ],
+        [
+          "occupation=Sales"
+        ],
+        [
+          "occupation=Other-service"
+        ],
+        [
+          "occupation=Machine-op-inspct"
+        ],
+        [
+          "occupation=Transport-moving"
+        ],
+        [
+          "relationship=Not-in-family"
+        ],
+        [
+          "relationship=Own-child"
+        ],
+        [
+          "relationship=Unmarried"
+        ],
+        [
+          "race=White"
+        ],
+        [
+          "race=Black"
+        ],
+        [
+          "sex"
+        ],
+        [
+          "capital-gain"
+        ],
+        [
+          "capital-loss"
+        ],
+        [
+          "hours-per-week"
+        ],
+        [
+          "native-country=US"
+        ]
+      ],
+      "rows": [
+        {
+          "rid": "r0",
+          "support_groups": [
+            0
+          ],
+          "support_names": [
+            "age"
+          ],
+          "common_core": [
+            0
+          ],
+          "common_core_names": [
+            "age"
+          ],
+          "variants": [
+            [
+              0
+            ],
+            [
+              0,
+              4,
+              5,
+              10
+            ],
+            [
+              0,
+              4,
+              5,
+              17,
+              21,
+              22,
+              23,
+              24
+            ],
+            [
+              0,
+              4,
+              5,
+              17,
+              21,
+              22,
+              24
+            ],
+            [
+              0,
+              4,
+              5,
+              17,
+              22,
+              24
+            ],
+            [
+              0,
+              4,
+              5,
+              17,
+              23,
+              24
+            ],
+            [
+              0,
+              4,
+              5,
+              22,
+              23
+            ],
+            [
+              0,
+              5,
+              13
+            ],
+            [
+              0,
+              5,
+              13,
+              22,
+              24
+            ],
+            [
+              0,
+              5,
+              17,
+              21,
+              22,
+              23
+            ],
+            [
+              0,
+              5,
+              21
+            ],
+            [
+              0,
+              5,
+              24
+            ],
+            [
+              0,
+              13,
+              23
+            ],
+            [
+              0,
+              17,
+              23
+            ],
+            [
+              0,
+              17,
+              24
+            ]
+          ],
+          "Pi": 1.0,
+          "pi": 0.95,
+          "members_main": [
+            "L1U1",
+            "L1U6"
+          ],
+          "mu": 0.9999738335609436,
+          "multiplicitous": false,
+          "delta": 0.06232456044469903,
+          "ci_low": 0.05327303450522297,
+          "ci_high": 0.07106749973829181,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "rid": "r1",
+          "support_groups": [
+            22
+          ],
+          "support_names": [
+            "capital-gain"
+          ],
+          "common_core": [
+            22
+          ],
+          "common_core_names": [
+            "capital-gain"
+          ],
+          "variants": [
+            [
+              4,
+              5,
+              10,
+              22,
+              24
+            ],
+            [
+              4,
+              5,
+              22
+            ],
+            [
+              4,
+              17,
+              22
+            ],
+            [
+              4,
+              22,
+              23
+            ],
+            [
+              5,
+              13,
+              22
+            ],
+            [
+              5,
+              22
+            ],
+            [
+              5,
+              22,
+              23
+            ],
+            [
+              22
+            ]
+          ],
+          "Pi": 1.0,
+          "pi": 0.675,
+          "members_main": [
+            "L1U0"
+          ],
+          "mu": 0.9943369626998901,
+          "multiplicitous": false,
+          "delta": 0.5487334974987784,
+          "ci_low": 0.508365514550125,
+          "ci_high": 0.5941401406982121,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r2",
+          "support_groups": [
+            5,
+            24
+          ],
+          "support_names": [
+            "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+            "hours-per-week"
+          ],
+          "common_core": [
+            24
+          ],
+          "common_core_names": [
+            "hours-per-week"
+          ],
+          "variants": [
+            [
+              4,
+              5,
+              24
+            ],
+            [
+              5,
+              13,
+              24
+            ],
+            [
+              5,
+              24
+            ],
+            [
+              17,
+              21,
+              24
+            ],
+            [
+              24
+            ]
+          ],
+          "Pi": 0.875,
+          "pi": 0.55,
+          "members_main": [
+            "L1U5"
+          ],
+          "mu": 0.9764877557754517,
+          "multiplicitous": false,
+          "delta": 0.10636549950233765,
+          "ci_low": 0.09346407342682674,
+          "ci_high": 0.11874309953329418,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "rid": "r3",
+          "support_groups": [
+            2,
+            4,
+            23
+          ],
+          "support_names": [
+            "workclass=Self-emp-not-inc",
+            "education-num",
+            "capital-loss"
+          ],
+          "common_core": [
+            2,
+            4,
+            23
+          ],
+          "common_core_names": [
+            "workclass=Self-emp-not-inc",
+            "education-num",
+            "capital-loss"
+          ],
+          "variants": [
+            [
+              2,
+              4,
+              23
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r4",
+          "support_groups": [
+            4,
+            5,
+            10
+          ],
+          "support_names": [
+            "education-num",
+            "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+            "occupation=Exec-managerial"
+          ],
+          "common_core": [
+            4,
+            5,
+            10
+          ],
+          "common_core_names": [
+            "education-num",
+            "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+            "occupation=Exec-managerial"
+          ],
+          "variants": [
+            [
+              4,
+              5,
+              10
+            ]
+          ],
+          "Pi": 0.25,
+          "pi": 0.0,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r5",
+          "support_groups": [
+            4,
+            5,
+            17
+          ],
+          "support_names": [
+            "education-num",
+            "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+            "relationship=Own-child"
+          ],
+          "common_core": [
+            4,
+            5,
+            17
+          ],
+          "common_core_names": [
+            "education-num",
+            "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+            "relationship=Own-child"
+          ],
+          "variants": [
+            [
+              4,
+              5,
+              17
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.125,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r6",
+          "support_groups": [
+            4,
+            5,
+            23
+          ],
+          "support_names": [
+            "education-num",
+            "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+            "capital-loss"
+          ],
+          "common_core": [
+            4,
+            5,
+            23
+          ],
+          "common_core_names": [
+            "education-num",
+            "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+            "capital-loss"
+          ],
+          "variants": [
+            [
+              4,
+              5,
+              23
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [],
+          "mu": null,
+          "multiplicitous": false,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main"
+          ]
+        },
+        {
+          "rid": "r7",
+          "support_groups": [
+            5,
+            17,
+            21
+          ],
+          "support_names": [
+            "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+            "relationship=Own-child",
+            "sex"
+          ],
+          "common_core": [
+            5,
+            17,
+            21
+          ],
+          "common_core_names": [
+            "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+            "relationship=Own-child",
+            "sex"
+          ],
+          "variants": [
+            [
+              5,
+              17,
+              21
+            ]
+          ],
+          "Pi": 0.125,
+          "pi": 0.025,
+          "members_main": [
+            "L1U7"
+          ],
+          "mu": 0.9994197488778029,
+          "multiplicitous": false,
+          "delta": 3.8955731108598557,
+          "ci_low": 3.6938944121236914,
+          "ci_high": 4.098683600733123,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        }
+      ],
+      "n_core_routes": 1,
+      "ev_bound_routes": 0.02562690613351407,
+      "note": "Routes are certified at the collinearity-group level (the level stable across retrainings); unit members are one carving from an explicit equivalence class."
+    },
+    "function_decomposition": {
+      "note": "Purified weighted-fANOVA components of the learned function under the DECLARED empirical training measure (unique given the measure; carving-invariant).  Shares are out-of-sample covariances on validation.",
+      "components": [
+        {
+          "support": [
+            0
+          ],
+          "support_names": [
+            "age"
+          ],
+          "group_support": [
+            0
+          ],
+          "group_names": [
+            "age"
+          ],
+          "share_main": 0.0785,
+          "shares_all": [
+            0.0785,
+            0.0986,
+            0.0971,
+            0.08,
+            0.0344,
+            0.0306,
+            0.1034,
+            0.1325
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            4
+          ],
+          "support_names": [
+            "education-num"
+          ],
+          "group_support": [
+            4
+          ],
+          "group_names": [
+            "education-num"
+          ],
+          "share_main": 0.0529,
+          "shares_all": [
+            0.0529,
+            0.0733,
+            0.0469,
+            0.0307,
+            0.0412,
+            0.0434,
+            0.0556,
+            0.0539
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            5
+          ],
+          "support_names": [
+            "marital-status=Married-civ-spouse"
+          ],
+          "group_support": [
+            5
+          ],
+          "group_names": [
+            "G5{marital-status=Married-civ-spouse, relationship=Husband}"
+          ],
+          "share_main": 0.075,
+          "shares_all": [
+            0.075,
+            0.1367,
+            0.1349,
+            0.0897,
+            0.0676,
+            0.1226,
+            0.1589,
+            0.129
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            6
+          ],
+          "support_names": [
+            "marital-status=Never-married"
+          ],
+          "group_support": [
+            6
+          ],
+          "group_names": [
+            "marital-status=Never-married"
+          ],
+          "share_main": 0.0106,
+          "shares_all": [
+            0.0106,
+            0.0172,
+            0.0196,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.375,
+          "pi": 0.5,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            8
+          ],
+          "support_names": [
+            "occupation=Prof-specialty"
+          ],
+          "group_support": [
+            8
+          ],
+          "group_names": [
+            "occupation=Prof-specialty"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0101,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.075,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            10
+          ],
+          "support_names": [
+            "occupation=Exec-managerial"
+          ],
+          "group_support": [
+            10
+          ],
+          "group_names": [
+            "occupation=Exec-managerial"
+          ],
+          "share_main": 0.0113,
+          "shares_all": [
+            0.0113,
+            0.0149,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0139,
+            0.0
+          ],
+          "Pi": 0.375,
+          "pi": 0.375,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            13
+          ],
+          "support_names": [
+            "occupation=Other-service"
+          ],
+          "group_support": [
+            13
+          ],
+          "group_names": [
+            "occupation=Other-service"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0107,
+            0.0,
+            0.0,
+            0.0,
+            0.0115,
+            0.0126
+          ],
+          "Pi": 0.375,
+          "pi": 0.3,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            18
+          ],
+          "support_names": [
+            "relationship=Own-child"
+          ],
+          "group_support": [
+            17
+          ],
+          "group_names": [
+            "relationship=Own-child"
+          ],
+          "share_main": 0.1534,
+          "shares_all": [
+            0.1534,
+            0.0335,
+            0.0,
+            0.0,
+            0.1242,
+            0.0,
+            0.0,
+            0.0106
+          ],
+          "Pi": 0.5,
+          "pi": 0.5,
+          "label": "PERIPHERY",
+          "reasons": [
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            20
+          ],
+          "support_names": [
+            "race=White"
+          ],
+          "group_support": [
+            19
+          ],
+          "group_names": [
+            "race=White"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0138,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            21
+          ],
+          "support_names": [
+            "race=Black"
+          ],
+          "group_support": [
+            20
+          ],
+          "group_names": [
+            "race=Black"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0229,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.0,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            22
+          ],
+          "support_names": [
+            "sex"
+          ],
+          "group_support": [
+            21
+          ],
+          "group_names": [
+            "sex"
+          ],
+          "share_main": 0.0104,
+          "shares_all": [
+            0.0104,
+            0.0158,
+            0.0122,
+            0.0296,
+            0.0,
+            0.0,
+            0.014,
+            0.0134
+          ],
+          "Pi": 0.75,
+          "pi": 0.325,
+          "label": "PERIPHERY",
+          "reasons": [
+            "infrequent"
+          ]
+        },
+        {
+          "support": [
+            23
+          ],
+          "support_names": [
+            "capital-gain"
+          ],
+          "group_support": [
+            22
+          ],
+          "group_names": [
+            "capital-gain"
+          ],
+          "share_main": 0.0641,
+          "shares_all": [
+            0.0641,
+            0.0353,
+            0.0638,
+            0.0343,
+            0.0644,
+            0.0626,
+            0.0482,
+            0.0489
+          ],
+          "Pi": 1.0,
+          "pi": 1.0,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            25
+          ],
+          "support_names": [
+            "hours-per-week"
+          ],
+          "group_support": [
+            24
+          ],
+          "group_names": [
+            "hours-per-week"
+          ],
+          "share_main": 0.0183,
+          "shares_all": [
+            0.0183,
+            0.0392,
+            0.0419,
+            0.0232,
+            0.0278,
+            0.0324,
+            0.0485,
+            0.0536
+          ],
+          "Pi": 1.0,
+          "pi": 0.975,
+          "label": "CORE",
+          "reasons": []
+        },
+        {
+          "support": [
+            4,
+            23
+          ],
+          "support_names": [
+            "education-num",
+            "capital-gain"
+          ],
+          "group_support": [
+            4,
+            22
+          ],
+          "group_names": [
+            "education-num",
+            "capital-gain"
+          ],
+          "share_main": 0.0,
+          "shares_all": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0133,
+            0.0,
+            0.0
+          ],
+          "Pi": 0.125,
+          "pi": 0.35,
+          "label": "PERIPHERY",
+          "reasons": [
+            "absent_in_main",
+            "unstable",
+            "infrequent"
+          ]
+        }
+      ],
+      "n_core": 5,
+      "group_shares": {
+        "0": 0.0785,
+        "4": 0.0529,
+        "5": 0.075,
+        "22": 0.0641,
+        "24": 0.0183
+      },
+      "ev_bound": 0.04172769073569482,
+      "recon_r2": 0.7638
+    },
+    "portfolio_reliance": [
+      {
+        "group": "age",
+        "min_reliance": 0.03,
+        "max_reliance": 0.1106
+      },
+      {
+        "group": "workclass=Private",
+        "min_reliance": -0.0002,
+        "max_reliance": 0.0007
+      },
+      {
+        "group": "workclass=Self-emp-not-inc",
+        "min_reliance": 0.0017,
+        "max_reliance": 0.0089
+      },
+      {
+        "group": "workclass=Local-gov",
+        "min_reliance": 0.0,
+        "max_reliance": 0.001
+      },
+      {
+        "group": "education-num",
+        "min_reliance": 0.0966,
+        "max_reliance": 0.13
+      },
+      {
+        "group": "G5{marital-status=Married-civ-spouse, relationship=Husband}",
+        "min_reliance": 0.1593,
+        "max_reliance": 0.2895
+      },
+      {
+        "group": "marital-status=Never-married",
+        "min_reliance": -0.0,
+        "max_reliance": 0.0125
+      },
+      {
+        "group": "marital-status=Divorced",
+        "min_reliance": -0.0002,
+        "max_reliance": 0.0028
+      },
+      {
+        "group": "occupation=Prof-specialty",
+        "min_reliance": 0.0025,
+        "max_reliance": 0.0113
+      },
+      {
+        "group": "occupation=Craft-repair",
+        "min_reliance": -0.0002,
+        "max_reliance": 0.0008
+      },
+      {
+        "group": "occupation=Exec-managerial",
+        "min_reliance": 0.0102,
+        "max_reliance": 0.0221
+      },
+      {
+        "group": "occupation=Adm-clerical",
+        "min_reliance": -0.0003,
+        "max_reliance": 0.001
+      },
+      {
+        "group": "occupation=Sales",
+        "min_reliance": 0.0002,
+        "max_reliance": 0.0024
+      },
+      {
+        "group": "occupation=Other-service",
+        "min_reliance": 0.0042,
+        "max_reliance": 0.009
+      },
+      {
+        "group": "occupation=Machine-op-inspct",
+        "min_reliance": 0.0003,
+        "max_reliance": 0.0015
+      },
+      {
+        "group": "occupation=Transport-moving",
+        "min_reliance": -0.0,
+        "max_reliance": 0.001
+      },
+      {
+        "group": "relationship=Not-in-family",
+        "min_reliance": 0.0,
+        "max_reliance": 0.0144
+      },
+      {
+        "group": "relationship=Own-child",
+        "min_reliance": 0.0003,
+        "max_reliance": 0.0437
+      },
+      {
+        "group": "relationship=Unmarried",
+        "min_reliance": -0.0001,
+        "max_reliance": 0.0025
+      },
+      {
+        "group": "race=White",
+        "min_reliance": -0.0006,
+        "max_reliance": 0.002
+      },
+      {
+        "group": "race=Black",
+        "min_reliance": -0.0,
+        "max_reliance": 0.0004
+      },
+      {
+        "group": "sex",
+        "min_reliance": 0.0012,
+        "max_reliance": 0.0101
+      },
+      {
+        "group": "capital-gain",
+        "min_reliance": 0.1658,
+        "max_reliance": 0.3468
+      },
+      {
+        "group": "capital-loss",
+        "min_reliance": 0.016,
+        "max_reliance": 0.0381
+      },
+      {
+        "group": "hours-per-week",
+        "min_reliance": 0.0256,
+        "max_reliance": 0.0505
+      },
+      {
+        "group": "native-country=US",
+        "min_reliance": 0.0001,
+        "max_reliance": 0.0026
+      }
+    ],
+    "non_claims": [
+      "CORE concepts are stable, real structures - not proven causal mechanisms of the world (M-C7).",
+      "The periphery is labelled, not certified.",
+      "Unit semantics require expert review (the soft target)."
+    ]
+  },
+  "core_share_sum": 0.2888,
+  "bars": [
+    {
+      "id": "fidelity \u2265 ceiling",
+      "pass": false,
+      "detail": "ratio 0.877 vs unconstrained MLP/HGB"
+    },
+    {
+      "id": "core coverage \u2265 0.5",
+      "pass": false,
+      "detail": "certified components cover 0.29 of function variance"
+    },
+    {
+      "id": "E[V] non-vacuous",
+      "pass": true,
+      "detail": "E[V] \u2264 0.042 over the structure-level universe"
+    },
+    {
+      "id": "honest depth",
+      "pass": true,
+      "detail": "depth 1; widths 5"
+    }
+  ]
+}
