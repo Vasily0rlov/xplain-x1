@@ -170,7 +170,9 @@ function drawBar(parent,x,y,w,h,segs){
 
 // =================================================================== LAYER F
 const FEATCX=96, COMPX=360, COMPW=232, ROWH=24, HEADH=42, BARZONE=17, BOXGAP=20, PAD=10;
-const OUTCX=COMPX+COMPW+150;
+// Q3: an explicit "Σ = certified f" node between the component boxes and the
+// output — the additive-composition "+" made visible.
+const SUMX=COMPX+COMPW+130, OUTCX=SUMX+150;
 function rowCount(c){ const base=c.members.length||c.feats_direct.length;
   return base + ((c.extra_members||0)>0?1:0); }
 function barH(c){ return c.measured ? BARZONE : 0; }   // contribution bar zone
@@ -187,6 +189,7 @@ function layoutHier(){
   POS={cpos, feat:{}, };
   const fy0=(H-(feats.length-1)*30)/2;
   feats.forEach((f,i)=>POS.feat[f.id]={x:FEATCX,y:fy0+i*30});
+  POS.sum={x:SUMX,y:H/2};
   POS.out={x:OUTCX,y:H/2};
   svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
 }
@@ -196,10 +199,12 @@ function tagFill(t){ return t==="CORE"?"var(--corewash)":"var(--periwash)"; }
 
 function edgePath(x1,y1,x2,y2){ const mx=(x1+x2)/2;
   return `M${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`; }
-function drawEdge(x1,y1,x2,y2,share,dim){
+function drawEdge(x1,y1,x2,y2,share,dim,dashed){
   const w=0.7+5*Math.min(1,(share||0)*3);
-  el("path",{d:edgePath(x1,y1,x2,y2),fill:"none",stroke:"var(--edge)",
-    "stroke-width":w.toFixed(2),"stroke-opacity":dim?0.12:0.5},g); }
+  const a={d:edgePath(x1,y1,x2,y2),fill:"none",stroke:dashed?"var(--accent)":"var(--edge)",
+    "stroke-width":(dashed?1.4:w.toFixed(2)),"stroke-opacity":dim?0.12:(dashed?0.6:0.5)};
+  if(dashed) a["stroke-dasharray"]="5 4";
+  el("path",a,g); }
 
 function drawHier(){
   g.textContent="";
@@ -213,14 +218,19 @@ function drawHier(){
   HIER.components.forEach(c=>{
     const cx1=COMPX, cy=POS.cpos[c.id].top+HEADH/2;
     const dimC = focus && focus!==c.id;
-    // component -> output
-    drawEdge(COMPX+COMPW, POS.cpos[c.id].top+compHeight(c)/2, OUTCX-46, POS.out.y, c.share, dimC);
+    // component -> Σ node  (Q3: additive composition made explicit)
+    drawEdge(COMPX+COMPW, POS.cpos[c.id].top+compHeight(c)/2, SUMX-54, POS.sum.y, c.share, dimC);
     if(!EXP[c.id]){
       // collapsed: feature -> component (the support), summary width
       c.support_names.forEach(f=>{ const fp=POS.feat["F::"+f]; if(!fp)return;
         drawEdge(fp.x+56, fp.y, cx1, cy, c.share, dimC); });
     } else {
-      // expanded: feature -> each member row (real flow)
+      // Q4: even expanded, keep the component's OWN support feature(s) feeding
+      // the box header (DASHED) — so "this is the PAY_3 term" stays legible even
+      // when the physical carriers read collinear neighbours, not PAY_3 itself.
+      c.support_names.forEach(f=>{ const fp=POS.feat["F::"+f]; if(!fp)return;
+        drawEdge(fp.x+56, fp.y, cx1, cy, c.share, dimC, true); });
+      // expanded: feature -> each member row (real flow through the carriers)
       const rows = c.members.length?c.members:c.feats_direct.map(f=>({feats:[f],direct:true}));
       rows.forEach((m,i)=>{ const ry=memberRowY(c,i);
         (m.feats||[]).forEach(f=>{ const fp=POS.feat["F::"+f]; if(!fp)return;
@@ -228,6 +238,8 @@ function drawHier(){
           drawEdge(fp.x+56, fp.y, cx1, ry, (m.coverage||0.04), dim); }); });
     }
   });
+  // Σ node -> output
+  drawEdge(POS.sum.x+54, POS.sum.y, OUTCX-46, POS.out.y, 0.5, false);
   // ---- feature nodes (left lane) ----
   HIER.features.forEach(f=>{ const p=POS.feat[f.id]; if(!p)return;
     const dim=focus && !featSel.has(f.label) && !HIER.components.some(c=>c.id===focus && c.support_names.includes(f.label));
@@ -315,7 +327,7 @@ function drawHier(){
     }
     grp.addEventListener("mousemove",ev=>{ if(ev.target.tagName!=="rect"||ev.offsetY==null){} showTip(
       `<h4>${c.support_names.join(" × ")}</h4>`+
-      `<div class="m">${c.tag} function component · ${(100*c.share).toFixed(1)}% of variance</div>`+
+      `<div class="m">${c.tag} function component · ${(100*c.share).toFixed(1)}% of TARGET variance</div>`+
       `<div class="m">Π ${fmt(c.Pi)} · π ${fmt(c.pi)} · ${c.n_members} member unit(s)`+
       `${(c.n_members||c.feats_direct.length)?" · double-click to open":""}</div>`,ev); });
     grp.addEventListener("mouseleave",hideTip);
@@ -323,6 +335,23 @@ function drawHier(){
     grp.addEventListener("dblclick",ev=>{ev.stopPropagation();
       if(c.n_members||c.feats_direct.length){ EXP[c.id]=!EXP[c.id]; layoutHier(); drawHier(); }});
   });
+  // ---- Σ node (Q3): f = Σ certified components — the "+" made visible ----
+  const sp=POS.sum, fnode=HIER.fnode||{};
+  const sg=el("g",{transform:`translate(${sp.x},${sp.y})`},g);
+  el("rect",{x:-54,y:-22,width:108,height:44,rx:9,fill:"var(--wash)",
+    stroke:"var(--accent)","stroke-width":1.6,"stroke-dasharray":"1 0"},sg);
+  const st=el("text",{x:0,y:-3,"text-anchor":"middle",
+    style:"font:13px system-ui;font-weight:700;fill:var(--ink);pointer-events:none"},sg);
+  st.textContent="Σ  f = Σ terms";
+  const ss=el("text",{x:0,y:12,"text-anchor":"middle",
+    style:"font:9px system-ui;fill:var(--muted);pointer-events:none"},sg);
+  ss.textContent=`recon R² ${fmt(fnode.recon_r2,2)} · cov ${fmt(fnode.coverage,2)}`;
+  sg.addEventListener("mousemove",ev=>showTip(
+    `<h4>Certified function f</h4>`+
+    `<div class="m">The certified components combine by ADDITION: f = intercept + Σ terms.</div>`+
+    `<div class="m">reconstruction R² ${fmt(fnode.recon_r2,2)} (how much of the model's f the sum captures)</div>`+
+    `<div class="m">coverage ${fmt(fnode.coverage,2)} (share of TARGET variance the certified terms explain)</div>`,ev));
+  sg.addEventListener("mouseleave",hideTip);
   // ---- output node (right) ----
   const o=HIER.output, op=POS.out;
   const og=el("g",{transform:`translate(${op.x},${op.y})`},g);
@@ -331,7 +360,7 @@ function drawHier(){
   const ot=el("text",{x:0,y:4,"text-anchor":"middle",
     style:"font:11px system-ui;fill:var(--ink);pointer-events:none"},og);
   ot.textContent=abbr(o.label,12);
-  og.addEventListener("mousemove",ev=>showTip(`<h4>${o.label}</h4><div class="m">${o.sub}</div>`,ev));
+  og.addEventListener("mousemove",ev=>showTip(`<h4>${o.label}</h4><div class="m">link(f) → ${o.sub}</div>`,ev));
   og.addEventListener("mouseleave",hideTip);
   applyZoom();
 }
@@ -431,22 +460,24 @@ function renderDetail(){
   if(!c){ box.innerHTML=emptyHelp(); return; }
   box.innerHTML=`<h3>${c.support_names.join(" × ")}</h3><div class="did">certified function component</div>`+
     `<div style="margin-top:7px"><span class="pill ${c.tag==="CORE"?"core":"peri"}">${c.tag}</span></div>`+
-    `<dl><dt>share</dt><dd>${(100*c.share).toFixed(1)}% of function variance</dd>`+
+    `<dl><dt>share</dt><dd>${(100*c.share).toFixed(1)}% of target variance explained</dd>`+
     `<dt>Π stab</dt><dd>${fmt(c.Pi)}</dd><dt>π cpss</dt><dd>${fmt(c.pi)}</dd>`+
     `<dt>carriers</dt><dd>${c.n_members} unit(s) carry it (measured)</dd></dl>`+
     `<div class="chips"><span class="chip">${(c.n_members||c.feats_direct.length)?"double-click the box to open its carrier units":"leaf"}</span></div>`;
 }
 function emptyHelp(){
   if(MODE==="hier") return `<div class="empty"><b>Layer F flow (left → right).</b>
-    Input features on the left feed the certified <b>function components</b> (the middle
-    boxes — additive terms of the model's function, NOT classes), which sum into the
-    output on the right. The <b>coloured bar under each box header</b> is the
-    <b>measured</b> split of that term's mass across its carrier units (from ablating each
-    unit). <b>Double-click a box</b> to open it: its <b>carrier units</b> appear inside —
-    identified by measurement, so a unit that carries the term through a collinear
-    feature is included (a <span style="color:var(--core)">⌾ direct</span> tag marks the
-    ones that also literally read the term's features). This is why the carrier here can
-    match the CORE unit in the Model-units view. <b>Green</b> = CORE; <b>grey</b> =
+    Input features (left) feed the certified <b>function components</b> — additive terms of
+    the model's function, each a small function of its inputs — which <b>add up</b> at the
+    <b>Σ node</b> (<i>f = intercept + Σ terms</i>) that then drives the decision. The Σ node
+    shows the reconstruction R² (how much of f the sum captures) and coverage. <b>Shares are
+    % of TARGET variance</b> (re-based by fidelity), so they sum to the coverage, not to 1 —
+    the gap is the target variance the model cannot explain.<br><br>
+    The <b>bar under each box header</b> is the measured split of that term's mass across its
+    <b>carrier units</b> (double-click a box to open them). A carrier can reach a term through
+    a <b>collinear</b> feature rather than the term's own — so the box's own support feature is
+    kept as a <span style="color:var(--accent)">dashed</span> edge even when expanded (e.g.
+    PAY_3's term, carried by units reading its neighbours). <b>Green</b> = CORE; <b>grey</b> =
     periphery. Drag to pan, scroll to zoom.</div>`;
   return `<div class="empty"><b>Model units.</b> The raw network graph: features → hidden
     units → output. Each unit is a <b>box labelled by its resolved input features</b>
@@ -783,9 +814,12 @@ def _build_hier(cert: dict, dag: dict, is_multiclass: bool,
                         else "output"))
     features = [{"id": "F::" + n, "kind": "feature", "label": n}
                 for n in feat_names]
+    coverage = round(sum(c["share"] for c in components
+                         if c["tag"] == "CORE"), 4)
     return {
         "features": features,
         "components": components,
+        "fnode": {"recon_r2": fdec.get("recon_r2"), "coverage": coverage},
         "output": {"id": "OUT", "kind": "output", "label": root_label,
                    "sub": f"{ident['task']} · {ident['dataset']}"},
     }
@@ -906,7 +940,9 @@ def render_dashboard(data: dict) -> str:
   <div class="card">
     <h2>Layer F — certified function components <span class="pill core">the certified claims</span></h2>
     <div class="note">{_esc(fdec['note'])} Reconstruction R² {fmt_or(fdec.get('recon_r2'))};
-      E[V] ≤ {fmt_or(ev, 3)} over {stat.get('p_universe','?')}-support universe.</div>
+      E[V] ≤ {fmt_or(ev, 3)} over {stat.get('p_universe','?')}-support universe.
+      <b>Shares are % of TARGET variance</b> (re-based by model fidelity), so they sum to the
+      certified coverage — not to 1: the gap to 1 is the target variance the model does not explain.</div>
     {_sharebar_table(fdec.get('components', []))}
   </div>
 

@@ -48,6 +48,42 @@
     "file": "drybean.html"
   },
   {
+    "dataset": "german_credit",
+    "task": "classification",
+    "n": 1000,
+    "d": 49,
+    "fidelity": 0.1944305941159159,
+    "ratio": 0.9862,
+    "n_core": 3,
+    "coverage": 0.0909,
+    "regime": "below stability power floor (n < 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A)",
+    "file": "german_credit.html"
+  },
+  {
+    "dataset": "morpher",
+    "task": "classification",
+    "n": 10195,
+    "d": 38,
+    "fidelity": 0.8784486522286448,
+    "ratio": 0.9935,
+    "n_core": 3,
+    "coverage": 0.1456,
+    "regime": "standard",
+    "file": "morpher.html"
+  },
+  {
+    "dataset": "morpher@grow-batch-8",
+    "task": "classification",
+    "n": 10195,
+    "d": 38,
+    "fidelity": 0.8784486522286448,
+    "ratio": 0.9935,
+    "n_core": 3,
+    "coverage": 0.1456,
+    "regime": "standard",
+    "file": "morpher@grow-batch-8.html"
+  },
+  {
     "dataset": "mushroom",
     "task": "classification",
     "n": 8124,
@@ -58,6 +94,30 @@
     "coverage": 0.8647,
     "regime": "standard",
     "file": "mushroom.html"
+  },
+  {
+    "dataset": "spambase",
+    "task": "classification",
+    "n": 4601,
+    "d": 57,
+    "fidelity": 0.7789854178413917,
+    "ratio": 0.942,
+    "n_core": 13,
+    "coverage": 0.4789,
+    "regime": "standard",
+    "file": "spambase.html"
+  },
+  {
+    "dataset": "spambase@grow-batch-8",
+    "task": "classification",
+    "n": 4601,
+    "d": 57,
+    "fidelity": 0.7775668411489033,
+    "ratio": 0.9403,
+    "n_core": 13,
+    "coverage": 0.4783,
+    "regime": "standard",
+    "file": "spambase@grow-batch-8.html"
   },
   {
     "dataset": "synthetic:comp2-noisy-8k",
@@ -82,6 +142,18 @@
     "coverage": 0.6702,
     "regime": "standard",
     "file": "synthetic_comp3-noisy-8k.html"
+  },
+  {
+    "dataset": "taiwan_credit",
+    "task": "classification",
+    "n": 30000,
+    "d": 24,
+    "fidelity": 0.16742681130435222,
+    "ratio": 0.8605,
+    "n_core": 2,
+    "coverage": 0.0967,
+    "regime": "standard",
+    "file": "taiwan_credit.html"
   },
   {
     "dataset": "tictactoe",
@@ -118,77 +190,5 @@
     "coverage": 2.8975,
     "regime": "below stability power floor (n < 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A)",
     "file": "zoo.html"
-  },
-  {
-    "dataset": "morpher",
-    "task": "classification",
-    "n": 10195,
-    "d": 38,
-    "fidelity": 0.8784486522286448,
-    "ratio": 0.9935,
-    "n_core": 3,
-    "coverage": 0.1456,
-    "regime": "standard",
-    "file": "morpher.html"
-  },
-  {
-    "dataset": "morpher@grow-batch-8",
-    "task": "classification",
-    "n": 10195,
-    "d": 38,
-    "fidelity": 0.8784486522286448,
-    "ratio": 0.9935,
-    "n_core": 3,
-    "coverage": 0.1456,
-    "regime": "standard",
-    "file": "morpher@grow-batch-8.html"
-  },
-  {
-    "dataset": "spambase",
-    "task": "classification",
-    "n": 4601,
-    "d": 57,
-    "fidelity": 0.7789854178413917,
-    "ratio": 0.942,
-    "n_core": 13,
-    "coverage": 0.4789,
-    "regime": "standard",
-    "file": "spambase.html"
-  },
-  {
-    "dataset": "spambase@grow-batch-8",
-    "task": "classification",
-    "n": 4601,
-    "d": 57,
-    "fidelity": 0.7775668411489033,
-    "ratio": 0.9403,
-    "n_core": 13,
-    "coverage": 0.4783,
-    "regime": "standard",
-    "file": "spambase@grow-batch-8.html"
-  },
-  {
-    "dataset": "german_credit",
-    "task": "classification",
-    "n": 1000,
-    "d": 49,
-    "fidelity": 0.1944305941159159,
-    "ratio": 0.9862,
-    "n_core": 3,
-    "coverage": 0.0909,
-    "regime": "below stability power floor (n < 2000): Pi/pi reported per concept; unit-level stability is not certifiable at this sample size (owner decision 2026-08-22, option A)",
-    "file": "german_credit.html"
-  },
-  {
-    "dataset": "taiwan_credit",
-    "task": "classification",
-    "n": 30000,
-    "d": 24,
-    "fidelity": 0.16742681130435222,
-    "ratio": 0.8605,
-    "n_core": 2,
-    "coverage": 0.0967,
-    "regime": "standard",
-    "file": "taiwan_credit.html"
   }
 ]
