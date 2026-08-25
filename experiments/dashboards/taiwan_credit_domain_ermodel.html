@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>taiwan_credit — domain relational model</title>
+<style>
+:root {
+  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#8b8983;
+  --grid:#e3e2db; --ring:rgba(11,11,11,.10); --wash:rgba(42,120,214,.08);
+  --core:#1baf7a; --coreink:#0d7a54; --corewash:rgba(27,175,122,.12);
+  --peri:#9a988f; --periwash:rgba(154,152,143,.12);
+  --accent:#2a78d6; --warn:#eb6834; --good:#0ca30c;
+  --edge:#b9b8ae;
+}
+@media (prefers-color-scheme: dark) { :root:where(:not([data-theme="light"])) {
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c8c7bd; --muted:#8b8983;
+  --grid:#2c2c2a; --ring:rgba(255,255,255,.11); --wash:rgba(57,135,229,.14);
+  --core:#199e70; --coreink:#5fd3a6; --corewash:rgba(25,158,112,.16);
+  --peri:#6f6e67; --periwash:rgba(120,118,110,.16);
+  --accent:#3987e5; --warn:#d95926; --good:#3fb23f; --edge:#55554e; } }
+:root[data-theme="dark"] {
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c8c7bd; --muted:#8b8983;
+  --grid:#2c2c2a; --ring:rgba(255,255,255,.11); --wash:rgba(57,135,229,.14);
+  --core:#199e70; --coreink:#5fd3a6; --corewash:rgba(25,158,112,.16);
+  --peri:#6f6e67; --periwash:rgba(120,118,110,.16);
+  --accent:#3987e5; --warn:#d95926; --good:#3fb23f; --edge:#55554e; }
+* { box-sizing:border-box; }
+body { background:var(--page); color:var(--ink); margin:0;
+  font:14px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; }
+a { color:var(--accent); }
+.wrap { max-width:1180px; margin:0 auto; padding:20px 20px 64px; }
+.top { display:flex; align-items:flex-start; gap:16px; flex-wrap:wrap;
+  border-bottom:1px solid var(--ring); padding-bottom:14px; margin-bottom:18px; }
+.top h1 { font-size:20px; margin:0 0 3px; }
+.top .sub { font-size:12.5px; color:var(--muted); }
+.back { font-size:12.5px; }
+.stats { display:flex; gap:22px; margin-left:auto; flex-wrap:wrap; }
+.stat { text-align:right; }
+.stat .v { font-size:19px; font-weight:650; font-variant-numeric:tabular-nums; }
+.stat .l { font-size:10.5px; color:var(--muted); text-transform:uppercase;
+  letter-spacing:.04em; }
+.pill { display:inline-block; font-size:11px; font-weight:700; padding:2px 9px;
+  border-radius:11px; letter-spacing:.03em; }
+.pill.core { background:var(--corewash); color:var(--coreink); }
+.pill.peri { background:var(--periwash); color:var(--ink2); }
+.pill.warn { background:color-mix(in srgb,var(--warn) 15%,transparent); color:var(--warn); }
+.pill.ok   { background:color-mix(in srgb,var(--good) 14%,transparent); color:var(--good); }
+.card { background:var(--surface); border:1px solid var(--ring); border-radius:10px;
+  padding:15px 17px; margin:16px 0; }
+.card h2 { font-size:14px; margin:0 0 3px; display:flex; gap:9px; align-items:center;
+  flex-wrap:wrap; }
+.card .note { font-size:12px; color:var(--muted); margin:2px 0 12px; line-height:1.5; }
+.layerbar { display:flex; gap:0; height:5px; border-radius:3px; overflow:hidden;
+  margin:4px 0 2px; background:var(--grid); }
+.dagcard { padding:0; overflow:hidden; }
+.daghdr { display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:12px 15px 10px; border-bottom:1px solid var(--ring); }
+.daghdr h2 { margin:0; }
+.seg { display:inline-flex; border:1px solid var(--grid); border-radius:7px; overflow:hidden; }
+.seg button { border:none; border-radius:0; padding:4px 11px; background:var(--surface);
+  color:var(--ink2); font-size:12px; cursor:pointer; }
+.seg button.on { background:var(--accent); color:#fff; }
+.ctrls { display:flex; gap:7px; align-items:center; flex-wrap:wrap; margin-left:auto; }
+.ctrls button, .ctrls label { font-size:12px; background:var(--surface); color:var(--ink);
+  border:1px solid var(--grid); border-radius:6px; padding:3px 9px; cursor:pointer; }
+.ctrls label { display:inline-flex; align-items:center; gap:5px; }
+.dagbody { display:grid; grid-template-columns:1fr 300px; }
+@media (max-width:820px){ .dagbody { grid-template-columns:1fr; } }
+.dagwrap { position:relative; height:540px; background:var(--page);
+  border-right:1px solid var(--ring); overflow:hidden; }
+.dagwrap svg { width:100%; height:100%; display:block; cursor:grab; }
+.dagwrap svg:active { cursor:grabbing; }
+.legend { position:absolute; left:12px; bottom:10px; display:flex; gap:13px;
+  flex-wrap:wrap; font-size:11px; color:var(--ink2);
+  background:color-mix(in srgb,var(--surface) 84%,transparent);
+  padding:4px 9px; border-radius:6px; }
+.legend i { width:11px; height:11px; border-radius:3px; display:inline-block;
+  vertical-align:-1px; margin-right:4px; }
+.detail { padding:14px 15px; min-height:0; overflow-y:auto; max-height:540px; }
+.detail .empty { color:var(--muted); font-size:12.5px; line-height:1.6; }
+.detail h3 { margin:0 0 2px; font-size:14px; word-break:break-word; }
+.detail .did { font-size:11px; color:var(--muted); font-family:ui-monospace,monospace; }
+.detail dl { display:grid; grid-template-columns:92px 1fr; gap:3px 10px;
+  margin:11px 0 4px; font-size:12.5px; font-variant-numeric:tabular-nums; }
+.detail dt { color:var(--muted); } .detail dd { margin:0; }
+.detail .chips { margin-top:9px; }
+.chip { display:inline-block; font-size:10.5px; border:1px solid var(--grid);
+  border-radius:10px; padding:1px 8px; margin:2px 3px 0 0; color:var(--ink2); }
+.chip.r { border-color:color-mix(in srgb,var(--warn) 45%,var(--grid));
+  color:var(--warn); }
+table.t { border-collapse:collapse; width:100%; font-size:12.5px;
+  font-variant-numeric:tabular-nums; }
+table.t th, table.t td { text-align:left; padding:5px 12px 5px 0;
+  border-top:1px solid var(--grid); vertical-align:top; }
+table.t th { color:var(--muted); font-weight:600; border-top:none;
+  font-size:11px; text-transform:uppercase; letter-spacing:.03em; }
+table.t td.num, table.t th.num { text-align:right; }
+.sharebar { display:inline-block; height:9px; border-radius:2px;
+  background:var(--accent); vertical-align:0; min-width:1px; }
+.grp { font-size:12px; color:var(--ink2); margin:2px 0; }
+.grp b { color:var(--ink); font-weight:600; }
+.bars { display:grid; gap:5px; margin-top:4px; }
+.bars .row { display:flex; gap:9px; align-items:baseline; font-size:12.5px; }
+.bars .row .u { min-width:150px; color:var(--ink2); }
+.bars .row.pass .u::before { content:"\2713 "; color:var(--good); }
+.bars .row.fail .u::before { content:"\2717 "; color:var(--warn); }
+#tip { position:fixed; pointer-events:none; background:var(--surface); color:var(--ink);
+  border:1px solid var(--ring); border-radius:8px; padding:8px 11px; font-size:12px;
+  box-shadow:0 4px 18px rgba(0,0,0,.18); opacity:0; z-index:30; max-width:300px;
+  transition:opacity .08s; }
+#tip h4 { margin:0 0 3px; font-size:12.5px; }
+#tip .m { font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.foot { font-size:11.5px; color:var(--muted); margin-top:26px; line-height:1.6;
+  border-top:1px solid var(--ring); padding-top:12px; }
+
+.erwrap { background:var(--page); border:1px solid var(--ring); border-radius:10px;
+  padding:14px; overflow-x:auto; }
+.lg { display:flex; gap:16px; flex-wrap:wrap; font-size:11.5px; color:var(--ink2); margin:10px 0; }
+</style></head><body><div class="wrap">
+  <div class="top"><div><h1>Taiwan Credit — domain relational model</h1>
+    <div class="sub">consumer credit default · one flat ML row = one CLIENT with a 6-month repeating statement group (normalised here)</div></div></div>
+  <div class="erwrap"><svg viewBox="0 0 1180 520" style="width:100%;height:auto"><path d="M165.0 175 C 165.0 175, 165.0 300, 165.0 300" fill="none" stroke="var(--edge)" stroke-width="1.4"/><line x1="171.0" y1="182" x2="159.0" y2="182" stroke="var(--ink2)" stroke-width="1.4"/><line x1="165.0" y1="300" x2="158.0" y2="289" stroke="var(--ink2)" stroke-width="1.2"/><line x1="165.0" y1="300" x2="165.0" y2="289" stroke="var(--ink2)" stroke-width="1.2"/><line x1="165.0" y1="300" x2="172.0" y2="289" stroke="var(--ink2)" stroke-width="1.2"/><rect x="145.5" y="229.5" width="39.0" height="16" rx="3" fill="var(--surface)" stroke="var(--ring)"/><text x="165.0" y="241.0" text-anchor="middle" style="font:10px system-ui;fill:var(--ink2)">holds</text><path d="M290 348.5 C 365.0 348.5, 365.0 227.0, 440 227.0" fill="none" stroke="var(--edge)" stroke-width="1.4"/><line x1="297" y1="342.5" x2="297" y2="354.5" stroke="var(--ink2)" stroke-width="1.4"/><line x1="440" y1="227.0" x2="429" y2="234.0" stroke="var(--ink2)" stroke-width="1.2"/><line x1="440" y1="227.0" x2="429" y2="227.0" stroke="var(--ink2)" stroke-width="1.2"/><line x1="440" y1="227.0" x2="429" y2="220.0" stroke="var(--ink2)" stroke-width="1.2"/><rect x="311.4" y="279.75" width="107.2" height="16" rx="3" fill="var(--surface)" stroke="var(--ring)"/><text x="365.0" y="291.25" text-anchor="middle" style="font:10px system-ui;fill:var(--ink2)">has monthly (×6)</text><path d="M290 348.5 C 570.0 348.5, 570.0 249.0, 850 249.0" fill="none" stroke="var(--edge)" stroke-width="1.4"/><line x1="297" y1="342.5" x2="297" y2="354.5" stroke="var(--ink2)" stroke-width="1.4"/><line x1="843" y1="255.0" x2="843" y2="243.0" stroke="var(--ink2)" stroke-width="1.4"/><rect x="535.0" y="290.75" width="70.0" height="16" rx="3" fill="var(--surface)" stroke="var(--ring)"/><text x="570.0" y="302.25" text-anchor="middle" style="font:10px system-ui;fill:var(--ink2)">results in</text><rect x="40" y="40" width="250" height="135" rx="7" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.6"/><rect x="40" y="40" width="250" height="34" rx="7" fill="var(--accent)" fill-opacity="0.14"/><text x="50" y="55" style="font:12px system-ui;font-weight:700;fill:var(--ink)">CLIENT</text><text x="50" y="67" style="font:8.5px system-ui;fill:var(--muted)">the borrower · demographics</text><text x="48" y="87" style="font:8px system-ui;font-weight:700;fill:var(--accent)">PK</text><text x="72" y="87" style="font:10px ui-monospace,monospace;fill:var(--ink2)">client_id</text><text x="72" y="106" style="font:10px ui-monospace,monospace;fill:var(--ink2)">sex</text><text x="282" y="106" text-anchor="end" style="font:8.5px system-ui;fill:var(--muted)">protected</text><line x1="40" y1="93" x2="290" y2="93" stroke="var(--grid)"/><text x="72" y="125" style="font:10px ui-monospace,monospace;fill:var(--ink2)">age</text><text x="282" y="125" text-anchor="end" style="font:8.5px system-ui;fill:var(--muted)">protected</text><line x1="40" y1="112" x2="290" y2="112" stroke="var(--grid)"/><text x="72" y="144" style="font:10px ui-monospace,monospace;fill:var(--ink2)">education</text><line x1="40" y1="131" x2="290" y2="131" stroke="var(--grid)"/><text x="72" y="163" style="font:10px ui-monospace,monospace;fill:var(--ink2)">marital_status</text><text x="282" y="163" text-anchor="end" style="font:8.5px system-ui;fill:var(--muted)">protected</text><line x1="40" y1="150" x2="290" y2="150" stroke="var(--grid)"/><rect x="40" y="300" width="250" height="97" rx="7" fill="var(--surface)" stroke="var(--core)" stroke-width="1.6"/><rect x="40" y="300" width="250" height="34" rx="7" fill="var(--core)" fill-opacity="0.14"/><text x="50" y="315" style="font:12px system-ui;font-weight:700;fill:var(--ink)">CREDIT_ACCOUNT</text><text x="50" y="327" style="font:8.5px system-ui;fill:var(--muted)">the credit line</text><text x="48" y="347" style="font:8px system-ui;font-weight:700;fill:var(--accent)">PK</text><text x="72" y="347" style="font:10px ui-monospace,monospace;fill:var(--ink2)">account_id</text><text x="48" y="366" style="font:8px system-ui;font-weight:700;fill:var(--warn)">FK</text><text x="72" y="366" style="font:10px ui-monospace,monospace;fill:var(--ink2)">client_id</text><line x1="40" y1="353" x2="290" y2="353" stroke="var(--grid)"/><text x="72" y="385" style="font:10px ui-monospace,monospace;fill:var(--ink2)">credit_limit</text><text x="282" y="385" text-anchor="end" style="font:8.5px system-ui;fill:var(--muted)">= LIMIT_BAL</text><line x1="40" y1="372" x2="290" y2="372" stroke="var(--grid)"/><rect x="440" y="150" width="290" height="154" rx="7" fill="var(--surface)" stroke="var(--warn)" stroke-width="1.6"/><rect x="440" y="150" width="290" height="34" rx="7" fill="var(--warn)" fill-opacity="0.14"/><text x="450" y="165" style="font:12px system-ui;font-weight:700;fill:var(--ink)">MONTHLY_STATEMENT</text><text x="450" y="177" style="font:8.5px system-ui;fill:var(--muted)">repeating group — 6 months / account</text><text x="448" y="197" style="font:8px system-ui;font-weight:700;fill:var(--accent)">PK</text><text x="472" y="197" style="font:10px ui-monospace,monospace;fill:var(--ink2)">statement_id</text><text x="448" y="216" style="font:8px system-ui;font-weight:700;fill:var(--warn)">FK</text><text x="472" y="216" style="font:10px ui-monospace,monospace;fill:var(--ink2)">account_id</text><line x1="440" y1="203" x2="730" y2="203" stroke="var(--grid)"/><text x="472" y="235" style="font:10px ui-monospace,monospace;fill:var(--ink2)">month_offset</text><text x="722" y="235" text-anchor="end" style="font:8.5px system-ui;fill:var(--muted)">0=recent … 5</text><line x1="440" y1="222" x2="730" y2="222" stroke="var(--grid)"/><text x="472" y="254" style="font:10px ui-monospace,monospace;fill:var(--ink2)">repayment_status</text><text x="722" y="254" text-anchor="end" style="font:8.5px system-ui;fill:var(--muted)">= PAY_0..6</text><line x1="440" y1="241" x2="730" y2="241" stroke="var(--grid)"/><text x="472" y="273" style="font:10px ui-monospace,monospace;fill:var(--ink2)">bill_amount</text><text x="722" y="273" text-anchor="end" style="font:8.5px system-ui;fill:var(--muted)">= BILL_AMT*</text><line x1="440" y1="260" x2="730" y2="260" stroke="var(--grid)"/><text x="472" y="292" style="font:10px ui-monospace,monospace;fill:var(--ink2)">payment_amount</text><text x="722" y="292" text-anchor="end" style="font:8.5px system-ui;fill:var(--muted)">= PAY_AMT*</text><line x1="440" y1="279" x2="730" y2="279" stroke="var(--grid)"/><rect x="850" y="210" width="250" height="78" rx="7" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.6"/><rect x="850" y="210" width="250" height="34" rx="7" fill="var(--accent)" fill-opacity="0.14"/><text x="860" y="225" style="font:12px system-ui;font-weight:700;fill:var(--ink)">DEFAULT_OUTCOME</text><text x="860" y="237" style="font:8.5px system-ui;fill:var(--muted)">the label</text><text x="858" y="257" style="font:8px system-ui;font-weight:700;fill:var(--warn)">FK</text><text x="882" y="257" style="font:10px ui-monospace,monospace;fill:var(--ink2)">account_id</text><text x="858" y="276" style="font:8px system-ui;font-weight:700;fill:var(--core)">▶</text><text x="882" y="276" style="font:10px ui-monospace,monospace;fill:var(--ink2)">defaulted_next_month</text><text x="1092" y="276" text-anchor="end" style="font:8.5px system-ui;fill:var(--core)">TARGET</text><line x1="850" y1="263" x2="1100" y2="263" stroke="var(--grid)"/></svg></div>
+  <div class="lg">
+    <span><b>PK</b> primary key · <b>FK</b> foreign key · <b style="color:var(--core)">▶</b> target</span>
+    <span>crow's foot = “many”, bar = “one”</span>
+    <span><b style="color:var(--accent)">blue</b> fact/target · <b style="color:var(--core)">green</b> dimension ·
+      <b style="color:var(--warn)">amber</b> repeating-group child</span>
+  </div>
+  <div class="card"><h2>How this was derived</h2>
+    <div class="note">The flat ML table has one row per observation. The load-bearing
+      structure was derived from the column semantics: repeating indexed column groups
+      (PAY_0..6, BILL_AMT1..6, PAY_AMT1..6 for Taiwan) are a <b>repeating group</b> ⇒ a child
+      table (MONTHLY_STATEMENT). Bike's columns split cleanly into a calendar dimension, a
+      weather lookup, and per-hour measures ⇒ a star schema. Domain knowledge supplies the
+      entity names; the normalisation is what makes the certified collinearity findings
+      <i>legible</i> — they fall out of the domain structure.</div></div>
+  <div class="card"><h2>Certified findings → domain model</h2><div class="note">Where each certified result lives in the domain schema — and why the collinearity groups exist.</div><table class="t"><thead><tr><th>certified finding</th><th>domain mapping</th></tr></thead><tbody><tr><td style="white-space:nowrap"><b>PAY_0 — dominant certified driver (Π=1.0)</b></td><td>MONTHLY_STATEMENT.repayment_status at month_offset=0 (the most recent month). The decision reliably flows through the latest repayment behaviour.</td></tr><tr><td style="white-space:nowrap"><b>LIMIT_BAL — 2nd certified driver</b></td><td>CREDIT_ACCOUNT.credit_limit — a per-account attribute.</td></tr><tr><td style="white-space:nowrap"><b>Collinearity groups {PAY_3,PAY_4}, {BILL_AMT1..4}, {BILL_AMT5,6}</b></td><td>adjacent rows of the SAME MONTHLY_STATEMENT time series — serial correlation is a DOMAIN consequence of the repeating group, which is exactly why the certified PAY_3 term is physically carried by units reading PAY_0/PAY_2/PAY_4.</td></tr><tr><td style="white-space:nowrap"><b>Protected non-reliance (SEX, AGE, MARRIAGE)</b></td><td>the CLIENT demographic attributes — none appears in a certified component (and none is a proxy): the decision structure lives on the ACCOUNT/STATEMENT, not the CLIENT.</td></tr></tbody></table></div>
+  <div class="foot">Domain-specific relational model (the real-world entities), distinct from
+    the certified-structure meta-model in <code>taiwan_credit_ermodel.html</code>.</div>
+</div></body></html>
