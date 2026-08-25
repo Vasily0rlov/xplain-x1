@@ -38,7 +38,7 @@ everything else is labelled periphery, never certified.
 | Performance and limits (fidelity vs ceiling, accuracy, restart spread) | outcomes analysis; benchmarking | Art 15 accuracy |
 | Statistical certification (Π, π, E[V], universe, assumptions) | ongoing monitoring; effective challenge | Art 9 risk management; Art 15 robustness |
 | Certified function components (Layer F) | model theory / variable roles | Art 13 transparency |
-| **Protected-attribute non-reliance** | fair-lending / disparate-impact review | Art 10 data governance / bias |
+| **Protected-attribute non-reliance + proxy screen** | fair-lending / disparate-impact review | Art 10 data governance / bias |
 | Portfolio reliance (Layer R) | sensitivity analysis | Art 15 robustness |
 | Non-claims | model limitations; use constraints | Art 13 limitations disclosure |
 
@@ -59,11 +59,14 @@ Please assess each and note where the certificate is sufficient / insufficient:
 1. **Faithfulness.** Do you accept that certifying the *model's own function*
    (rather than a surrogate) is the right object for reliance, and that the
    purified-component decomposition is a defensible variable-role account?
-2. **Non-reliance.** Is the protected-attribute non-reliance statement, as framed
-   (no *certified* component relies on the attribute; periphery appearances
-   disclosed), sufficient for a fair-lending file? What would you additionally
-   require — e.g. proxy/redundant-encoding analysis, outcome-level disparate
-   impact, intersectional checks?
+2. **Non-reliance + proxy.** The certificate now makes two claims: (i) no
+   *certified* component relies directly on a protected attribute, and (ii) a
+   **proxy screen** — no certified driver correlates with a protected attribute
+   above a |ρ|=0.30 screen (Taiwan max 0.186, German 0.183). Is this pair
+   sufficient for a fair-lending file? What would you *additionally* require —
+   e.g. outcome-level disparate impact, intersectional (joint) proxies, a
+   multivariate reconstruction test rather than pairwise ρ, or a lower screen
+   threshold?
 3. **The FDR bound.** Is E[V] (expected number of false certified components)
    over the declared structure-level universe a statistic your framework can use,
    and is the exchangeability assumption (stated in the certificate) acceptable
@@ -81,10 +84,12 @@ Please assess each and note where the certificate is sufficient / insufficient:
 - These are **public benchmark datasets**, not a lender's production data; the
   purpose is to exercise the certificate format, not to validate a deployable
   model. Absolute accuracy is benchmark-limited.
-- Non-reliance is asserted at the level of **certified components**; it does not
-  by itself rule out reliance via an *unmeasured proxy* (a legitimate reviewer
-  request — see Q2). Protected attributes were kept as visible predicates
-  precisely so this analysis is possible.
+- Non-reliance is asserted at the level of **certified components**, now
+  accompanied by a **pairwise proxy screen** (|Spearman ρ| of each certified
+  driver vs each protected column). The screen is *pairwise and linear-rank*: it
+  would not catch a proxy that only emerges from a *combination* of drivers, or a
+  strongly non-monotone relationship (see Q2). Protected attributes were kept as
+  visible predicates precisely so both analyses are possible.
 - The certificate certifies *stable, real structure*, **not causal mechanism**
   and **not fitness for a specific decision** (see the certificate's Non-claims).
 - No reason-code / adverse-action-notice generation is included yet (a known gap
