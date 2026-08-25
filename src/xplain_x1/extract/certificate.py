@@ -61,11 +61,58 @@ def _protected_reliance(cert: dict, ds: Dataset) -> dict:
                if not any_certified else
                "WARNING: at least one protected attribute appears in a certified "
                "component — review required.")
+    proxy = _proxy_reliance(cert, ds, protected)
     return {"declared": protected, "rows": rows,
             "relies_on_protected": any_certified, "verdict": verdict,
+            "proxy": proxy,
             "basis": "certified Layer-F components under the declared measure; "
                      "FDR-bounded (E[V]).  Absence here is a certified "
                      "non-reliance statement, not a post-hoc approximation."}
+
+
+def _proxy_reliance(cert: dict, ds: Dataset, protected: list) -> dict:
+    """Indirect-reliance screen: could a CERTIFIED driver act as a PROXY for a
+    protected attribute?  For each certified-component driver feature, report the
+    strongest rank correlation (|Spearman ρ| on the data) to any protected-
+    attribute column.  Direct non-reliance does not by itself rule out proxy
+    encoding (the standard fair-lending follow-up); this quantifies it."""
+    from scipy.stats import spearmanr
+    fn = ds.feature_names
+    idx = {n: i for i, n in enumerate(fn)}
+    prot_cols = {p: [i for i, n in enumerate(fn) if p.lower() in n.lower()]
+                 for p in protected}
+    core = [c for c in cert.get("components", []) if c.get("label") == "CORE"]
+    drivers = sorted({s for c in core for s in c.get("support_names", [])})
+    NOTABLE, STRONG = 0.3, 0.5
+    rows, overall = [], 0.0
+    for drv in drivers:
+        di = idx.get(drv)
+        if di is None:
+            continue
+        best_r, best_p = 0.0, None
+        for p, cols in prot_cols.items():
+            for ci in cols:
+                r = spearmanr(ds.X[:, di], ds.X[:, ci]).correlation
+                r = abs(float(r)) if r == r else 0.0     # NaN guard
+                if r > best_r:
+                    best_r, best_p = r, p
+        overall = max(overall, best_r)
+        rows.append({"driver": drv, "max_rho": round(best_r, 3),
+                     "nearest_protected": best_p,
+                     "flag": ("strong" if best_r >= STRONG
+                              else "notable" if best_r >= NOTABLE else "weak")})
+    flag = ("strong" if overall >= STRONG else "notable" if overall >= NOTABLE
+            else "none")
+    verdict = (f"No certified driver is a strong or notable proxy for a protected "
+               f"attribute (max |ρ| = {overall:.3f}, below the 0.30 screen)."
+               if flag == "none" else
+               f"At least one certified driver correlates with a protected "
+               f"attribute at |ρ| = {overall:.3f} ({flag}) — proxy review required.")
+    return {"drivers": rows, "max_rho": round(overall, 3), "flag": flag,
+            "verdict": verdict,
+            "method": "|Spearman ρ| of each certified driver vs each protected-"
+                      "attribute column on the full dataset; screen thresholds "
+                      "notable 0.30 / strong 0.50."}
 
 
 def build_certificate(cert: dict, ds: Dataset, splits: Splits, cfg: dict,
@@ -230,6 +277,16 @@ def render_markdown(cert_doc: dict) -> str:
                 f"{'YES' if r['certified_component'] else 'no'} | {r['max_share']:.4f} | "
                 f"{r['status']} |")
         lines += ["", f"*Basis: {par['basis']}*"]
+        px = par.get("proxy", {})
+        if px.get("drivers"):
+            lines += ["", "### Proxy screen (indirect reliance)",
+                      f"**{px['verdict']}**", "",
+                      "| certified driver | nearest protected attr | max \\|ρ\\| | flag |",
+                      "|---|---|---|---|"]
+            for r in sorted(px["drivers"], key=lambda r: -r["max_rho"]):
+                lines.append(f"| {r['driver']} | {r['nearest_protected']} | "
+                             f"{r['max_rho']:.3f} | {r['flag']} |")
+            lines += ["", f"*Method: {px['method']}*"]
     rel = cert_doc.get("portfolio_reliance", [])
     if rel:
         lines += ["", "## Portfolio reliance (Layer R — every restart relies on)",

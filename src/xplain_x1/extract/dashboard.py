@@ -578,6 +578,26 @@ def _protected_block(par: dict) -> str:
             f'<td>{"YES" if r["certified_component"] else "no"}</td>'
             f'<td class="num">{r["max_share"]:.4f}</td>'
             f'<td><span class="pill {cls}">{_esc(stat)}</span></td></tr>')
+    px = par.get("proxy", {})
+    proxy_html = ""
+    if px.get("drivers"):
+        ppill = "ok" if px.get("flag") == "none" else "warn"
+        prows = []
+        for r in sorted(px["drivers"], key=lambda r: -r["max_rho"]):
+            fcls = {"strong": "warn", "notable": "warn"}.get(r["flag"], "ok")
+            prows.append(
+                f'<tr><td>{_esc(r["driver"])}</td>'
+                f'<td>{_esc(r["nearest_protected"])}</td>'
+                f'<td class="num">{r["max_rho"]:.3f}</td>'
+                f'<td><span class="pill {fcls}">{_esc(r["flag"])}</span></td></tr>')
+        proxy_html = f"""
+    <h2 style="margin-top:16px;font-size:13px">Proxy screen (indirect reliance)
+      <span class="pill {ppill}">max |ρ| {px.get('max_rho',0):.3f} · {_esc(px.get('flag',''))}</span></h2>
+    <div class="note">{_esc(px.get('verdict',''))}</div>
+    <table class="t"><thead><tr><th>certified driver</th><th>nearest protected</th>
+      <th class="num">max |ρ|</th><th>flag</th></tr></thead>
+      <tbody>{''.join(prows)}</tbody></table>
+    <div class="note" style="margin-top:6px">{_esc(px.get('method',''))}</div>"""
     return f"""
   <div class="card">
     <h2>Protected-attribute non-reliance <span class="pill {pill}">{verdict_word}</span>
@@ -587,6 +607,7 @@ def _protected_block(par: dict) -> str:
       <th>certified?</th><th class="num">max share</th><th>status</th></tr></thead>
       <tbody>{''.join(rows)}</tbody></table>
     <div class="note" style="margin-top:8px">{_esc(par.get('basis',''))}</div>
+    {proxy_html}
   </div>"""
 
 
