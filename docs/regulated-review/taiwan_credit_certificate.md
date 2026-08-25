@@ -45,6 +45,16 @@ reconstruction R² 0.8936 · E[V] <= 0.0235
 
 *Basis: certified Layer-F components under the declared measure; FDR-bounded (E[V]).  Absence here is a certified non-reliance statement, not a post-hoc approximation.*
 
+### Proxy screen (indirect reliance)
+**No certified driver is a strong or notable proxy for a protected attribute (max |ρ| = 0.186, below the 0.30 screen).**
+
+| certified driver | nearest protected attr | max \|ρ\| | flag |
+|---|---|---|---|
+| LIMIT_BAL | AGE | 0.186 | weak |
+| PAY_0 | AGE | 0.064 | weak |
+
+*Method: |Spearman ρ| of each certified driver vs each protected-attribute column on the full dataset; screen thresholds notable 0.30 / strong 0.50.*
+
 ## Portfolio reliance (Layer R — every restart relies on)
 | group | min reliance | max |
 |---|---|---|

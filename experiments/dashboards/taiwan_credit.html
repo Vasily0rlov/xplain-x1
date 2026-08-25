@@ -187,6 +187,14 @@ table.t td.num, table.t th.num { text-align:right; }
       <th>certified?</th><th class="num">max share</th><th>status</th></tr></thead>
       <tbody><tr><td>SEX</td><td>no</td><td>no</td><td class="num">0.0000</td><td><span class="pill ok">absent from decomposition</span></td></tr><tr><td>AGE</td><td>yes</td><td>no</td><td class="num">0.0000</td><td><span class="pill peri">labelled periphery only</span></td></tr><tr><td>MARRIAGE</td><td>yes</td><td>no</td><td class="num">0.0000</td><td><span class="pill peri">labelled periphery only</span></td></tr></tbody></table>
     <div class="note" style="margin-top:8px">certified Layer-F components under the declared measure; FDR-bounded (E[V]).  Absence here is a certified non-reliance statement, not a post-hoc approximation.</div>
+    
+    <h2 style="margin-top:16px;font-size:13px">Proxy screen (indirect reliance)
+      <span class="pill ok">max |ρ| 0.186 · none</span></h2>
+    <div class="note">No certified driver is a strong or notable proxy for a protected attribute (max |ρ| = 0.186, below the 0.30 screen).</div>
+    <table class="t"><thead><tr><th>certified driver</th><th>nearest protected</th>
+      <th class="num">max |ρ|</th><th>flag</th></tr></thead>
+      <tbody><tr><td>LIMIT_BAL</td><td>AGE</td><td class="num">0.186</td><td><span class="pill ok">weak</span></td></tr><tr><td>PAY_0</td><td>AGE</td><td class="num">0.064</td><td><span class="pill ok">weak</span></td></tr></tbody></table>
+    <div class="note" style="margin-top:6px">|Spearman ρ| of each certified driver vs each protected-attribute column on the full dataset; screen thresholds notable 0.30 / strong 0.50.</div>
   </div>
 
   <div class="card">
