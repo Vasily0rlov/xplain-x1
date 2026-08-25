@@ -529,7 +529,44 @@ d=57 screen did not strain — the practical dimensionality ceiling is higher th
 the MVL alone showed.  Two datasets, two orthogonal stressors (sparsity, then
 dimensionality), honesty layer intact throughout.
 
-### E8.3 — hour-interaction partner stability (weekday vs workingday), 2026-08-24
+### Regulated credit datasets — the first genuinely regulated deliverables, 2026-08-24
+
+Owner decision (roadmap #5): produce the audit deliverable on a genuinely
+regulated decision domain.  Two credit-risk datasets (branch
+`feat/regulated-credit`): **taiwan_credit** (30,000 real bank clients, default
+next month — EU AI Act Annex III creditworthiness / SR 11-7 core scope;
+full-power regime) and **german_credit** (credit-g, n=1,000 — the canonical
+benchmark; small-n regime by design).  Protected attributes (SEX, MARRIAGE,
+AGE) deliberately kept visible as explicit predicates for fair-lending review.
+
+**Taiwan (flagship, full certificate):** fid 0.167 vs ceiling 0.195 (ratio
+0.861), test accuracy 0.823, minimal [4]-unit model, E[V] ≤ 0.04.
+- **`PAY_0` (most recent repayment status) certifies as THE dominant driver
+  (Π=1.0, π=1.0)** — exactly the literature's known answer; `LIMIT_BAL` second
+  (Π=1.0).  Older repayment lags (PAY_3) land in the labelled periphery.
+- **Fair-lending finding: protected attributes certify NOTHING.**  SEX and AGE
+  are absent from the decomposition entirely; MARRIAGE=single appears at share
+  0.000 periphery.  The certificate can state affirmatively: the model's
+  certified decision structure relies on repayment behaviour and credit limit,
+  not on sex, age, or marital status — an auditable non-reliance statement the
+  black-box + SHAP stack cannot make with FDR backing.
+- Low absolute pseudo-R² (~0.17–0.20 even for HGB) is the domain's known
+  irreducible noise; the certificate reports it honestly (accuracy 0.82).
+  Ratio 0.861 is below the 0.98 neutrality bar — diffuse-frontier territory
+  (like adult), recorded as such.
+
+**German (companion, small-n regime label as designed):** fid 0.194 vs ceiling
+0.197 (ratio **0.986**), [8] units.  3 CORE: `checking_status=no checking`
+(Π=1.0, π=1.0) · `credit_history=critical/other existing` (Π=1.0) · `duration`
+(Π=0.875) — the classic Statlog triad, correct.  Savings/purpose/amount land in
+the honest periphery (unstable at n=1,000 half-samples).  No protected-attribute
+component certifies (age periphery-only).
+
+**Verdict:** the method produces domain-correct, expert-validatable certified
+structure on real credit data at both regimes, and — the practitioner headline —
+supports certified NON-reliance statements on protected attributes.  These two
+dashboards + certificates are the artifacts for external model-risk review
+(roadmap #6).
 
 Literature's canonical bike interaction is hour × **workingday**; our pipeline
 certifies hour × **weekday**.  Diagnostic: per restart (dev seeds 0–7, BOTH
