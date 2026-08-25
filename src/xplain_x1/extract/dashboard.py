@@ -562,6 +562,34 @@ def _routes_block(routes: dict) -> str:
         f'<tbody>{"".join(body)}</tbody></table>')
 
 
+def _protected_block(par: dict) -> str:
+    if not par.get("declared"):
+        return ""
+    relies = par.get("relies_on_protected")
+    pill = "warn" if relies else "ok"
+    verdict_word = "RELIES — review" if relies else "NON-RELIANCE"
+    rows = []
+    for r in par.get("rows", []):
+        stat = r["status"]
+        cls = "core" if r["certified_component"] else ("peri" if r["appears_in_decomposition"] else "ok")
+        rows.append(
+            f'<tr><td>{_esc(r["attribute"])}</td>'
+            f'<td>{"yes" if r["appears_in_decomposition"] else "no"}</td>'
+            f'<td>{"YES" if r["certified_component"] else "no"}</td>'
+            f'<td class="num">{r["max_share"]:.4f}</td>'
+            f'<td><span class="pill {cls}">{_esc(stat)}</span></td></tr>')
+    return f"""
+  <div class="card">
+    <h2>Protected-attribute non-reliance <span class="pill {pill}">{verdict_word}</span>
+      <span class="pill peri">fair lending · SR 11-7 / EU AI Act Art 10</span></h2>
+    <div class="note">{_esc(par.get('verdict',''))}</div>
+    <table class="t"><thead><tr><th>protected attribute</th><th>in decomposition?</th>
+      <th>certified?</th><th class="num">max share</th><th>status</th></tr></thead>
+      <tbody>{''.join(rows)}</tbody></table>
+    <div class="note" style="margin-top:8px">{_esc(par.get('basis',''))}</div>
+  </div>"""
+
+
 def _reliance_block(reliance: list[dict]) -> str:
     if not reliance:
         return '<div class="note">No reliance rows.</div>'
@@ -870,6 +898,8 @@ def render_dashboard(data: dict) -> str:
     <h2>Layer R — portfolio reliance</h2>
     {_reliance_block(reliance)}
   </div>
+
+  {_protected_block(cert.get('protected_attribute_reliance', {}))}
 
   <div class="card">
     <h2>Certificate summary</h2>

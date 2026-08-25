@@ -25,6 +25,49 @@ def honest_depth_statement(model: MaskedMLP, ds: Dataset, splits: Splits,
             "all_earned": all(l["earned"] for l in layers) if layers else True}
 
 
+def _protected_reliance(cert: dict, ds: Dataset) -> dict:
+    """Fair-lending / non-discrimination section (SR 11-7 fairness, EU AI Act
+    Art 10).  For each declared protected attribute (`ds.meta['protected']`),
+    report whether ANY certified function component relies on it.  The headline
+    is an FDR-backed *non-reliance* statement when none certify — a claim the
+    black-box + post-hoc-attribution stack cannot make with statistical
+    guarantees."""
+    protected = ds.meta.get("protected", [])
+    if not protected:
+        return {"declared": [], "note": "no protected attributes declared for "
+                "this dataset"}
+    comps = cert.get("components", [])
+    rows = []
+    any_certified = False
+    for attr in protected:
+        low = attr.lower()
+        hits = [c for c in comps
+                if any(low in s.lower() for s in c.get("support_names", []))]
+        certified = [c for c in hits if c.get("label") == "CORE"]
+        max_share = round(max([c.get("share_main", 0.0) for c in hits], default=0.0), 4)
+        if certified:
+            any_certified = True
+        rows.append({
+            "attribute": attr,
+            "appears_in_decomposition": bool(hits),
+            "certified_component": bool(certified),
+            "max_share": max_share,
+            "status": ("RELIES (certified component)" if certified
+                       else "labelled periphery only" if hits
+                       else "absent from decomposition")})
+    verdict = ("The model's certified decision structure does NOT rely on any "
+               "declared protected attribute: none appears in a certified "
+               "(CORE) function component."
+               if not any_certified else
+               "WARNING: at least one protected attribute appears in a certified "
+               "component — review required.")
+    return {"declared": protected, "rows": rows,
+            "relies_on_protected": any_certified, "verdict": verdict,
+            "basis": "certified Layer-F components under the declared measure; "
+                     "FDR-bounded (E[V]).  Absence here is a certified "
+                     "non-reliance statement, not a post-hoc approximation."}
+
+
 def build_certificate(cert: dict, ds: Dataset, splits: Splits, cfg: dict,
                       seed: int = 0) -> dict:
     model: MaskedMLP = cert["model"]
@@ -109,6 +152,7 @@ def build_certificate(cert: dict, ds: Dataset, splits: Splits, cfg: dict,
             "recon_r2": cert.get("fanova_r2"),
         },
         "portfolio_reliance": cert.get("reliance", []),   # P7 Layer R
+        "protected_attribute_reliance": _protected_reliance(cert, ds),
         "non_claims": [
             "CORE concepts are stable, real structures - not proven causal "
             "mechanisms of the world (M-C7).",
@@ -173,6 +217,19 @@ def render_markdown(cert_doc: dict) -> str:
                 f"{', '.join(c['group_names'])} | {c['share_main']:.3f} | "
                 f"{c['Pi']:.2f} | {c['pi']:.2f} | {c['label']}"
                 + (f" ({', '.join(c['reasons'])})" if c["reasons"] else "") + " |")
+    par = cert_doc.get("protected_attribute_reliance", {})
+    if par.get("declared"):
+        lines += ["", "## Protected-attribute non-reliance (fair lending — "
+                  "SR 11-7 fairness / EU AI Act Art 10)",
+                  f"**{par['verdict']}**", "",
+                  "| protected attribute | in decomposition? | certified? | max share | status |",
+                  "|---|---|---|---|---|"]
+        for r in par["rows"]:
+            lines.append(
+                f"| {r['attribute']} | {'yes' if r['appears_in_decomposition'] else 'no'} | "
+                f"{'YES' if r['certified_component'] else 'no'} | {r['max_share']:.4f} | "
+                f"{r['status']} |")
+        lines += ["", f"*Basis: {par['basis']}*"]
     rel = cert_doc.get("portfolio_reliance", [])
     if rel:
         lines += ["", "## Portfolio reliance (Layer R — every restart relies on)",

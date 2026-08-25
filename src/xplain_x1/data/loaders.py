@@ -358,6 +358,7 @@ def load_taiwan_credit() -> Dataset:
                          "domain": "consumer credit default (regulated: "
                                    "EU AI Act Annex III creditworthiness / SR 11-7)",
                          "known": "PAY_0 (most recent repayment status) dominates",
+                         "protected": ["SEX", "AGE", "MARRIAGE"],
                          "expected_depth": 1})
 
 
@@ -377,4 +378,5 @@ def load_german_credit() -> Dataset:
                                    "benchmark)",
                          "known": "checking_status dominates; duration, "
                                   "credit_amount, credit_history secondary",
+                         "protected": ["personal_status", "age", "foreign"],
                          "expected_depth": 1, "regime": "small-n"})
