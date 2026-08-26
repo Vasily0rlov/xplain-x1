@@ -7,3 +7,5 @@
 3. **Box capacity**: Before running any processing on the box, first check available capacity (sister projects may be running workloads at the same time). Wait until the box is free before starting the processing task.
 
 4. **Use all the compute**: Do not save on compute. Utilise the 32-core/64-thread box to the maximum — it is paid by the period, not by utilisation.
+
+5. **Persist artifacts**: Always save models, results, and reports into the repository for history — never leave them only on the box. Catalogue each in [`MODELS-AND-RUNS.md`](MODELS-AND-RUNS.md), attributed to the relevant build-plan milestone and timestamped (dated).
