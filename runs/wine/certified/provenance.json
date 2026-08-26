@@ -1,0 +1,74 @@
+{
+  "config": {
+    "data": {
+      "dataset": "wine",
+      "split_seed": 1000,
+      "probe_size": 2048,
+      "fractions": [
+        0.6,
+        0.2,
+        0.2
+      ]
+    },
+    "model": {
+      "init_layers": 1,
+      "init_width": 8,
+      "max_layers": 4,
+      "max_total_units": 96
+    },
+    "train": {
+      "lr": 0.001,
+      "batch_size": 256,
+      "max_epochs": 500,
+      "weight_decay": 0.0001,
+      "plateau_rel": 0.001,
+      "plateau_evals": 20,
+      "anneal_frac": 0.25,
+      "safety_margin": 0.01,
+      "lambda_act": 0.01,
+      "lambda_fanin": 0.1
+    },
+    "reference": {
+      "mlp_widths": [
+        64,
+        64
+      ]
+    },
+    "audit": {
+      "eps_edge": 0.02,
+      "f_max": 3,
+      "top_parents": 6
+    },
+    "controller": {
+      "discovery_scale": 0.3,
+      "eps_prune": 0.001,
+      "eps_depth": 0.005,
+      "delta_grow": 0.005,
+      "delta_stop": 0.02,
+      "max_rounds": 12
+    },
+    "certify": {
+      "restarts": 8,
+      "cpss_pairs": 20,
+      "tau_match": 0.7,
+      "pi_thr": 0.7,
+      "mu_min": 0.8,
+      "Pi_min": 0.7,
+      "delta_min": 0.005,
+      "bootstrap": 1000
+    },
+    "compute": {
+      "device": "cpu",
+      "n_workers": 16,
+      "load_threshold": 8.0
+    }
+  },
+  "config_hash": "ad6a837b2b50e36c50d6a03bf922c13303c28ee2c03063989977a74372a398a5",
+  "data_hash": "fdd1a162030a8e5b-28570293bbf6f313",
+  "seeds": {
+    "restarts": 8,
+    "cpss_runs": 40,
+    "split_seed": 1000
+  },
+  "git_commit": "822caf1399dddd5326f47307eebbaa61c152b778"
+}

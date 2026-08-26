@@ -1,0 +1,11 @@
+E8.2: full bike certification at grow_batch=8
+[box] load 0.16 < 8.0 — proceeding
+wall 0.12h · fid 0.9405 ratio 0.9925
+  ref hour            : recert=True Pi=1.0 share=0.5871 (ref 0.589)
+  ref temp            : recert=True Pi=1.0 share=0.0656 (ref 0.0804)
+  ref hour x weekday  : recert=True Pi=1.0 share=0.0714 (ref 0.0511)
+  ref year            : recert=True Pi=1.0 share=0.0241 (ref 0.0222)
+  hour x temp certified: False (share 0.0)
+  additions: [{'names': ['season'], 'share': 0.0228, 'Pi': 0.875, 'pi': 0.875}, {'names': ['humidity'], 'share': 0.0134, 'Pi': 1.0, 'pi': 0.85}]
+  coverage: 0.7844 (ref 0.743) · core routes 1 · hour-anchored: True
+E8.2 BAR: MET

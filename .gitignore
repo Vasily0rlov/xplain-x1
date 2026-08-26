@@ -3,7 +3,8 @@ __pycache__/
 *.pyc
 *.egg-info/
 data_cache/
-runs/
+# runs/ is tracked — saved model runs are cataloged in MODELS-AND-RUNS.md.
+# (Models here are tiny by design; keep certified runs referable in future.)
 experiments/results/*.tmp
 .pytest_cache/
 uv.lock

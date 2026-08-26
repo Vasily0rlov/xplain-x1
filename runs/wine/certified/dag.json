@@ -1,0 +1,483 @@
+{
+  "dataset": "wine",
+  "nodes": [
+    {
+      "id": "alcohol",
+      "kind": "input",
+      "label": "alcohol"
+    },
+    {
+      "id": "malic_acid",
+      "kind": "input",
+      "label": "malic_acid"
+    },
+    {
+      "id": "ash",
+      "kind": "input",
+      "label": "ash"
+    },
+    {
+      "id": "alcalinity_of_ash",
+      "kind": "input",
+      "label": "alcalinity_of_ash"
+    },
+    {
+      "id": "magnesium",
+      "kind": "input",
+      "label": "magnesium"
+    },
+    {
+      "id": "total_phenols",
+      "kind": "input",
+      "label": "total_phenols"
+    },
+    {
+      "id": "flavanoids",
+      "kind": "input",
+      "label": "flavanoids"
+    },
+    {
+      "id": "proanthocyanins",
+      "kind": "input",
+      "label": "proanthocyanins"
+    },
+    {
+      "id": "color_intensity",
+      "kind": "input",
+      "label": "color_intensity"
+    },
+    {
+      "id": "hue",
+      "kind": "input",
+      "label": "hue"
+    },
+    {
+      "id": "od280/od315_of_diluted_wines",
+      "kind": "input",
+      "label": "od280/od315_of_diluted_wines"
+    },
+    {
+      "id": "proline",
+      "kind": "input",
+      "label": "proline"
+    },
+    {
+      "id": "L1U4",
+      "kind": "unit",
+      "layer": 1,
+      "label": "poly(2)(od280/od315_of_diluted_wines, alcohol, flavanoids)",
+      "mu": 0.9435674548149109,
+      "Pi": 0.375,
+      "pi": 0.4,
+      "delta": 0.2968647963275304,
+      "coverage": 0.21993370958676495,
+      "tag": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "multiplicitous"
+      ]
+    },
+    {
+      "id": "L1U0",
+      "kind": "unit",
+      "layer": 1,
+      "label": "poly(2)(alcohol, alcalinity_of_ash, color_intensity)",
+      "mu": 0.8963489532470703,
+      "Pi": 0.875,
+      "pi": 0.625,
+      "delta": 0.010172347001884408,
+      "coverage": 0.06406331973687251,
+      "tag": "PERIPHERY",
+      "reasons": [
+        "infrequent",
+        "no_effect",
+        "multiplicitous"
+      ]
+    },
+    {
+      "id": "L1U3",
+      "kind": "unit",
+      "layer": 1,
+      "label": "poly(2)(color_intensity, flavanoids, od280/od315_of_diluted_wines)",
+      "mu": 0.9819733500480652,
+      "Pi": 0.5,
+      "pi": 0.6,
+      "delta": 0.22433957497591228,
+      "coverage": 0.1090657232464346,
+      "tag": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "multiplicitous"
+      ]
+    },
+    {
+      "id": "L1U6",
+      "kind": "unit",
+      "layer": 1,
+      "label": "poly(2)(alcohol, malic_acid, color_intensity)",
+      "mu": 0.916084885597229,
+      "Pi": 0.375,
+      "pi": 0.425,
+      "delta": 0.07590154147353012,
+      "coverage": 0.07211984936293547,
+      "tag": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "no_effect",
+        "multiplicitous"
+      ]
+    },
+    {
+      "id": "L1U1",
+      "kind": "unit",
+      "layer": 1,
+      "label": "poly(2)(ash, magnesium, color_intensity)",
+      "mu": 0.9332723617553711,
+      "Pi": 0.625,
+      "pi": 0.3,
+      "delta": 0.024648724906495723,
+      "coverage": 0.11837627727989519,
+      "tag": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "no_effect",
+        "multiplicitous"
+      ]
+    },
+    {
+      "id": "L1U8",
+      "kind": "unit",
+      "layer": 1,
+      "label": "poly(2)(color_intensity, proanthocyanins, total_phenols)",
+      "mu": 0.9545342326164246,
+      "Pi": 0.125,
+      "pi": 0.175,
+      "delta": -0.013661879982370895,
+      "coverage": -0.023460639305739606,
+      "tag": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "no_effect"
+      ]
+    },
+    {
+      "id": "L1U9",
+      "kind": "unit",
+      "layer": 1,
+      "label": "smooth(proanthocyanins)",
+      "mu": 0.9425665736198425,
+      "Pi": 0.25,
+      "pi": 0.025,
+      "delta": -0.01617344234770257,
+      "coverage": -0.009027844134203211,
+      "tag": "PERIPHERY",
+      "reasons": [
+        "unstable",
+        "infrequent",
+        "no_effect"
+      ]
+    },
+    {
+      "id": "class_0",
+      "kind": "output",
+      "label": "class_0"
+    },
+    {
+      "id": "class_1",
+      "kind": "output",
+      "label": "class_1"
+    },
+    {
+      "id": "class_2",
+      "kind": "output",
+      "label": "class_2"
+    }
+  ],
+  "edges": [
+    {
+      "src": "alcohol",
+      "dst": "L1U4",
+      "share": 0.1747
+    },
+    {
+      "src": "ash",
+      "dst": "L1U4",
+      "share": 0.0275
+    },
+    {
+      "src": "alcalinity_of_ash",
+      "dst": "L1U4",
+      "share": 0.1926
+    },
+    {
+      "src": "magnesium",
+      "dst": "L1U4",
+      "share": 0.0243
+    },
+    {
+      "src": "total_phenols",
+      "dst": "L1U4",
+      "share": 0.2126
+    },
+    {
+      "src": "flavanoids",
+      "dst": "L1U4",
+      "share": 0.0288
+    },
+    {
+      "src": "od280/od315_of_diluted_wines",
+      "dst": "L1U4",
+      "share": 0.2037
+    },
+    {
+      "src": "proline",
+      "dst": "L1U4",
+      "share": 0.1356
+    },
+    {
+      "src": "alcohol",
+      "dst": "L1U0",
+      "share": 0.2592
+    },
+    {
+      "src": "ash",
+      "dst": "L1U0",
+      "share": 0.1536
+    },
+    {
+      "src": "alcalinity_of_ash",
+      "dst": "L1U0",
+      "share": 0.2052
+    },
+    {
+      "src": "proanthocyanins",
+      "dst": "L1U0",
+      "share": 0.0864
+    },
+    {
+      "src": "color_intensity",
+      "dst": "L1U0",
+      "share": 0.1161
+    },
+    {
+      "src": "hue",
+      "dst": "L1U0",
+      "share": 0.0316
+    },
+    {
+      "src": "proline",
+      "dst": "L1U0",
+      "share": 0.1478
+    },
+    {
+      "src": "magnesium",
+      "dst": "L1U3",
+      "share": 0.0617
+    },
+    {
+      "src": "flavanoids",
+      "dst": "L1U3",
+      "share": 0.2886
+    },
+    {
+      "src": "color_intensity",
+      "dst": "L1U3",
+      "share": 0.3181
+    },
+    {
+      "src": "hue",
+      "dst": "L1U3",
+      "share": 0.1027
+    },
+    {
+      "src": "od280/od315_of_diluted_wines",
+      "dst": "L1U3",
+      "share": 0.2288
+    },
+    {
+      "src": "alcohol",
+      "dst": "L1U6",
+      "share": 0.2803
+    },
+    {
+      "src": "malic_acid",
+      "dst": "L1U6",
+      "share": 0.2655
+    },
+    {
+      "src": "alcalinity_of_ash",
+      "dst": "L1U6",
+      "share": 0.1228
+    },
+    {
+      "src": "proanthocyanins",
+      "dst": "L1U6",
+      "share": 0.0326
+    },
+    {
+      "src": "color_intensity",
+      "dst": "L1U6",
+      "share": 0.2101
+    },
+    {
+      "src": "proline",
+      "dst": "L1U6",
+      "share": 0.0886
+    },
+    {
+      "src": "ash",
+      "dst": "L1U1",
+      "share": 0.2619
+    },
+    {
+      "src": "alcalinity_of_ash",
+      "dst": "L1U1",
+      "share": 0.0403
+    },
+    {
+      "src": "magnesium",
+      "dst": "L1U1",
+      "share": 0.2405
+    },
+    {
+      "src": "color_intensity",
+      "dst": "L1U1",
+      "share": 0.1967
+    },
+    {
+      "src": "proline",
+      "dst": "L1U1",
+      "share": 0.2606
+    },
+    {
+      "src": "malic_acid",
+      "dst": "L1U8",
+      "share": 0.0297
+    },
+    {
+      "src": "magnesium",
+      "dst": "L1U8",
+      "share": 0.1063
+    },
+    {
+      "src": "total_phenols",
+      "dst": "L1U8",
+      "share": 0.2185
+    },
+    {
+      "src": "proanthocyanins",
+      "dst": "L1U8",
+      "share": 0.3101
+    },
+    {
+      "src": "color_intensity",
+      "dst": "L1U8",
+      "share": 0.3355
+    },
+    {
+      "src": "ash",
+      "dst": "L1U9",
+      "share": 0.1314
+    },
+    {
+      "src": "proanthocyanins",
+      "dst": "L1U9",
+      "share": 0.8686
+    },
+    {
+      "src": "L1U4",
+      "dst": "class_0",
+      "share": 0.2702
+    },
+    {
+      "src": "L1U0",
+      "dst": "class_0",
+      "share": 0.1299
+    },
+    {
+      "src": "L1U3",
+      "dst": "class_0",
+      "share": 0.3302
+    },
+    {
+      "src": "L1U6",
+      "dst": "class_0",
+      "share": 0.1082
+    },
+    {
+      "src": "L1U1",
+      "dst": "class_0",
+      "share": 0.0858
+    },
+    {
+      "src": "L1U8",
+      "dst": "class_0",
+      "share": 0.0663
+    },
+    {
+      "src": "L1U4",
+      "dst": "class_1",
+      "share": 0.2544
+    },
+    {
+      "src": "L1U0",
+      "dst": "class_1",
+      "share": 0.1223
+    },
+    {
+      "src": "L1U3",
+      "dst": "class_1",
+      "share": 0.2717
+    },
+    {
+      "src": "L1U6",
+      "dst": "class_1",
+      "share": 0.1553
+    },
+    {
+      "src": "L1U1",
+      "dst": "class_1",
+      "share": 0.1395
+    },
+    {
+      "src": "L1U8",
+      "dst": "class_1",
+      "share": 0.0466
+    },
+    {
+      "src": "L1U4",
+      "dst": "class_2",
+      "share": 0.2919
+    },
+    {
+      "src": "L1U0",
+      "dst": "class_2",
+      "share": 0.1362
+    },
+    {
+      "src": "L1U3",
+      "dst": "class_2",
+      "share": 0.2027
+    },
+    {
+      "src": "L1U6",
+      "dst": "class_2",
+      "share": 0.1053
+    },
+    {
+      "src": "L1U1",
+      "dst": "class_2",
+      "share": 0.1431
+    },
+    {
+      "src": "L1U8",
+      "dst": "class_2",
+      "share": 0.1116
+    }
+  ]
+}

@@ -18,6 +18,7 @@ periphery; the deliverables are a concept DAG and an audit certificate.
 | [data/DATASETS.md](data/DATASETS.md) | dataset survey + method data requirements |
 | [docs/ALTERNATIVE-OPTIONS.md](docs/ALTERNATIVE-OPTIONS.md) | approach-level options not taken |
 | [docs/FINDINGS.md](docs/FINDINGS.md) | experiment verdicts + instrument corrections |
+| [MODELS-AND-RUNS.md](MODELS-AND-RUNS.md) | catalog of saved models + run results, by phase/milestone |
 
 ## Quickstart
 

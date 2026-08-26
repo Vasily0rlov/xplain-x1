@@ -1,0 +1,24 @@
+E8.1 batched growth: grow_batch=8, 18 runs
+[box] load 0.18 < 8.0 — proceeding
+  bike                         s0: ratio=0.9925 widths=[14, 14] live=28 mu=0.999 w+=2 d+=1 (1227.3s)
+  bike                         s1: ratio=0.9908 widths=[15] live=15 mu=0.992 w+=2 d+=0 (1204.6s)
+  bike                         s2: ratio=0.9726 widths=[10] live=10 mu=0.981 w+=1 d+=0 (1203.0s)
+  bike                         s3: ratio=0.9846 widths=[11] live=11 mu=0.992 w+=1 d+=0 (1155.4s)
+  adult                        s0: ratio=0.8758 widths=[5] live=5 mu=0.999 w+=0 d+=0 (1034.4s)
+  adult                        s1: ratio=0.8847 widths=[6] live=6 mu=0.981 w+=0 d+=0 (1015.1s)
+  synthetic:noise-8k           s0: ratio=-0.4064 widths=[8] live=8 mu=0.979 w+=0 d+=0 (79.8s)
+  synthetic:noise-8k           s1: ratio=-0.3274 widths=[7] live=7 mu=1.000 w+=0 d+=0 (108.8s)
+  synthetic:noise-8k           s2: ratio=-0.3441 widths=[4] live=4 mu=0.972 w+=0 d+=0 (110.8s)
+  synthetic:noise-8k           s3: ratio=-0.5032 widths=[7] live=7 mu=1.000 w+=0 d+=0 (115.8s)
+  synthetic:add-noisy-8k       s0: ratio=1.0044 widths=[7] live=7 mu=0.999 w+=0 d+=0 (126.8s)
+  synthetic:add-noisy-8k       s1: ratio=1.0004 widths=[6] live=6 mu=0.999 w+=0 d+=0 (159.7s)
+  synthetic:add-noisy-8k       s2: ratio=1.0024 widths=[7] live=7 mu=1.000 w+=0 d+=0 (130.4s)
+  synthetic:add-noisy-8k       s3: ratio=0.9972 widths=[6] live=6 mu=1.000 w+=0 d+=0 (110.0s)
+  synthetic:comp2-noisy-8k     s0: ratio=0.992 widths=[8] live=8 mu=0.924 w+=0 d+=0 (140.8s)
+  synthetic:comp2-noisy-8k     s1: ratio=0.9954 widths=[8] live=8 mu=0.984 w+=0 d+=0 (145.5s)
+  synthetic:comp2-noisy-8k     s2: ratio=1.0043 widths=[13] live=13 mu=0.975 w+=1 d+=0 (309.9s)
+  synthetic:comp2-noisy-8k     s3: ratio=0.9871 widths=[8] live=8 mu=0.979 w+=0 d+=0 (137.0s)
+
+bike median ratio=0.9877 (bar >=0.97) median mu=0.992 (bar >=0.9)
+guards: noise=True add=True comp2=4/4
+E8.1 BAR: MET

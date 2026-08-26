@@ -1,0 +1,24 @@
+E8.3 partner stability: 16 runs (2 regimes x 8 seeds)
+[box] load 0.14 < 8.0 — proceeding
+
+=== FROZEN (grow_batch=2) ===
+  seed 0: widths=[6] weekday=0.0571 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0571}
+  seed 1: widths=[11] weekday=0.0768 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0768}
+  seed 2: widths=[8] weekday=0.0857 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0857}
+  seed 3: widths=[10, 10] weekday=0.0768 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0768}
+  seed 4: widths=[11] weekday=0.0699 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0699}
+  seed 5: widths=[8] weekday=0.0219 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0219}
+  seed 6: widths=[9, 7] weekday=0.0759 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0759}
+  seed 7: widths=[8] weekday=0.0629 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0629}
+  SUMMARY: dominant {'weekday': 8} | weekday present 8/8, workingday 0/8, both 0/8 | stable partner: True
+
+=== BATCHED (grow_batch=8) ===
+  seed 0: widths=[14, 14] weekday=0.0759 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0759}
+  seed 1: widths=[15] weekday=0.0795 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0795}
+  seed 2: widths=[10] weekday=0.0846 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0846}
+  seed 3: widths=[11] weekday=0.0804 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0804}
+  seed 4: widths=[11, 10] weekday=0.0702 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0702}
+  seed 5: widths=[14, 9] weekday=0.0793 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0793}
+  seed 6: widths=[11, 11] weekday=0.0777 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0777}
+  seed 7: widths=[8] weekday=0.0629 workingday=0.0 -> weekday  | all hour-pairs: {'weekday': 0.0629}
+  SUMMARY: dominant {'weekday': 8} | weekday present 8/8, workingday 0/8, both 0/8 | stable partner: True
